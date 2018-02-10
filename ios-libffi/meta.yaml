@@ -1,0 +1,26 @@
+package:
+  name: ios-libffi
+  version: 3.2.1
+
+source:
+  url: https://github.com/libffi/libffi/archive/v3.2.1.tar.gz
+
+build:
+  number: 0
+  binary_relocation: False
+
+outputs:
+  - name: iphoneos-libffi
+    files:
+      - iphoneos/libffi.dylib
+      - iphoneos/libffi.dylib.dSYM
+      - iphoneos/include/ffi.h
+  - name: iphonesimulator-libffi
+    files:
+      - iphonesimulator/libffi.dylib
+      - iphonesimulator/libffi.dylib.dSYM
+      - iphonesimulator/include/ffi.h
+
+about:
+  home: http://github.com/codelv/enaml-native
+  license: MIT

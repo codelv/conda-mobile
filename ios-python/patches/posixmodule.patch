@@ -1,0 +1,22 @@
+--- Python-2.7.14/Modules/posixmodule.c
++++ Python-2.7.14-patched/Modules/posixmodule.c
+@@ -628,7 +628,7 @@ _PyVerify_fd_dup2(int fd1, int fd2)
+ ** environ directly, we must obtain it with _NSGetEnviron(). See also
+ ** man environ(7).
+ */
+-//#include <crt_externs.h>
++#include <crt_externs.h>
+ static char **environ;
+ #elif !defined(_MSC_VER) && ( !defined(__WATCOMC__) || defined(__QNX__) )
+ extern char **environ;
+@@ -648,7 +648,7 @@ convertenviron(void)
+         return NULL;
+ #if defined(WITH_NEXT_FRAMEWORK) || (defined(__APPLE__) && defined(Py_ENABLE_SHARED))
+     if (environ == NULL)
+-        environ = NULL;//*_NSGetEnviron();
++        environ = *_NSGetEnviron();
+ #endif
+     if (environ == NULL)
+         return d;
+~
+~
