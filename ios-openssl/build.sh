@@ -2,45 +2,42 @@
 export DEVELOPER="$(xcode-select -print-path)"
 export VERSION_MIN="-miphoneos-version-min=8.0.0"
 export BUILD_TOOLS="${DEVELOPER}"
-#export ARCHS=("armv7 arm64 i386 x86_64")
-export ARCHS=("armv7 arm64 x86_64")
+export ARCHS=("i386 x86_64 armv7 arm64")
+
 
 for ARCH in $ARCHS
 do
-    if [ "$ARCH" == "armv7" ] || [ "$ARCH" == "arm64" ]; then
-        export SDK="iphoneos"
-        export PLATFORM="iPhoneOS"
-        export TARGET="iphoneos-cross"
-    else
+    if [ "$ARCH" == "i386" ] || [ "$ARCH" == "x86_64" ]; then
         export SDK="iphonesimulator"
         export PLATFORM="iPhoneSimulator"
         if [ "$ARCH" == "x86_64" ]; then
-            export TARGET="darwin64-$ARCH-cc"
+            export TARGET="darwin64-x86_64-cc"
         else
-            export TARGET="darwin-$ARCH-cc"
+            export TARGET="darwin-i386-cc"
         fi
+    else
+        export SDK="iphoneos"
+        export PLATFORM="iPhoneOS"
+        export TARGET="iphoneos-cross"
+        sed -ie "s!static volatile sig_atomic_t intr_signal;!static volatile intr_signal;!" "crypto/ui/ui_openssl.c"
     fi
 
     export SYSROOT="$(xcrun --sdk $SDK --show-sdk-path)"
     export CROSS_TOP="${DEVELOPER}/Platforms/${PLATFORM}.platform/Developer"
     export CROSS_SDK="$PLATFORM$(xcrun --sdk $SDK --show-sdk-platform-version).sdk"
-    export CC="${BUILD_TOOLS}/usr/bin/gcc -arch ${ARCH}"
+    export TOOLS="${DEVELOPER}"
+
+    # Note the -miphoneos-version-min flag is required!
+    export CC="${BUILD_TOOLS}/usr/bin/gcc -arch ${ARCH} $VERSION_MIN"
 
     # Configure for iphoneos
-    perl Configure \
-         $TARGET \
-         -shared \
-         --prefix=@rpath \
+    perl Configure $TARGET -shared --prefix=@rpath
 
     # Clean
     make clean
 
-    # Patch cflags
-    export CFLAGS="-pipe -isysroot $SYSROOT -O3 $VERSION_MIN -DOPENSSL_THREADS -D_REENTRANT -fomit-frame-pointer"
-    sed -ie "s!^CFLAG=.*!CFLAG=$CFLAGS !g" Makefile
-
+    # Build
     make -j$CPU_COUNT build_libs LIBDIR=.
-
 
     # Copy to install dir
     mkdir $ARCH
@@ -50,26 +47,29 @@ do
 done
 
 mkdir $PREFIX/iphoneos
+mkdir $PREFIX/iphoneos/lib
 mkdir $PREFIX/iphonesimulator
+mkdir $PREFIX/iphonesimulator/lib
 
 # Merge iphoneos libs
-lipo -create -arch armv7 armv7/libssl.1.0.0.dylib \
-             -arch arm64 arm64/libssl.1.0.0.dylib \
-             -output $PREFIX/iphoneos/libssl.dylib
+lipo -create armv7/libssl.1.0.0.dylib \
+             arm64/libssl.1.0.0.dylib \
+             -output $PREFIX/iphoneos/lib/libssl.dylib
 
-lipo -create -arch armv7 armv7/libcrypto.1.0.0.dylib \
-             -arch arm64 arm64/libcrypto.1.0.0.dylib \
-             -output $PREFIX/iphoneos/libcrypto.dylib
+lipo -create armv7/libcrypto.1.0.0.dylib \
+             arm64/libcrypto.1.0.0.dylib \
+             -output $PREFIX/iphoneos/lib/libcrypto.dylib
 cp -RL include $PREFIX/iphoneos
 
 # Merge simulator libs
-#lipo -create i386/libssl*.dylib x86_64/libssl*.dylib \
-#     -output $PREFIX/iphoneos/libssl.dylib
-#
-#lipo -create i386/libcrypto*.dylib x86_64/libcrypto*.dylib \
-#     -output $PREFIX/iphoneos/libcrypto.dylib
-mv x86_64/libcrypto.1.0.0.dylib $PREFIX/iphonesimulator/libcrypto.dylib
-mv x86_64/libssl.1.0.0.dylib $PREFIX/iphonesimulator/libssl.dylib
+lipo -create i386/libssl.1.0.0.dylib \
+             x86_64/libssl.1.0.0.dylib \
+             -output $PREFIX/iphonesimulator/lib/libssl.dylib
+
+lipo -create i386/libcrypto.1.0.0.dylib \
+             x86_64/libcrypto.1.0.0.dylib \
+             -output $PREFIX/iphonesimulator/lib/libcrypto.dylib
+
 cp -RL include $PREFIX/iphonesimulator
 
 # Merge iphone sim libs

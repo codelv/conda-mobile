@@ -13,25 +13,26 @@ cp -R $RECIPE_DIR/libffi.xcodeproj $SRC_DIR
 # Prepare
 ./autogen.sh
 
-# Build iphoneos
-export SDK="iphoneos"
-xcodebuild -sdk $SDK \
-           -project libffi.xcodeproj \
-           -target libffi-iOS \
-           -configuration Release
+export SDKS="iphoneos iphonesimulator"
 
-mkdir $PREFIX/$SDK
-cp -R build/Release-$SDK/ $PREFIX/$SDK
-cp -R build_$SDK-armv7/include $PREFIX/$SDK
+for SDK in $SDKS
+do
+    if [ "$SDK" == "iphoneos" ]; then
+        export LOCAL_ARCH="armv7"
+    else
+        export LOCAL_ARCH="x86_64"
+    fi
+    export ARCH
 
-# Build iphonesimulator
-export SDK="iphonesimulator"
+    # Build the project
+    xcodebuild -sdk $SDK \
+               -project libffi.xcodeproj \
+               -target libffi-iOS \
+               -configuration Release
 
-xcodebuild -sdk $SDK \
-           -project libffi.xcodeproj \
-           -target libffi-iOS \
-           -configuration Release
+    mkdir $PREFIX/$SDK
+    mkdir $PREFIX/$SDK/lib
+    cp -RL build/Release-$SDK/ $PREFIX/$SDK/lib
+    cp -RL build_$SDK-$LOCAL_ARCH/include $PREFIX/$SDK
 
-mkdir $PREFIX/$SDK
-cp -R build/Release-$SDK/* $PREFIX/$SDK
-cp -R build_$SDK-x86_64/include $PREFIX/$SDK
+done

@@ -6,20 +6,20 @@ source:
   url: https://github.com/libffi/libffi/archive/v3.2.1.tar.gz
 
 build:
-  number: 0
+  number: 1
   binary_relocation: False
 
 outputs:
   - name: iphoneos-libffi
     files:
-      - iphoneos/libffi.dylib
-      - iphoneos/libffi.dylib.dSYM
-      - iphoneos/include/ffi.h
+      - iphoneos/lib/libffi.dylib
+      - iphoneos/lib/libffi.dylib.dSYM
+      - iphoneos/include/*
   - name: iphonesimulator-libffi
     files:
-      - iphonesimulator/libffi.dylib
-      - iphonesimulator/libffi.dylib.dSYM
-      - iphonesimulator/include/ffi.h
+      - iphonesimulator/lib/libffi.dylib
+      - iphonesimulator/lib/libffi.dylib.dSYM
+      - iphonesimulator/include/*
 
 about:
   home: http://github.com/codelv/enaml-native

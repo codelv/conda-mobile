@@ -8,20 +8,20 @@ source:
   sha256: 370babb75f278c39e0c50e8c4e7493bc0f18db6867478341a832a982fd15a8fe
 
 build:
-  number: 0
+  number: 1
   binary_relocation: False
 
 outputs:
   - name: iphoneos-openssl
     files:
-      - iphoneos/libssl.dylib
-      - iphoneos/libcrypto.dylib
+      - iphoneos/lib/libssl.dylib
+      - iphoneos/lib/libcrypto.dylib
       - iphoneos/include/openssl/*.h
 
   - name: iphonesimulator-openssl
     files:
-      - iphonesimulator/libssl.dylib
-      - iphonesimulator/libcrypto.dylib
+      - iphonesimulator/lib/libssl.dylib
+      - iphonesimulator/lib/libcrypto.dylib
       - iphonesimulator/include/openssl/*.h
 about:
   home: http://github.com/codelv/enaml-native
