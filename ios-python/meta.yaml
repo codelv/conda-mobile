@@ -7,20 +7,26 @@ source:
   md5: 1f6db41ad91d9eb0a6f0c769b8613c5b
 
 build:
-  number: 0
+  number: 1
+  binary_relocation: False
+  dependencies:
+    - iphoneos-libffi
+    - iphoneos-openssl
+    - iphonesimulator-libffi
+    - iphonesimulator-openssl
 
 outputs:
   - name: iphoneos-python2.7
     files:
-      - iphoneos/libpython2.7.dylib
-      - iphoneos/python2.7/*
-      - iphoneos/include/Python/*.h
+      - iphoneos/lib/libpython2.7.dylib
+      - iphoneos/python/*
+      - iphoneos/include/*
 
   - name: iphonesimulator-python2.7
     files:
-      - iphonesimulator/libpython2.7.dylib
-      - iphonesimulator/python2.7/*
-      - iphonesimulator/include/Python/*.h
+      - iphonesimulator/lib/libpython2.7.dylib
+      - iphonesimulator/python/*
+      - iphonesimulator/include/*
 
 about:
   home: http://github.com/codelv/enaml-native
