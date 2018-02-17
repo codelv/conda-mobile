@@ -18,9 +18,9 @@
 
 # Modules that should always be present (non UNIX dependent):
 
-# These are included already
-math mathmodule.c _math.c # -lm # math library functions, e.g. sin()
-time timemodule.c #-lm # time operations and variables
+# These say symbol duplicates if included
+#math mathmodule.c _math.c # -lm # math library functions, e.g. sin()
+#time timemodule.c #-lm # time operations and variables
 
 array arraymodule.c	# array objects
 cmath cmathmodule.c _math.c #-lm # complex math library functions
