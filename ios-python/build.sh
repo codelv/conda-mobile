@@ -58,8 +58,8 @@ do
                 --enable-ipv6 \
                 --enable-shared \
                 --with-system-ffi \
-                --without-doc-strings \
-                --enable-optimizations
+                --without-doc-strings
+                #--enable-optimizations
 
     make clean
 
