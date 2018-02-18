@@ -8,7 +8,12 @@ export ARCHS=("i386 x86_64 armv7 arm64 ")
 # Patch
 patch -t -d $SRC_DIR -p1 -i $RECIPE_DIR/patches/xcompile.patch
 patch -t -d $SRC_DIR -p1 -i $RECIPE_DIR/patches/posixmodule.patch
+
+# Add MODULE_NAME
 patch -t -d $SRC_DIR -p1 -i $RECIPE_DIR/patches/sqlite.patch
+
+# Patch the makefile to use the install_name "@rpath/"
+patch -t -d $SRC_DIR -p1 -i $RECIPE_DIR/patches/rpath.patch
 
 for ARCH in $ARCHS
 do
@@ -50,7 +55,6 @@ do
                 LDFLAGS="$LDFLAGS" \
                 ac_cv_file__dev_ptmx=no \
                 ac_cv_file__dev_ptc=no \
-                --prefix=$PREFIX \
                 --host=$TARGET_HOST \
                 --build=$BUILD \
                 --without-pymalloc \
@@ -64,14 +68,10 @@ do
     make clean
 
     # Use ARC4RANDOM or we get an error building expat
-    sed -i.bak "s!HAVE_GETENTROPY!HAVE_ARC4RANDOM_BUF!g" pyconfig.h
+    sed -ie "s!HAVE_GETENTROPY!HAVE_ARC4RANDOM_BUF!g" pyconfig.h
 
     # The with-system-ffi flag is ignored for some reason
-    sed -i.bak "s!LIBFFI_INCLUDEDIR=	!LIBFFI_INCLUDEDIR=$APP_ROOT/include/!g" Makefile
-
-    # Make compileall ignore everything
-    #REPLACE='\$(DESTDIR)\$(LIBDEST)/compileall.py'
-    #sed -i.bak s!$REPLACE!$RECIPE_DIR/patches/nocompile.py!g Makefile
+    sed -ie "s!LIBFFI_INCLUDEDIR=	!LIBFFI_INCLUDEDIR=$APP_ROOT/include/!g" Makefile
 
     # Build and install
     make -j$CPU_COUNT CROSS_COMPILE_TARGET=yes
@@ -109,13 +109,6 @@ lipo -create dist/i386/lib/libpython2.7.dylib \
 # Copy headers and stdlib
 cp -RL dist/x86_64/include $PREFIX/iphoneos/
 cp -RL dist/x86_64/lib/python2.7/* $PREFIX/iphonesimulator/python
-
-
-
-
-#cp -RL dist/x86_64/lib/ $PREFIX/iphonesimulator/
-#cp -RL dist/x86_64/include $PREFIX/iphonesimulator/
-#cp -RL dist/x86_64/lib/python2.7 $PREFIX/iphonesimulator/
 
 
 # Use this to debug the outputs
