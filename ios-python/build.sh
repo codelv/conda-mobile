@@ -45,7 +45,7 @@ do
     export AR="$(xcrun -find -sdk $SDK ar)"
     export CXX="$(xcrun -find -sdk $SDK g++)"
     export LD="$(xcrun -find -sdk $SDK ld)"
-    export LDFLAGS="-arch $ARCH --sysroot $SYSROOT $VERSION_MIN -L$APP_ROOT/lib -lsqlite3 -lffi"
+    export LDFLAGS="-arch $ARCH --sysroot $SYSROOT $VERSION_MIN -L$APP_ROOT/lib -lsqlite3 -lffi -lssl -lcrypto"
 
     # The magic cross compile flag (tells it to not try to load them after building)
     export _PYTHON_HOST_PLATFORM="$TARGET_HOST"
