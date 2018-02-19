@@ -1,13 +1,12 @@
 
 export PYTHON_FOR_BUILD="$(which python2)"
 export VERSION_MIN="-miphoneos-version-min=8.0.0"
-#export ARCHS=("x86_64 arm64 armv7")
-# TODO: x86_64 doesnt work? It's trying to build libffi dispite the --with-system-ffi flag...
-export ARCHS=("i386 x86_64 armv7 arm64 ")
+export ARCHS=("i386 x86_64 armv7 arm64")
+#export ARCHS=("armv7 arm64")
+
 
 # Patch
 patch -t -d $SRC_DIR -p1 -i $RECIPE_DIR/patches/xcompile.patch
-patch -t -d $SRC_DIR -p1 -i $RECIPE_DIR/patches/posixmodule.patch
 
 # Add MODULE_NAME
 patch -t -d $SRC_DIR -p1 -i $RECIPE_DIR/patches/sqlite.patch
@@ -21,6 +20,8 @@ do
     if [ "$ARCH" == "armv7" ]; then
         export SDK="iphoneos"
         export TARGET_HOST="armv7-apple-darwin"
+
+        patch -t -d $SRC_DIR -p1 -i $RECIPE_DIR/patches/posixmodule.patch
     elif [ "$ARCH" == "arm64" ]; then
         export SDK="iphoneos"
         export TARGET_HOST="aarch64-apple-darwin"
