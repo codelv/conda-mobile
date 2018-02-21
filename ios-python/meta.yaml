@@ -20,13 +20,13 @@ outputs:
     files:
       - iphoneos/lib/libpython2.7.dylib
       - iphoneos/python/*
-      - iphoneos/include/*
+      - iphoneos/include/python2.7/*
 
   - name: iphonesimulator-python2.7
     files:
       - iphonesimulator/lib/libpython2.7.dylib
       - iphonesimulator/python/*
-      - iphonesimulator/include/*
+      - iphonesimulator/include/python2.7/*
 
 about:
   home: http://github.com/codelv/enaml-native
