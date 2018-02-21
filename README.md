@@ -55,7 +55,7 @@ App dependencies can be installed with `conda` or the `enaml-native-cli` (soon).
 1. Install `miniconda` from https://conda.io/miniconda.html
 2. Create an env `conda create -n myapp`
 3. Activate it `source activate myapp`
-2. Then install `conda install iphoneos-python2.7`
+2. Then install `conda install -c channel iphoneos-python2.7`
 
 Packages are prefixed for the target platform as follows
 
@@ -68,9 +68,10 @@ The packages are installed into the env using the structure
 
 ```
 # In <env>/<target> (ex miniconda2/envs/myapp/iphoneos)
-include/ # All headers
-libs/ # All .dylib or .so files
-python/ # Python stdlib and site-packages 
+
+iphoneos/include/ # All headers
+iphoneos/libs/ # All .dylib or .so files
+iphoneos/python/ # Python stdlib and site-packages 
 
 ```
 
@@ -78,18 +79,23 @@ The build system (gradle, xcode) can then easily grab these libraries from the
 env for the given target and use them as is.
 
 
-### Building
+### Building recipes
 
 Only developers of packages should need to build recipes. End users should
-be able to simply install and use prebuilt verisons. To build recipes
+be able to simply install and use prebuilt versions. 
+
+To add a new recipe or to build existing recipes:
 
 1. Install miniconda
 2. Clone this repo or a recipe from somewhere and cd to this folder
-3. Run `conda-build <recipe-name>`
+3. Create either an `ios` or `android` env
+4. Install all the dependencies for your recipe
+5. Run `conda-build <recipe-name>`
 
-You can also create your own repos with recipes.
+Then either add a PR or create your own repos with recipes.
 
 
 ### Thanks
 
-These recipes are based on those from kivy-ios and python-for-android.
+These recipes are based on those from kivy-ios and python-for-android and various
+other projects across the web.
