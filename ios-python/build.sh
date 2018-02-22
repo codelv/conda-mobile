@@ -108,7 +108,7 @@ lipo -create dist/i386/lib/libpython2.7.dylib \
              -o $PREFIX/iphonesimulator/lib/libpython2.7.dylib
 
 # Copy headers and stdlib
-cp -RL dist/x86_64/include $PREFIX/iphoneos/
+cp -RL dist/x86_64/include $PREFIX/iphonesimulator/
 cp -RL dist/x86_64/lib/python2.7/* $PREFIX/iphonesimulator/python
 
 
