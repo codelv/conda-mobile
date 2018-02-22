@@ -1,0 +1,28 @@
+package:
+  name: ios-msgpack
+  version: 0.5.5
+
+source:
+  url: https://github.com/msgpack/msgpack-python/archive/0.5.5.tar.gz
+  md5: d9e7e71bc5464956bdf68a225b4f28df
+
+build:
+  number: 0
+  binary_relocation: False
+  dependencies:
+    - cython
+    - iphoneos-python2.7
+    - iphonesimulator-python2.7
+
+outputs:
+  - name: iphoneos-msgpack
+    files:
+      - iphoneos/python/site-packages/msgpack/*
+
+  - name: iphonesimulator-msgpack
+    files:
+      - iphonesimulator/python/site-packages/msgpack/*
+
+about:
+  home: http://github.com/codelv/enaml-native
+  license: MIT
