@@ -6,22 +6,15 @@ source:
   url: https://github.com/nucleic/atom/archive/0.4.1.tar.gz
   md5: e76cb77c242601810ff0ca363ce33b28
 
+requirements:
+  build:
+    - ios-python
+  run:
+    - ios-python
+
 build:
   number: 0
   binary_relocation: False
-  dependencies:
-    - iphoneos-python2.7
-    - iphonesimulator-python2.7
-
-
-outputs:
-  - name: iphoneos-atom
-    files:
-      - iphoneos/python/site-packages/atom/*
-
-  - name: iphonesimulator-atom
-    files:
-      - iphonesimulator/python/site-packages/atom/*
 
 about:
   home: http://github.com/codelv/enaml-native

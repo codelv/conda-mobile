@@ -35,7 +35,7 @@ do
     export TOOLS="${DEVELOPER}"
 
     # Note the -miphoneos-version-min flag is required!
-    export CC="${BUILD_TOOLS}/usr/bin/gcc -arch ${ARCH} $VERSION_MIN"
+    export CC="${BUILD_TOOLS}/usr/bin/gcc -arch ${ARCH} -isysroot $SYSROOT $VERSION_MIN"
 
     # Configure for iphoneos
     perl Configure $TARGET -shared --prefix=@rpath

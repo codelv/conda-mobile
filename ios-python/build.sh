@@ -19,14 +19,15 @@ patch -t -d $SRC_DIR -p1 -i $RECIPE_DIR/patches/sqlite.patch
 # Patch the makefile to use the install_name "@rpath/"
 patch -t -d $SRC_DIR -p1 -i $RECIPE_DIR/patches/rpath.patch
 
+# Remove crt_extensions and use of private API
+patch -t -d $SRC_DIR -p1 -i $RECIPE_DIR/patches/posixmodule.patch
+
 for ARCH in $ARCHS
 do
 
     if [ "$ARCH" == "armv7" ]; then
         export SDK="iphoneos"
         export TARGET_HOST="armv7-apple-darwin"
-
-        patch -t -d $SRC_DIR -p1 -i $RECIPE_DIR/patches/posixmodule.patch
     elif [ "$ARCH" == "arm64" ]; then
         export SDK="iphoneos"
         export TARGET_HOST="aarch64-apple-darwin"
@@ -35,7 +36,7 @@ do
         export TARGET_HOST="$ARCH-apple-darwin"
     fi
 
-    export APP_ROOT="$ROOT/envs/ios/$SDK"
+    export APP_ROOT="$PREFIX/$SDK"
     export SYSROOT="$(xcrun --sdk $SDK --show-sdk-path)"
 
     # Copy modules and update SSL path
@@ -46,7 +47,7 @@ do
     #export USE_CCACHE="1"
     #export CCACHE="$(which ccache)"
     export CC="$(xcrun -find -sdk $SDK gcc)"
-    export CFLAGS="-arch $ARCH -pipe --sysroot $SYSROOT -O3 $VERSION_MIN -I$APP_ROOT/include"
+    export CFLAGS="-arch $ARCH -pipe --sysroot $SYSROOT -isysroot $SYSROOT -O3 $VERSION_MIN -I$APP_ROOT/include"
     export AR="$(xcrun -find -sdk $SDK ar)"
     export CXX="$(xcrun -find -sdk $SDK g++)"
     export LD="$(xcrun -find -sdk $SDK ld)"
@@ -88,9 +89,9 @@ do
 done
 
 
-mkdir $PREFIX/iphoneos
-mkdir $PREFIX/iphoneos/lib
+# Create outputs
 mkdir $PREFIX/iphoneos/python
+mkdir $PREFIX/iphonesimulator/python
 
 # Make a single lib with both for the iphone
 lipo -create dist/armv7/lib/libpython2.7.dylib \
@@ -100,12 +101,6 @@ lipo -create dist/armv7/lib/libpython2.7.dylib \
 # Copy headers and stdlib
 cp -RL dist/armv7/include $PREFIX/iphoneos/
 cp -RL dist/armv7/lib/python2.7/* $PREFIX/iphoneos/python
-
-
-# Create
-mkdir $PREFIX/iphonesimulator
-mkdir $PREFIX/iphonesimulator/lib
-mkdir $PREFIX/iphonesimulator/python
 
 # Make a single lib with both for the iphone
 lipo -create dist/i386/lib/libpython2.7.dylib \

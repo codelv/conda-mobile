@@ -11,18 +11,6 @@ build:
   number: 1
   binary_relocation: False
 
-outputs:
-  - name: iphoneos-openssl
-    files:
-      - iphoneos/lib/libssl.dylib
-      - iphoneos/lib/libcrypto.dylib
-      - iphoneos/include/openssl/*.h
-
-  - name: iphonesimulator-openssl
-    files:
-      - iphonesimulator/lib/libssl.dylib
-      - iphonesimulator/lib/libcrypto.dylib
-      - iphonesimulator/include/openssl/*.h
 about:
   home: http://github.com/codelv/enaml-native
   license: MIT

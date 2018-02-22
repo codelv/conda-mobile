@@ -27,7 +27,7 @@ do
         export LOCAL_ARCH=$ARCH
     fi
 
-    export APP_ROOT=$ROOT/$SDK
+    export APP_ROOT="$PREFIX/$SDK"
     export SYSROOT="$(xcrun --sdk $SDK --show-sdk-path)"
 
     export CC="$(xcrun -find -sdk $SDK gcc)"
@@ -41,21 +41,13 @@ do
     export CROSS_COMPILE_TARGET='yes'
     export _PYTHON_HOST_PLATFORM="darwin-$LOCAL_ARCH"
 
-    # Print the flags
-    export
-
-
     # Build
     python setup.py build
 
 done
 
-mkdir $PREFIX/iphoneos/
-mkdir $PREFIX/iphoneos/python/
-mkdir $PREFIX/iphoneos/python/site-packages/
-mkdir $PREFIX/iphonesimulator/
-mkdir $PREFIX/iphonesimulator/python/
-mkdir $PREFIX/iphonesimulator/python/site-packages/
+mkdir -p $PREFIX/iphoneos/python/site-packages/
+mkdir -p $PREFIX/iphonesimulator/python/site-packages/
 
 # Copy to output
 cp -RL build/lib.darwin-arm-2.7/atom $PREFIX/iphoneos/python/site-packages/

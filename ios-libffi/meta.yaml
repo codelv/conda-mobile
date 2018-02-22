@@ -4,22 +4,11 @@ package:
 
 source:
   url: https://github.com/libffi/libffi/archive/v3.2.1.tar.gz
+  md5: 9066486bcab807f7ddaaf2596348c1db
 
 build:
   number: 1
   binary_relocation: False
-
-outputs:
-  - name: iphoneos-libffi
-    files:
-      - iphoneos/lib/libffi.dylib
-      - iphoneos/lib/libffi.dylib.dSYM
-      - iphoneos/include/*
-  - name: iphonesimulator-libffi
-    files:
-      - iphonesimulator/lib/libffi.dylib
-      - iphonesimulator/lib/libffi.dylib.dSYM
-      - iphonesimulator/include/*
 
 about:
   home: http://github.com/codelv/enaml-native

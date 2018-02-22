@@ -1,5 +1,16 @@
 --- Python-2.7.14/Modules/posixmodule.c
 +++ Python-2.7.14-patched/Modules/posixmodule.c
+@@ -162,6 +162,10 @@ corresponding Unix manual entries for more information on calls.");
+ #endif  /* ! __WATCOMC__ || __QNX__ */
+ #endif /* ! __IBMC__ */
+
++#if defined(__APPLE__)
++#undef HAVE_SYSTEM
++#endif
++
+ #ifndef _MSC_VER
+
+ #if defined(__sgi)&&_COMPILER_VERSION>=700
 @@ -628,7 +628,7 @@ _PyVerify_fd_dup2(int fd1, int fd2)
  ** environ directly, we must obtain it with _NSGetEnviron(). See also
  ** man environ(7).
