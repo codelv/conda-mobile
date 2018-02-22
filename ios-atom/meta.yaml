@@ -1,0 +1,27 @@
+package:
+  name: ios-atom
+  version: 0.4.1
+
+source:
+  url: https://github.com/nucleic/atom/archive/0.4.1.tar.gz
+
+build:
+  number: 0
+  binary_relocation: False
+  dependencies:
+    - iphoneos-python2.7
+    - iphonesimulator-python2.7
+
+
+outputs:
+  - name: iphoneos-atom
+    files:
+      - iphoneos/python/site-packages/atom/*
+
+  - name: iphonesimulator-atom
+    files:
+      - iphonesimulator/python/site-packages/atom/*
+
+about:
+  home: http://github.com/codelv/enaml-native
+  license: MIT
