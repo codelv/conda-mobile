@@ -1,9 +1,14 @@
+#!/usr/bin/env bash
+# ==================================================================================================
+# Copyright (c) 2018, Jairus Martin.
+# Distributed under the terms of the MIT License.
+# The full license is in the file LICENSE, distributed with this software.
+# Created on Feb 10, 2018
+# ==================================================================================================
 
 export PYTHON_FOR_BUILD="$(which python2)"
 export VERSION_MIN="-miphoneos-version-min=8.0.0"
 export ARCHS=("i386 x86_64 armv7 arm64")
-#export ARCHS=("armv7 arm64")
-
 
 # Patch
 patch -t -d $SRC_DIR -p1 -i $RECIPE_DIR/patches/xcompile.patch

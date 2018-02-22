@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
+# ==================================================================================================
+# Copyright (c) 2018, Jairus Martin.
+# Distributed under the terms of the MIT License.
+# The full license is in the file LICENSE, distributed with this software.
+# Created on Feb 22, 2018
+# ==================================================================================================
 
 export HOSTPYTHON="$(which python2)"
 export VERSION_MIN="-miphoneos-version-min=8.0.0"

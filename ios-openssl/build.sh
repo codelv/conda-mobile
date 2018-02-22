@@ -1,3 +1,10 @@
+#!/usr/bin/env bash
+# ==================================================================================================
+# Copyright (c) 2018, Jairus Martin.
+# Distributed under the terms of the MIT License.
+# The full license is in the file LICENSE, distributed with this software.
+# Created on Feb 10, 2018
+# ==================================================================================================
 
 export DEVELOPER="$(xcode-select -print-path)"
 export VERSION_MIN="-miphoneos-version-min=8.0.0"
@@ -77,5 +84,3 @@ lipo -create i386/libcrypto.1.0.0.dylib \
 
 cp -RL include $PREFIX/iphonesimulator
 
-# Merge iphone sim libs
-#exit 77
