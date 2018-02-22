@@ -6,27 +6,19 @@ source:
   url:  https://www.python.org/ftp/python/2.7.14/Python-2.7.14.tar.xz
   md5: 1f6db41ad91d9eb0a6f0c769b8613c5b
 
+requirements:
+  build:
+    - python
+    - ios-libffi
+    - ios-openssl
+
+  run:
+    - ios-libffi
+    - ios-openssl
+
 build:
   number: 1
   binary_relocation: False
-  dependencies:
-    - iphoneos-libffi
-    - iphoneos-openssl
-    - iphonesimulator-libffi
-    - iphonesimulator-openssl
-
-outputs:
-  - name: iphoneos-python2.7
-    files:
-      - iphoneos/lib/libpython2.7.dylib
-      - iphoneos/python/*
-      - iphoneos/include/python2.7/*
-
-  - name: iphonesimulator-python2.7
-    files:
-      - iphonesimulator/lib/libpython2.7.dylib
-      - iphonesimulator/python/*
-      - iphonesimulator/include/python2.7/*
 
 about:
   home: http://github.com/codelv/enaml-native
