@@ -1,0 +1,28 @@
+package:
+  name: ios-enaml
+  version: 0.10.2
+
+source:
+  url: https://github.com/nucleic/enaml/archive/0.10.2.tar.gz
+  md5: 04525c2c83104a6f2be3b5c928dd9d25c
+
+build:
+  number: 0
+  binary_relocation: False
+  dependencies:
+    - iphoneos-python2.7
+    - iphonesimulator-python2.7
+
+
+outputs:
+  - name: iphoneos-enaml
+    files:
+      - iphoneos/python/site-packages/enaml/*
+
+  - name: iphonesimulator-enaml
+    files:
+      - iphonesimulator/python/site-packages/enaml/*
+
+about:
+  home: http://github.com/codelv/enaml-native
+  license: MIT
