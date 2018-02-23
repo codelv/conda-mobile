@@ -28,6 +28,9 @@ do
     if [ "$ARCH" == "armv7" ]; then
         export SDK="iphoneos"
         export TARGET_HOST="armv7-apple-darwin"
+        # iPhone builds cannot use the private API _NSGetEnviron
+        sed -ie "s!environ = *_NSGetEnviron();!environ = NULL;!g" Modules/posixmodule.c
+
     elif [ "$ARCH" == "arm64" ]; then
         export SDK="iphoneos"
         export TARGET_HOST="aarch64-apple-darwin"
@@ -86,6 +89,12 @@ do
                     prefix=$SRC_DIR/dist/$ARCH
 
 
+    # Remove unused stuff
+    rm -Rf dist/$ARCH/lib/python2.7/test
+    rm -Rf dist/$ARCH/lib/python2.7/*/test/
+    rm -Rf dist/$ARCH/lib/python2.7/plat-*
+    rm -Rf dist/$ARCH/lib/python2.7/lib-*
+
 done
 
 
@@ -101,6 +110,7 @@ lipo -create dist/armv7/lib/libpython2.7.dylib \
 # Copy headers and stdlib
 cp -RL dist/armv7/include $PREFIX/iphoneos/
 cp -RL dist/armv7/lib/python2.7/* $PREFIX/iphoneos/python
+
 
 # Make a single lib with both for the iphone
 lipo -create dist/i386/lib/libpython2.7.dylib \
