@@ -59,11 +59,7 @@ do
     # The magic cross compile flag (tells it to not try to load them after building)
     export _PYTHON_HOST_PLATFORM="$TARGET_HOST"
 
-    ./configure CC="$CC" \
-                LD="$LD" \
-                CLFAGS="$CFLAGS" \
-                LDFLAGS="$LDFLAGS" \
-                ac_cv_file__dev_ptmx=no \
+    ./configure ac_cv_file__dev_ptmx=no \
                 ac_cv_file__dev_ptc=no \
                 --host=$TARGET_HOST \
                 --build=$BUILD \
