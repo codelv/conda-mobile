@@ -58,17 +58,19 @@ cp -RL build/lib.darwin-x86_64-2.7/enaml $PREFIX/iphonesimulator/python/site-pac
 SOFILES="enaml/callableref enaml/core/dynamicscope enaml/core/alias enaml/core/declarative_function enaml/core/funchelper enaml/c_compat enaml/signaling enaml/fontext enaml/colorext enaml/weakmethod"
 for SOFILE in $SOFILES
 do
+    # Convert all / to .
+    DYFILE=${SOFILE//\//.}
 
     # Merge iphoneos versions
     rm $PREFIX/iphoneos/python/site-packages/$SOFILE.so
     lipo -create build/lib.darwin-arm-2.7/$SOFILE.so \
                  build/lib.darwin-aarch64-2.7/$SOFILE.so \
-                 -o $PREFIX/iphoneos/python/site-packages/$SOFILE.dylib
+                 -o $PREFIX/iphoneos/lib/$DYFILE.dylib
 
     # Rename simulator versions
     rm $PREFIX/iphonesimulator/python/site-packages/$SOFILE.so
 
     lipo -create build/lib.darwin-i386-2.7/$SOFILE.so \
                  build/lib.darwin-x86_64-2.7/$SOFILE.so \
-                -o $PREFIX/iphonesimulator/python/site-packages/$SOFILE.dylib
+                -o $PREFIX/iphonesimulator/lib/$DYFILE.dylib
 done

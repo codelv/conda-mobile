@@ -57,17 +57,19 @@ cp -RL build/lib.darwin-x86_64-2.7/atom $PREFIX/iphonesimulator/python/site-pack
 SOFILES="atom/catom atom/datastructures/sortedmap"
 for SOFILE in $SOFILES
 do
+    # Convert all / to .
+    DYFILE=${SOFILE//\//.}
 
     # Merge iphoneos versions
     rm $PREFIX/iphoneos/python/site-packages/$SOFILE.so
     lipo -create build/lib.darwin-arm-2.7/$SOFILE.so \
                  build/lib.darwin-aarch64-2.7/$SOFILE.so \
-                 -o $PREFIX/iphoneos/python/site-packages/$SOFILE.dylib
+                 -o $PREFIX/iphoneos/lib/$DYFILE.dylib
 
     # Rename simulator versions
     rm $PREFIX/iphonesimulator/python/site-packages/$SOFILE.so
 
     lipo -create build/lib.darwin-i386-2.7/$SOFILE.so \
                  build/lib.darwin-x86_64-2.7/$SOFILE.so \
-                -o $PREFIX/iphonesimulator/python/site-packages/$SOFILE.dylib
+                -o $PREFIX/iphonesimulator/lib/$DYFILE.dylib
 done
