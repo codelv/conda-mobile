@@ -1,0 +1,16 @@
+
+package:
+  name: android-openssl
+  version: 1.0.2n
+
+source:
+  url: https://www.openssl.org/source/openssl-1.0.2n.tar.gz
+  sha256: 370babb75f278c39e0c50e8c4e7493bc0f18db6867478341a832a982fd15a8fe
+
+build:
+  number: 1
+  binary_relocation: False
+
+about:
+  home: http://github.com/codelv/enaml-native
+  license: MIT
