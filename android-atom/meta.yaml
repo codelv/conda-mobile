@@ -1,0 +1,21 @@
+package:
+  name: android-atom
+  version: 0.4.1
+
+source:
+  url: https://github.com/nucleic/atom/archive/0.4.1.tar.gz
+  md5: e76cb77c242601810ff0ca363ce33b28
+
+requirements:
+  build:
+    - android-python
+  run:
+    - android-python
+
+build:
+  number: 0
+  binary_relocation: False
+
+about:
+  home: http://github.com/codelv/enaml-native
+  license: MIT
