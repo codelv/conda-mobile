@@ -1,0 +1,16 @@
+
+package:
+  name: android-libffi
+  version: 3.2.1
+
+source:
+  url: https://github.com/libffi/libffi/archive/v3.2.1.tar.gz
+  md5: 9066486bcab807f7ddaaf2596348c1db
+
+build:
+  number: 1
+  binary_relocation: False
+
+about:
+  home: http://github.com/codelv/enaml-native
+  license: MIT
