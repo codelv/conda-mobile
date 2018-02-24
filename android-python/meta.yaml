@@ -1,0 +1,21 @@
+package:
+  name: android-python
+  version: 2.7.14
+
+source:
+  url:  https://www.python.org/ftp/python/2.7.14/Python-2.7.14.tar.xz
+  md5: 1f6db41ad91d9eb0a6f0c769b8613c5b
+
+requirements:
+  build:
+    - android-libffi
+    - android-openssl
+    - android-sqlite
+
+build:
+  number: 1
+  binary_relocation: False
+
+about:
+  home: http://github.com/codelv/enaml-native
+  license: MIT
