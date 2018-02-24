@@ -1,0 +1,23 @@
+package:
+  name: android-msgpack
+  version: 0.5.5
+
+source:
+  url: https://github.com/msgpack/msgpack-python/archive/0.5.5.tar.gz
+  md5: d9e7e71bc5464956bdf68a225b4f28df
+
+requirements:
+  build:
+    - python<=3
+    - cython
+    - android-python
+  run:
+    - android-python
+
+build:
+  number: 0
+  binary_relocation: False
+
+about:
+  home: http://github.com/codelv/enaml-native
+  license: MIT
