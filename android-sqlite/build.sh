@@ -32,7 +32,7 @@ do
     export CC="$TARGET_HOST-clang"
     export LD="$TARGET_HOST-ld"
     export STRIP="$TARGET_HOST-strip"
-    export CFLAGS="-O3"
+    export CFLAGS="-Os"
 
     ./configure --host=$TARGET_HOST --prefix=$SRC_DIR/dist/$ARCH
     make clean
@@ -44,6 +44,6 @@ do
     cp -RL dist/$ARCH/include $PREFIX/android/$ARCH/
 
     # Strip symbols
-    ${STRIP} --strip-unneeded $PREFIX/android/$ARCH/lib/libsqlite3.so
+    #${STRIP} --strip-unneeded $PREFIX/android/$ARCH/lib/libsqlite3.so
 
 done

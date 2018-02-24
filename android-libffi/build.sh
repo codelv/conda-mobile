@@ -3,7 +3,7 @@
 # Copyright (c) 2018, Jairus Martin.
 # Distributed under the terms of the MIT License.
 # The full license is in the file LICENSE, distributed with this software.
-# Created on Feb 10, 2018
+# Created on Feb 23, 2018
 # ==================================================================================================
 export ARCHS=("x86_64 x86 arm arm64")
 export NDK="$HOME/Android/Sdk/ndk-bundle"

@@ -1,0 +1,15 @@
+diff --git a/setup.py b/setup.py-patched
+index 5503486..f0b89a4 100644
+--- a/setup.py
++++ b/setup.py-patched
+@@ -2255,9 +2255,7 @@ def main():
+           ext_modules=[Extension('_struct', ['_struct.c'])],
+ 
+           # Scripts to install
+-          scripts = ['Tools/scripts/pydoc', 'Tools/scripts/idle',
+-                     'Tools/scripts/2to3',
+-                     'Lib/smtpd.py']
++          scripts = []
+         )
+ 
+ # --install-platlib

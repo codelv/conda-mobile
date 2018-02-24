@@ -101,7 +101,7 @@ do
 
     # Strip libs of debug symbol
     chmod 775 $PREFIX/android/$ARCH/lib/libpython2.7.so
-    find $PREFIX/android/$ARCH/lib -name "*.so" \
-         -exec ${STRIP} --strip-unneeded {} \;
+    #find $PREFIX/android/$ARCH/lib -name "*.so" \
+    #     -exec ${STRIP} --strip-unneeded {} \;
 
 done
