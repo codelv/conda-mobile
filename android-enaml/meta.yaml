@@ -1,0 +1,22 @@
+package:
+  name: android-enaml
+  version: 0.10.2
+
+source:
+  url: https://github.com/nucleic/enaml/archive/0.10.2.tar.gz
+  md5: 04525c2c83104a6f2be3b5c928dd9d25
+
+requirements:
+  build:
+    - android-python
+  run:
+    - android-python
+    - android-atom
+
+build:
+  number: 0
+  binary_relocation: False
+
+about:
+  home: http://github.com/codelv/enaml-native
+  license: MIT
