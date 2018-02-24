@@ -49,6 +49,7 @@ binascii binascii.c # Helper module for various ascii-encoders
 parser parsermodule.c # Fred Drake's interface to the Python parser
 cStringIO cStringIO.c # cStringIO and cPickle
 cPickle cPickle.c # cStringIO and cPickle
+future_builtins future_builtins.c # Future backport
 
 # Standard I/O baseline
 _io -I$(srcdir)/Modules/_io _io/bufferedio.c _io/bytesio.c _io/fileio.c _io/iobase.c _io/_iomodule.c _io/stringio.c _io/textio.c
