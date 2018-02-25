@@ -40,11 +40,12 @@ do
     # Clean
     make clean
 
-    FIND='SHLIB_EXT=.\$(SHLIB_MAJOR).\$(SHLIB_MINOR).so'
-    sed -ie s!$FIND!SHLIB_EXT=.so!g Makefile
+    # Remove version otherwise it tries to link a specific version
+    sed -ie 's!SHLIB_EXT=.so.$(SHLIB_MAJOR).$(SHLIB_MINOR)!SHLIB_EXT=.so!g' Makefile
+    sed -ie 's!-soname=$$SHLIB$$SHLIB_SOVER$$SHLIB_SUFFIX!-soname=$$SHLIB!g' Makefile.shared
 
     # Build
-    make -j$CPU_COUNT build_libs LIBDIR=.
+    make -j$CPU_COUNT build_libs LIBDIR=. SHLIB_EXT=.so
 
     # Copy to install dir
     mkdir -p $PREFIX/android/$ARCH/lib
