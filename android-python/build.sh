@@ -14,6 +14,9 @@ patch -t -d $SRC_DIR -p1 -i $RECIPE_DIR/patches/xcompile.patch
 patch -t -d $SRC_DIR -p1 -i $RECIPE_DIR/patches/setup.patch
 patch -t -d $SRC_DIR -p1 -i $RECIPE_DIR/patches/sqlite.patch
 
+# Disable LFS
+sed -ie "s!use_lfs=yes!use_lfs=no!g" configure
+
 for ARCH in $ARCHS
 do
 # This expects the toolchain to be built at $NDK/standalone/$ARCH
@@ -23,7 +26,7 @@ do
 #                                            --stl=libc++ \
 #                                            --install-dir=$NDK/standalone/$ARCH
     export ANDROID_TOOLCHAIN="$NDK/standalone/$ARCH"
-
+    LIBDIR="lib"
     if [ "$ARCH" == "arm" ]; then
         export TARGET_HOST="arm-linux-androideabi"
         export TARGET_ABI="armeabi-v7a"
@@ -36,6 +39,7 @@ do
     elif [ "$ARCH" == "x86_64" ]; then
         export TARGET_HOST="x86_64-linux-android"
         export TARGET_ABI="x86_64"
+        LIBDIR="lib64"
     fi
 
     export APP_ROOT="$PREFIX/android/$ARCH"
@@ -57,7 +61,7 @@ do
     # Copy modules and update SSL path
     # If you want to make it smaller remove modules from Setup.local
     cp $RECIPE_DIR/Setup.local $SRC_DIR/Modules/
-    sed -i.bak s!SSL=/usr/local/ssl!SSL=$APP_ROOT/$SDK/include/!g $SRC_DIR/Modules/Setup.local
+    sed -ie s!SSL=/usr/local/ssl!SSL=$APP_ROOT/$SDK/include/!g $SRC_DIR/Modules/Setup.local
 
     ./configure ac_cv_file__dev_ptmx=no \
                 ac_cv_file__dev_ptc=no \
@@ -72,6 +76,18 @@ do
                 --without-doc-strings
 
     make clean
+
+    # Disable langinfo android has it but not full support (missing nl_langinfo)
+    sed -ie 's!#define HAVE_LANGINFO_H 1!/* #undef HAVE_LANGINFO_H */!g' pyconfig.h
+
+    # termios
+    sed -ie 's!#define HAVE_CTERMID 1!/* #undef HAVE_CTERMID */!g' pyconfig.h
+    sed -ie 's!#define HAVE_OPENPTY 1!/* #undef HAVE_OPENPTY */!g' pyconfig.h
+    sed -ie 's!#define HAVE_FORKPTY 1!/* #undef HAVE_FORKPTY */!g' pyconfig.h
+
+    # pwdmodule
+    sed -ie 's!#define HAVE_GETPWENT 1!/* #undef HAVE_GETPWENT */!g' pyconfig.h
+
 
     # Build and install
     make -j$CPU_COUNT CROSS_COMPILE_TARGET=yes
@@ -98,6 +114,9 @@ do
     cp -RL dist/$ARCH/lib/libpython2.7.so $PREFIX/android/$ARCH/lib/
     cp -RL dist/$ARCH/include $PREFIX/android/$ARCH
     cp -RL dist/$ARCH/lib/python2.7/* $PREFIX/android/$ARCH/python
+
+    # Include c++_shared.so
+    cp -RL $ANDROID_TOOLCHAIN/$TARGET_HOST/$LIBDIR/libc++_shared.so $PREFIX/android/$ARCH/lib
 
     # Strip libs of debug symbol
     chmod 775 $PREFIX/android/$ARCH/lib/libpython2.7.so
