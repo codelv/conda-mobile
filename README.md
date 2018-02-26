@@ -1,82 +1,68 @@
-# enaml-native-repo
+# conda-mobile
 
-This is an experimental repo for a new build system for cross compiling python 
-libraries and extensions for iOS and Android using a common platform. 
+A collection of conda recipes for cross compiling libraries, python, and 
+python extensions for iOS and Android.
 
-The goal is to replace python-for-android and kivy-ios build systems with a 
-repository of conda recipes to create precompiled packages that can simply be 
-installed and used directly by gradle (Android) or xcode (iOS).
+The idea is to be able to easily create a python distribution that works on 
+Android and iOS by simply using `conda install` within an environment created
+for a specific app.
 
+These recipes have been tested and confirmed working using 
+[enaml-native](https://github.com/codelv/enaml-native) (yet to be released).
 
-### Why?
+### Targets
 
-Why do something else when kivy-ios and python-for-android are both 
-well established projects?
+Currently all recipes are built for Python 2.7.14 with optional support for openssl and 
+ctypes for the following targets:
 
-- Versioning - Both existing build systems do not support versioning well. 
-You cannot easily add or remove a specific version of a package which makes
-it hard to create reproducible builds.
+- Android (arm (armeabi-v7a), arm64 (arm64-v8a), x86_64, x86 (i686))
+- iPhone (armv7, aarch64)
+- iPhone Simulator (x86_64, i386)
 
-- Decentralized - Both p4a and kivy-ios have all the recipes in one repo and
-it is often difficult for new recipes to make it into the main repo. Conda
-supports installing from separate channels enabling anyone to build and share
-their own recipes. Users can easily pick and choose which to use.
+> Note: All libs and extensions are built as unstripped shared modules. Android strips
+libraries automatically.
 
-- Environments - Conda lets you install dependencies (including system level)
-in their own environment so they don't interfere with other apps or system
-packages. It also makes it easy to share the whole environment with others.
-
-- Simplify - Kivy-ios and p4a are both very similar and complex build systems. 
-Much of what they do (dependency management, downloading, building) can now be
-done with pip or conda so there's no point in supporting another toolchain for 
-this. 
-
-- Clarity - Using separate and explicit build scripts makes it more clear 
-which flags are being set when trying to debug a build issue.  Fixes for one
-recipe won't break others.
-
-
-##### Why Conda?
-
-Conda was chosen over pip+virtualenv (or pipenv) because it aims to support both 
-python packages and system libraries.  Cross compiling for iOS and Android projects 
-requires both (CPython for example is not a python package) and conda makes the 
-process the same for each.  It also easily lets you generate different outputs 
-for each target platform and arch in a very clean manner. One conda recipe can
-create outputs for both ios and android devices.
-
-> See https://conda.io/docs/commands.html#conda-vs-pip-vs-virtualenv-commands
-
-
-### Usage
-
-App dependencies can be installed with `conda` or the `enaml-native-cli` (soon). 
-
-1. Install `miniconda` from https://conda.io/miniconda.html
-2. Create an env `conda create -n myapp`
-3. Activate it `source activate myapp`
-2. Then install `conda install -c channel iphoneos-python2.7`
-
-Packages are prefixed for the target platform as follows
+Packages are installed into the env using a prefix for the target platform as follows
 
 - `iphoneos` - iOS recipes for the IPhone (armv7 and arm64)
-- `iphonesimulator` - iOS recipes for the IPhone simulator (x86_64)
-- `android-<arch>` - Android recipes for a given arch (armv7a or x86)
+- `iphonesimulator` - iOS recipes for the IPhone simulator (x86_64 and i386)
+- `android/<arch>` - Android recipes for a given arch (arm (v7a), arm64, x86_64, x86)
 
 
-The packages are installed into the env using the structure
+Each target then contains it's own include, lib, and python folders as follows
 
 ```
 # In <env>/<target> (ex miniconda2/envs/myapp/iphoneos)
 
 iphoneos/include/ # All headers
-iphoneos/libs/ # All .dylib or .so files
+iphoneos/libs/ # All shared libraries files
 iphoneos/python/ # Python stdlib and site-packages 
 
 ```
 
-The build system (gradle, xcode) can then easily grab these libraries from the
-env for the given target and use them as is.
+Recipes can easily reference these locations using appropriate `CFLAGS` and `LDFLAGS`.
+
+### Usage
+
+This requires `conda`. The preferred method is to install `miniconda2` from 
+[conda.io/miniconda.html](https://conda.io/miniconda.html).
+
+1. Create an env `conda create -n myapp`
+2. Activate it `source activate myapp`
+3. Add this channel `conda --add-channel conda-mobile`
+4. Then install your apps dependencies using the the `android` or `ios` prefix. 
+For example `conda install ios-python ios-msgpack`  
+
+
+Pure python packages can be installed with pip using the `--target` to tell it
+where to install. `pip install tornado --target=$CONDA_PREFIX/iphoneos/python/site-packages`
+or (preferred) create a conda package for it.
+
+Once the packages are installed, the build system (gradle, xcode) can then easily grab 
+these libraries from the env for the given target and use them as is. 
+
+> Note: An import hook is required to load python extensions from "non" standard locations. 
+[enaml-native](https://github.com/codelv/enaml-native) supports this. 
 
 
 ### Building recipes
@@ -84,18 +70,27 @@ env for the given target and use them as is.
 Only developers of packages should need to build recipes. End users should
 be able to simply install and use prebuilt versions. 
 
+See the [conda docs](https://conda.io/docs/user-guide/tasks/build-packages/index.html)
+to get started.
+
 To add a new recipe or to build existing recipes:
 
-1. Install miniconda
-2. Clone this repo or a recipe from somewhere and cd to this folder
-3. Create either an `ios` or `android` env
-4. Install all the dependencies for your recipe
+1. Install `miniconda2`
+2. Install conda-build via `conda install conda-build` (recommended outside of an env)
+2. Clone this repo or create your own recipe(s)
+3. Add the requirements to your recipes as needed
 5. Run `conda-build <recipe-name>`
 
 Then either add a PR or create your own repos with recipes.
 
+> Note: If using linux with an encrypted home directory you may have to build in a different
+root to avoid "path to long" errors. Add the `--croot=/tmp/conda` or some other path to 
+fix this.
 
-### Thanks
 
-These recipes are based on those from kivy-ios and python-for-android and various
-other projects across the web.
+### Support
+
+Some of these recipes are based on those from kivy-ios and python-for-android and various
+other projects across the web.  
+
+Many are rewrites from scratch using more up to date methods.
