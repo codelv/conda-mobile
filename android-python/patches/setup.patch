@@ -1,8 +1,30 @@
-diff --git a/setup.py b/setup.py-patched
-index 5503486..f0b89a4 100644
+diff --git a/setup.py b/setup.py.orig
+index 5503486..1ea3dc1 100644
 --- a/setup.py
-+++ b/setup.py-patched
-@@ -2255,9 +2255,7 @@ def main():
++++ b/setup.py.orig
+@@ -218,10 +218,10 @@ class PyBuildExt(build_ext):
+         headers = [sysconfig.get_config_h_filename()]
+         headers += glob(os.path.join(sysconfig.get_path('include'), "*.h"))
+         for ext in self.extensions[:]:
+-            ext.sources = [ find_module_file(filename, moddirlist)
++            ext.sources = [ os.path.join('Modules', find_module_file(filename, moddirlist))
+                             for filename in ext.sources ]
+             if ext.depends is not None:
+-                ext.depends = [find_module_file(filename, moddirlist)
++                ext.depends = [ os.path.join('Modules', find_module_file(filename, moddirlist))
+                                for filename in ext.depends]
+             else:
+                 ext.depends = []
+@@ -460,7 +466,7 @@ class PyBuildExt(build_ext):
+             add_dir_to_list(self.compiler.include_dirs, '/usr/local/include')
+         if cross_compiling:
+             self.add_gcc_paths()
+-        self.add_multiarch_paths()
++        #self.add_multiarch_paths()
+
+         # Add paths specified in the environment variables LDFLAGS and
+         # CPPFLAGS for header and library files.
+@@ -2255,9 +2261,7 @@ def main():
            ext_modules=[Extension('_struct', ['_struct.c'])],
  
            # Scripts to install
