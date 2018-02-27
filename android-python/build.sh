@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==================================================================================================
 # Copyright (c) 2018, Jairus Martin.
-# Distributed under the terms of the MIT License.
+# Distributed under the terms of the GPL v3 License.
 # The full license is in the file LICENSE, distributed with this software.
 # Created on Feb 23, 2018
 # ==================================================================================================
@@ -50,9 +50,9 @@ do
     export APP_ROOT="$PREFIX/android/$ARCH"
     export PATH="$PATH:$ANDROID_TOOLCHAIN/bin"
     export AR="$TARGET_HOST-ar"
-    export AS="$TARGET_HOST-clang"
-    export CC="$TARGET_HOST-clang"
-    export CXX="$TARGET_HOST-clang++"
+    export AS="$TARGET_HOST-as"
+    export CC="$TARGET_HOST-gcc"
+    export CXX="$TARGET_HOST-g++"
     export LD="$TARGET_HOST-ld"
     export RANLIB="$TARGET_HOST-ranlib"
 
