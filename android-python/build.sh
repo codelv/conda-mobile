@@ -50,9 +50,9 @@ do
     export APP_ROOT="$PREFIX/android/$ARCH"
     export PATH="$PATH:$ANDROID_TOOLCHAIN/bin"
     export AR="$TARGET_HOST-ar"
-    export AS="$TARGET_HOST-as"
-    export CC="$TARGET_HOST-gcc"
-    export CXX="$TARGET_HOST-g++"
+    export AS="$TARGET_HOST-clang"
+    export CC="$TARGET_HOST-clang"
+    export CXX="$TARGET_HOST-clang++"
     export LD="$TARGET_HOST-ld"
     export RANLIB="$TARGET_HOST-ranlib"
 
