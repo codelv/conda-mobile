@@ -4,10 +4,10 @@ A collection of conda recipes for cross compiling libraries, python, and
 python extensions for iOS and Android.
 
 The idea is to be able to easily create a python distribution that works on 
-Android and iOS by simply using `conda install` within an environment created
-for a specific app.
+Android and iOS by simply using `conda install android-<package>` or 
+`conda install ios-<package>` within an environment created for a specific app.
 
-These recipes have been tested and confirmed working using 
+These recipes have been tested and confirmed working using a dev version of 
 [enaml-native](https://github.com/codelv/enaml-native) (yet to be released).
 
 ### Targets
@@ -88,12 +88,12 @@ root to avoid "path to long" errors. Add the `--croot=/tmp/conda` or some other 
 fix this.
 
 
-### Support
+### Contributing 
 
-Some of these recipes are based on those from kivy-ios and python-for-android and various
-other projects across the web.  
+Please donate to [enaml-native](https://www.codelv.com/projects/enaml-native/support/) or
+[kivy](https://kivy.org/#home) to help continue supporting python frameworks that run on 
+mobile devices.
 
-Many are rewrites from scratch using more up to date methods.
+This is released under the GPL v3. See the LICENSE included adjacent to this file.
 
-### License
-
+Pull requests are always welcome.
