@@ -47,7 +47,7 @@ install:
   - mv android-ndk-r16b ndk-bundle
 
   # Install sdk and build tools
-  - tools/bin/sdkmanager --update |& $capture
+  - tools/bin/sdkmanager --update | $capture
   - echo yes | tools/bin/sdkmanager "platforms;android-27" | $capture
   - echo yes | tools/bin/sdkmanager "build-tools;27.0.3" | $capture
   - echo yes | tools/bin/sdkmanager "extras;google;m2repository" | $capture
