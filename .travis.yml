@@ -1,15 +1,8 @@
-language: python
+language: generic
 os:
   - linux
   - osx
 osx_image: xcode9.2
-python:
-  - 2.7
-##  components:
-##    - platform-tools
-##    - tools
-##    - android-27
-
 install:
   - export ANDROID_HOME=$HOME/Android/Sdk/
   - export NDK=$HOME/Android/Sdk/ndk-bundle
