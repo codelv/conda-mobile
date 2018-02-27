@@ -2,9 +2,6 @@ language: python
 os:
   - linux
   - osx
-env:
-  - ANDROID_HOME=$HOME/Android/Sdk
-  - NDK=$HOME/Android/Sdk/ndk-bundle
 #python:
 #  - "2.7"
 ##  components:
@@ -12,11 +9,13 @@ env:
 ##    - tools
 ##    - android-27
 before_install:
-  - mkdir "$ANDROID_HOME/licenses" || true
+  - mkdir "$HOME/Android/Sdk/licenses" || true
   - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
   - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
 
 install:
+  - export ANDROID_HOME=$HOME/Android/Sdk/
+  - export NDK=$HOME/Android/Sdk/ndk-bundle
   # We do this conditionally because it saves us some downloading if the
   # version is the same.
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
