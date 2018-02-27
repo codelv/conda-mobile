@@ -2,12 +2,12 @@ language: python
 os:
   - linux
   - osx
-python:
-  - "2.7"
-#  components:
-#    - platform-tools
-#    - tools
-#    - android-27
+#python:
+#  - "2.7"
+##  components:
+##    - platform-tools
+##    - tools
+##    - android-27
 
 install:
   # We do this conditionally because it saves us some downloading if the
@@ -46,7 +46,7 @@ install:
   - rm *.zip
   - tools/bin/sdkmanager --update
   - tools/bin/sdkmanager "platforms;android-27" "build-tools;27.0.3" "extras;google;m2repository" "extras;android;m2repository"
-  - tools/bin/sdkmanager --licenses
+  - yes | tools/bin/sdkmanager --licenses
   - cd $TRAVIS_BUILD_DIR
   - export NDK=$ANDROID_SDK_ROOT/ndk-bundle
 
