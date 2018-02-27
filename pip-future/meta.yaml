@@ -1,0 +1,14 @@
+package:
+  name: pip-future
+  version: 0.16.0
+
+requirements:
+  build:
+    - python
+
+build:
+  number: 1
+
+about:
+  home: http://github.com/codelv/enaml-native
+  license: GPLv3

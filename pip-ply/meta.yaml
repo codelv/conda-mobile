@@ -1,0 +1,14 @@
+package:
+  name: pip-ply
+  version: 3.11
+
+requirements:
+  build:
+    - python
+
+build:
+  number: 1
+
+about:
+  home: http://github.com/codelv/enaml-native
+  license: GPLv3
