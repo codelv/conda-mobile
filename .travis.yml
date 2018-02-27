@@ -2,12 +2,19 @@ language: python
 os:
   - linux
   - osx
+env:
+  - ANDROID_HOME=$HOME/Android/Sdk
+  - NDK=$HOME/Android/Sdk/ndk-bundle
 #python:
 #  - "2.7"
 ##  components:
 ##    - platform-tools
 ##    - tools
 ##    - android-27
+before_install:
+  - mkdir "$ANDROID_HOME/licenses" || true
+  - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
+  - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
 
 install:
   # We do this conditionally because it saves us some downloading if the
@@ -28,9 +35,8 @@ install:
   - conda install conda-build -q
 
   # Install NDK
-  - export ANDROID_SDK_ROOT=$HOME/Android/Sdk
-  - mkdir -p $ANDROID_SDK_ROOT
-  - cd $ANDROID_SDK_ROOT
+  - mkdir -p $ANDROID_HOME
+  - cd $ANDROID_HOME
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
       wget https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip -O tools.zip;
      else
@@ -44,17 +50,16 @@ install:
   - unzip -oq tools.zip
   - unzip -oq ndk-bundle.zip
   - rm *.zip
-  - echo yes | tools/bin/sdkmanager --update
-  - echo yes | tools/bin/sdkmanager "platforms;android-27" "build-tools;27.0.3" "extras;google;m2repository" "extras;android;m2repository"
-  - echo yes | tools/bin/sdkmanager --licenses
+  - tools/bin/sdkmanager --update
+  - tools/bin/sdkmanager "platforms;android-27" "build-tools;27.0.3" "extras;google;m2repository" "extras;android;m2repository"
+  - tools/bin/sdkmanager --licenses
   - cd $TRAVIS_BUILD_DIR
-  - export NDK=$ANDROID_SDK_ROOT/ndk-bundle
 
   # Create toolchains
-  - python $NDK/build/tools/make_standalone_toolchain.py --arch x86_64 --api 26 --stl=libc++ --install-dir=$NDK/standalone/$ARCH
-  - python $NDK/build/tools/make_standalone_toolchain.py --arch x86 --api 26 --stl=libc++ --install-dir=$NDK/standalone/$ARCH
-  - python $NDK/build/tools/make_standalone_toolchain.py --arch arm --api 26 --stl=libc++ --install-dir=$NDK/standalone/$ARCH
-  - python $NDK/build/tools/make_standalone_toolchain.py --arch arm64 --api 26 --stl=libc++ --install-dir=$NDK/standalone/$ARCH
+  - python $NDK/build/tools/make_standalone_toolchain.py --arch x86_64 --api 26 --stl=libc++ --install-dir=$NDK/standalone/x86_64
+  - python $NDK/build/tools/make_standalone_toolchain.py --arch x86 --api 26 --stl=libc++ --install-dir=$NDK/standalone/x86
+  - python $NDK/build/tools/make_standalone_toolchain.py --arch arm --api 26 --stl=libc++ --install-dir=$NDK/standalone/arm
+  - python $NDK/build/tools/make_standalone_toolchain.py --arch arm64 --api 26 --stl=libc++ --install-dir=$NDK/standalone/arm64
 
 
 script:
