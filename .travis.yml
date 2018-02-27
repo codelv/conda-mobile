@@ -44,6 +44,7 @@ install:
     fi
   - unzip -oq tools.zip
   - unzip -oq ndk-bundle.zip
+  - find . | grep make_standalone_toolchain
   - rm *.zip
   - echo yes | tools/bin/sdkmanager --update > install-sdk.log
   - echo yes | tools/bin/sdkmanager "platforms;android-27" > install-sdk.log
