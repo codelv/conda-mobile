@@ -55,5 +55,8 @@ do
     cp -RL build/lib.android-$ARCH-2.7/enaml $PREFIX/android/$ARCH/python/site-packages/
     cp -RL build/lib.android-$ARCH-2.7/*.so $PREFIX/android/$ARCH/lib
 
-    #${STRIP} --strip-unneeded $PREFIX/android/$ARCH/lib/*.so
+    # Copy parse tables
+    cp -RL $RECIPE_DIR/tables/$PKG_VERSION/parse_tab $PREFIX/android/$ARCH/python/site-packages/enaml/core/parser
+
 done
+

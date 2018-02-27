@@ -3,6 +3,8 @@
 A collection of conda recipes for cross compiling libraries, python, and 
 python extensions for iOS and Android.
 
+[![Build Status](https://travis-ci.org/codelv/conda-mobile.svg?branch=master)](https://travis-ci.org/codelv/conda-mobile)
+
 The idea is to be able to easily create a python distribution that works on 
 Android and iOS by simply using `conda install android-<package>` or 
 `conda install ios-<package>` within an environment created for a specific app.
@@ -49,7 +51,7 @@ This requires `conda`. The preferred method is to install `miniconda2` from
 
 1. Create an env `conda create -n myapp`
 2. Activate it `source activate myapp`
-3. Add this channel `conda --add-channel conda-mobile`
+3. Add this channel `conda config --add channels codelv`
 4. Then install your apps dependencies using the the `android` or `ios` prefix. 
 For example `conda install ios-python ios-msgpack`  
 

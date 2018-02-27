@@ -11,7 +11,9 @@ requirements:
     - android-python
   run:
     - android-python
-    - android-atom
+    - android-atom>=0.4.1
+    - pip-ply==3.11
+    - pip-future
 
 build:
   number: 0
