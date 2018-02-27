@@ -45,12 +45,12 @@ install:
   - unzip -oq tools.zip
   - unzip -oq ndk-bundle.zip
   - rm *.zip
-  - echo yes | tools/bin/sdkmanager --update
-  - echo yes | tools/bin/sdkmanager "platforms;android-27"
-  - echo yes | tools/bin/sdkmanager "build-tools;27.0.3"
-  - echo yes | tools/bin/sdkmanager "extras;google;m2repository"
-  - echo yes | tools/bin/sdkmanager "extras;android;m2repository"
-  - echo yes | tools/bin/sdkmanager --licenses
+  - echo yes | tools/bin/sdkmanager --update > install-sdk.log
+  - echo yes | tools/bin/sdkmanager "platforms;android-27" > install-sdk.log
+  - echo yes | tools/bin/sdkmanager "build-tools;27.0.3" > install-sdk.log
+  - echo yes | tools/bin/sdkmanager "extras;google;m2repository" > install-sdk.log
+  - echo yes | tools/bin/sdkmanager "extras;android;m2repository" > install-sdk.log
+  - echo yes | tools/bin/sdkmanager --licenses > install-sdk.log
   - cd $TRAVIS_BUILD_DIR
 
   # Create toolchains
