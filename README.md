@@ -94,3 +94,6 @@ Some of these recipes are based on those from kivy-ios and python-for-android an
 other projects across the web.  
 
 Many are rewrites from scratch using more up to date methods.
+
+### License
+
