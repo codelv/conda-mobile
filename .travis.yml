@@ -44,8 +44,8 @@ install:
   - unzip -oq tools.zip
   - unzip -oq ndk-bundle.zip
   - rm *.zip
-  - tools/bin/sdkmanager --update
-  - tools/bin/sdkmanager "platforms;android-27" "build-tools;27.0.3" "extras;google;m2repository" "extras;android;m2repository"
+  - echo yes | tools/bin/sdkmanager --update
+  - echo yes | tools/bin/sdkmanager "platforms;android-27" "build-tools;27.0.3" "extras;google;m2repository" "extras;android;m2repository"
   - echo yes | tools/bin/sdkmanager --licenses
   - cd $TRAVIS_BUILD_DIR
   - export NDK=$ANDROID_SDK_ROOT/ndk-bundle
