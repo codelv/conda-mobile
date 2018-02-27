@@ -1,12 +1,13 @@
-language: android
+language: python
 os:
   - linux
   - osx
-android:
-  components:
-    - platform-tools
-    - tools
-    - android-27
+python:
+  - "2.7"
+#  components:
+#    - platform-tools
+#    - tools
+#    - android-27
 
 install:
   # We do this conditionally because it saves us some downloading if the
@@ -26,24 +27,25 @@ install:
   # Install conda build
   - conda install conda-build -q
 
-  # Install system dependencies
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]];
-      brew install autoconf automake libtool pkg-config
-      brew link libtool
-    fi
-
   # Install NDK
-  - mkdir -p $HOME/Android/Sdk/
-  - cd $HOME/Android/Sdk/
+  - export ANDROID_SDK_ROOT=$HOME/Android/Sdk
+  - mkdir -p $ANDROID_SDK_ROOT
+  - cd $ANDROID_SDK_ROOT
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]];
+      wget https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip -O tools.zip
       wget https://dl.google.com/android/repository/android-ndk-r16b-linux-x86_64.zip -O ndk-bundle.zip
      else
+      wget https://dl.google.com/android/repository/sdk-tools-darwin-3859397.zip -O tools.zip
       wget https://dl.google.com/android/repository/android-ndk-r16b-darwin-x86_64.zip -O ndk-bundle.zip
     fi
+  - unzip -oq tools.zip
   - unzip -oq ndk-bundle.zip
-  - rm ndk-bundle.zip
+  - rm *.zip
+  - tools/bin/sdkmanager --update
+  - tools/bin/sdkmanager "platforms;android-27" "build-tools;27.0.3" "extras;google;m2repository" "extras;android;m2repository"
+  - tools/bin/sdkmanager --licenses
   - cd $TRAVIS_BUILD_DIR
-  - export NDK=$HOME/Android/Sdk/
+  - export NDK=$ANDROID_SDK_ROOT/ndk-bundle
 
   # Create toolchains
   - python $NDK/build/tools/make_standalone_toolchain.py --arch x86_64 --api 26 --stl=libc++ --install-dir=$NDK/standalone/$ARCH
