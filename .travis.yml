@@ -6,7 +6,7 @@ osx_image: xcode9.2
 install:
   - export ANDROID_HOME=$HOME/Android/Sdk/
   - export NDK=$HOME/Android/Sdk/ndk-bundle
-  - export capture="tail -n 1000"
+  - export capture="tail -n 200"
 
   # Install makeinfo via texinfo
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt update -qq && sudo apt -qq install texinfo; fi
@@ -50,12 +50,12 @@ install:
   - mv android-ndk-r16b ndk-bundle
 
   # Install sdk and build tools
-  - echo yes | tools/bin/sdkmanager --update | $capture
-  - echo yes | tools/bin/sdkmanager "platforms;android-27" | $capture
-  - echo yes | tools/bin/sdkmanager "build-tools;27.0.3" | $capture
-  - echo yes | tools/bin/sdkmanager "extras;google;m2repository" | $capture
-  - echo yes | tools/bin/sdkmanager "extras;android;m2repository" | $capture
-  - echo yes | tools/bin/sdkmanager --licenses | $capture
+  - echo yes | tools/bin/sdkmanager --update > output.log
+  - echo yes | tools/bin/sdkmanager "platforms;android-27" > output.log
+  - echo yes | tools/bin/sdkmanager "build-tools;27.0.3" > output.log
+  - echo yes | tools/bin/sdkmanager "extras;google;m2repository" > output.log
+  - echo yes | tools/bin/sdkmanager "extras;android;m2repository" > output.log
+  - echo yes | tools/bin/sdkmanager --licenses > output.log
   - cd $TRAVIS_BUILD_DIR
 
   # Create toolchains
