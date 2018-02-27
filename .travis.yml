@@ -48,11 +48,11 @@ install:
 
   # Install sdk and build tools
   - tools/bin/sdkmanager --update |& $capture
-  - echo yes | tools/bin/sdkmanager "platforms;android-27" |& $capture
-  - echo yes | tools/bin/sdkmanager "build-tools;27.0.3" |& $capture
-  - echo yes | tools/bin/sdkmanager "extras;google;m2repository" |& $capture
-  - echo yes | tools/bin/sdkmanager "extras;android;m2repository" |& $capture
-  - echo yes | tools/bin/sdkmanager --licenses |& $capture
+  - echo yes | tools/bin/sdkmanager "platforms;android-27" | $capture
+  - echo yes | tools/bin/sdkmanager "build-tools;27.0.3" | $capture
+  - echo yes | tools/bin/sdkmanager "extras;google;m2repository" | $capture
+  - echo yes | tools/bin/sdkmanager "extras;android;m2repository" | $capture
+  - echo yes | tools/bin/sdkmanager --licenses | $capture
   - cd $TRAVIS_BUILD_DIR
 
   # Create toolchains
@@ -63,19 +63,23 @@ install:
 
 
 script:
+  # Pip (pure python) recipes
+  - conda-build pip-future | $capture
+  - conda-build pip-ply | $capture
+
   # Build ios recipes
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then conda-build ios-libffi |& $capture; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then conda-build ios-openssl |& $capture; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then conda-build ios-python |& $capture; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then conda-build ios-atom |& $capture; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then conda-build ios-enaml |& $capture; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then conda-build ios-msgpack |& $capture; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then conda-build ios-libffi | $capture; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then conda-build ios-openssl | $capture; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then conda-build ios-python | $capture; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then conda-build ios-atom | $capture; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then conda-build ios-enaml | $capture; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then conda-build ios-msgpack | $capture; fi
 
   # Build android recipes
-  - conda-build android-libffi |& $capture
-  - conda-build android-openssl |& $capture
-  - conda-build android-sqlite |& $capture
-  - conda-build android-python |& $capture
-  - conda-build android-atom |& $capture
-  - conda-build android-enaml |& $capture
-  - conda-build android-msgpack |& $capture
+  - conda-build android-libffi | $capture
+  - conda-build android-openssl | $capture
+  - conda-build android-sqlite | $capture
+  - conda-build android-python | $capture
+  - conda-build android-atom | $capture
+  - conda-build android-enaml | $capture
+  - conda-build android-msgpack | $capture
