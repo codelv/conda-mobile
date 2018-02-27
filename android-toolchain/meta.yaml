@@ -1,0 +1,11 @@
+package:
+  name: android-toolchain
+  version: 26
+
+build:
+  number: 1
+  binary_relocation: False
+
+about:
+  home: http://github.com/codelv/enaml-native
+  license: MIT
