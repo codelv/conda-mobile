@@ -32,11 +32,11 @@ install:
   - mkdir -p $ANDROID_SDK_ROOT
   - cd $ANDROID_SDK_ROOT
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]];
-      wget https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip -O tools.zip
-      wget https://dl.google.com/android/repository/android-ndk-r16b-linux-x86_64.zip -O ndk-bundle.zip
+      wget https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip -O tools.zip;
+      wget https://dl.google.com/android/repository/android-ndk-r16b-linux-x86_64.zip -O ndk-bundle.zip;
      else
-      wget https://dl.google.com/android/repository/sdk-tools-darwin-3859397.zip -O tools.zip
-      wget https://dl.google.com/android/repository/android-ndk-r16b-darwin-x86_64.zip -O ndk-bundle.zip
+      wget https://dl.google.com/android/repository/sdk-tools-darwin-3859397.zip -O tools.zip;
+      wget https://dl.google.com/android/repository/android-ndk-r16b-darwin-x86_64.zip -O ndk-bundle.zip;
     fi
   - unzip -oq tools.zip
   - unzip -oq ndk-bundle.zip
@@ -56,12 +56,12 @@ install:
 
 script:
   # Build ios recipes
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; conda-build ios-libffi fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; conda-build ios-openssl fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; conda-build ios-python fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; conda-build ios-atom fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; conda-build ios-enaml fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; conda-build ios-msgpack fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; conda-build ios-libffi; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; conda-build ios-openssl; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; conda-build ios-python; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; conda-build ios-atom; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; conda-build ios-enaml; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; conda-build ios-msgpack; fi
 
   # Build android recipes
   - conda-build android-libffi
