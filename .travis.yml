@@ -12,8 +12,11 @@ python:
 install:
   - export ANDROID_HOME=$HOME/Android/Sdk/
   - export NDK=$HOME/Android/Sdk/ndk-bundle
-  # We do this conditionally because it saves us some downloading if the
-  # version is the same.
+
+  # Install makeinfo
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt -y install textinfo; fi
+
+  # Install miniconda
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
        wget http://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh -O miniconda.sh;
      else
@@ -28,6 +31,7 @@ install:
   - conda info -a
   # Install conda build
   - conda install conda-build -q
+
 
   # Install NDK
   - mkdir -p $ANDROID_HOME
