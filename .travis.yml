@@ -64,12 +64,12 @@ install:
 
 script:
   # Build ios recipes
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; conda-build ios-libffi; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; conda-build ios-openssl; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; conda-build ios-python; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; conda-build ios-atom; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; conda-build ios-enaml; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; conda-build ios-msgpack; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then conda-build ios-libffi; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then conda-build ios-openssl; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then conda-build ios-python; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then conda-build ios-atom; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then conda-build ios-enaml; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then conda-build ios-msgpack; fi
 
   # Build android recipes
   - conda-build android-libffi
