@@ -14,7 +14,7 @@ install:
   - export NDK=$HOME/Android/Sdk/ndk-bundle
 
   # Install makeinfo
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt -y install textinfo; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt update && sudo apt -y install textinfo; fi
 
   # Install miniconda
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
