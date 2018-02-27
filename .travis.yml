@@ -45,6 +45,7 @@ install:
   - unzip -oq tools.zip
   - unzip -oq ndk-bundle.zip
   - find . | grep make_standalone_toolchain
+  - mv android-ndk-r16b ndk-bundle
   - rm *.zip
   - echo yes | tools/bin/sdkmanager --update > install-sdk.log
   - echo yes | tools/bin/sdkmanager "platforms;android-27" > install-sdk.log
