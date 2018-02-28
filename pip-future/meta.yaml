@@ -8,6 +8,7 @@ requirements:
 
 build:
   number: 1
+  noarch: generic
 
 about:
   home: http://github.com/codelv/enaml-native

@@ -15,6 +15,7 @@ requirements:
 build:
   number: 0
   binary_relocation: False
+  noarch: generic
 
 about:
   home: http://github.com/codelv/enaml-native
