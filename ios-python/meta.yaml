@@ -8,11 +8,6 @@ source:
 
 requirements:
   build:
-    - python
-    - ios-libffi
-    - ios-openssl
-
-  run:
     - ios-libffi
     - ios-openssl
 
