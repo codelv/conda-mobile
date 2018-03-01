@@ -5,6 +5,9 @@ package:
 source:
   url:  https://www.python.org/ftp/python/2.7.14/Python-2.7.14.tar.xz
   md5: 1f6db41ad91d9eb0a6f0c769b8613c5b
+  patches:
+    - patches/setup.patch
+    - patches/sqlite.patch
 
 requirements:
   build:

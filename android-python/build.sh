@@ -9,10 +9,6 @@ export PYTHON_FOR_BUILD="$(which python2)"
 export ARCHS=("x86 x86_64 arm arm64")
 export NDK="$HOME/Android/Sdk/ndk-bundle"
 
-# Patch
-patch -t -d $SRC_DIR -p1 -i $RECIPE_DIR/patches/setup.patch
-patch -t -d $SRC_DIR -p1 -i $RECIPE_DIR/patches/sqlite.patch
-
 # Change insoname
 sed -ie 's!INSTSONAME="$LDLIBRARY".$SOVERSION!!g' configure
 
