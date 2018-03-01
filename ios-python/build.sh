@@ -54,16 +54,17 @@ do
     export AR="$(xcrun -find -sdk $SDK ar)"
     export CXX="$(xcrun -find -sdk $SDK g++)"
     export LD="$(xcrun -find -sdk $SDK ld)"
-    export LDFLAGS="-arch $ARCH --sysroot $SYSROOT $VERSION_MIN -L$APP_ROOT/lib -lsqlite3 -lffi -lssl -lcrypto"
+    export LDFLAGS="-arch $ARCH --sysroot $SYSROOT $VERSION_MIN -L$APP_ROOT/lib" # -lsqlite3 -lffi -lssl -lcrypto
 
     # The magic cross compile flag (tells it to not try to load them after building)
+    export CROSS_COMPILE_TARGET='yes'
     export _PYTHON_HOST_PLATFORM="$TARGET_HOST"
 
     ./configure ac_cv_file__dev_ptmx=no \
                 ac_cv_file__dev_ptc=no \
                 --host=$TARGET_HOST \
                 --build=$BUILD \
-                --without-pymalloc \
+                --with-threads \
                 --disable-toolbox-glue \
                 --enable-ipv6 \
                 --enable-shared \
@@ -80,17 +81,27 @@ do
     sed -ie "s!LIBFFI_INCLUDEDIR=	!LIBFFI_INCLUDEDIR=$APP_ROOT/include/!g" Makefile
 
     # Build and install
-    make -j$CPU_COUNT CROSS_COMPILE_TARGET=yes
-    make -C $SRC_DIR install CROSS_COMPILE_TARGET=yes \
-                    prefix=$SRC_DIR/dist/$ARCH
+    make -j$CPU_COUNT libpython2.7.dylib
 
+    export LDFLAGS="$LDFLAGS -L. -lpython2.7"
+    make -j$CPU_COUNT oldsharedmods SO=.dylib
+    make -C $SRC_DIR install prefix=$SRC_DIR/dist/$ARCH
+
+    # Rename to dylib, remove module, and move to libs
+    cd dist/$ARCH/lib/python2.7/lib-dynload;
+        rename 's/^/lib./' *.so
+        rename 's/\.so/.dylib/' *.so
+        rename 's/module//' *.dylib
+        cp *.dylib $SRC_DIR/dist/$ARCH/lib
+    cd $SRC_DIR
 
     # Remove unused stuff
     rm -Rf dist/$ARCH/lib/python2.7/test
     rm -Rf dist/$ARCH/lib/python2.7/*/test/
+    rm -Rf dist/$ARCH/lib/python2.7/*/tests/
     rm -Rf dist/$ARCH/lib/python2.7/plat-*
     rm -Rf dist/$ARCH/lib/python2.7/lib-*
-
+    rm -Rf dist/$ARCH/lib/python2.7/config
 done
 
 
@@ -99,19 +110,24 @@ mkdir $PREFIX/iphoneos/python
 mkdir $PREFIX/iphonesimulator/python
 
 # Make a single lib with both for the iphone
-lipo -create dist/armv7/lib/libpython2.7.dylib \
-             dist/arm64/lib/libpython2.7.dylib \
-             -o $PREFIX/iphoneos/lib/libpython2.7.dylib
+cd dist/armv7/lib/
+find *.dylib -exec lipo -create $SRC_DIR/dist/armv7/lib/{} \
+                                $SRC_DIR/dist/arm64/lib/{} \
+                                -o $PREFIX/iphoneos/lib/{} \;
+cd $SRC_DIR
 
 # Copy headers and stdlib
 cp -RL dist/armv7/include $PREFIX/iphoneos/
 cp -RL dist/armv7/lib/python2.7/* $PREFIX/iphoneos/python
 
 
-# Make a single lib with both for the iphone
-lipo -create dist/i386/lib/libpython2.7.dylib \
-             dist/x86_64/lib/libpython2.7.dylib \
-             -o $PREFIX/iphonesimulator/lib/libpython2.7.dylib
+# Make a single lib with both for the iphonesimulator
+cd dist/x86_64/lib/
+find *.dylib -exec lipo -create $SRC_DIR/dist/x86_64/lib/{} \
+                                $SRC_DIR/dist/i386/lib/{} \
+                                -o $PREFIX/iphonesimulator/lib/{} \;
+cd $SRC_DIR
+
 
 # Copy headers and stdlib
 cp -RL dist/x86_64/include $PREFIX/iphonesimulator/
