@@ -1,0 +1,25 @@
+package:
+  name: enaml-native
+  version: 3.1.1
+
+source:
+  url: https://github.com/codelv/enaml-native/archive/v3.1.1.tar.gz
+  sha1: 180fb4ba46a8c7483933e802ac23d99748273bac
+
+requirements:
+  build:
+    - python
+
+  run:
+    - android-enaml
+    - android-msgpack
+    - ios-enaml # [osx]
+    - ios-msgpack # [osx]
+
+build:
+  number: 1
+  noarch: generic
+
+about:
+  home: http://github.com/codelv/enaml-native
+  license: GPLv3
