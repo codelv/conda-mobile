@@ -1,10 +1,10 @@
 package:
   name: android-atom
-  version: 0.4.1
+  version: 0.4.2.a0
 
 source:
-  url: https://github.com/nucleic/atom/archive/0.4.1.tar.gz
-  md5: e76cb77c242601810ff0ca363ce33b28
+  url: https://github.com/nucleic/atom/archive/0.4.2.a0.tar.gz
+  #md5: e76cb77c242601810ff0ca363ce33b28
 
 requirements:
   build:

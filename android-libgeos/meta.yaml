@@ -1,0 +1,17 @@
+
+package:
+  name: android-libgeos
+  version: 3.6.2
+
+source:
+  url: https://github.com/OSGeo/geos/archive/3.6.2.tar.gz
+  sha1: dfe1dbea10084822309767edd15a7ddb4f61b613
+
+build:
+  number: 1
+  binary_relocation: False
+  noarch: generic
+
+about:
+  home: http://github.com/codelv/enaml-native
+  license: GPLv3

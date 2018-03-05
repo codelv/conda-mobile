@@ -1,0 +1,30 @@
+package:
+  name: android-shapely
+  version: 1.6.4
+
+source:
+  url: https://github.com/Toblerity/Shapely/archive/1.6.4.tar.gz
+  sha1: 9de76f6b1d450ff1ca0df30ac3aac5bf903d94e5
+  patches:
+    - setup.patch
+
+requirements:
+  build:
+    - python<=3
+    - cython
+    - numpy
+    - android-python
+    - android-libgeos
+
+  run:
+    - android-python
+    - android-libgeos
+
+build:
+  number: 0
+  binary_relocation: False
+  noarch: generic
+
+about:
+  home: http://github.com/codelv/enaml-native
+  license: GPLv3
