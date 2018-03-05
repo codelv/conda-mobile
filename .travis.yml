@@ -86,3 +86,7 @@ script:
   - conda-build android-atom | $capture
   - conda-build android-enaml | $capture
   - conda-build android-msgpack | $capture
+  - conda-build android-lz4 | $capture
+  - conda-build android-libgeos | $capture
+  - conda-build android-shapely | $capture
+  - conda-build android-pyproj | $capture
