@@ -1,0 +1,64 @@
+{% set name = "Twisted" %}
+{% set version = "17.9.0" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "0da1a7e35d5fcae37bc9c7978970b5feb3bc82822155b8654ec63925c05af75c" %}
+package:
+  name: pip-{{ name|lower }}
+  version: '{{ version }}'
+
+source:
+  fn: '{{ name }}-{{ version }}.tar.bz2'
+  url: https://pypi.io/packages/source/{{ name[0]|lower }}/{{ name|lower }}/{{ name }}-{{ version }}.tar.bz2
+  '{{ hash_type }}': '{{ hash_value }}'
+  patches:
+    - setup.patch
+
+build:
+  number: 0
+  entry_points:
+  - ckeygen = twisted.conch.scripts.ckeygen:run
+  - cftp = twisted.conch.scripts.cftp:run
+  - conch = twisted.conch.scripts.conch:run
+  - pyhtmlizer = twisted.scripts.htmlizer:run
+  - tkconch = twisted.conch.scripts.tkconch:run
+  - trial = twisted.scripts.trial:run
+  - twist = twisted.application.twist._twist:Twist.main
+  - twistd = twisted.scripts.twistd:run
+  - mailmail = twisted.mail.scripts.mailmail:run
+  script_env:
+  - CC
+  - CXX
+  noarch: true
+  script:
+
+  - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/arm --install-lib=$PREFIX/android/arm/python/site-packages --install-scripts=$PREFIX/android/arm/scripts --install-data=$PREFIX/android/arm/data --install-headers=$PREFIX/android/arm/include
+  - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/arm64 --install-lib=$PREFIX/android/arm64/python/site-packages --install-scripts=$PREFIX/android/arm64/scripts --install-data=$PREFIX/android/arm64/data --install-headers=$PREFIX/android/arm64/include
+  - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/x86 --install-lib=$PREFIX/android/x86/python/site-packages --install-scripts=$PREFIX/android/x86/scripts --install-data=$PREFIX/android/x86/data --install-headers=$PREFIX/android/x86/include
+  - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/x86_64 --install-lib=$PREFIX/android/x86_64/python/site-packages --install-scripts=$PREFIX/android/x86_64/scripts --install-data=$PREFIX/android/x86_64/data --install-headers=$PREFIX/android/x86_64/include
+  - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/iphoneos --install-lib=$PREFIX/iphoneos/python/site-packages --install-scripts=$PREFIX/iphoneos/scripts --install-data=$PREFIX/iphoneos/data --install-headers=$PREFIX/iphoneos/include
+  - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/iphonesimulator --install-lib=$PREFIX/iphonesimulator/python/site-packages --install-scripts=$PREFIX/iphonesimulator/scripts --install-data=$PREFIX/iphonesimulator/data --install-headers=$PREFIX/iphonesimulator/include
+requirements:
+  build:
+  - pip-zope.interface >=3.6.0
+  - pip-constantly >=15.1
+  - pip-incremental >=16.10.1
+  - pip-automat >=0.3.0
+  - pip-hyperlink >=17.1.1
+  run:
+  - pip-zope.interface >=3.6.0
+  - pip-constantly >=15.1
+  - pip-incremental >=16.10.1
+  - pip-automat >=0.3.0
+  - pip-hyperlink >=17.1.1
+about:
+  home: http://twistedmatrix.com/
+  license: MIT
+  license_family: MIT
+  license_file: ''
+  summary: An asynchronous networking framework written in Python
+  description: "An extensible framework for Python programming, with special focus\non event-based network programming and multiprotocol integration."
+  doc_url: ''
+  dev_url: ''
+
+extra:
+  recipe-maintainers: ''

@@ -29,7 +29,6 @@ install:
   # Install conda build and anaconda-client
   - conda install anaconda-client conda-build -q
 
-
   # Install NDK
   - mkdir -p $ANDROID_HOME
   - cd $ANDROID_HOME
@@ -67,7 +66,6 @@ install:
 
 script:
   # Pip (pure python) recipes
-  - conda-build pip-future | $capture
   - conda-build pip-ply | $capture
 
   # Build ios recipes

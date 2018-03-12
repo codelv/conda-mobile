@@ -1,0 +1,13 @@
+diff --git a/src/twisted/python/_setup.py b/src/twisted/python/_setup.patched.py
+index 3b5f69d..51d59ac 100644
+--- a/src/twisted/python/_setup.py
++++ b/src/twisted/python/_setup.patched.py
+@@ -197,7 +197,7 @@ _EXTENSIONS = [
+ 
+ 
+ 
+-def getSetupArgs(extensions=_EXTENSIONS):
++def getSetupArgs(extensions=[]):
+     """
+     @return: The keyword arguments to be used the the setup method.
+     @rtype: L{dict}
