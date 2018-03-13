@@ -58,12 +58,13 @@ install:
   - cd $TRAVIS_BUILD_DIR
 
   # Create toolchains
-  - ARCHS=("x86_64 x86 arm arm65")
-  - for ARCH in $ARCHS do
-      if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+  - ARCHS=("x86_64 x86 arm arm64")
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+      for ARCH in $ARCHS
+      do
         python $NDK/build/tools/make_standalone_toolchain.py --arch $ARCH --api 26 --stl=libc++ --install-dir=$NDK/standalone/$ARCH;
-      fi
-    done
+      done
+    fi
 
 script:
   # Build ios recipes
