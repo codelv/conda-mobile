@@ -49,25 +49,23 @@ install:
   - mv android-ndk-r16b ndk-bundle
 
   # Install sdk and build tools
-  - echo yes | tools/bin/sdkmanager --update > output.log
-  - echo yes | tools/bin/sdkmanager "platforms;android-27" > output.log
-  - echo yes | tools/bin/sdkmanager "build-tools;27.0.3" > output.log
-  - echo yes | tools/bin/sdkmanager "extras;google;m2repository" > output.log
-  - echo yes | tools/bin/sdkmanager "extras;android;m2repository" > output.log
-  - echo yes | tools/bin/sdkmanager --licenses > output.log
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then echo yes | tools/bin/sdkmanager --update > output.log; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then echo yes | tools/bin/sdkmanager "platforms;android-27" > output.log; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then echo yes | tools/bin/sdkmanager "build-tools;27.0.3" > output.log; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then echo yes | tools/bin/sdkmanager "extras;google;m2repository" > output.log; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then echo yes | tools/bin/sdkmanager "extras;android;m2repository" > output.log; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then echo yes | tools/bin/sdkmanager --licenses > output.log; fi
   - cd $TRAVIS_BUILD_DIR
 
   # Create toolchains
-  - python $NDK/build/tools/make_standalone_toolchain.py --arch x86_64 --api 26 --stl=libc++ --install-dir=$NDK/standalone/x86_64
-  - python $NDK/build/tools/make_standalone_toolchain.py --arch x86 --api 26 --stl=libc++ --install-dir=$NDK/standalone/x86
-  - python $NDK/build/tools/make_standalone_toolchain.py --arch arm --api 26 --stl=libc++ --install-dir=$NDK/standalone/arm
-  - python $NDK/build/tools/make_standalone_toolchain.py --arch arm64 --api 26 --stl=libc++ --install-dir=$NDK/standalone/arm64
-
+  - ARCHS=("x86_64 x86 arm arm65")
+  - for ARCH in $ARCHS do
+      if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+        python $NDK/build/tools/make_standalone_toolchain.py --arch $ARCH --api 26 --stl=libc++ --install-dir=$NDK/standalone/$ARCH;
+      fi
+    done
 
 script:
-  # Pip (pure python) recipes
-  - conda-build pip-ply | $capture
-
   # Build ios recipes
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then conda-build ios-libffi | $capture; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then conda-build ios-openssl | $capture; fi
@@ -77,14 +75,29 @@ script:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then conda-build ios-msgpack | $capture; fi
 
   # Build android recipes
-  - conda-build android-libffi | $capture
-  - conda-build android-openssl | $capture
-  - conda-build android-sqlite | $capture
-  - conda-build android-python | $capture
-  - conda-build android-atom | $capture
-  - conda-build android-enaml | $capture
-  - conda-build android-msgpack | $capture
-  - conda-build android-lz4 | $capture
-  - conda-build android-libgeos | $capture
-  - conda-build android-shapely | $capture
-  - conda-build android-pyproj | $capture
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then conda-build android-libffi | $capture; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then conda-build android-openssl | $capture; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then conda-build android-sqlite | $capture; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then conda-build android-python | $capture; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then conda-build android-atom | $capture; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then conda-build android-enaml | $capture; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then conda-build android-msgpack | $capture; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then conda-build android-lz4 | $capture; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then conda-build android-libgeos | $capture; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then conda-build android-shapely | $capture; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then conda-build android-pyproj | $capture; fi
+
+  # Pip (pure python) recipes
+  - conda-build pip-ply | $capture
+  - conda-build pip-automat | $capture
+  - conda-build pip-futures | $capture
+  - conda-build pip-backports_abc | $capture
+  - conda-build pip-constantly | $capture
+  - conda-build pip-hyperlink | $capture
+  - conda-build pip-inda | $capture
+  - conda-build pip-incremental | $capture
+  - conda-build pip-singledispatch | $capture
+  - conda-build pip-six | $capture
+  - conda-build pip-zope.interface | $capture
+  - conda-build pip-twisted | $capture
+  - conda-build pip-tornado | $capture
