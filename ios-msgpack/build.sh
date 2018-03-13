@@ -70,12 +70,12 @@ do
     rm $PREFIX/iphoneos/python/site-packages/$SOFILE.so
     lipo -create build/lib.darwin-arm-2.7/$SOFILE.so \
                  build/lib.darwin-aarch64-2.7/$SOFILE.so \
-                 -o $PREFIX/iphoneos/lib/$DYFILE.dylib
+                 -o $PREFIX/iphoneos/lib/lib.$DYFILE.dylib
 
     # Rename simulator versions
     rm $PREFIX/iphonesimulator/python/site-packages/$SOFILE.so
 
     lipo -create build/lib.darwin-i386-2.7/$SOFILE.so \
                  build/lib.darwin-x86_64-2.7/$SOFILE.so \
-                -o $PREFIX/iphonesimulator/lib/$DYFILE.dylib
+                -o $PREFIX/iphonesimulator/lib/lib.$DYFILE.dylib
 done
