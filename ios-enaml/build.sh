@@ -44,6 +44,7 @@ do
     # Build
     python setup.py build
 
+
 done
 
 
@@ -55,6 +56,8 @@ cp -RL build/lib.darwin-arm-2.7/enaml $PREFIX/iphoneos/python/site-packages/
 cp -RL build/lib.darwin-x86_64-2.7/enaml $PREFIX/iphonesimulator/python/site-packages/
 
 # Lipo the so files iphone
+# TODO: Use find
+#SOFILES="enaml/callableref enaml/core/dynamicscope enaml/core/alias enaml/core/funchelper enaml/signaling enaml/fontext enaml/colorext enaml/weakmethod"
 SOFILES="enaml/callableref enaml/core/dynamicscope enaml/core/alias enaml/core/declarative_function enaml/core/funchelper enaml/c_compat enaml/signaling enaml/fontext enaml/colorext enaml/weakmethod"
 for SOFILE in $SOFILES
 do
@@ -65,12 +68,17 @@ do
     rm $PREFIX/iphoneos/python/site-packages/$SOFILE.so
     lipo -create build/lib.darwin-arm-2.7/$SOFILE.so \
                  build/lib.darwin-aarch64-2.7/$SOFILE.so \
-                 -o $PREFIX/iphoneos/lib/$DYFILE.dylib
+                 -o $PREFIX/iphoneos/lib/lib.$DYFILE.dylib
 
     # Rename simulator versions
     rm $PREFIX/iphonesimulator/python/site-packages/$SOFILE.so
 
     lipo -create build/lib.darwin-i386-2.7/$SOFILE.so \
                  build/lib.darwin-x86_64-2.7/$SOFILE.so \
-                -o $PREFIX/iphonesimulator/lib/$DYFILE.dylib
+                -o $PREFIX/iphonesimulator/lib/lib.$DYFILE.dylib
 done
+
+# Copy parse tables
+DEST=enaml/core/parser
+cp -RL $RECIPE_DIR/tables/$PKG_VERSION/parse_tab $PREFIX/iphoneos/python/site-packages/$DEST
+cp -RL $RECIPE_DIR/tables/$PKG_VERSION/parse_tab $PREFIX/iphonesimulator/python/site-packages/$DEST
