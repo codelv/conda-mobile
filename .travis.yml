@@ -84,10 +84,10 @@ script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then conda-build android-atom | $capture; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then conda-build android-enaml | $capture; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then conda-build android-msgpack | $capture; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then conda-build android-lz4 | $capture; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then conda-build android-libgeos | $capture; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then conda-build android-shapely | $capture; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then conda-build android-pyproj | $capture; fi
+  #- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then conda-build android-lz4 | $capture; fi
+  #- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then conda-build android-libgeos | $capture; fi
+  #- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then conda-build android-shapely | $capture; fi
+  #- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then conda-build android-pyproj | $capture; fi
 
   # Pip (pure python) recipes
   - conda-build pip-ply | $capture
