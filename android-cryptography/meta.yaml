@@ -1,0 +1,42 @@
+{% set name = "cryptography" %}
+{% set version = "2.1.4" %}
+{% set hash_type = "md5" %}
+{% set hash_value = "9f39d4d8f2b05f295fa0ff52475ec4f2" %}
+package:
+  name: android-{{ name|lower }}
+  version: '{{ version }}'
+
+source:
+  fn: '{{ name }}-{{ version }}.tar.gz'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  '{{ hash_type }}': '{{ hash_value }}'
+
+build:
+  number: 0
+  noarch: true
+
+requirements:
+  build:
+    - python<3
+    - cffi
+    - android-cffi
+    - android-openssl
+  run:
+    - android-openssl
+    - android-cffi>=1.7,!=1.11.3
+    - pip-idna>=2.1
+    - pip-asn1crypto>=0.21.0
+    - pip-six>=1.4.1
+    - pip-enum34
+about:
+  home: https://cryptography.io/
+  license: Apache License
+  license_family: Apache
+  license_file: ''
+  summary: cryptography is a package which provides cryptographic recipes and primitives to Python developers. Built for iOS and Android apps using enaml-native.
+  description: ""
+  doc_url: ''
+  dev_url: ''
+
+extra:
+  recipe-maintainers: ''

@@ -1,0 +1,30 @@
+{% set name = "cffi" %}
+{% set version = "1.11.5" %}
+{% set hash_type = "md5" %}
+{% set hash_value = "ac8492f4ad952360737413e82d661908" %}
+package:
+  name: android-{{ name|lower }}
+  version: '{{ version }}'
+
+source:
+  fn: '{{ name }}-{{ version }}.tar.gz'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  '{{ hash_type }}': '{{ hash_value }}'
+
+requirements:
+  build:
+    - android-python
+    - android-libffi
+  run:
+    - android-python
+    - android-libffi
+
+build:
+  number: 0
+  binary_relocation: False
+  noarch: generic
+
+about:
+  home: http://cffi.readthedocs.org/
+  summary: Foreign Function Interface for Python calling C code. Built for Android apps using enaml-native.
+  license:  MIT

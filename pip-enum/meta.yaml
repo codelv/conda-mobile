@@ -1,0 +1,40 @@
+{% set name = "enum" %}
+{% set version = "0.4.6" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "54e78526b166982b36884613f35a76d9a6711c49810d3ec1a05b10c9b31f938e" %}
+package:
+  name: pip-{{ name|lower }}
+  version: '{{ version }}'
+
+source:
+  fn: '{{ name }}-{{ version }}.tar.gz'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  '{{ hash_type }}': '{{ hash_value }}'
+
+build:
+  number: 0
+  noarch: true
+  script: 
+
+  - export CC=/bin/false
+  - export CXX=/bin/false
+  - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/arm --install-lib=$PREFIX/android/arm/python/site-packages --install-scripts=$PREFIX/android/arm/scripts --install-data=$PREFIX/android/arm/data --install-headers=$PREFIX/android/arm/include
+  - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/arm64 --install-lib=$PREFIX/android/arm64/python/site-packages --install-scripts=$PREFIX/android/arm64/scripts --install-data=$PREFIX/android/arm64/data --install-headers=$PREFIX/android/arm64/include
+  - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/x86 --install-lib=$PREFIX/android/x86/python/site-packages --install-scripts=$PREFIX/android/x86/scripts --install-data=$PREFIX/android/x86/data --install-headers=$PREFIX/android/x86/include
+  - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/x86_64 --install-lib=$PREFIX/android/x86_64/python/site-packages --install-scripts=$PREFIX/android/x86_64/scripts --install-data=$PREFIX/android/x86_64/data --install-headers=$PREFIX/android/x86_64/include
+  - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/iphoneos --install-lib=$PREFIX/iphoneos/python/site-packages --install-scripts=$PREFIX/iphoneos/scripts --install-data=$PREFIX/iphoneos/data --install-headers=$PREFIX/iphoneos/include
+  - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/iphonesimulator --install-lib=$PREFIX/iphonesimulator/python/site-packages --install-scripts=$PREFIX/iphonesimulator/scripts --install-data=$PREFIX/iphonesimulator/data --install-headers=$PREFIX/iphonesimulator/include
+requirements: {}
+about:
+  home: http://pypi.python.org/pypi/enum/
+  license: GNU General Public License (GPL)
+  license_family: LGPL
+  license_file: ''
+  summary: Robust enumerated type support in Python. Built for Android and iOS apps using enaml-native.
+  description: "..  Important:: Superseded by Python standard library.\n\n    Python 3 now has in its standard library an `enum`_\n    implementation (also available for older Python versions as\n    the third-party `flufl.enum`_ distribution) that supersedes\n    this library.\n\n    ..  _enum: https://docs.python.org/3/library/enum.html\n    ..  _flufl.enum: https://pypi.python.org/pypi/flufl.enum\n\nThis package provides a module for robust enumerations in Python.\n\nAn enumeration object is created with a sequence of string arguments\nto the Enum() constructor::\n\n    >>> from enum import Enum\n    >>> Colours = Enum('red', 'blue', 'green')\n    >>> Weekdays = Enum('mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun')\n\nThe return value is an immutable sequence object with a value for each\nof the string arguments. Each value is also available as an attribute\nnamed from the corresponding string argument::\n\n    >>> pizza_night = Weekdays[4]\n    >>> shirt_colour = Colours.green\n\nThe\
+    \ values are constants that can be compared only with values from\nthe same enumeration; comparison with other values will invoke\nPython's fallback comparisons::\n\n    >>> pizza_night == Weekdays.fri\n    True\n    >>> shirt_colour > Colours.red\n    True\n    >>> shirt_colour == \"green\"\n    False\n\nEach value from an enumeration exports its sequence index\nas an integer, and can be coerced to a simple string matching the\noriginal arguments used to create the enumeration::\n\n    >>> str(pizza_night)\n    'fri'\n    >>> shirt_colour.index\n    2"
+  doc_url: ''
+  dev_url: ''
+
+extra:
+  recipe-maintainers: ''
