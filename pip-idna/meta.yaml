@@ -13,12 +13,10 @@ source:
 
 build:
   number: 0
-  script_env:
-  - CC
-  - CXX
   noarch: true
   script: 
-
+  - export CC=/bin/false
+  - export CXX=/bin/false
   - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/arm --install-lib=$PREFIX/android/arm/python/site-packages --install-scripts=$PREFIX/android/arm/scripts --install-data=$PREFIX/android/arm/data --install-headers=$PREFIX/android/arm/include
   - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/arm64 --install-lib=$PREFIX/android/arm64/python/site-packages --install-scripts=$PREFIX/android/arm64/scripts --install-data=$PREFIX/android/arm64/data --install-headers=$PREFIX/android/arm64/include
   - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/x86 --install-lib=$PREFIX/android/x86/python/site-packages --install-scripts=$PREFIX/android/x86/scripts --install-data=$PREFIX/android/x86/data --install-headers=$PREFIX/android/x86/include
@@ -31,7 +29,7 @@ about:
   license: BSD License
   license_family: BSD
   license_file: ''
-  summary: Internationalized Domain Names in Applications (IDNA)
+  summary: Internationalized Domain Names in Applications (IDNA). Built for iOS and Android apps using enaml-native.
   description: "Internationalized Domain Names in Applications (IDNA)\n=====================================================\n\nSupport for the Internationalised Domain Names in Applications\n(IDNA) protocol as specified in `RFC 5891 <http://tools.ietf.org/html/rfc5891>`_.\nThis is the latest version of the protocol and is sometimes referred to as\n\u201CIDNA 2008\u201D.\n\nThis library also provides support for Unicode Technical Standard 46,\n`Unicode IDNA Compatibility Processing <http://unicode.org/reports/tr46/>`_.\n\nThis acts as a suitable replacement for the \u201Cencodings.idna\u201D module that\ncomes with the Python standard library, but only supports the\nold, deprecated IDNA specification (`RFC 3490 <http://tools.ietf.org/html/rfc3490>`_).\n\nBasic functions are simply executed:\n\n.. code-block:: pycon\n\n    # Python 3\n    >>> import idna\n    >>> idna.encode('\u30C9\u30E1\u30A4\u30F3.\u30C6\u30B9\u30C8')\n    b'xn--eckwd4c7c.xn--zckzah'\n    >>> print(idna.decode('xn--eckwd4c7c.xn--zckzah'))\n\
     \    \u30C9\u30E1\u30A4\u30F3.\u30C6\u30B9\u30C8\n\n    # Python 2\n    >>> import idna\n    >>> idna.encode(u'\u30C9\u30E1\u30A4\u30F3.\u30C6\u30B9\u30C8')\n    'xn--eckwd4c7c.xn--zckzah'\n    >>> print idna.decode('xn--eckwd4c7c.xn--zckzah')\n    \u30C9\u30E1\u30A4\u30F3.\u30C6\u30B9\u30C8\n\nPackages\n--------\n\nThe latest tagged release version is published in the PyPI repository:\n\n.. image:: https://badge.fury.io/py/idna.svg\n   :target: http://badge.fury.io/py/idna\n\n\nInstallation\n------------\n\nTo install this library, you can use pip:\n\n.. code-block:: bash\n\n    $ pip install idna\n\nAlternatively, you can install the package using the bundled setup script:\n\n.. code-block:: bash\n\n    $ python setup.py install\n\nThis library works with Python 2.6 or later, and Python 3.3 or later.\n\n\nUsage\n-----\n\nFor typical usage, the ``encode`` and ``decode`` functions will take a domain\nname argument and perform a conversion to A-labels or U-labels respectively.\n\n.. code-block::\
     \ pycon\n\n    # Python 3\n    >>> import idna\n    >>> idna.encode('\u30C9\u30E1\u30A4\u30F3.\u30C6\u30B9\u30C8')\n    b'xn--eckwd4c7c.xn--zckzah'\n    >>> print(idna.decode('xn--eckwd4c7c.xn--zckzah'))\n    \u30C9\u30E1\u30A4\u30F3.\u30C6\u30B9\u30C8\n\nYou may use the codec encoding and decoding methods using the\n``idna.codec`` module:\n\n.. code-block:: pycon\n\n    # Python 2\n    >>> import idna.codec\n    >>> print u'\u0434\u043E\u043C\u0435\u043D\u0430.\u0438\u0441\u043F\u044B\u0442\u0430\u043D\u0438\u0435'.encode('idna')\n    xn--80ahd1agd.xn--80akhbyknj4f\n    >>> print 'xn--80ahd1agd.xn--80akhbyknj4f'.decode('idna')\n    \u0434\u043E\u043C\u0435\u043D\u0430.\u0438\u0441\u043F\u044B\u0442\u0430\u043D\u0438\u0435\n\nConversions can be applied at a per-label basis using the ``ulabel`` or ``alabel``\nfunctions if necessary:\n\n.. code-block:: pycon\n\n    # Python 2\n    >>> idna.alabel(u'\u6D4B\u8BD5')\n    'xn--0zwm56d'\n\nCompatibility Mapping (UTS #46)\n+++++++++++++++++++++++++++++++\n\

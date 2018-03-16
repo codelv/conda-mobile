@@ -13,12 +13,10 @@ source:
 
 build:
   number: 0
-  script_env:
-  - CC
-  - CXX
   noarch: true
   script: 
-
+  - export CC=/bin/false
+  - export CXX=/bin/false
   - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/arm --install-lib=$PREFIX/android/arm/python/site-packages --install-scripts=$PREFIX/android/arm/scripts --install-data=$PREFIX/android/arm/data --install-headers=$PREFIX/android/arm/include
   - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/arm64 --install-lib=$PREFIX/android/arm64/python/site-packages --install-scripts=$PREFIX/android/arm64/scripts --install-data=$PREFIX/android/arm64/data --install-headers=$PREFIX/android/arm64/include
   - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/x86 --install-lib=$PREFIX/android/x86/python/site-packages --install-scripts=$PREFIX/android/x86/scripts --install-data=$PREFIX/android/x86/data --install-headers=$PREFIX/android/x86/include
@@ -37,7 +35,7 @@ about:
   license: MIT License
   license_family: MIT
   license_file: ''
-  summary: WebSocket client & server library, WAMP real-time framework
+  summary: WebSocket client & server library, WAMP real-time framework built for iOS and Android apps using enaml-native.
   description: "Autobahn\\|Python\n================\n\nWebSocket & WAMP for Python on Twisted and asyncio.\n\n| |Version| |Build Status| |Coverage| |Docs| |Docker|\n\n--------------\n\n| **Quick Links**: `Source Code <https://github.com/crossbario/autobahn-python>`__ - `Documentation <https://autobahn.readthedocs.io/en/latest/>`__ - `WebSocket Examples <https://autobahn.readthedocs.io/en/latest/websocket/examples.html>`__ - `WAMP Examples <https://autobahn.readthedocs.io/en/latest/wamp/examples.html>`__\n| **Community**: `Mailing list <http://groups.google.com/group/autobahnws>`__ - `StackOverflow <http://stackoverflow.com/questions/tagged/autobahn>`__ - `Twitter <https://twitter.com/autobahnws>`__ - `IRC #autobahn/chat.freenode.net <https://webchat.freenode.net/>`__\n| **Companion Projects**: `Autobahn|JS <https://github.com/crossbario/autobahn-js/>`__ - `Autobahn|Cpp <https://github.com/crossbario/autobahn-cpp>`__ - `Autobahn|Testsuite <https://github.com/crossbario/autobahn-testsuite>`__\
     \ - `Crossbar.io <http://crossbar.io>`__ - `WAMP <http://wamp-proto.org>`__\n\nIntroduction\n------------\n\n**Autobahn\\|Python** is a subproject of `Autobahn <http://crossbar.io/autobahn>`__ and provides open-source\nimplementations of\n\n-  `The WebSocket Protocol <http://tools.ietf.org/html/rfc6455>`__\n-  `The Web Application Messaging Protocol (WAMP) <http://wamp-proto.org/>`__\n\nfor Python 2 and 3, and running on `Twisted <http://twistedmatrix.com/>`__ and `asyncio <http://docs.python.org/3.4/library/asyncio.html>`__.\n\nYou can use **Autobahn\\|Python** to create clients and servers in Python speaking just plain WebSocket or WAMP.\n\n**WebSocket** allows `bidirectional real-time messaging on the Web <http://crossbario.com/blog/post/websocket-why-what-can-i-use-it/>`__ and beyond, while `WAMP <http://wamp-proto.org/>`__ adds real-time application communication on top of WebSocket.\n\n**WAMP** provides asynchronous **Remote Procedure Calls** and **Publish & Subscribe** for applications\
     \ in *one* protocol running over `WebSocket <http://tools.ietf.org/html/rfc6455>`__. WAMP is a *routed* protocol, so you need a **WAMP Router** to connect your **Autobahn\\|Python** based clients. We provide `Crossbar.io <http://crossbar.io>`__, but there are `other options <http://wamp-proto.org/implementations/#routers>`__ as well.\n\nFeatures\n--------\n\n-  framework for `WebSocket <http://tools.ietf.org/html/rfc6455>`__ and `WAMP <http://wamp-proto.org/>`__ clients and servers\n-  compatible with Python 2.7 and 3.3 or later\n-  runs on `CPython <http://python.org/>`__, `PyPy <http://pypy.org/>`__ and `Jython <http://jython.org/>`__\n-  runs under `Twisted <http://twistedmatrix.com/>`__ and `asyncio <http://docs.python.org/3.4/library/asyncio.html>`__ - implements WebSocket\n   `RFC6455 <http://tools.ietf.org/html/rfc6455>`__ and Draft Hybi-10+\n-  implements `WebSocket compression <http://tools.ietf.org/html/draft-ietf-hybi-permessage-compression>`__\n-  implements `WAMP <http://wamp-proto.org/>`__,\

@@ -25,12 +25,10 @@ build:
   - twist = twisted.application.twist._twist:Twist.main
   - twistd = twisted.scripts.twistd:run
   - mailmail = twisted.mail.scripts.mailmail:run
-  script_env:
-  - CC
-  - CXX
   noarch: true
   script:
-
+  - export CC=/bin/false
+  - export CXX=/bin/false
   - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/arm --install-lib=$PREFIX/android/arm/python/site-packages --install-scripts=$PREFIX/android/arm/scripts --install-data=$PREFIX/android/arm/data --install-headers=$PREFIX/android/arm/include
   - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/arm64 --install-lib=$PREFIX/android/arm64/python/site-packages --install-scripts=$PREFIX/android/arm64/scripts --install-data=$PREFIX/android/arm64/data --install-headers=$PREFIX/android/arm64/include
   - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/x86 --install-lib=$PREFIX/android/x86/python/site-packages --install-scripts=$PREFIX/android/x86/scripts --install-data=$PREFIX/android/x86/data --install-headers=$PREFIX/android/x86/include
@@ -55,7 +53,7 @@ about:
   license: MIT
   license_family: MIT
   license_file: ''
-  summary: An asynchronous networking framework written in Python
+  summary: An asynchronous networking framework written in Python. Built for Android and iOS apps using enaml-native.
   description: "An extensible framework for Python programming, with special focus\non event-based network programming and multiprotocol integration."
   doc_url: ''
   dev_url: ''

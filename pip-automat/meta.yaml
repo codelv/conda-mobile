@@ -15,12 +15,10 @@ build:
   number: 0
   entry_points:
   - automat-visualize = automat._visualize:tool
-  script_env:
-  - CC
-  - CXX
   noarch: true
   script: 
-
+  - export CC=/bin/false
+  - export CXX=/bin/false
   - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/arm --install-lib=$PREFIX/android/arm/python/site-packages --install-scripts=$PREFIX/android/arm/scripts --install-data=$PREFIX/android/arm/data --install-headers=$PREFIX/android/arm/include
   - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/arm64 --install-lib=$PREFIX/android/arm64/python/site-packages --install-scripts=$PREFIX/android/arm64/scripts --install-data=$PREFIX/android/arm64/data --install-headers=$PREFIX/android/arm64/include
   - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/x86 --install-lib=$PREFIX/android/x86/python/site-packages --install-scripts=$PREFIX/android/x86/scripts --install-data=$PREFIX/android/x86/data --install-headers=$PREFIX/android/x86/include
@@ -39,7 +37,7 @@ about:
   license: MIT
   license_family: MIT
   license_file: ''
-  summary: Self-service finite-state machines for the programmer on the go.
+  summary: Self-service finite-state machines for the programmer on the go.  Built for iOS and Android apps using enaml-native.
   description: "Automat\n=======\n\n\n.. image:: https://travis-ci.org/glyph/automat.svg?branch=master\n   :target: https://travis-ci.org/glyph/automat\n   :alt: Build Status\n\n\n.. image:: https://coveralls.io/repos/glyph/automat/badge.png\n   :target: https://coveralls.io/r/glyph/automat\n   :alt: Coverage Status\n\n\nSelf-service finite-state machines for the programmer on the go.\n----------------------------------------------------------------\n\nAutomat is a library for concise, idiomatic Python expression of finite-state\nautomata (particularly deterministic finite-state transducers).\n\nWhy use state machines?\n^^^^^^^^^^^^^^^^^^^^^^^\n\nSometimes you have to create an object whose behavior varies with its state,\nbut still wishes to present a consistent interface to its callers.\n\nFor example, let's say you're writing the software for a coffee machine.  It\nhas a lid that can be opened or closed, a chamber for water, a chamber for\ncoffee beans, and a button for \"brew\".\n\n\
     There are a number of possible states for the coffee machine.  It might or\nmight not have water.  It might or might not have beans.  The lid might be open\nor closed.  The \"brew\" button should only actually attempt to brew coffee in\none of these configurations, and the \"open lid\" button should only work if the\ncoffee is not, in fact, brewing.\n\nWith diligence and attention to detail, you can implement this correctly using\na collection of attributes on an object; ``has_water``\\ , ``has_beans``\\ ,\n``is_lid_open`` and so on.  However, you have to keep all these attributes\nconsistent.  As the coffee maker becomes more complex - perhaps you add an\nadditional chamber for flavorings so you can make hazelnut coffee, for\nexample - you have to keep adding more and more checks and more and more\nreasoning about which combinations of states are allowed.\n\nRather than adding tedious 'if' checks to every single method to make sure that\neach of these flags are exactly what you expect,\
     \ you can use a state machine to\nensure that if your code runs at all, it will be run with all the required\nvalues initialized, because they have to be called in the order you declare\nthem.\n\nYou can read about state machines and their advantages for Python programmers\nin considerably more detail\n`in this excellent series of articles from ClusterHQ <https://clusterhq.com/blog/what-is-a-state-machine/>`_.\n\nWhat makes Automat different?\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\nThere are\n`dozens of libraries on PyPI implementing state machines <https://pypi.org/search/?q=finite+state+machine>`_.\nSo it behooves me to say why yet another one would be a good idea.\n\nAutomat is designed around this principle: while organizing your code around\nstate machines is a good idea, your callers don't, and shouldn't have to, care\nthat you've done so.  In Python, the \"input\" to a stateful system is a method\ncall; the \"output\" may be a method call, if you need to invoke a side effect,\nor a\

@@ -1,15 +1,39 @@
+{% set name = "ply" %}
+{% set version = "3.11" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "00c7c1aaa88358b9c765b6d3000c6eec0ba42abca5351b095321aef446081da3" %}
 package:
-  name: pip-ply
-  version: 3.11
+  name: pip-{{ name|lower }}
+  version: '{{ version }}'
 
-requirements:
-  build:
-    - python
+source:
+  fn: '{{ name }}-{{ version }}.tar.gz'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  '{{ hash_type }}': '{{ hash_value }}'
 
 build:
-  number: 1
-  noarch: generic
+  number: 0
+  noarch: true
+  script: 
 
+  - export CC=/bin/false
+  - export CXX=/bin/false
+  - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/arm --install-lib=$PREFIX/android/arm/python/site-packages --install-scripts=$PREFIX/android/arm/scripts --install-data=$PREFIX/android/arm/data --install-headers=$PREFIX/android/arm/include
+  - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/arm64 --install-lib=$PREFIX/android/arm64/python/site-packages --install-scripts=$PREFIX/android/arm64/scripts --install-data=$PREFIX/android/arm64/data --install-headers=$PREFIX/android/arm64/include
+  - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/x86 --install-lib=$PREFIX/android/x86/python/site-packages --install-scripts=$PREFIX/android/x86/scripts --install-data=$PREFIX/android/x86/data --install-headers=$PREFIX/android/x86/include
+  - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/x86_64 --install-lib=$PREFIX/android/x86_64/python/site-packages --install-scripts=$PREFIX/android/x86_64/scripts --install-data=$PREFIX/android/x86_64/data --install-headers=$PREFIX/android/x86_64/include
+  - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/iphoneos --install-lib=$PREFIX/iphoneos/python/site-packages --install-scripts=$PREFIX/iphoneos/scripts --install-data=$PREFIX/iphoneos/data --install-headers=$PREFIX/iphoneos/include
+  - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/iphonesimulator --install-lib=$PREFIX/iphonesimulator/python/site-packages --install-scripts=$PREFIX/iphonesimulator/scripts --install-data=$PREFIX/iphonesimulator/data --install-headers=$PREFIX/iphonesimulator/include
+requirements: {}
 about:
-  home: http://github.com/codelv/enaml-native
-  license: GPLv3
+  home: http://www.dabeaz.com/ply/
+  license: BSD
+  license_family: BSD
+  license_file: ''
+  summary: Python Lex & Yacc for Android and iOS apps using enaml-native.
+  description: "\nPLY is yet another implementation of lex and yacc for Python. Some notable\nfeatures include the fact that its implemented entirely in Python and it\nuses LALR(1) parsing which is efficient and well suited for larger grammars.\n\nPLY provides most of the standard lex/yacc features including support for empty \nproductions, precedence rules, error recovery, and support for ambiguous grammars. \n\nPLY is extremely easy to use and provides very extensive error checking. \nIt is compatible with both Python 2 and Python 3.\n"
+  doc_url: ''
+  dev_url: ''
+
+extra:
+  recipe-maintainers: ''

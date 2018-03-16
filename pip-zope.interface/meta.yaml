@@ -13,11 +13,10 @@ source:
 
 build:
   number: 0
-  script_env:
-  - CC
-  - CXX
   noarch: true
-  script: 
+  script:
+  - export CC=/bin/false
+  - export CXX=/bin/false
   - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/arm --install-lib=$PREFIX/android/arm/python/site-packages --install-scripts=$PREFIX/android/arm/scripts --install-data=$PREFIX/android/arm/data --install-headers=$PREFIX/android/arm/include
   - touch $PREFIX/android/arm/python/site-packages/zope/__init__.py
   - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/arm64 --install-lib=$PREFIX/android/arm64/python/site-packages --install-scripts=$PREFIX/android/arm64/scripts --install-data=$PREFIX/android/arm64/data --install-headers=$PREFIX/android/arm64/include
@@ -36,7 +35,7 @@ about:
   license: Zope Public License
   license_family: OTHER
   license_file: ''
-  summary: Interfaces for Python
+  summary: Interfaces for Python. Built for Android and iOS apps using enaml-native.
   description: "``zope.interface``\n==================\n\n.. image:: https://img.shields.io/pypi/v/zope.interface.svg\n    :target: https://pypi.python.org/pypi/zope.interface/\n    :alt: Latest Version\n\n.. image:: https://travis-ci.org/zopefoundation/zope.interface.png?branch=master\n        :target: https://travis-ci.org/zopefoundation/zope.interface\n\n.. image:: https://readthedocs.org/projects/zopeinterface/badge/?version=latest\n        :target: https://zopeinterface.readthedocs.io/en/latest/\n        :alt: Documentation Status\n\nThis package is intended to be independently reusable in any Python\nproject. It is maintained by the `Zope Toolkit project\n<http://docs.zope.org/zopetoolkit/>`_.\n\nThis package provides an implementation of \"object interfaces\" for Python.\nInterfaces are a mechanism for labeling objects as conforming to a given\nAPI or contract. So, this package can be considered as implementation of\nthe `Design By Contract`_ methodology support in Python.\n\n.. _Design\
     \ By Contract: http://en.wikipedia.org/wiki/Design_by_contract\n\nFor detailed documentation, please see https://zopeinterface.readthedocs.io/en/latest/\n\nChanges\n=======\n\n4.4.3 (2017-09-22)\n------------------\n\n- Avoid exceptions when the ``__annotations__`` attribute is added to\n  interface definitions with Python 3.x type hints. See `issue 98\n  <https://github.com/zopefoundation/zope.interface/issues/98>`_.\n- Fix the possibility of a rare crash in the C extension when\n  deallocating items. See `issue 100\n  <https://github.com/zopefoundation/zope.interface/issues/100>`_.\n\n\n4.4.2 (2017-06-14)\n------------------\n\n- Fix a regression storing\n  ``zope.component.persistentregistry.PersistentRegistry`` instances.\n  See `issue 85 <https://github.com/zopefoundation/zope.interface/issues/85>`_.\n\n- Fix a regression that could lead to the utility registration cache\n  of ``Components`` getting out of sync. See `issue 93\n  <https://github.com/zopefoundation/zope.interface/issues/93>`_.\n\
     \n4.4.1 (2017-05-13)\n------------------\n\n- Simplify the caching of utility-registration data. In addition to\n  simplification, avoids spurious test failures when checking for\n  leaks in tests with persistent registries. See `pull 84\n  <https://github.com/zopefoundation/zope.interface/pull/84>`_.\n\n- Raise ``ValueError`` when non-text names are passed to adapter registry\n  methods:  prevents corruption of lookup caches.\n\n4.4.0 (2017-04-21)\n------------------\n\n- Avoid a warning from the C compiler.\n  (https://github.com/zopefoundation/zope.interface/issues/71)\n\n- Add support for Python 3.6.\n\n4.3.3 (2016-12-13)\n------------------\n\n- Correct typos and ReST formatting errors in documentation.\n\n- Add API documentation for the adapter registry.\n\n- Ensure that the ``LICENSE.txt`` file is included in built wheels.\n\n- Fix C optimizations broken on Py3k.  See the Python bug at:\n  http://bugs.python.org/issue15657\n  (https://github.com/zopefoundation/zope.interface/issues/60)\n\
