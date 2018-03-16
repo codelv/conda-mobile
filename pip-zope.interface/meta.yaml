@@ -18,13 +18,18 @@ build:
   - CXX
   noarch: true
   script: 
-
   - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/arm --install-lib=$PREFIX/android/arm/python/site-packages --install-scripts=$PREFIX/android/arm/scripts --install-data=$PREFIX/android/arm/data --install-headers=$PREFIX/android/arm/include
+  - touch $PREFIX/android/arm/python/site-packages/zope/__init__.py
   - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/arm64 --install-lib=$PREFIX/android/arm64/python/site-packages --install-scripts=$PREFIX/android/arm64/scripts --install-data=$PREFIX/android/arm64/data --install-headers=$PREFIX/android/arm64/include
+  - touch $PREFIX/android/arm64/python/site-packages/zope/__init__.py
   - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/x86 --install-lib=$PREFIX/android/x86/python/site-packages --install-scripts=$PREFIX/android/x86/scripts --install-data=$PREFIX/android/x86/data --install-headers=$PREFIX/android/x86/include
+  - touch $PREFIX/android/x86/python/site-packages/zope/__init__.py
   - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/x86_64 --install-lib=$PREFIX/android/x86_64/python/site-packages --install-scripts=$PREFIX/android/x86_64/scripts --install-data=$PREFIX/android/x86_64/data --install-headers=$PREFIX/android/x86_64/include
+  - touch $PREFIX/android/x86_64/python/site-packages/zope/__init__.py
   - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/iphoneos --install-lib=$PREFIX/iphoneos/python/site-packages --install-scripts=$PREFIX/iphoneos/scripts --install-data=$PREFIX/iphoneos/data --install-headers=$PREFIX/iphoneos/include
+  - touch $PREFIX/iphoneos/python/site-packages/zope/__init__.py
   - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/iphonesimulator --install-lib=$PREFIX/iphonesimulator/python/site-packages --install-scripts=$PREFIX/iphonesimulator/scripts --install-data=$PREFIX/iphonesimulator/data --install-headers=$PREFIX/iphonesimulator/include
+  - touch $PREFIX/iphonesimulator/python/site-packages/zope/__init__.py
 requirements: {}
 about:
   home: https://github.com/zopefoundation/zope.interface

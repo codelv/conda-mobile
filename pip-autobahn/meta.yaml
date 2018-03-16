@@ -1,0 +1,53 @@
+{% set name = "autobahn" %}
+{% set version = "18.3.1" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "fc1d38227bb44a453b54cffa48de8b2e6ce48ddc5e97fb5950b0faa27576f385" %}
+package:
+  name: pip-{{ name|lower }}
+  version: '{{ version }}'
+
+source:
+  fn: '{{ name }}-{{ version }}.tar.gz'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  '{{ hash_type }}': '{{ hash_value }}'
+
+build:
+  number: 0
+  script_env:
+  - CC
+  - CXX
+  noarch: true
+  script: 
+
+  - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/arm --install-lib=$PREFIX/android/arm/python/site-packages --install-scripts=$PREFIX/android/arm/scripts --install-data=$PREFIX/android/arm/data --install-headers=$PREFIX/android/arm/include
+  - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/arm64 --install-lib=$PREFIX/android/arm64/python/site-packages --install-scripts=$PREFIX/android/arm64/scripts --install-data=$PREFIX/android/arm64/data --install-headers=$PREFIX/android/arm64/include
+  - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/x86 --install-lib=$PREFIX/android/x86/python/site-packages --install-scripts=$PREFIX/android/x86/scripts --install-data=$PREFIX/android/x86/data --install-headers=$PREFIX/android/x86/include
+  - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/x86_64 --install-lib=$PREFIX/android/x86_64/python/site-packages --install-scripts=$PREFIX/android/x86_64/scripts --install-data=$PREFIX/android/x86_64/data --install-headers=$PREFIX/android/x86_64/include
+  - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/iphoneos --install-lib=$PREFIX/iphoneos/python/site-packages --install-scripts=$PREFIX/iphoneos/scripts --install-data=$PREFIX/iphoneos/data --install-headers=$PREFIX/iphoneos/include
+  - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/iphonesimulator --install-lib=$PREFIX/iphonesimulator/python/site-packages --install-scripts=$PREFIX/iphonesimulator/scripts --install-data=$PREFIX/iphonesimulator/data --install-headers=$PREFIX/iphonesimulator/include
+requirements:
+  build:
+  - pip-six >=1.10.0
+  - pip-txaio >=2.7.0
+  run:
+  - pip-six >=1.10.0
+  - pip-txaio >=2.7.0
+about:
+  home: http://crossbar.io/autobahn
+  license: MIT License
+  license_family: MIT
+  license_file: ''
+  summary: WebSocket client & server library, WAMP real-time framework
+  description: "Autobahn\\|Python\n================\n\nWebSocket & WAMP for Python on Twisted and asyncio.\n\n| |Version| |Build Status| |Coverage| |Docs| |Docker|\n\n--------------\n\n| **Quick Links**: `Source Code <https://github.com/crossbario/autobahn-python>`__ - `Documentation <https://autobahn.readthedocs.io/en/latest/>`__ - `WebSocket Examples <https://autobahn.readthedocs.io/en/latest/websocket/examples.html>`__ - `WAMP Examples <https://autobahn.readthedocs.io/en/latest/wamp/examples.html>`__\n| **Community**: `Mailing list <http://groups.google.com/group/autobahnws>`__ - `StackOverflow <http://stackoverflow.com/questions/tagged/autobahn>`__ - `Twitter <https://twitter.com/autobahnws>`__ - `IRC #autobahn/chat.freenode.net <https://webchat.freenode.net/>`__\n| **Companion Projects**: `Autobahn|JS <https://github.com/crossbario/autobahn-js/>`__ - `Autobahn|Cpp <https://github.com/crossbario/autobahn-cpp>`__ - `Autobahn|Testsuite <https://github.com/crossbario/autobahn-testsuite>`__\
+    \ - `Crossbar.io <http://crossbar.io>`__ - `WAMP <http://wamp-proto.org>`__\n\nIntroduction\n------------\n\n**Autobahn\\|Python** is a subproject of `Autobahn <http://crossbar.io/autobahn>`__ and provides open-source\nimplementations of\n\n-  `The WebSocket Protocol <http://tools.ietf.org/html/rfc6455>`__\n-  `The Web Application Messaging Protocol (WAMP) <http://wamp-proto.org/>`__\n\nfor Python 2 and 3, and running on `Twisted <http://twistedmatrix.com/>`__ and `asyncio <http://docs.python.org/3.4/library/asyncio.html>`__.\n\nYou can use **Autobahn\\|Python** to create clients and servers in Python speaking just plain WebSocket or WAMP.\n\n**WebSocket** allows `bidirectional real-time messaging on the Web <http://crossbario.com/blog/post/websocket-why-what-can-i-use-it/>`__ and beyond, while `WAMP <http://wamp-proto.org/>`__ adds real-time application communication on top of WebSocket.\n\n**WAMP** provides asynchronous **Remote Procedure Calls** and **Publish & Subscribe** for applications\
+    \ in *one* protocol running over `WebSocket <http://tools.ietf.org/html/rfc6455>`__. WAMP is a *routed* protocol, so you need a **WAMP Router** to connect your **Autobahn\\|Python** based clients. We provide `Crossbar.io <http://crossbar.io>`__, but there are `other options <http://wamp-proto.org/implementations/#routers>`__ as well.\n\nFeatures\n--------\n\n-  framework for `WebSocket <http://tools.ietf.org/html/rfc6455>`__ and `WAMP <http://wamp-proto.org/>`__ clients and servers\n-  compatible with Python 2.7 and 3.3 or later\n-  runs on `CPython <http://python.org/>`__, `PyPy <http://pypy.org/>`__ and `Jython <http://jython.org/>`__\n-  runs under `Twisted <http://twistedmatrix.com/>`__ and `asyncio <http://docs.python.org/3.4/library/asyncio.html>`__ - implements WebSocket\n   `RFC6455 <http://tools.ietf.org/html/rfc6455>`__ and Draft Hybi-10+\n-  implements `WebSocket compression <http://tools.ietf.org/html/draft-ietf-hybi-permessage-compression>`__\n-  implements `WAMP <http://wamp-proto.org/>`__,\
+    \ the Web Application Messaging Protocol\n-  high-performance, fully asynchronous implementation\n-  best-in-class standards conformance (100% strict passes with `Autobahn Testsuite <http://crossbar.io/autobahn#testsuite>`__: `Client <http://autobahn.ws/testsuite/reports/clients/index.html>`__ `Server <http://autobahn.ws/testsuite/reports/servers/index.html>`__)\n-  message-, frame- and streaming-APIs for WebSocket\n-  supports TLS (secure WebSocket) and proxies\n-  Open-source (`MIT license <https://github.com/crossbario/autobahn-python/blob/master/LICENSE>`__)\n\nShow me some code\n-----------------\n\nTo give you a first impression, here are two examples. We have lot more `in the repo <https://github.com/crossbario/autobahn-python/tree/master/examples>`__.\n\nWebSocket Echo Server\n~~~~~~~~~~~~~~~~~~~~~\n\nHere is a simple WebSocket Echo Server that will echo back any WebSocket\nmessage received:\n\n.. code:: python\n\n    from autobahn.twisted.websocket import WebSocketServerProtocol\n\
+    \    # or: from autobahn.asyncio.websocket import WebSocketServerProtocol\n\n    class MyServerProtocol(WebSocketServerProtocol):\n\n        def onConnect(self, request):\n            print(\"Client connecting: {}\".format(request.peer))\n\n        def onOpen(self):\n            print(\"WebSocket connection open.\")\n\n        def onMessage(self, payload, isBinary):\n            if isBinary:\n                print(\"Binary message received: {} bytes\".format(len(payload)))\n            else:\n                print(\"Text message received: {}\".format(payload.decode('utf8')))\n\n            # echo back message verbatim\n            self.sendMessage(payload, isBinary)\n\n        def onClose(self, wasClean, code, reason):\n            print(\"WebSocket connection closed: {}\".format(reason))\n\nTo actually run above server protocol, you need some lines of `boilerplate <https://autobahn.readthedocs.io/en/latest/websocket/programming.html#running-a-server>`__.\n\nWAMP Application Component\n\
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~\n\nHere is a WAMP Application Component that performs all four types of\nactions that WAMP provides:\n\n#. **subscribe** to a topic\n#. **publish** an event\n#. **register** a procedure\n#. **call** a procedure\n\n.. code:: python\n\n    from autobahn.twisted.wamp import ApplicationSession\n    # or: from autobahn.asyncio.wamp import ApplicationSession\n\n    class MyComponent(ApplicationSession):\n\n        @inlineCallbacks\n        def onJoin(self, details):\n\n            # 1. subscribe to a topic so we receive events\n            def onevent(msg):\n                print(\"Got event: {}\".format(msg))\n\n            yield self.subscribe(onevent, 'com.myapp.hello')\n\n            # 2. publish an event to a topic\n            self.publish('com.myapp.hello', 'Hello, world!')\n\n            # 3. register a procedure for remote calling\n            def add2(x, y):\n                return x + y\n\n            self.register(add2, 'com.myapp.add2')\n\n         \
+    \   # 4. call a remote procedure\n            res = yield self.call('com.myapp.add2', 2, 3)\n            print(\"Got result: {}\".format(res))\n\nAbove code will work on Twisted and asyncio by changing a single line\n(the base class of ``MyComponent``). To actually run above application component, you need some lines of `boilerplate <https://autobahn.readthedocs.io/en/latest/wamp/programming.html#running-components>`__ and a `WAMP Router <https://autobahn.readthedocs.io/en/latest/wamp/programming.html#running-a-wamp-router>`__.\n\n.. |Version| image:: https://img.shields.io/pypi/v/autobahn.svg\n   :target: https://pypi.python.org/pypi/autobahn\n\n.. |Master Branch| image:: https://img.shields.io/badge/branch-master-orange.svg\n   :target: https://travis-ci.org/crossbario/autobahn-python.svg?branch=master\n\n.. |Build Status| image:: https://travis-ci.org/crossbario/autobahn-python.svg?branch=master\n   :target: https://travis-ci.org/crossbario/autobahn-python\n\n.. |Coverage| image::\
+    \ https://img.shields.io/codecov/c/github/crossbario/autobahn-python/master.svg\n   :target: https://codecov.io/github/crossbario/autobahn-python\n\n.. |Docs| image:: https://img.shields.io/badge/docs-latest-brightgreen.svg?style=flat\n   :target: https://autobahn.readthedocs.io/en/latest/\n\n.. |Docker| image:: https://img.shields.io/badge/docker-ready-blue.svg?style=flat\n   :target: https://hub.docker.com/r/crossbario/autobahn-python/\n\n\n"
+  doc_url: ''
+  dev_url: ''
+
+extra:
+  recipe-maintainers: ''
