@@ -75,6 +75,16 @@ be able to simply install and use prebuilt versions.
 See the [conda docs](https://conda.io/docs/user-guide/tasks/build-packages/index.html)
 to get started.
 
+Pure python packages should be prefixed as `pip-<package>` to distinguish them between regular
+packages. You can create these package automatically using the 
+[enaml-native-cli](https://github.com/codelv/enaml-native-cli).
+
+
+> Note: By convention libraries with compiled extensions / cython components are split 
+into separate packages with the prefix `ios-<package>` and `android-package`. Otherwise
+all packages would need to be built from mac osx.
+
+
 To add a new recipe or to build existing recipes:
 
 1. Install `miniconda2`

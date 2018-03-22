@@ -1,0 +1,22 @@
+
+package:
+  name: android-liblzma
+  version: 5.2.3
+
+source:
+  # sourceforge is ....
+  git_url: https://git.tukaani.org/xz.git
+  git_tag: v5.2.3
+
+build:
+  number: 1
+  binary_relocation: False
+  noarch: generic
+
+#requirements:
+#  build:
+#  #  - autopoint
+
+about:
+  home: http://github.com/codelv/enaml-native
+  license: GPLv3
