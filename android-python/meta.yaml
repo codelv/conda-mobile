@@ -8,6 +8,8 @@ source:
   patches:
     - patches/setup.patch
     - patches/sqlite.patch
+    # For Kitcat 4.4
+    #- patches/locale.patch
 
 requirements:
   build:

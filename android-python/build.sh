@@ -15,6 +15,9 @@ sed -ie 's!INSTSONAME="$LDLIBRARY".$SOVERSION!!g' configure
 # Disable LFS
 sed -ie "s!use_lfs=yes!use_lfs=no!g" configure
 
+# Conda patches can fail silently so use these for debugging
+#patch -t -d $SRC_DIR -p1 -i $RECIPE_DIR/patches/locale.patch
+
 for ARCH in $ARCHS
 do
 # This expects the toolchain to be built at $NDK/standalone/$ARCH
@@ -104,6 +107,9 @@ do
 
     # pwdmodule
     sed -ie 's!#define HAVE_GETPWENT 1!/* #undef HAVE_GETPWENT */!g' pyconfig.h
+
+    # socketmodule (Android 5.x)
+    sed -ie 's!#define HAVE_GETHOSTBYNAME_R 1!/* #undef HAVE_GETHOSTBYNAME_R */!g' pyconfig.h
 
     # Build libpython
     make -j$CPU_COUNT libpython2.7.so

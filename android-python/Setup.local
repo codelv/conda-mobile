@@ -18,11 +18,11 @@
 # Modules that should always be present (non UNIX dependent):
 
 # These say symbol duplicates if included
-math mathmodule.c _math.c # -lm # math library functions, e.g. sin()
-time timemodule.c #-lm # time operations and variables
+math mathmodule.c _math.c -lm # math library functions, e.g. sin()
+time timemodule.c -lm # time operations and variables
 
 array arraymodule.c	# array objects
-cmath cmathmodule.c _math.c #-lm # complex math library functions
+cmath cmathmodule.c _math.c -lm # complex math library functions
 _struct _struct.c	# binary structure packing/unpacking
 operator operator.c	# operator.add() and similar goodies
 #_testcapi _testcapimodule.c    # Python C API test module
@@ -33,7 +33,7 @@ itertools itertoolsmodule.c	# Functions creating iterators for efficient looping
 strop stropmodule.c		# String manipulations
 _functools _functoolsmodule.c	# Tools for working with functions and callable objects
 #_pickle _pickle.c	# pickle accelerator
-datetime datetimemodule.c timemodule.c   # date/time type
+datetime datetimemodule.c timemodule.c -lm # date/time type
 _bisect _bisectmodule.c	# Bisection algorithms
 _json _json.c # json speedups
 termios termios.c	# Steen Lumholt's termios module
@@ -43,7 +43,7 @@ fcntl fcntlmodule.c	# fcntl(2) and ioctl(2)
 #spwd spwdmodule.c		# spwd(3)
 #grp grpmodule.c		# grp(3)
 select selectmodule.c	# select(2); not on ancient System V
-_socket socketmodule.c timemodule.c # Socket module helper for socket(2)
+_socket socketmodule.c timemodule.c -lm # Socket module helper for socket(2)
 binascii binascii.c # Helper module for various ascii-encoders
 parser parsermodule.c # Fred Drake's interface to the Python parser
 cStringIO cStringIO.c # cStringIO and cPickle
