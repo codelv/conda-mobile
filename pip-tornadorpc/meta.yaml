@@ -1,0 +1,88 @@
+{% set name = "tornadorpc" %}
+{% set version = "0.1.1" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "3a5ec5e7d1f5db90d047fdec6461249ff42b2f7b0642398617b1df8a7d860693" %}
+
+package:
+  name: 'pip-{{ name|lower }}'
+  version: '{{ version }}'
+
+source:
+  fn: '{{ name }}-{{ version }}.tar.gz'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  '{{ hash_type }}': '{{ hash_value }}'
+
+build:
+  number: 0
+  noarch: true
+  script:
+  - export CC=/bin/false
+  - export CXX=/bin/false
+  - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/arm --install-lib=$PREFIX/android/arm/python/site-packages --install-scripts=$PREFIX/android/arm/scripts --install-data=$PREFIX/android/arm/data --install-headers=$PREFIX/android/arm/include
+  - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/arm64 --install-lib=$PREFIX/android/arm64/python/site-packages --install-scripts=$PREFIX/android/arm64/scripts --install-data=$PREFIX/android/arm64/data --install-headers=$PREFIX/android/arm64/include
+  - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/x86 --install-lib=$PREFIX/android/x86/python/site-packages --install-scripts=$PREFIX/android/x86/scripts --install-data=$PREFIX/android/x86/data --install-headers=$PREFIX/android/x86/include
+  - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/x86_64 --install-lib=$PREFIX/android/x86_64/python/site-packages --install-scripts=$PREFIX/android/x86_64/scripts --install-data=$PREFIX/android/x86_64/data --install-headers=$PREFIX/android/x86_64/include
+  - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/iphoneos --install-lib=$PREFIX/iphoneos/python/site-packages --install-scripts=$PREFIX/iphoneos/scripts --install-data=$PREFIX/iphoneos/data --install-headers=$PREFIX/iphoneos/include
+  - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/iphonesimulator --install-lib=$PREFIX/iphonesimulator/python/site-packages --install-scripts=$PREFIX/iphonesimulator/scripts --install-data=$PREFIX/iphonesimulator/data --install-headers=$PREFIX/iphonesimulator/include
+
+requirements:
+  build:
+    - pip-tornado
+    - pip-jsonrpclib
+  run:
+    - pip-tornado
+    - pip-jsonrpclib
+
+about:
+  home: http://code.google.com/p/tornadorpc/
+  license: http://www.apache.org/licenses/LICENSE-2.0
+  license_family: APACHE
+  license_file: ''
+  summary: TornadoRPC is a an implementation of both JSON-RPC and XML-RPC handlers for the Tornado framework.
+  description: "[![Build Status](https://travis-ci.org/joshmarshall/tornadorpc.png?branch=master)](https://travis-ci.org/joshmarshall/tornadorpc)\nTORNADO-RPC\n===========\nThis library is an implementation\
+    \ of both the JSON-RPC and the\nXML-RPC specification (server-side) for the Tornado web framework.\nIt supports the basic features of both, as well as the MultiCall /\nBatch support for both specifications.\
+    \ The JSON-RPC handler supports \nboth the original 1.0 specification, as well as the new (proposed) \n2.0 spec, which includes batch submission, keyword arguments, etc.\n\nAsynchronous request support\
+    \ has been added for methods which require \nthe use of asynchronous libraries (like Tornado's AsyncHTTPClient \nlibrary.)\n\nTornadoRPC is licensed under the Apache License, Version 2.0\n(http://www.apache.org/licenses/LICENSE-2.0.html).\n\
+    \nMailing List\n------------\nIf you have any questions, issues, or just use the library please feel \nfree to send a message to the mailing list at:\n\n    http://groups.google.com/group/tornadorpc\n\
+    \nInstallation\n------------\nTo install:\n\n    python setup.py build\n    sudo python setup.py install\n\nTo use this module, you'll need Tornado installed, which you can\nget at this address:\n\n\
+    http://www.tornadoweb.org/\n\nIf you want to use the JSON-RPC handler, you'll also need \njsonrpclib, which you can grab at:\n\nhttp://github.com/joshmarshall/jsonrpclib/\n\nThe jsonrpclib library requires\
+    \ one of the JSON libraries. It looks \nfirst for cjson, then for the built-in JSON library (with default \nPython 2.6+ distributions), and finally the simplejson library.\n\nOverview\n--------\nThis\
+    \ library is an implementation of both the JSON-RPC and the XML-RPC \nspecification (server-side) for the Tornado web framework. It supports \nthe basic features of both, as well as the MultiCall /\
+    \ Batch support for \nboth specifications. The JSON-RPC handler supports both the original 1.0 \nspecification, as well as the new (proposed) 2.0 spec, which includes batch \nsubmission, keyword arguments,\
+    \ etc. \n\nThere is also a base library that other RPC protocols could use to quickly \nget tied into Tornado.\n\nRequirements\n------------\nThe library obviously requires Tornado, which you can get\
+    \ at \nTornado's website (http://www.tornadoweb.org). After installing Tornado \n(instructions included with the Tornado distribution) you should be able \nto use the XML-RPC handler without any other\
+    \ libraries.\n\nThe JSON-RPC handler requires my jsonrpclib library, which you can get \nat http://github.com/joshmarshall/jsonrpclib . It also requires a JSON \nlibrary, although any distribution of\
+    \ Python past 2.5 should have it by \ndefault. (Note: Some Linuxes only include a base Python install. On Ubuntu, \nfor instance, you may need to run `sudo apt-get install python-json` or \n`sudo apt-get\
+    \ python-cjson` to get one of the libraries.)\n\nUsage\n-----\nThe library is designed to be mostly transparent in usage. You simply \nextend the XML/JSON RPCHandler class from either the tornadorpc.xml\
+    \ or \nthe tornado.json library, resepectively, and pass that handler in to \nthe Tornado framework just like any other handler. \n\nFor any synchronous (normal) operation, you can just return the value\n\
+    you want sent to the client. However, if you use any asynchronous\nlibrary (like Tornado's AsyncHTTPClient) you will want to call \nself.result(RESULT) in your callback. See the Asynchronous section\n\
+    below for examples.\n\nXML-RPC Example\n---------------\nTo set up a simple XML RPC server, this is all you need:\n\n\tfrom tornadorpc.xml import XMLRPCHandler\n\tfrom tornadorpc import private, start_server\n\
+    \n\tclass Handler(XMLRPCHandler):\n\n\t    def add(self, x, y):\n\t        return x+y\n\n\t    def ping(self, obj):\n\t        return obj\n    \n\t    @private\n\t    def private(self):\n\t        #should\
+    \ not get called\n\t        return False\n\n\tstart_server(Handler, port=8080)\n\nThe `@private` decorator is a way to ensure that it cannot be called \nexternally. You can also create methods that\
+    \ start with an underscore `_` \ncharacter, and they will be private by default. The `start_server` function \nis just an easy wrap around the default Tornado setup -- you can use these \nhandlers just\
+    \ like you would any other Tornado RequestHandler. \n\nJSON-RPC Example\n----------------\nA JSON-RPC server would be started with the exact same syntax, replacing \nXMLRPCHandler with JSONRPCHandler.\
+    \ Here is an example of the JSON-RPC \nclient with \"dot-attribute\" support:\n\n\tfrom tornadorpc.json import JSONRPCHandler\n\tfrom tornadorpc import private, start_server\n\n\tclass Tree(object):\n\
+    \n\t    def power(self, base, power, modulo=None):\n\t        result = pow(base, power, modulo)\n            return result\n  \n\t    def _private(self):\n\t        # Won't be callable\n\t        return\
+    \ False\n\n\tclass Handler(JSONRPCHandler):\n\n\t    tree = Tree()\n\n\t    def add(self, x, y):\n\t        return x+y\n\n\t    def ping(self, obj):\n\t        return obj\n\n\tstart_server(Handler,\
+    \ port=8080)\n\nTo use this, you should be able to use either the JSON-RPC official \nimplementation, or the jsonrpclib library (which you'd need for this to \nwork anyway.) One of the benefits of the\
+    \ jsonrpclib is designed to be a \nparallel implementation to the xmlrpclib, so syntax should be very similar \nand it should be easy to experiment with existing apps.\n\nAn example of client usage\
+    \ would be:\n\n    from jsonrpclib import Server\n    server = Server('http://localhost:8080')\n    result = server.tree.power(2, 6)\n    # result should equal 64\n\nAsynchronous Example\n--------------------\n\
+    To indicate that a request is asynchronous, simply use the \"async\" \ndecorator, and call \"self.result(RESULT)\" in your callback. Please note\nthat this will only work in the RPCHandler methods,\
+    \ not in any sub-tree\nmethods since they do not have access to the handler's result() method.\n\nHere is an example that uses Tornado's AsyncHTTPClient with a callback:\n\n    from tornadorpc import\
+    \ async\n    from tornadorpc.xml import XMLRPCHandler\n    from tornado.httpclient import AsyncHTTPClient\n\n    class Handler(XMLRPCHandler):\n        \n        @async\n        def external(self, url):\n\
+    \            client = AsyncHTTPClient()\n            client.fetch(url, self._handle_response)\n            \n        def _handle_response(self, response):\n            # The underscore will make it\
+    \ private automatically\n            # You could also use @private if you wished\n            # This returns the status code of the request\n            self.result(response.code)\n\nDebugging\n---------\n\
+    There is a `config` object that is available -- it will be expanded as time \ngoes by. Currently, it supports two options: `verbose` and `short_errors`, \nboth of which default to True. The `verbose`\
+    \ setting just specifies whether \nyou want to print out results to the terminal (automatically on, you'll \nprobably want to turn that off for production, WSGI deployment, etc.) and \nthe `short_errors`\
+    \ option determines whether to print just the last few \nlines of the traceback (if set to True, default) or print the full traceback. \nOnce the logging mechanism is in place, the `short_errors` configuration\
+    \ \nelement will apply to that as well.\n\nThe default error look something similar to this:\n\n\tJSON-RPC SERVER AT http://localhost:8484\n\t---------------\n\tERROR IN messup\n\t---------------\n\t\
+    Traceback (most recent call last):\n\t  File \"test.py\", line 20, in messup\n\t    return doesntexist['bad_key']\n\tNameError: global name 'doesntexist' is not defined\n\nTo change the configuration,\
+    \ look over the following:\n\n\timport tornadorpc\n\ttornadorpc.config.verbose = False\n\ttornadorpc.config.short_errors = False\n\t# or...\n\tfrom tornadorpc import config\n\tconfig.verbose = False\n\
+    \tconfig.short_errors = False\n    \nTests\n-----\nTo run some basic tests, enter the following in the same directory that\nthis README is in:\n\n    python run_tests.py\n    \nThis will test a few\
+    \ basic utilites and the XMLRPC system. If you wish\nto test the JSONRPC system, run the following:\n    \n    python run_tests.py --json\n    \nTODO\n----\n* Add unit tests\n* Add logging mechanism\n\
+    * Add proper HTTP codes for failures\n* Optimize"
+  doc_url: ''
+  dev_url: ''
+
+extra:
+  recipe-maintainers: ''

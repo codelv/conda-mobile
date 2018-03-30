@@ -1,0 +1,30 @@
+{% set name = "pymongo" %}
+{% set version = "3.6.1" %}
+{% set hash_type = "md5" %}
+{% set hash_value = "0d72c87fb93cea0759529befafefce54" %}
+package:
+  name: android-{{ name|lower }}
+  version: '{{ version }}'
+
+source:
+  fn: '{{ name }}-{{ version }}.tar.gz'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  '{{ hash_type }}': '{{ hash_value }}'
+
+requirements:
+  build:
+    - python<3
+    - android-python
+  run:
+    - android-python
+
+
+build:
+  number: 0
+  binary_relocation: False
+  noarch: generic
+
+about:
+  home: http://lxml.de/
+  summary:  XML and HTML with Python. Built for Android apps using enaml-native.
+  license:  BSD

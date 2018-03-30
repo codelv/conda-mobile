@@ -1,0 +1,48 @@
+{% set name = "motor" %}
+{% set version = "1.2.1" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "ed4aff66c625efe01398e8416fd1f35f00be77cc5afb242172ee3d03a0307c04" %}
+package:
+  name: pip-{{ name|lower }}
+  version: '{{ version }}'
+
+source:
+  fn: '{{ name }}-{{ version }}.tar.gz'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  '{{ hash_type }}': '{{ hash_value }}'
+
+build:
+  number: 0
+  noarch: true
+  script: 
+  - export CC=/bin/false
+  - export CXX=/bin/false
+  - python setup.py install --record=record.txt --no-compile --install-base=$PREFIX/android/arm --install-lib=$PREFIX/android/arm/python/site-packages --install-scripts=$PREFIX/android/arm/scripts --install-data=$PREFIX/android/arm/data --install-headers=$PREFIX/android/arm/include
+  - python setup.py install --record=record.txt --no-compile --install-base=$PREFIX/android/arm64 --install-lib=$PREFIX/android/arm64/python/site-packages --install-scripts=$PREFIX/android/arm64/scripts --install-data=$PREFIX/android/arm64/data --install-headers=$PREFIX/android/arm64/include
+  - python setup.py install --record=record.txt --no-compile --install-base=$PREFIX/android/x86 --install-lib=$PREFIX/android/x86/python/site-packages --install-scripts=$PREFIX/android/x86/scripts --install-data=$PREFIX/android/x86/data --install-headers=$PREFIX/android/x86/include
+  - python setup.py install --record=record.txt --no-compile --install-base=$PREFIX/android/x86_64 --install-lib=$PREFIX/android/x86_64/python/site-packages --install-scripts=$PREFIX/android/x86_64/scripts --install-data=$PREFIX/android/x86_64/data --install-headers=$PREFIX/android/x86_64/include
+  - python setup.py install --record=record.txt --no-compile --install-base=$PREFIX/iphoneos --install-lib=$PREFIX/iphoneos/python/site-packages --install-scripts=$PREFIX/iphoneos/scripts --install-data=$PREFIX/iphoneos/data --install-headers=$PREFIX/iphoneos/include
+  - python setup.py install --record=record.txt --no-compile --install-base=$PREFIX/iphonesimulator --install-lib=$PREFIX/iphonesimulator/python/site-packages --install-scripts=$PREFIX/iphonesimulator/scripts --install-data=$PREFIX/iphonesimulator/data --install-headers=$PREFIX/iphonesimulator/include
+
+requirements:
+  build:
+  - android-pymongo >=3.4,<4
+  - pip-futures
+  run:
+  - android-pymongo >=3.4,<4
+  - pip-futures
+about:
+  home: https://github.com/mongodb/motor/
+  license: Apache Software License
+  license_family: APACHE
+  license_file: ''
+  summary: Non-blocking MongoDB driver for Tornado or asyncio Built for Android and iOS apps using enaml-native.
+  description: "=====\nMotor\n=====\n\n.. image:: https://raw.github.com/mongodb/motor/master/doc/_static/motor.png\n\n:Info: Motor is a full-featured, non-blocking MongoDB_ driver for Python\n    Tornado_ and asyncio_ applications.\n:Author: A\\. Jesse Jiryu Davis\n\nAbout\n=====\n\nMotor presents a callback- or Future-based API for non-blocking access\nto MongoDB. The source is `on GitHub <https://github.com/mongodb/motor>`_\nand the docs are on ReadTheDocs_.\n\n    \"We use Motor in high throughput environments, processing tens of thousands\n    of requests per second. It allows us to take full advantage of modern\n    hardware, ensuring we utilise the entire capacity of our purchased CPUs.\n    This helps us be more efficient with computing power, compute spend and\n    minimises the environmental impact of our infrastructure as a result.\"\n\n    --*David Mytton, Server Density*\n\n    \"We develop easy-to-use sensors and sensor systems with open source\n    software to ensure every\
+    \ innovator, from school child to laboratory\n    researcher, has the same opportunity to create. We integrate Motor into our\n    software to guarantee massively scalable sensor systems for everyone.\"\n\n    --*Ryan Smith, inXus Interactive*\n\nInstallation\n============\n\n  $ pip install motor\n\nDependencies\n============\n\nMotor works in all the environments officially supported by Tornado or by\nasyncio. It requires:\n\n* Unix, including Mac OS X. Windows is not supported.\n* PyMongo_ 3.4 or later.\n* Python 2.7 or later.\n* `futures`_ on Python 2.7.\n* `backports.pbkdf2`_ for faster authentication with MongoDB 3.0+,\n  especially on Python older than 2.7.8, or on Python 3 before Python 3.4.\n\nSee `requirements <https://motor.readthedocs.io/en/stable/requirements.html>`_\nfor details about compatibility.\n\nHow To Ask For Help\n===================\n\nIssues with, questions about, or feedback for Motor should be sent to the\n`mongodb-user list on Google Groups`_.\n\nFor confirmed\
+    \ issues or feature requests,\nopen a case in `Jira <http://jira.mongodb.org>`_ in the \"MOTOR\" project.\nPlease include all of the following information:\n\n- Detailed steps to reproduce the problem, including your code and a full\n  traceback, if possible.\n- What you expected to happen, and what actually happened.\n- The exact python version used, with patch level::\n\n  $ python -c \"import sys; print(sys.version)\"\n\n- The exact version of PyMongo used::\n\n  $ python -c \"import pymongo; print(pymongo.version); print(pymongo.has_c())\"\n\n- The exact Tornado version, if you are using Tornado::\n\n  $ python -c \"import tornado; print(tornado.version)\"\n\n- The operating system and version (e.g. RedHat Enterprise Linux 6.4, OSX 10.9.5, ...)\n\nDocumentation\n=============\n\nMotor's documentation is on ReadTheDocs_.\n\nBuild the documentation with Python 3.5. Install sphinx, Tornado, and aiohttp,\nand do ``cd doc; make html``.\n\nExamples\n========\n\nSee the `examples on ReadTheDocs\
+    \ <https://motor.readthedocs.io/en/latest/examples/index.html>`_.\n\nTesting\n=======\n\nRun ``python setup.py test``.\nTests are located in the ``test/`` directory.\n\n.. _PyMongo: http://pypi.python.org/pypi/pymongo/\n\n.. _MongoDB: http://mongodb.org/\n\n.. _Tornado: http://tornadoweb.org/\n\n.. _asyncio: https://docs.python.org/3/library/asyncio.html\n\n.. _futures: https://pypi.python.org/pypi/futures\n\n.. _backports.pbkdf2: https://pypi.python.org/pypi/backports.pbkdf2/\n\n.. _ReadTheDocs: https://motor.readthedocs.io/\n\n.. _mongodb-user list on Google Groups:\n   https://groups.google.com/forum/?fromgroups#!forum/mongodb-user\n\n.. _sphinx: http://sphinx.pocoo.org/\n"
+  doc_url: ''
+  dev_url: ''
+
+extra:
+  recipe-maintainers: ''
