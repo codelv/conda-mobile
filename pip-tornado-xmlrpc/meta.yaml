@@ -1,0 +1,51 @@
+{% set name = "tornado-xmlrpc" %}
+{% set version = "1.7.1" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "c4beb291d4720e98b2d59751f0cbfb2fddf41b51231343f075f9f001ad56071d" %}
+package:
+  name: pip-{{ name|lower }}
+  version: '{{ version }}'
+
+source:
+  fn: '{{ name }}-{{ version }}.tar.gz'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  '{{ hash_type }}': '{{ hash_value }}'
+
+build:
+  number: 0
+  noarch: true
+  script: 
+
+  - export CC=/bin/false
+  - export CXX=/bin/false
+  - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/arm --install-lib=$PREFIX/android/arm/python/site-packages --install-scripts=$PREFIX/android/arm/scripts --install-data=$PREFIX/android/arm/data --install-headers=$PREFIX/android/arm/include
+  - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/arm64 --install-lib=$PREFIX/android/arm64/python/site-packages --install-scripts=$PREFIX/android/arm64/scripts --install-data=$PREFIX/android/arm64/data --install-headers=$PREFIX/android/arm64/include
+  - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/x86 --install-lib=$PREFIX/android/x86/python/site-packages --install-scripts=$PREFIX/android/x86/scripts --install-data=$PREFIX/android/x86/data --install-headers=$PREFIX/android/x86/include
+  - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/x86_64 --install-lib=$PREFIX/android/x86_64/python/site-packages --install-scripts=$PREFIX/android/x86_64/scripts --install-data=$PREFIX/android/x86_64/data --install-headers=$PREFIX/android/x86_64/include
+  - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/iphoneos --install-lib=$PREFIX/iphoneos/python/site-packages --install-scripts=$PREFIX/iphoneos/scripts --install-data=$PREFIX/iphoneos/data --install-headers=$PREFIX/iphoneos/include
+  - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/iphonesimulator --install-lib=$PREFIX/iphonesimulator/python/site-packages --install-scripts=$PREFIX/iphonesimulator/scripts --install-data=$PREFIX/iphonesimulator/data --install-headers=$PREFIX/iphonesimulator/include
+requirements:
+  build:
+  - pip-tornado >=4.1
+  - android-lxml
+  - pip-slimurl
+  - pip-futures
+  run:
+  - pip-tornado >=4.1
+  - android-lxml
+  - pip-slimurl
+  - pip-futures
+about:
+  home: The package home page
+  license: MIT
+  license_family: MIT
+  license_file: ''
+  summary: Tornado XML-RPC server and client Built for Android and iOS apps using enaml-native.
+  description: "Tornado XMLRPC\n==============\n\n.. image:: https://travis-ci.org/mosquito/tornado-xmlrpc.svg\n    :target: https://travis-ci.org/mosquito/tornado-xmlrpc\n\n.. image:: https://img.shields.io/pypi/v/tornado-xmlrpc.svg\n    :target: https://pypi.python.org/pypi/tornado-xmlrpc/\n    :alt: Latest Version\n\n.. image:: https://img.shields.io/pypi/wheel/tornado-xmlrpc.svg\n    :target: https://pypi.python.org/pypi/tornado-xmlrpc/\n\n.. image:: https://img.shields.io/pypi/pyversions/tornado-xmlrpc.svg\n    :target: https://pypi.python.org/pypi/tornado-xmlrpc/\n\n.. image:: https://img.shields.io/pypi/l/tornado-xmlrpc.svg\n    :target: https://pypi.python.org/pypi/tornado-xmlrpc/\n\n\nXML-RPC server and client implementation based on tornado. Using lxml and AsyncHttpClient.\n\n\nExample:\n\n.. code-block:: python\n\n    from tornado_xmlrpc import handler, client\n    from tornado.testing import *\n\n\n    class XMLRPCTestHandler(handler.XMLRPCHandler):\n        def rpc_test(self):\n\
+    \            return None\n\n        def rpc_args(self, *args):\n            return len(args)\n\n        def rpc_kwargs(self, **kwargs):\n            return len(kwargs)\n\n        def rpc_args_kwargs(self, *args, **kwargs):\n            return len(args) + len(kwargs)\n\n        def rpc_exception(self):\n            raise Exception(\"YEEEEEE!!!\")\n\n\n    class TestSimple(tornado.testing.AsyncHTTPTestCase):\n        def setUp(self):\n            super(TestSimple, self).setUp()\n            self.server = client.ServerProxy(\"http://localhost:%d\" % self.get_http_port())\n\n        def tearDown(self):\n            super(TestSimple, self).tearDown()\n            self.server = None\n\n        def get_app(self):\n            return Application(handlers=[\n                ('/', XMLRPCTestHandler),\n            ])\n\n        @gen_test\n        def test_00_test(self):\n            result = yield self.server.test()\n            self.assertIsNone(result)\n\n        @gen_test\n        def test_10_args(self):\n\
+    \            result = yield self.server.args(1, 2, 3, 4, 5)\n            self.assertEqual(result, 5)\n\n        @gen_test\n        def test_20_kwargs(self):\n            result = yield self.server.kwargs(foo=1, bar=2)\n            self.assertEqual(result, 2)\n\n        @gen_test\n        def test_20_kwargs(self):\n            result = yield self.server.args_kwargs(1, 2, 3, 4, 5, foo=1, bar=2)\n            self.assertEqual(result, 7)\n\n        @gen_test\n        def test_30_exception(self):\n            try:\n                yield self.server.exception()\n            except client.RemoteServerException as e:\n                self.assertIn(\"YEEEEEE!!!\", e.message)\n            else:\n                raise RuntimeError(\"No exception\")\n\n"
+  doc_url: ''
+  dev_url: ''
+
+extra:
+  recipe-maintainers: ''
