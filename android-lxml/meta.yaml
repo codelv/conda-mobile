@@ -1,0 +1,36 @@
+{% set name = "lxml" %}
+{% set version = "4.2.0" %}
+{% set hash_type = "md5" %}
+{% set hash_value = "04455d43fd587bd11ccef6315258c3ce" %}
+package:
+  name: android-{{ name|lower }}
+  version: '{{ version }}'
+
+source:
+  fn: '{{ name }}-{{ version }}.tar.gz'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  '{{ hash_type }}': '{{ hash_value }}'
+  patches:
+    - setup.patch
+
+requirements:
+  build:
+    - python<3
+    - cython
+    - android-libxml2
+    - android-libxslt
+    - android-python
+  run:
+    - android-libxml2
+    - android-libxslt
+    - android-python
+
+build:
+  number: 0
+  binary_relocation: False
+  noarch: generic
+
+about:
+  home: http://lxml.de/
+  summary:  XML and HTML with Python. Built for Android apps using enaml-native.
+  license:  BSD

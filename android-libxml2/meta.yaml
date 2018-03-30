@@ -1,0 +1,22 @@
+
+package:
+  name: android-libxml2
+  version: 2.9.8
+
+source:
+  url: https://github.com/GNOME/libxml2/archive/v2.9.8.tar.gz
+
+build:
+  number: 1
+  binary_relocation: False
+  noarch: generic
+
+requirements:
+  build:
+    - android-liblzma
+  run:
+    - android-liblzma
+about:
+  home: http://www.xmlsoft.org/
+  summary:  The XML C parser and toolkit of Gnome. Built for Android apps using enaml-native.
+  license:  MIT

@@ -1,0 +1,15 @@
+diff --git a/setupinfo.py b/setupinfo-patched.py
+index 313424f..28423b1 100644
+--- a/setupinfo.py
++++ b/setupinfo-patched.py
+@@ -264,8 +264,8 @@ def print_libxml_error():
+ 
+ def libraries():
+     standard_libs = []
+-    if 'linux' in sys.platform:
+-        standard_libs.append('rt')
++    #if 'linux' in sys.platform:
++    #    standard_libs.append('rt')
+     if not OPTION_BUILD_LIBXML2XSLT:
+         standard_libs.append('z')
+     standard_libs.append('m')

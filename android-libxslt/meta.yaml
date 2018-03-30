@@ -1,0 +1,22 @@
+
+package:
+  name: android-libxslt
+  version: 1.1.32
+
+source:
+  url: https://github.com/GNOME/libxslt/archive/v1.1.32.tar.gz
+
+build:
+  number: 1
+  binary_relocation: False
+  noarch: generic
+
+requirements:
+  build:
+    - android-libxml2
+  run:
+    - android-libxml2
+about:
+  home: https://github.com/GNOME/libxslt
+  summary:  an implementation of XSLT 1.0 and common extensions like EXSLT for libxml2. Built for Android apps using enaml-native.
+  license:  MIT
