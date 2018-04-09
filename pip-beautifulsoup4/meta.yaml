@@ -1,0 +1,52 @@
+{% set name = "beautifulsoup4" %}
+{% set version = "4.6.0" %}
+{% set file_ext = "tar.gz" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "808b6ac932dccb0a4126558f7dfdcf41710dd44a4ef497a0bb59a77f9f078e89" %}
+package:
+  name: pip-{{ name|lower }}
+  version: '{{ version }}'
+
+source:
+  fn: '{{ name }}-{{ version }}.{{ file_ext }}'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ file_ext }}
+  '{{ hash_type }}': '{{ hash_value }}'
+
+build:
+  number: 0
+  noarch: true
+  script: 
+
+  - export CC=/bin/false
+  - export CXX=/bin/false
+  - python setup.py install --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/arm --install-lib=$PREFIX/android/arm/python/site-packages --install-scripts=$PREFIX/android/arm/scripts --install-data=$PREFIX/android/arm/data --install-headers=$PREFIX/android/arm/include
+  - python setup.py install --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/arm64 --install-lib=$PREFIX/android/arm64/python/site-packages --install-scripts=$PREFIX/android/arm64/scripts --install-data=$PREFIX/android/arm64/data --install-headers=$PREFIX/android/arm64/include
+  - python setup.py install --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/x86 --install-lib=$PREFIX/android/x86/python/site-packages --install-scripts=$PREFIX/android/x86/scripts --install-data=$PREFIX/android/x86/data --install-headers=$PREFIX/android/x86/include
+  - python setup.py install --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/x86_64 --install-lib=$PREFIX/android/x86_64/python/site-packages --install-scripts=$PREFIX/android/x86_64/scripts --install-data=$PREFIX/android/x86_64/data --install-headers=$PREFIX/android/x86_64/include
+  - python setup.py install --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/iphoneos --install-lib=$PREFIX/iphoneos/python/site-packages --install-scripts=$PREFIX/iphoneos/scripts --install-data=$PREFIX/iphoneos/data --install-headers=$PREFIX/iphoneos/include
+  - python setup.py install --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/iphonesimulator --install-lib=$PREFIX/iphonesimulator/python/site-packages --install-scripts=$PREFIX/iphonesimulator/scripts --install-data=$PREFIX/iphonesimulator/data --install-headers=$PREFIX/iphonesimulator/include
+
+requirements:
+  build:
+  - android-libxml2
+  - android-lxml
+  - android-libxslt
+  run:
+  - android-libxml2
+  - android-lxml
+  - android-libxslt
+  - pip-html5lib
+  - pip-future
+
+about:
+  home: http://www.crummy.com/software/BeautifulSoup/bs4/
+  license: MIT License
+  license_family: MIT
+  license_file: ''
+  summary: Screen-scraping library Built for Android and iOS apps using enaml-native.
+  description: Beautiful Soup sits atop an HTML or XML parser, providing Pythonic idioms for iterating, searching, and modifying the parse tree.
+  doc_url: ''
+  dev_url: ''
+
+extra:
+  recipe-maintainers: ''
