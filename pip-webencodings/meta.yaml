@@ -1,0 +1,41 @@
+{% set name = "webencodings" %}
+{% set version = "0.5.1" %}
+{% set file_ext = "tar.gz" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "b36a1c245f2d304965eb4e0a82848379241dc04b865afcc4aab16748587e1923" %}
+package:
+  name: pip-{{ name|lower }}
+  version: '{{ version }}'
+
+source:
+  fn: '{{ name }}-{{ version }}.{{ file_ext }}'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ file_ext }}
+  '{{ hash_type }}': '{{ hash_value }}'
+
+build:
+  number: 0
+  noarch: true
+  script: 
+
+  - export CC=/bin/false
+  - export CXX=/bin/false
+  - python setup.py install --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/arm --install-lib=$PREFIX/android/arm/python/site-packages --install-scripts=$PREFIX/android/arm/scripts --install-data=$PREFIX/android/arm/data --install-headers=$PREFIX/android/arm/include
+  - python setup.py install --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/arm64 --install-lib=$PREFIX/android/arm64/python/site-packages --install-scripts=$PREFIX/android/arm64/scripts --install-data=$PREFIX/android/arm64/data --install-headers=$PREFIX/android/arm64/include
+  - python setup.py install --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/x86 --install-lib=$PREFIX/android/x86/python/site-packages --install-scripts=$PREFIX/android/x86/scripts --install-data=$PREFIX/android/x86/data --install-headers=$PREFIX/android/x86/include
+  - python setup.py install --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/x86_64 --install-lib=$PREFIX/android/x86_64/python/site-packages --install-scripts=$PREFIX/android/x86_64/scripts --install-data=$PREFIX/android/x86_64/data --install-headers=$PREFIX/android/x86_64/include
+  - python setup.py install --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/iphoneos --install-lib=$PREFIX/iphoneos/python/site-packages --install-scripts=$PREFIX/iphoneos/scripts --install-data=$PREFIX/iphoneos/data --install-headers=$PREFIX/iphoneos/include
+  - python setup.py install --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/iphonesimulator --install-lib=$PREFIX/iphonesimulator/python/site-packages --install-scripts=$PREFIX/iphonesimulator/scripts --install-data=$PREFIX/iphonesimulator/data --install-headers=$PREFIX/iphonesimulator/include
+requirements: {}
+about:
+  home: https://github.com/SimonSapin/python-webencodings
+  license: BSD License
+  license_family: BSD
+  license_file: ''
+  summary: Character encoding aliases for legacy web content Built for Android and iOS apps using enaml-native.
+  description: "python-webencodings\n===================\n\nThis is a Python implementation of the `WHATWG Encoding standard\n<http://encoding.spec.whatwg.org/>`_.\n\n* Latest documentation: http://packages.python.org/webencodings/\n* Source code and issue tracker:\n  https://github.com/gsnedders/python-webencodings\n* PyPI releases: http://pypi.python.org/pypi/webencodings\n* License: BSD\n* Python 2.6+ and 3.3+\n\nIn order to be compatible with legacy web content\nwhen interpreting something like ``Content-Type: text/html; charset=latin1``,\ntools need to use a particular set of aliases for encoding labels\nas well as some overriding rules.\nFor example, ``US-ASCII`` and ``iso-8859-1`` on the web are actually\naliases for ``windows-1252``, and an UTF-8 or UTF-16 BOM takes precedence\nover any other encoding declaration.\nThe Encoding standard defines all such details so that implementations do\nnot have to reverse-engineer each other.\n\nThis module has encoding labels and BOM detection,\n\
+    but the actual implementation for encoders and decoders is Python\u2019s.\n\n\n"
+  doc_url: ''
+  dev_url: ''
+
+extra:
+  recipe-maintainers: ''
