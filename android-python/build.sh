@@ -23,7 +23,7 @@ do
 # This expects the toolchain to be built at $NDK/standalone/$ARCH
 #   python $NDK/build/tools/make_standalone_toolchain.py \
 #                                            --arch $ARCH \
-#                                            --api 26 \
+#                                            --api 21 \
 #                                            --stl=libc++ \
 #                                            --install-dir=$NDK/standalone/$ARCH
     export ANDROID_TOOLCHAIN="$NDK/standalone/$ARCH"
