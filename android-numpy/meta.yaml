@@ -4,10 +4,13 @@ package:
 
 source:
   url: https://github.com/numpy/numpy/archive/v1.14.2.tar.gz
-  #md5: e76cb77c242601810ff0ca363ce33b28
+  patches:
+    - numpy.patch
 
 requirements:
   build:
+    - python<3
+    - cython
     - android-python
   run:
     - android-python

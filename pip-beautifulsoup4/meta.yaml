@@ -1,8 +1,8 @@
 {% set name = "beautifulsoup4" %}
-{% set version = "4.6.0" %}
+{% set version = "4.5.3" %}
 {% set file_ext = "tar.gz" %}
 {% set hash_type = "sha256" %}
-{% set hash_value = "808b6ac932dccb0a4126558f7dfdcf41710dd44a4ef497a0bb59a77f9f078e89" %}
+{% set hash_value = "b21ca09366fa596043578fd4188b052b46634d22059e68dd0077d9ee77e08a3e" %}
 package:
   name: pip-{{ name|lower }}
   version: '{{ version }}'
@@ -28,15 +28,10 @@ build:
 
 requirements:
   build:
-  - android-libxml2
   - android-lxml
-  - android-libxslt
   run:
-  - android-libxml2
   - android-lxml
-  - android-libxslt
   - pip-html5lib
-  - pip-future
 
 about:
   home: http://www.crummy.com/software/BeautifulSoup/bs4/
@@ -49,4 +44,4 @@ about:
   dev_url: ''
 
 extra:
-  recipe-maintainers: 'https://github.com/rodgomesc'
+  recipe-maintainers: 'https://github.com/rodgomesc/'
