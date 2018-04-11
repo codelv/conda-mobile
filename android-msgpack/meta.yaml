@@ -1,10 +1,10 @@
 package:
   name: android-msgpack
-  version: 0.5.5
+  version: 0.5.6
 
 source:
-  url: https://github.com/msgpack/msgpack-python/archive/0.5.5.tar.gz
-  md5: d9e7e71bc5464956bdf68a225b4f28df
+  url: https://github.com/msgpack/msgpack-python/archive/0.5.6.tar.gz
+  md5: 6d644c06a87a5a111bbbf5b34b4be440
 
 requirements:
   build:
