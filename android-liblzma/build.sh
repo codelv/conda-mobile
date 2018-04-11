@@ -29,19 +29,21 @@ do
     export APP_ROOT="$PREFIX/android/$ARCH"
     export PATH="$PATH:$ANDROID_TOOLCHAIN/bin"
     export AR="$TARGET_HOST-ar"
-    export AS="$TARGET_HOST-clang"
-    export CC="$TARGET_HOST-clang"
-    export CXX="$TARGET_HOST-clang++"
+    #export AS="$TARGET_HOST-clang"
+    export CC="$TARGET_HOST-gcc"
+    export CXX="$TARGET_HOST-g++"
     export LD="$TARGET_HOST-ld"
+    export CFLAGS="-std=c11"
 
     ./autogen.sh
-    ./configure --host=$TARGET_HOST --prefix=$SRC_DIR/dist/$ARCH
+    ./configure --host=$TARGET_HOST --prefix=$SRC_DIR/dist/$ARCH \
+        --disable-xz --disable-xzdec --disable-lzmainfo --disable-scripts --disable-lzmadec
 
     # Clean
     make clean
 
     # Build
-    make -j$CPU_COUNT
+    make #-j$CPU_COUNT
     make install
 
     # Copy to install dir
