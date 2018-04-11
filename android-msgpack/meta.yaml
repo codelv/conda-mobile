@@ -4,7 +4,7 @@ package:
 
 source:
   url: https://github.com/msgpack/msgpack-python/archive/0.5.6.tar.gz
-  md5: 6d644c06a87a5a111bbbf5b34b4be440
+  md5: e05e0edfebdd32d11b02bea88381595e
 
 requirements:
   build:
