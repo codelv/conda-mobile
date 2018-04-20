@@ -1,0 +1,27 @@
+package:
+  name: android-pygraphviz
+  version: 1.4rc1
+
+source:
+  url: https://github.com/pygraphviz/pygraphviz/archive/pygraphviz-1.4rc1.tar.gz
+  #md5: 874c2380af491d60505bfcb1ba957b5d
+
+requirements:
+  build:
+    - python
+    - android-python
+    - android-graphviz * py{{CONDA_PY}}*
+  run:
+    - python
+    - android-graphviz
+    - android-python * py{{CONDA_PY}}*
+
+build:
+  number: 0
+  binary_relocation: False
+  noarch: generic
+
+about:
+  home: http://github.com/codelv/enaml-native
+  license: EPL-1.0
+  recipe maintainerr: 'https://github.com/rodgomesc'

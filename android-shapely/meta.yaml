@@ -10,14 +10,15 @@ source:
 
 requirements:
   build:
-    - python<=3
+    - python
     - cython
     - numpy
-    - android-python
+    - android-python * py{{CONDA_PY}}*
     - android-libgeos
 
   run:
-    - android-python
+    - python
+    - android-python * py{{CONDA_PY}}*
     - android-libgeos
 
 build:

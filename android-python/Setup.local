@@ -92,7 +92,7 @@ _ssl _ssl.c \
 zlib zlibmodule.c -I$(prefix)/include -L$(exec_prefix)/lib -lz
 
 # Gustavo Niemeyer's bz2 module.
-#bz2 bz2module.c -lbz2
+bz2 bz2module.c -lbz2
 
 # Interface to the Expat XML parser
 #

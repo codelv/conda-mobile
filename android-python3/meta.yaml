@@ -1,30 +1,27 @@
-{% set version = "2.7.14" %}
-{% set md5 = "1f6db41ad91d9eb0a6f0c769b8613c5b" %}
+{% set version = "3.6.5" %}
+{% set md5 = "9f49654a4d6f733ff3284ab9d227e9fd" %}
 package:
   name: android-python
   version: {{version}}
 source:
   url:  https://www.python.org/ftp/python/{{version}}/Python-{{version}}.tar.xz
   md5: {{md5}}
-  patches:
-      - patches/setup.patch
-      - patches/sqlite.patch
-      # For Kitcat 4.4
-      #- patches/locale.patch
 
 requirements:
   build:
-    - python<3
+    - python>=3.6
     - android-libffi
     - android-openssl
     - android-sqlite
+    - android-liblzma
     - android-libbz2
   run:
-    - python<3
+    - python>=3.6
 build:
   number: 0
   binary_relocation: False
   noarch: generic
+
 about:
   home: http://github.com/codelv/enaml-native
   license: GPLv3

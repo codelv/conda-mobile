@@ -13,10 +13,12 @@ source:
 
 requirements:
   build:
-    - android-python
+    - python
+    - android-python * py{{CONDA_PY}}*
     - android-libffi
   run:
-    - android-python
+    - python
+    - android-python * py{{CONDA_PY}}*
     - android-libffi
 
 build:

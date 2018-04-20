@@ -9,11 +9,12 @@ source:
 
 requirements:
   build:
-    - python<3
+    - python
     - cython
-    - android-python
+    - android-python * py{{CONDA_PY}}*
   run:
-    - android-python
+    - python
+    - android-python * py{{CONDA_PY}}*
 
 build:
   number: 0

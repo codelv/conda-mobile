@@ -1,0 +1,39 @@
+{% set name = "asn1crypto" %}
+{% set version = "0.24.0" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "9d5c20441baf0cb60a4ac34cc447c6c189024b6b4c6cd7877034f4965c464e49" %}
+package:
+  name: pip-{{ name|lower }}
+  version: '{{ version }}'
+
+source:
+  fn: '{{ name }}-{{ version }}.tar.gz'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  '{{ hash_type }}': '{{ hash_value }}'
+
+build:
+  number: 0
+  noarch: true
+  script: 
+
+  - export CC=/bin/false
+  - export CXX=/bin/false
+  - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/arm --install-lib=$PREFIX/android/arm/python/site-packages --install-scripts=$PREFIX/android/arm/scripts --install-data=$PREFIX/android/arm/data --install-headers=$PREFIX/android/arm/include
+  - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/arm64 --install-lib=$PREFIX/android/arm64/python/site-packages --install-scripts=$PREFIX/android/arm64/scripts --install-data=$PREFIX/android/arm64/data --install-headers=$PREFIX/android/arm64/include
+  - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/x86 --install-lib=$PREFIX/android/x86/python/site-packages --install-scripts=$PREFIX/android/x86/scripts --install-data=$PREFIX/android/x86/data --install-headers=$PREFIX/android/x86/include
+  - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/x86_64 --install-lib=$PREFIX/android/x86_64/python/site-packages --install-scripts=$PREFIX/android/x86_64/scripts --install-data=$PREFIX/android/x86_64/data --install-headers=$PREFIX/android/x86_64/include
+  - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/iphoneos --install-lib=$PREFIX/iphoneos/python/site-packages --install-scripts=$PREFIX/iphoneos/scripts --install-data=$PREFIX/iphoneos/data --install-headers=$PREFIX/iphoneos/include
+  - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/iphonesimulator --install-lib=$PREFIX/iphonesimulator/python/site-packages --install-scripts=$PREFIX/iphonesimulator/scripts --install-data=$PREFIX/iphonesimulator/data --install-headers=$PREFIX/iphonesimulator/include
+requirements: {}
+about:
+  home: https://github.com/wbond/asn1crypto
+  license: MIT License
+  license_family: MIT
+  license_file: ''
+  summary: Fast ASN.1 parser and serializer with definitions for private keys, public keys, certificates, CRL, OCSP, CMS, PKCS#3, PKCS#7, PKCS#8, PKCS#12, PKCS#5, X.509 and TSP Built for Android and iOS apps using enaml-native.
+  description: "Docs for this project are maintained at https://github.com/wbond/asn1crypto#readme.\n\n\n"
+  doc_url: ''
+  dev_url: ''
+
+extra:
+  recipe-maintainers: ''

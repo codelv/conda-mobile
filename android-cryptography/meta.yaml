@@ -13,21 +13,23 @@ source:
 
 build:
   number: 0
-  noarch: true
+  binary_relocation: False
+  noarch: generic
 
 requirements:
   build:
-    - python<3
+    - python
     - cffi
-    - android-cffi
+    - android-cffi>=1.7,!=1.11.3 py{{CONDA_PY}}*
     - android-openssl
   run:
+    - python
     - android-openssl
-    - android-cffi>=1.7,!=1.11.3
+    - android-cffi>=1.7,!=1.11.3 py{{CONDA_PY}}*
     - pip-idna>=2.1
     - pip-asn1crypto>=0.21.0
     - pip-six>=1.4.1
-    - pip-enum34
+    - pip-enum34 # [py27]
 about:
   home: https://cryptography.io/
   license: Apache License

@@ -1,0 +1,12 @@
+package:
+  name: android-libcxx
+  version: 11
+
+build:
+  number: 0
+  binary_relocation: False
+  noarch: generic
+
+about:
+  summary: libc++_shared from the Android NDK
+  license:  MIT

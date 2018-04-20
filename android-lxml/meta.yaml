@@ -15,15 +15,16 @@ source:
 
 requirements:
   build:
-    - python<3
+    - python
     - cython
     - android-libxml2
     - android-libxslt
-    - android-python
+    - android-python * py{{CONDA_PY}}*
   run:
+    - python
     - android-libxml2
     - android-libxslt
-    - android-python
+    - android-python * py{{CONDA_PY}}*
 
 build:
   number: 0

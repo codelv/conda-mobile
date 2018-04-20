@@ -14,7 +14,7 @@ These recipes have been tested and confirmed working using a dev version of
 
 ### Targets
 
-Currently all recipes are built for Python 2.7.14 with optional support for openssl and 
+Currently all recipes are built for Python 2.7.14 and 3.6.5 with optional support for openssl and 
 ctypes for the following targets:
 
 - Android (arm (armeabi-v7a), arm64 (arm64-v8a), x86_64, x86 (i686))
@@ -58,7 +58,7 @@ For example `conda install ios-python ios-msgpack`
 
 Pure python packages can be installed with pip using the `--target` to tell it
 where to install. `pip install tornado --target=$CONDA_PREFIX/iphoneos/python/site-packages`
-or (preferred) create a conda package for it.
+or (preferred) create a conda package for it using `enaml-native make-pip-recipe <package>`.
 
 Once the packages are installed, the build system (gradle, xcode) can then easily grab 
 these libraries from the env for the given target and use them as is. 
@@ -75,37 +75,90 @@ be able to simply install and use prebuilt versions.
 See the [conda docs](https://conda.io/docs/user-guide/tasks/build-packages/index.html)
 to get started.
 
-Pure python packages should be prefixed as `pip-<package>` to distinguish them between regular
-packages. You can create these package automatically using the 
-[enaml-native-cli](https://github.com/codelv/enaml-native-cli).
+There are three general recipe types that are generally relevant for conda-mobile: 
+ 
+ 1. Pure python packages, no extensions
+ 2. Python package with, with extensions
+ 3. Non python dependent libs
 
 
-> Note: By convention libraries with compiled extensions / cython components are split 
-into separate packages with the prefix `ios-<package>` and `android-package`. Otherwise
-all packages would need to be built from mac osx.
+Pure python packages are prefixed with `pip-<package>` to distinguish them between regular
+conda packages that may exist with the same name. You can create these package (almost) 
+automatically using the [enaml-native-cli](https://github.com/codelv/enaml-native-cli)'s 
+`enaml-native make-pip-recipe <package>` command.
 
+Libraries with compiled extensions / cython components are split  into separate packages with 
+the prefix `ios-<package>` and `android-package`. Otherwise all packages would need to be 
+built from mac osx.
 
 To add a new recipe or to build existing recipes:
 
 1. Install `miniconda2`
 2. Install conda-build via `conda install conda-build` (recommended outside of an env)
-2. Clone this repo or create your own recipe(s)
-3. Add the requirements to your recipes as needed
-5. Run `conda-build <recipe-name>`
-
-Then either add a PR or create your own repos with recipes.
+3. Clone this repo or create your own recipe(s)
+4. Add the requirements to your recipes as needed
+5. If building an extension or c/c++ library install `build-essential`,  `autopoint`, and `texinfo` with apt
+5. Run `conda-build <recipe-name>` (python extensions must be built separately for 
+    `2.7` and `3.6` by specifying it as an argument ex `conda-build --py 3.6 <recipe-name>`)
+6. Then either add a PR or create your own repos with recipes.
 
 > Note: If using linux with an encrypted home directory you may have to build in a different
 root to avoid "path to long" errors. Add the `--croot=/tmp/conda` or some other path to 
 fix this.
 
+#### Recipe requirements
+
+Now that both python 2.7 and 3.6 are supported all recipes that build python extensions MUST 
+include `py27` or `py36` in the build string so conda knows which version to install. 
+conda will do this automatically if you simply include `python` in the run 
+requirements of your recipe (even though the ios / android version is actually used on the 
+app). Alternatively you can manually set `string: py{{CONDA_PY}}` under the `build` section. 
+
+In addition to specifying a build string, any requirements that have python extensions must
+filter by the build string since conda does not do this automatically at the moment.
+
+> Note: This only applies to python extensions. Pure c/c++ libraries do not need to do this!
+
+For example:
+
+```yaml
+
+requirements:
+  build:
+    - python
+    - cython
+    - android-python * py{{CONDA_PY}}* 
+    - android-libc++
+  run:
+    - python # Adding python here make conda append the py27 or py36 build string
+    - android-python  * py{{CONDA_PY}}* # Required so it installs the correct pkg for the py version
+    - android-libc++ # Pure c/c++ libraries do not need a "build" filter
+
+```
+
+Failure to include python as a run requirement may cause conda to install the incorrect 
+packages (ie a 2.7 package may be selected for a 3.6 python build!).
+
+In order to make your package "installable" from other operating systems (ie windows) the
+recipe must use `noarch:generic` in the `build` parameters as follows.
+
+```yaml
+
+build:
+    binary_relocation: False
+    noarch: generic
+
+```
+
+The `binary_relocation: False` prevents conda from doing it's relocation logic on the
+libraries created which can cause issues.
 
 ### Contributing 
 
 Please donate to [enaml-native](https://www.codelv.com/projects/enaml-native/support/) or
 [kivy](https://kivy.org/#home) to help continue supporting python frameworks that run on 
 mobile devices.
-
-This is released under the GPL v3. See the LICENSE included adjacent to this file.
+ 
+This is released under the GPL v3. See the LICENSE included adjacent to this file. 
 
 Pull requests are always welcome.

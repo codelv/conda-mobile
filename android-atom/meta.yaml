@@ -8,15 +8,17 @@ source:
 
 requirements:
   build:
-    - android-python
+    - python
+    - android-python * py{{CONDA_PY}}*
+    - android-libcxx
   run:
-    - android-python
+    - python
+    - android-python * py{{CONDA_PY}}*
+    - android-libcxx
 
 build:
-  number: 0
   binary_relocation: False
   noarch: generic
-
 about:
   home: http://github.com/codelv/enaml-native
   license: GPLv3

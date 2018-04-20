@@ -8,10 +8,11 @@ source:
 
 requirements:
   build:
-    - android-python
+    - python
+    - android-atom>=0.4.2.a0 py{{CONDA_PY}}*
   run:
-    - android-python
-    - android-atom>=0.4.2.a0
+    - python
+    - android-atom>=0.4.2.a0 py{{CONDA_PY}}*
     - pip-ply==3.11
 
 build:

@@ -5,9 +5,15 @@
 # The full license is in the file LICENSE, distributed with this software.
 # Created on Feb 23, 2018
 # ==================================================================================================
-export HOSTPYTHON="$(which python2)"
+export HOSTPYTHON=$PYTHON
 export ARCHS=("x86_64 x86 arm arm64")
 export NDK="$HOME/Android/Sdk/ndk-bundle"
+
+if [ "$PY3K" == "1" ]; then
+    export PY_LIB_VER="3.6m"
+else
+    export PY_LIB_VER="2.7"
+fi
 
 for ARCH in $ARCHS
 do
@@ -34,7 +40,7 @@ do
     export CXX="$TARGET_HOST-g++"
     export LD="$TARGET_HOST-ld"
     export STRIP="$TARGET_HOST-strip"
-    export CFLAGS="-O3 -I$APP_ROOT/include/python2.7"
+    export CFLAGS="-O3 -I$APP_ROOT/include/python$PY_LIB_VER"
     export LDFLAGS="-L$APP_ROOT/lib"
     export LDSHARED="$CC -shared"
     export CROSS_COMPILE="$ARCH"
@@ -45,13 +51,13 @@ do
     python setup.py build
 
     # Rename and move all so files to lib
-    cd build/lib.android-$ARCH-2.7/
+    cd build/lib.android-$ARCH-$PY_VER/
         find * -type f -name "*.so" -exec rename 's!/!.!g' {} \;
-        rename 's/^/lib./' *.so
+        rename 's/^/lib./' *.so; rename 's/\.cpython-.+\.so/\.so/' *.so;
     cd $SRC_DIR
 
     # Copy to install
     mkdir -p $PREFIX/android/$ARCH/python/site-packages/
-    cp -RL build/lib.android-$ARCH-2.7/numpy $PREFIX/android/$ARCH/python/site-packages/
-    cp -RL build/lib.android-$ARCH-2.7/*.so $PREFIX/android/$ARCH/lib
+    cp -RL build/lib.android-$ARCH-$PY_VER/numpy $PREFIX/android/$ARCH/python/site-packages/
+    cp -RL build/lib.android-$ARCH-$PY_VER/*.so $PREFIX/android/$ARCH/lib
 done
