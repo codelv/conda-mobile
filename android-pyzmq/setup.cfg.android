@@ -1,0 +1,17 @@
+[global]
+# the prefix with which libzmq was configured / installed
+zmq_prefix = APP_ROOT
+have_sys_un_h = False
+
+[build_ext]
+libraries = pythonPY_LIB_VER
+# path to your python-for-android
+# the result of:
+# wget http://python-for-android.googlecode.com/files/python-lib_r16.zip
+# unzip python-lib_r16.zip -dpython-lib
+library_dirs = APP_ROOT/lib/
+include_dirs = APP_ROOT/include/pythonPY_VER/
+
+[bdist_egg]
+plat-name = TARGET_HOST
+

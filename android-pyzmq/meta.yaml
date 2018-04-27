@@ -1,0 +1,35 @@
+{% set name = "pyzmq" %}
+{% set version = "17.0.0" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "0145ae59139b41f65e047a3a9ed11bbc36e37d5e96c64382fcdff911c4d8c3f0" %}
+package:
+  name: android-{{ name|lower }}
+  version: '{{ version }}'
+
+source:
+  fn: '{{ name }}-{{ version }}.tar.gz'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  '{{ hash_type }}': '{{ hash_value }}'
+
+requirements:
+  build:
+    - python
+    - cython
+    - android-libzmq
+    - android-libsodium
+    - android-python * py{{CONDA_PY}}*
+  run:
+    - python
+    - android-libzmq
+    - android-libffi
+    - android-python * py{{CONDA_PY}}*
+
+build:
+  number: 0
+  binary_relocation: False
+  noarch: generic
+
+about:
+  home: https://pyzmq.readthedocs.io/en/latest/
+  summary:  PyZMQ is the Python bindings for ØMQ. Built for Android apps using enaml-native.
+  license:  BSD
