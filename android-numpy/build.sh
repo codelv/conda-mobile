@@ -15,6 +15,8 @@ else
     export PY_LIB_VER="2.7"
 fi
 
+patch -t -d $SRC_DIR -p1 -i $RECIPE_DIR/numpy.patch
+
 for ARCH in $ARCHS
 do
 
@@ -36,11 +38,11 @@ do
     export APP_ROOT="$PREFIX/android/$ARCH"
     export PATH="$PATH:$ANDROID_TOOLCHAIN/bin"
     export AR="$TARGET_HOST-ar"
-    export CC="$TARGET_HOST-gcc"
+    export CC="$TARGET_HOST-gcc -D__ANDROID_API__=21"
     export CXX="$TARGET_HOST-g++"
     export LD="$TARGET_HOST-ld"
     export STRIP="$TARGET_HOST-strip"
-    export CFLAGS="-O3 -I$APP_ROOT/include/python$PY_LIB_VER"
+    export CFLAGS="-I$APP_ROOT/include/python$PY_LIB_VER"
     export LDFLAGS="-L$APP_ROOT/lib"
     export LDSHARED="$CC -shared"
     export CROSS_COMPILE="$ARCH"
@@ -48,7 +50,7 @@ do
     export _PYTHON_HOST_PLATFORM="android-$ARCH"
 
     # Build
-    python setup.py build
+    python setup.py build -j$CPU_COUNT
 
     # Rename and move all so files to lib
     cd build/lib.android-$ARCH-$PY_VER/
@@ -60,4 +62,7 @@ do
     mkdir -p $PREFIX/android/$ARCH/python/site-packages/
     cp -RL build/lib.android-$ARCH-$PY_VER/numpy $PREFIX/android/$ARCH/python/site-packages/
     cp -RL build/lib.android-$ARCH-$PY_VER/*.so $PREFIX/android/$ARCH/lib
+
+    # Clean
+
 done

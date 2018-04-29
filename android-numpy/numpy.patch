@@ -1,0 +1,99 @@
+diff --git a/numpy/core/src/multiarray/numpyos.c b/numpy-patched/core/src/multiarray/numpyos.c
+index e6f4147..7ac15ee 100644
+--- a/numpy/core/src/multiarray/numpyos.c
++++ b/numpy-patched/core/src/multiarray/numpyos.c
+@@ -178,8 +178,8 @@ ensure_decimal_point(char* buffer, size_t buf_size)
+ static void
+ change_decimal_from_locale_to_dot(char* buffer)
+ {
+-    struct lconv *locale_data = localeconv();
+-    const char *decimal_point = locale_data->decimal_point;
++    //struct lconv *locale_data = localeconv();
++    const char *decimal_point = "."; //locale_data->decimal_point;
+ 
+     if (decimal_point[0] != '.' || decimal_point[1] != 0) {
+         size_t decimal_point_len = strlen(decimal_point);
+diff --git a/numpy/core/src/private/npy_config.h b/numpy-patched/core/src/private/npy_config.h
+index 107b3cb..19dd747 100644
+--- a/numpy/core/src/private/npy_config.h
++++ b/numpy-patched/core/src/private/npy_config.h
+@@ -45,6 +45,14 @@
+ 
+ #endif
+ 
++/* Android only */
++#ifdef ANDROID
++#undef HAVE_LDEXPL
++#undef HAVE_FREXPL
++#undef HAVE_ATTRIBUTE_TARGET_AVX2
++#endif
++
++
+ #if defined(_MSC_VER) && (_MSC_VER == 1900)
+ 
+ #undef HAVE_CASIN
+diff --git a/numpy/fft/setup.py b/numpy-patched/fft/setup.py
+index cd99a82..e614ecd 100644
+--- a/numpy/fft/setup.py
++++ b/numpy-patched/fft/setup.py
+@@ -9,7 +9,8 @@ def configuration(parent_package='',top_path=None):
+ 
+     # Configure fftpack_lite
+     config.add_extension('fftpack_lite',
+-                         sources=['fftpack_litemodule.c', 'fftpack.c']
++                         sources=['fftpack_litemodule.c', 'fftpack.c'],
++                         libraries=['m']
+                          )
+ 
+     return config
+diff --git a/numpy/linalg/setup.py b/numpy-patched/linalg/setup.py
+index 66c07c9..01ef719 100644
+--- a/numpy/linalg/setup.py
++++ b/numpy-patched/linalg/setup.py
+@@ -43,6 +43,7 @@ def configuration(parent_package='', top_path=None):
+         sources=['lapack_litemodule.c', get_lapack_lite_sources],
+         depends=['lapack_lite/f2c.h'],
+         extra_info=lapack_info,
++        libraries=['m']
+     )
+ 
+     # umath_linalg module
+@@ -51,7 +52,7 @@ def configuration(parent_package='', top_path=None):
+         sources=['umath_linalg.c.src', get_lapack_lite_sources],
+         depends=['lapack_lite/f2c.h'],
+         extra_info=lapack_info,
+-        libraries=['npymath'],
++        libraries=['npymath', 'm'],
+     )
+     return config
+ 
+diff --git a/numpy/random/setup.py b/numpy-patched/random/setup.py
+index 3f3b773..c1db9f7 100644
+--- a/numpy/random/setup.py
++++ b/numpy-patched/random/setup.py
+@@ -40,7 +40,7 @@ def configuration(parent_package='',top_path=None):
+     if needs_mingw_ftime_workaround():
+         defs.append(("NPY_NEEDS_MINGW_TIME_WORKAROUND", None))
+ 
+-    libs = []
++    libs = ['m']
+     # Configure mtrand
+     config.add_extension('mtrand',
+                          sources=[join('mtrand', x) for x in
+diff --git a/numpy/core/__init__.py b/numpy/core/__init__.patched.py
+index 6db484d..3ca7382 100644
+--- a/numpy/core/__init__.py
++++ b/numpy/core/__init__.patched.py
+@@ -71,9 +71,9 @@ __all__ += shape_base.__all__
+ __all__ += einsumfunc.__all__
+
+
+-from numpy.testing import _numpy_tester
+-test = _numpy_tester().test
+-bench = _numpy_tester().bench
++#from numpy.testing import _numpy_tester
++#test = _numpy_tester().test
++#bench = _numpy_tester().bench
+
+ # Make it possible so that ufuncs can be pickled
+ #  Here are the loading and unloading functions

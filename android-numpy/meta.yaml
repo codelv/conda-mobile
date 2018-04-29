@@ -1,11 +1,11 @@
+
 package:
   name: android-numpy
-  version: 1.14.2
+  version: 1.14.3
 
 source:
-  url: https://github.com/numpy/numpy/archive/v1.14.2.tar.gz
-  patches:
-    - numpy.patch
+  url: https://github.com/numpy/numpy/releases/download/v1.14.3/numpy-1.14.3.tar.gz
+  sha256: cfcfc7a9a8ba4275c60a815c683d59ac5e7aa9362d76573b6cc4324ffb1235fa
 
 requirements:
   build:
