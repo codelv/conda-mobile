@@ -1,0 +1,18 @@
+{% set version = "1.7.6" %}
+package:
+  name: android-harfbuzz
+  version: {{version}}
+
+source:
+  url: https://github.com/harfbuzz/harfbuzz/releases/download/{{version}}/harfbuzz-{{version}}.tar.bz2
+  sha256: da7bed39134826cd51e57c29f1dfbe342ccedb4f4773b1c951ff05ff383e2e9b
+
+build:
+  number: 1
+  binary_relocation: False
+  noarch: generic
+
+about:
+  home: http://harfbuzz.org/
+  summary:  HarfBuzz OpenType text shaping engine
+  license:  MIT

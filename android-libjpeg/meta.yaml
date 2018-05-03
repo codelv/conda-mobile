@@ -1,0 +1,22 @@
+
+package:
+  name: android-libjpeg
+  version: 1.5.90
+  sha256: cb948ade92561d8626fd7866a4a7ba3b952f9759ea3dd642927bc687470f60b7
+
+source:
+  url: https://github.com/libjpeg-turbo/libjpeg-turbo/archive/1.5.90.tar.gz
+
+build:
+  number: 1
+  binary_relocation: False
+  noarch: generic
+
+requirements:
+  build:
+    - cmake
+
+about:
+  home: https://libjpeg-turbo.org/
+  summary: libjpeg-turbo is a JPEG image codec that uses SIMD instructions
+  license: BSD

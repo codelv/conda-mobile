@@ -3,14 +3,13 @@
 # Copyright (c) 2018, Jairus Martin.
 # Distributed under the terms of the GPL v3 License.
 # The full license is in the file LICENSE, distributed with this software.
-# Created on Feb 23, 2018
+# Created on May 2, 2018
 # ==================================================================================================
 export HOSTPYTHON=$PYTHON
-export ARCHS=("x86_64 x86 arm arm64")
+export ARCHS=("arm arm64 x86_64 x86 ")
 export NDK="$HOME/Android/Sdk/ndk-bundle"
 
-# Disable the libgeos check
-patch -t -d $SRC_DIR -p1 -i $RECIPE_DIR/setup.patch
+patch -t -d $SRC_DIR -p1 -i $RECIPE_DIR/compat.patch
 
 if [ "$PY3K" == "1" ]; then
     export PY_LIB_VER="3.6m"
@@ -59,8 +58,12 @@ do
         rename 's/^/lib./' *.so; rename 's/\.cpython-.+\.so/\.so/' *.so;
     cd $SRC_DIR
 
+    # Clean tests
+    rm -Rf build/lib.android-$ARCH-$PY_VER/pandas/tests
+
     # Copy to install
     mkdir -p $PREFIX/android/$ARCH/python/site-packages/
-    cp -RL build/lib.android-$ARCH-$PY_VER/shapely $PREFIX/android/$ARCH/python/site-packages/
+    cp -RL build/lib.android-$ARCH-$PY_VER/pandas $PREFIX/android/$ARCH/python/site-packages/
     cp -RL build/lib.android-$ARCH-$PY_VER/*.so $PREFIX/android/$ARCH/lib
+
 done

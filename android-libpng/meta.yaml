@@ -1,0 +1,22 @@
+
+package:
+  name: android-libpng
+  version: 1.6.34
+
+source:
+  url: https://github.com/glennrp/libpng/archive/v1.6.34.tar.gz
+  sha256: e45ce5f68b1d80e2cb9a2b601605b374bdf51e1798ef1c2c2bd62131dfcf9eef
+
+requirements:
+  build:
+    - cmake
+
+build:
+  number: 1
+  binary_relocation: False
+  noarch: generic
+
+about:
+  home: http://libpng.sf.net
+  summary: "LIBPNG: Portable Network Graphics support"
+  license: PNG
