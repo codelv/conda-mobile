@@ -14,7 +14,7 @@ These recipes have been tested and confirmed working using a dev version of
 
 ### Targets
 
-Currently all recipes are built for Python 2.7.14 and 3.6.5 with optional support for openssl and 
+Currently all recipes are built for Python 2.7.15 and 3.6.5 with optional support for openssl and 
 ctypes for the following targets:
 
 - Android (arm (armeabi-v7a), arm64 (arm64-v8a), x86_64, x86 (i686))
