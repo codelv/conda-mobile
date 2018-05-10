@@ -1,5 +1,5 @@
-{% set version = "2.7.14" %}
-{% set md5 = "1f6db41ad91d9eb0a6f0c769b8613c5b" %}
+{% set version = "2.7.15" %}
+{% set md5 = "a80ae3cc478460b922242f43a1b4094d" %}
 package:
   name: android-python
   version: {{version}}
