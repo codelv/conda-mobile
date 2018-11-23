@@ -10,7 +10,7 @@
 # need Android SDK Tools to version 25.2.5
 # Details: https://github.com/opencv/opencv/issues/8460
 
-export ARCHS=("arm arm64")
+export ARCHS=("x86_64 x86 arm arm64")
 export NDK="$HOME/Android/Sdk/ndk-bundle"
 export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
 
