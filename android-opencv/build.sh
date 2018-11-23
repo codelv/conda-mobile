@@ -9,15 +9,17 @@
 
 # need Android SDK Tools to version 25.2.5
 # Details: https://github.com/opencv/opencv/issues/8460
-
-export ARCHS=("x86_64 x86 arm arm64")
+#sudo ln -s /usr/lib/x86_64-linux-gnu/libstdc++.so.6 /usr/lib/x86_64-linux-gnu/libstdc++.so
+ 
+export ARCHS=("arm arm64")
 export NDK="$HOME/Android/Sdk/ndk-bundle"
 export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+
+
 
 for ARCH in $ARCHS
 do
 
-    CONFIGURE_FLAGS=""
     if [ "$ARCH" == "arm" ]; then
         export TARGET_HOST="arm-linux-androideabi"
         export TARGET_ABI="armeabi-v7a"
@@ -51,7 +53,7 @@ do
     rm -Rf build || true
     mkdir build
     cd build       
-	cmake .. -DCMAKE_BUILD_WITH_INSTALL_RPATH=ON \
+	cmake .. -G "Unix Makefiles" -DCMAKE_BUILD_WITH_INSTALL_RPATH=ON \
 	      -DCMAKE_TOOLCHAIN_FILE="$NDK/build/cmake/android.toolchain.cmake" \
               -DANDROID_ARM_NEON=ON \
 	      -DANDROID_NDK="${NDK}" \
@@ -65,9 +67,15 @@ do
 	      -DBUILD_DOCS=OFF \
 	      -DBUILD_PERF_TESTS=OFF \
 	      -DBUILD_TESTS=OFF \
+	      -DBUILD_PNG=OFF \
+	      -DBUILD_TIFF=OFF \
+	      -DBUILD_TBB=OFF \
+	      -DBUILD_JPEG=OFF \
+	      -DBUILD_JASPER=OFF \
+	      -DBUILD_ZLIB=OFF \
 	      -DBUILD_ANDROID_PROJECTS=OFF \
-              -DBUILD_ANDROID_STL="libc++_shared"
-	      -DCMAKE_INSTALL_PREFIX=$SRC_DIR/dist/$ARCH 
+              -DBUILD_ANDROID_STL="libc++_shared" \
+	      -DCMAKE_INSTALL_PREFIX=$SRC_DIR/dist/$ARCH
 	      
 
        
