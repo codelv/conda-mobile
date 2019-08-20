@@ -13,18 +13,18 @@ do
     CCOMPILER="clang"
     if [ "$ARCH" == "arm" ]; then
         export TARGET_HOST="arm-linux-androideabi"
-        export TARGET="android-armv7"
+        export TARGET="android-armeabi"
         CCOMPILER="gcc" # android-armv7 doesn't seem to work with clang
     elif [ "$ARCH" == "arm64" ]; then
         export TARGET_HOST="aarch64-linux-android"
-        export TARGET="linux-aarch64"
+        export TARGET="android64-aarch64"
     elif [ "$ARCH" == "x86" ]; then
         export TARGET_HOST="i686-linux-android"
         export TARGET="android-x86"
         CCOMPILER="gcc" # android-x86 doesn't seem to work with clang
     elif [ "$ARCH" == "x86_64" ]; then
         export TARGET_HOST="x86_64-linux-android"
-        export TARGET="linux-x86_64-clang"
+        export TARGET="android64"
     fi
 
     export ANDROID_TOOLCHAIN="$NDK/standalone/$ARCH"
@@ -43,6 +43,10 @@ do
     # Remove version otherwise it tries to link a specific version
     sed -ie 's!SHLIB_EXT=.so.$(SHLIB_MAJOR).$(SHLIB_MINOR)!SHLIB_EXT=.so!g' Makefile
     sed -ie 's!-soname=$$SHLIB$$SHLIB_SOVER$$SHLIB_SUFFIX!-soname=$$SHLIB!g' Makefile.shared
+
+    # Remove -mandroid because NDK r19 sucks and removed gcc
+    # of course "it's not due to licensing", right.... nice one!
+    sed -ie 's!-mandroid!!g' Makefile
 
     # Build
     make -j$CPU_COUNT build_libs LIBDIR=. SHLIB_EXT=.so

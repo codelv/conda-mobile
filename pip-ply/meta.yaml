@@ -14,7 +14,7 @@ source:
 build:
   number: 0
   noarch: true
-  script: 
+  script:
 
   - export CC=/bin/false
   - export CXX=/bin/false

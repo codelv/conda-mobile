@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ==================================================================================================
-# Copyright (c) 2018, Jairus Martin.
+# Copyright (c) 2018-2019, Jairus Martin.
 # Distributed under the terms of the GPL v3 License.
 # The full license is in the file LICENSE, distributed with this software.
 # Created on Feb 23, 2018
@@ -9,8 +9,10 @@ export HOSTPYTHON=$PYTHON
 export ARCHS=("x86_64 x86 arm arm64")
 export NDK="$HOME/Android/Sdk/ndk-bundle"
 
+patch -t -d $SRC_DIR -p1 -i $RECIPE_DIR/clang.patch
+
 if [ "$PY3K" == "1" ]; then
-    export PY_LIB_VER="3.6m"
+    export PY_LIB_VER="3.7m"
 else
     export PY_LIB_VER="2.7"
 fi

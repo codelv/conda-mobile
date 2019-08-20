@@ -1,11 +1,11 @@
 
 package:
   name: android-libffi
-  version: 3.2.1
+  version: 3.3.rc0
 
 source:
-  url: https://github.com/libffi/libffi/archive/v3.2.1.tar.gz
-  md5: 9066486bcab807f7ddaaf2596348c1db
+  url: https://github.com/libffi/libffi/archive/v3.3-rc0.tar.gz
+  sha256: db41cfb9ec8052fcd116a94c12237303c4447af4844d50e4fea7163661e31743
 
 build:
   number: 1

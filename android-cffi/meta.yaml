@@ -1,7 +1,7 @@
 {% set name = "cffi" %}
-{% set version = "1.11.5" %}
-{% set hash_type = "md5" %}
-{% set hash_value = "ac8492f4ad952360737413e82d661908" %}
+{% set version = "1.12.3" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "041c81822e9f84b1d9c401182e174996f0bae9991f33725d059b771744290774" %}
 package:
   name: android-{{ name|lower }}
   version: '{{ version }}'

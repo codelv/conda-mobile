@@ -10,10 +10,17 @@ export ARCHS=("x86_64 x86 arm arm64")
 export NDK="$HOME/Android/Sdk/ndk-bundle"
 
 if [ "$PY3K" == "1" ]; then
-    export PY_LIB_VER="3.6m"
+    export PY_LIB_VER="3.7m"
 else
     export PY_LIB_VER="2.7"
 fi
+
+# Install in host python
+python setup.py develop
+
+# Write parse tables
+python $RECIPE_DIR/write_tables.py
+
 
 for ARCH in $ARCHS
 do
@@ -62,11 +69,13 @@ do
     cp -RL build/lib.android-$ARCH-$PY_VER/*.so $PREFIX/android/$ARCH/lib
 
     # Copy parse tables
-    cp -RL $RECIPE_DIR/tables/$PKG_VERSION/parse_tab $PREFIX/android/$ARCH/python/site-packages/enaml/core/parser
+    cp -RL $SP_DIR/enaml/core/parser/parse_tab $PREFIX/android/$ARCH/python/site-packages/enaml/core/parser
     if [ "$PY3K" == "1" ]; then
-        rm $PREFIX/android/$ARCH/python/site-packages/enaml/core/parser/parse_tab/*2.py
+        rm -f $PREFIX/android/$ARCH/python/site-packages/enaml/core/parser/parse_tab/*2.py
     else
-        rm $PREFIX/android/$ARCH/python/site-packages/enaml/core/parser/parse_tab/*3*.py
+        rm -f $PREFIX/android/$ARCH/python/site-packages/enaml/core/parser/parse_tab/*3*.py
     fi
 done
 
+# Cleanup extra files added from running develop
+rm -Rf $PREFIX/lib

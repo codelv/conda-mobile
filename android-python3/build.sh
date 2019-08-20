@@ -17,8 +17,8 @@ sed -ie "s!use_lfs=yes!use_lfs=no!g" configure
 
 # Conda patches can fail silently so use these for debugging
 #patch -t -d $SRC_DIR -p1 -i $RECIPE_DIR/patches/locale.patch
-patch -t -d $SRC_DIR -p1 -i $RECIPE_DIR/patches/setup.patch
-patch -t -d $SRC_DIR -p1 -i $RECIPE_DIR/patches/sqlite.patch
+patch -t -d $SRC_DIR -p1 -i $RECIPE_DIR/patches/37/setup.patch
+patch -t -d $SRC_DIR -p1 -i $RECIPE_DIR/patches/37/sqlite.patch
 
 for ARCH in $ARCHS
 do
@@ -63,7 +63,7 @@ do
     export CROSS_COMPILE="$ARCH"
     export CROSS_COMPILE_TARGET='yes'
 
-    export CFLAGS="-O3 -I$APP_ROOT/include"
+    export CFLAGS="-O3 -fPIC -I$APP_ROOT/include"
     export LDFLAGS="-L$APP_ROOT/lib -L$ANDROID_TOOLCHAIN/sysroot/usr/$EXTLIBDIR -llog" # -lffi -lssl -lcrypto"
 
     # Flags for building extensions these are patched in
@@ -84,17 +84,13 @@ do
 
     export
 
-    ./configure ac_cv_file__dev_ptmx=no \
+    ./configure ac_cv_file__dev_ptmx=yes \
                 ac_cv_file__dev_ptc=no \
                 ac_cv_have_long_long_format=yes \
                 --host=$TARGET_HOST \
                 --build=$BUILD \
-                --with-threads \
-                --with-system-ffi \
-                --disable-toolbox-glue \
                 --enable-ipv6 \
-                --enable-shared \
-                --without-doc-strings
+                --enable-shared
 
     make clean
 
@@ -113,34 +109,34 @@ do
     sed -ie 's!#define HAVE_GETHOSTBYNAME_R 1!/* #undef HAVE_GETHOSTBYNAME_R */!g' pyconfig.h
 
     # Build libpython
-    make -j$CPU_COUNT libpython3.6m.so
+    make -j$CPU_COUNT libpython3.7m.so
 
     # Now build the extensions and be sure to explicitly link python
     # The new setup.py build has all kinds of errors so use the old school way
     # To anyone that wants to try with setup.py have fun :)
-    make -j$CPU_COUNT oldsharedmods LDFLAGS="$LDFLAGS -L. -lpython3.6m -landroid"
+    make -j$CPU_COUNT oldsharedmods LDFLAGS="$LDFLAGS -L. -lpython3.7m -landroid"
     make -C $SRC_DIR install prefix=$SRC_DIR/dist/$ARCH
 
     # Remove unused stuff
-    rm -Rf dist/$ARCH/lib/python3.6/test
-    rm -Rf dist/$ARCH/lib/python3.6/*/test/
-    rm -Rf dist/$ARCH/lib/python3.6/*/tests/
-    rm -Rf dist/$ARCH/lib/python3.6/plat-*
-    rm -Rf dist/$ARCH/lib/python3.6/lib-*
-    rm -Rf dist/$ARCH/lib/python3.6/config-*
-    rm -Rf dist/$ARCH/lib/python3.6/tkinter
+    rm -Rf dist/$ARCH/lib/python3.7/test
+    rm -Rf dist/$ARCH/lib/python3.7/*/test/
+    rm -Rf dist/$ARCH/lib/python3.7/*/tests/
+    rm -Rf dist/$ARCH/lib/python3.7/plat-*
+    rm -Rf dist/$ARCH/lib/python3.7/lib-*
+    rm -Rf dist/$ARCH/lib/python3.7/config-*
+    rm -Rf dist/$ARCH/lib/python3.7/tkinter
 
     mkdir -p $PREFIX/android/$ARCH/lib
     mkdir -p $PREFIX/android/$ARCH/python
 
-    # Prefix with lib., remove cpython-36m from name, remove module from name, and copy extensions
-    cd Modules; rename 's/^/lib./' *.so; rename 's/.cpython-36m//' *.so; rename 's/module//' *.so; cd ..
+    # Prefix with lib., remove cpython-37m from name, remove module from name, and copy extensions
+    cd Modules; rename 's/^/lib./' *.so; rename 's/.cpython-37m//' *.so; rename 's/module//' *.so; cd ..
     find Modules -type f -name "*.so" -exec cp {} "$PREFIX/android/$ARCH/lib/" \;
 
     # Copy python
-    cp -RL dist/$ARCH/lib/libpython3.6m.so $PREFIX/android/$ARCH/lib/
+    cp -RL dist/$ARCH/lib/libpython3.7m.so $PREFIX/android/$ARCH/lib/
     cp -RL dist/$ARCH/include $PREFIX/android/$ARCH
-    cp -RL dist/$ARCH/lib/python3.6/* $PREFIX/android/$ARCH/python
+    cp -RL dist/$ARCH/lib/python3.7/* $PREFIX/android/$ARCH/python
 
 done
 

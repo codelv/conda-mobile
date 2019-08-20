@@ -10,7 +10,7 @@ export ARCHS=("x86_64 x86 arm arm64")
 export NDK="$HOME/Android/Sdk/ndk-bundle"
 
 if [ "$PY3K" == "1" ]; then
-    export PY_LIB_VER="3.6m"
+    export PY_LIB_VER="3.7m"
 else
     export PY_LIB_VER="2.7"
 fi

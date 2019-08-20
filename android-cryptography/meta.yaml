@@ -1,7 +1,7 @@
 {% set name = "cryptography" %}
-{% set version = "2.1.4" %}
-{% set hash_type = "md5" %}
-{% set hash_value = "9f39d4d8f2b05f295fa0ff52475ec4f2" %}
+{% set version = "2.7" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "e6347742ac8f35ded4a46ff835c60e68c22a536a8ae5c4422966d06946b6d4c6" %}
 package:
   name: android-{{ name|lower }}
   version: '{{ version }}'
@@ -20,14 +20,12 @@ requirements:
   build:
     - python
     - cffi
-    - android-cffi>=1.7,!=1.11.3 py{{CONDA_PY}}*
+    - android-cffi>=1.8,!=1.11.3 py{{CONDA_PY}}*
     - android-openssl
   run:
     - python
     - android-openssl
-    - android-cffi>=1.7,!=1.11.3 py{{CONDA_PY}}*
-    - pip-idna>=2.1
-    - pip-asn1crypto>=0.21.0
+    - android-cffi>=1.8,!=1.11.3 py{{CONDA_PY}}*
     - pip-six>=1.4.1
     - pip-enum34 # [py27]
 about:

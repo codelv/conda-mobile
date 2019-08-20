@@ -1,0 +1,15 @@
+diff --git a/atom/src/pythonhelpers.h b/atom/src/pythonhelpers.h
+index 4b0ad9f..5396392 100644
+--- a/atom/src/pythonhelpers.h
++++ b/atom/src/pythonhelpers.h
+@@ -17,10 +17,6 @@
+     return Py_INCREF(Py_NotImplemented), Py_NotImplemented
+ #endif
+ 
+-#ifndef cmpfunc
+-#define cmpfunc int
+-#endif
+-
+ 
+ #define pyobject_cast( o ) ( reinterpret_cast<PyObject*>( o ) )
+ #define pytype_cast( o ) ( reinterpret_cast<PyTypeObject*>( o ) )

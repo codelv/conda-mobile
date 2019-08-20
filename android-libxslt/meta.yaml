@@ -1,10 +1,12 @@
+{% set version = "1.1.33" %}
 
 package:
   name: android-libxslt
-  version: 1.1.32
+  version: '{{ version }}'
 
 source:
-  url: https://github.com/GNOME/libxslt/archive/v1.1.32.tar.gz
+  url: https://github.com/GNOME/libxslt/archive/v{{ version }}.tar.gz
+  sha256: cb4bca0adbabf218948550bdf1f1b20120e7ae8322c7d599be4b58908946aad8
 
 build:
   number: 1
@@ -14,6 +16,7 @@ build:
 requirements:
   build:
     - android-libxml2
+    #- android-ndk-libs
   run:
     - android-libxml2
 about:

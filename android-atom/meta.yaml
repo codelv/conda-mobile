@@ -1,10 +1,15 @@
+{% set name = "atom" %}
+{% set version = "0.4.3" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "ce96fb50326a3bfa084463dbde1cf2e02c92735e5bc324d836355c25af87e0ae" %}
 package:
-  name: android-atom
-  version: 0.4.2.a0
+  name: android-{{ name|lower }}
+  version: '{{ version }}'
 
 source:
-  url: https://github.com/nucleic/atom/archive/0.4.2.a0.tar.gz
-  #md5: e76cb77c242601810ff0ca363ce33b28
+  fn: '{{ name }}-{{ version }}.tar.gz'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  '{{ hash_type }}': '{{ hash_value }}'
 
 requirements:
   build:
@@ -19,6 +24,7 @@ requirements:
 build:
   binary_relocation: False
   noarch: generic
+
 about:
   home: http://github.com/codelv/enaml-native
   license: GPLv3

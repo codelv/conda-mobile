@@ -1,0 +1,108 @@
+diff --git a/lib/common/memory.h b/lib/common/memory.h
+index 1a0b346..6b001ce 100644
+--- a/lib/common/memory.h
++++ b/lib/common/memory.h
+@@ -14,6 +14,7 @@
+ #ifndef GV_MEMORY_H
+ #define GV_MEMORY_H
+ 
++#include <stdint.h>
+ #include <stdlib.h>
+ #ifdef HAVE_MALLOC_H
+ #include <malloc.h>
+diff --git a/lib/gvc/gvcontext.c b/lib/gvc/gvcontext.c
+index 4ad388b..4a87e43 100644
+--- a/lib/gvc/gvcontext.c
++++ b/lib/gvc/gvcontext.c
+@@ -21,6 +21,7 @@
+ 
+ #include "config.h"
+ 
++#include <stdint.h>
+ #include <stdlib.h>
+ 
+ #include "builddate.h"
+diff --git a/lib/gvc/gvdevice.c b/lib/gvc/gvdevice.c
+index b9588d0..1330f5b 100644
+--- a/lib/gvc/gvdevice.c
++++ b/lib/gvc/gvdevice.c
+@@ -18,6 +18,7 @@
+ #include "config.h"
+ 
+ #include <stdarg.h>
++#include <stdint.h>
+ #include <stdlib.h>
+ #include <string.h>
+ #include <inttypes.h>
+diff --git a/lib/label/index.c b/lib/label/index.c
+index 27c8498..dcce153 100644
+--- a/lib/label/index.c
++++ b/lib/label/index.c
+@@ -10,6 +10,7 @@
+  * Contributors: See CVS logs. Details at http://www.graphviz.org/
+  *************************************************************************/
+ 
++#include <stdint.h>
+ #include <stdlib.h>
+ 
+ #include "index.h"
+diff --git a/lib/label/node.c b/lib/label/node.c
+index 0285ca0..2cda9ce 100644
+--- a/lib/label/node.c
++++ b/lib/label/node.c
+@@ -10,6 +10,7 @@
+  * Contributors: See CVS logs. Details at http://www.graphviz.org/
+  *************************************************************************/
+ 
++#include <stdint.h>
+ #include <stdlib.h>
+ 
+ #include "index.h"
+diff --git a/lib/label/xlabels.c b/lib/label/xlabels.c
+index 26146b9..379ad14 100644
+--- a/lib/label/xlabels.c
++++ b/lib/label/xlabels.c
+@@ -14,6 +14,7 @@
+ #include <errno.h>
+ #include <limits.h>
+ #include <math.h>
++#include <stdint.h>
+ #include <stdlib.h>
+ #include <stdio.h>
+ #include <string.h>
+diff --git a/lib/neatogen/matinv.c b/lib/neatogen/matinv.c
+index 35b56df..e3f32dd 100644
+--- a/lib/neatogen/matinv.c
++++ b/lib/neatogen/matinv.c
+@@ -34,6 +34,7 @@
+  *	n    - the order of the matrices A and Ainv
+  */
+ 
++#include <stdint.h>
+ #include <stdlib.h>
+ #include "render.h"
+ extern int lu_decompose(double **a, int n);
+diff --git a/lib/neatogen/solve.c b/lib/neatogen/solve.c
+index 48cf04e..39a9434 100644
+--- a/lib/neatogen/solve.c
++++ b/lib/neatogen/solve.c
+@@ -14,6 +14,7 @@
+ 
+ /* solves the system ab=c using gauss reduction */
+ #include <math.h>
++#include <stdint.h>
+ #include <stdlib.h>
+ #include <stdio.h>
+ #include "render.h"
+diff --git a/lib/sparse/general.h b/lib/sparse/general.h
+index d62c318..5f13985 100644
+--- a/lib/sparse/general.h
++++ b/lib/sparse/general.h
+@@ -14,6 +14,7 @@
+ #ifndef GENERAL_H
+ #define GENERAL_H
+ 
++#include <stdint.h>
+ #include <stdlib.h>
+ #include <stdio.h>
+ #include <math.h>

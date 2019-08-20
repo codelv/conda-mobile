@@ -1,4 +1,4 @@
-{% set version = "4.2.5" %}
+{% set version = "4.3.2" %}
 package:
   name: android-libzmq
   version: {{version}}
