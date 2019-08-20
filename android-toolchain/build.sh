@@ -11,5 +11,5 @@ do
                                             --arch $ARCH \
                                             --api 26 \
                                             --stl=libc++ \
-                                            --install-dir=$PREFIX/android/toolchains/$ARCH
+                                            --install-dir=$NDK/standalone/$ARCH
 done

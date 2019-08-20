@@ -1,0 +1,17 @@
+package:
+  name: android-ndk
+  version: r16
+
+requirements:
+  build:
+    - bison
+    - flex
+    
+build:
+  number: 1
+
+about:
+  home: http://github.com/codelv/enaml-native
+  summary: Android NDK with fortran support. Thanks to android-gfortran
+  license: MIT
+  

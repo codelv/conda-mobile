@@ -1,11 +1,11 @@
 
 package:
   name: android-openssl
-  version: 1.0.2o
+  version: 1.1.0k
 
 source:
-  url: https://www.openssl.org/source/openssl-1.0.2o.tar.gz
-  sha256: ec3f5c9714ba0fd45cb4e087301eb1336c317e0d20b575a125050470e8089e4d
+  url: https://www.openssl.org/source/openssl-1.1.0k.tar.gz
+  sha256: efa4965f4f773574d6cbda1cf874dbbe455ab1c0d4f906115f867d30444470b1
 
 build:
   number: 1

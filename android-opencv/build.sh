@@ -72,7 +72,6 @@ do
 	      -DBUILD_TBB=OFF \
 	      -DBUILD_JPEG=OFF \
 	      -DBUILD_JASPER=OFF \
-	      -DBUILD_ZLIB=OFF \
 	      -DBUILD_ANDROID_PROJECTS=OFF \
               -DBUILD_ANDROID_STL="libc++_shared" \
 	      -DCMAKE_INSTALL_PREFIX=$SRC_DIR/dist/$ARCH

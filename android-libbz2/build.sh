@@ -37,21 +37,17 @@ do
     export CXX="$TARGET_HOST-clang++"
     export LD="$TARGET_HOST-ld"
 
-    #./autogen.sh
-    #./configure --host=$TARGET_HOST --prefix=$SRC_DIR/dist/$ARCH
-
     # Clean
     make clean
 
     # Build
     make -j$CPU_COUNT
-    make install PREFIX=$SRC_DIR/dist/$ARCH
 
     # Copy to install dir
     mkdir -p $PREFIX/android/$ARCH/lib
     mkdir -p $PREFIX/android/$ARCH/include
-    cp -RL dist/$ARCH/lib/libbz2.so $PREFIX/android/$ARCH/lib
-    cp -RL dist/$ARCH/include/* $PREFIX/android/$ARCH/include
+    cp -RL libbz2.so $PREFIX/android/$ARCH/lib
+    cp -RL *.h $PREFIX/android/$ARCH/include
 
 done
 

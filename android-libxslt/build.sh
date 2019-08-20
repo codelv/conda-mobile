@@ -34,7 +34,7 @@ do
     export CXX="$TARGET_HOST-clang++"
     export LD="$TARGET_HOST-ld"
     export CFLAGS="-I$APP_ROOT/include"
-    export LDFLAGS="-L$APP_ROOT/lib -lxml2 -llzma"
+    export LDFLAGS="-L$APP_ROOT/lib -lxml2 -llzma -lz -lm"
 
     #
     # Configuration file for using the XML library in GNOME applications

@@ -50,7 +50,7 @@ index 924e162..e666fa1 100644
 @@ -25,6 +25,10 @@
  #define PYSQLITE_PREPARE_PROTOCOL_H
  #include "Python.h"
- 
+
 +#ifndef MODULE_NAME
 +#define MODULE_NAME "_sqlite3"
 +#endif

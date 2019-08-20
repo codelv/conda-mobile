@@ -1,12 +1,13 @@
+{% set version = "5.2.4" %}
 
 package:
   name: android-liblzma
-  version: 5.2.3
+  version: '{{ version }}'
 
 source:
   # sourceforge is ....
   git_url: https://git.tukaani.org/xz.git
-  git_tag: v5.2.3
+  git_tag: v{{ version }}
 
 build:
   number: 1

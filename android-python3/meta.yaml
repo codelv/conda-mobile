@@ -1,5 +1,5 @@
-{% set version = "3.6.5" %}
-{% set md5 = "9f49654a4d6f733ff3284ab9d227e9fd" %}
+{% set version = "3.7.4" %}
+{% set md5 = "d33e4aae66097051c2eca45ee3604803" %}
 package:
   name: android-python
   version: {{version}}
@@ -9,14 +9,14 @@ source:
 
 requirements:
   build:
-    - python>=3.6
+    - python>=3.7
     - android-libffi
     - android-openssl
     - android-sqlite
     - android-liblzma
     - android-libbz2
   run:
-    - python>=3.6
+    - python>=3.7
 build:
   number: 1
   binary_relocation: False

@@ -1,18 +1,24 @@
+{% set name = "enaml" %}
+{% set version = "0.10.3" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "9a3a16f859372f50b1cb2868ea033f8e3724ce0cc8dbdd0dae0cb5f407b44a27" %}
 package:
-  name: android-enaml
-  version: 0.10.3.a0
+  name: android-{{ name|lower }}
+  version: '{{ version }}'
 
 source:
-  url: https://github.com/nucleic/enaml/archive/0.10.3.a0.tar.gz
-  #md5: 04525c2c83104a6f2be3b5c928dd9d25
+  fn: '{{ name }}-{{ version }}.tar.gz'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  '{{ hash_type }}': '{{ hash_value }}'
 
 requirements:
   build:
     - python
-    - android-atom>=0.4.2.a0 py{{CONDA_PY}}*
+    - enaml=={{ version }}
+    - android-atom>=0.4.3 py{{CONDA_PY}}*
   run:
     - python
-    - android-atom>=0.4.2.a0 py{{CONDA_PY}}*
+    - android-atom>=0.4.3# py{{CONDA_PY}}*
     - pip-ply==3.11
 
 build:

@@ -1,0 +1,7 @@
+.idea/
+.kdev4/
+.directory
+*.kate-swp
+
+
+tests/

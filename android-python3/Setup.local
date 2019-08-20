@@ -35,8 +35,7 @@
 #_tracemalloc _tracemalloc.c hashtable.c # debug tool to trace memory blocks allocated by Python
 #_symtable symtablemodule.c # The Python symtable module depends on .h files that setup.py doesn't track
 #readline readline.c -lreadline -ltermcap
-
-
+# _weakref _weakref.c	# basic weak reference support
 
 *shared*
 
@@ -44,7 +43,7 @@ array arraymodule.c	# array objects
 cmath cmathmodule.c _math.c -lm # complex math library functions
 math mathmodule.c _math.c -lm # math library functions, e.g. sin()
 _struct _struct.c	# binary structure packing/unpacking
-_weakref _weakref.c	# basic weak reference support
+
 _testcapi _testcapimodule.c    # Python C API test module
 _random _randommodule.c	# Random number generator
 _elementtree -I$(srcdir)/Modules/expat -DHAVE_EXPAT_CONFIG_H -DUSE_PYEXPAT_CAPI _elementtree.c	# elementtree accelerator
