@@ -39,15 +39,15 @@ install:
       wget https://dl.google.com/android/repository/sdk-tools-darwin-4333796.zip -O tools.zip;
     fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-      wget https://dl.google.com/android/repository/android-ndk-r19-linux-x86_64.zip -O ndk-bundle.zip;
+      wget https://dl.google.com/android/repository/android-ndk-r20-linux-x86_64.zip -O ndk-bundle.zip;
     else
-      wget https://dl.google.com/android/repository/android-ndk-r19-darwin-x86_64.zip -O ndk-bundle.zip;
+      wget https://dl.google.com/android/repository/android-ndk-r20-darwin-x86_64.zip -O ndk-bundle.zip;
     fi
   - unzip -oq tools.zip
   - unzip -oq ndk-bundle.zip
   - rm *.zip
   - find . | grep make_standalone_toolchain
-  - mv android-ndk-r16b ndk-bundle
+  - mv android-ndk-r20 ndk-bundle
 
   # Install sdk and build tools
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then echo yes | tools/bin/sdkmanager --update > output.log; fi
@@ -87,10 +87,10 @@ script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then conda-build --py 2.7 android-atom | $capture; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then conda-build --py 2.7 android-enaml | $capture; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then conda-build --py 2.7 android-msgpack | $capture; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then conda-build --py 3.6 android-python | $capture; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then conda-build --py 3.6 android-atom | $capture; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then conda-build --py 3.6 android-enaml | $capture; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then conda-build --py 3.6 android-msgpack | $capture; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then conda-build --py 3.7 android-python | $capture; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then conda-build --py 3.7 android-atom | $capture; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then conda-build --py 3.7 android-enaml | $capture; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then conda-build --py 3.7 android-msgpack | $capture; fi
   #- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then conda-build android-lz4 | $capture; fi
   #- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then conda-build android-libgeos | $capture; fi
   #- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then conda-build android-shapely | $capture; fi
