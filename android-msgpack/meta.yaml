@@ -16,7 +16,7 @@ requirements:
     - android-python * py{{CONDA_PY}}*
 
 build:
-  number: 0
+  number: 1
   binary_relocation: False
   noarch: generic
 
