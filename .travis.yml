@@ -6,12 +6,17 @@ osx_image: xcode9.2
 install:
   - export ANDROID_HOME=$HOME/Android/Sdk/
   - export NDK=$HOME/Android/Sdk/ndk-bundle
-  - export DEFAULT_JVM_OPTS='"-Dcom.android.sdklib.toolsdir=$APP_HOME" --add-modules java.xml.bind'
   - export NDK_API=21
   - export capture="tail -n 200"
 
   # Install makeinfo via texinfo
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt update -qq && sudo apt -qq install texinfo; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt update -qq && sudo apt -qq install texinfo openjdk-8-jdk; fi
+
+  # Use java 8
+  - java -version
+  #- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo  update-java-alternatives --list; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo  update-java-alternatives --set java-1.8.0-openjdk-amd64; fi
+  - java -version
 
   # Install rename via brew
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install rename; fi
