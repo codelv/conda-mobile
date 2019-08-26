@@ -9,23 +9,27 @@ The idea is to be able to easily create a python distribution that works on
 Android and iOS by simply using `conda install android-<package>` or
 `conda install ios-<package>` within an environment created for a specific app.
 
-These recipes have been tested and confirmed working using a dev version of
-[enaml-native](https://github.com/codelv/enaml-native) (yet to be released).
+These recipes have been tested and confirmed working using
+[enaml-native](https://github.com/codelv/enaml-native).
+
+Visit [anaconda.org/codelv/repo](https://anaconda.org/codelv/repo) to see which
+packages are available.
+
 
 ### Targets
 
-Currently all recipes are built for 3.7.5 with optional support for openssl and
-ctypes for the following targets:
+Currently all recipes are built for 2.7.16 and 3.7.4 with optional support for
+openssl, sqlite, and ctypes for the following targets:
 
 - Android (arm (armeabi-v7a), arm64 (arm64-v8a), x86_64, x86 (i686))
 
-At one time iPhone builds worked but is no longer used.
+At one time iPhone builds worked but they are no longer being maintained.
 
 - iPhone (armv7, aarch64)
 - iPhone Simulator (x86_64, i386)
 
-> Note: All libs and extensions are built as unstripped shared modules. Android strips
-libraries automatically.
+> Note: All libs and extensions are built as unstripped shared modules.
+>Android strips libraries automatically.
 
 Packages are installed into the env using a prefix for the target platform as follows
 
@@ -85,7 +89,7 @@ To add a new recipe or to build existing recipes:
 8. Then either add a PR or create your own repos with recipes.
 
 > Note: If using linux with an encrypted home directory you may have to build in a different
-root to avoid "path to long" errors. Add the `--croot=/tmp/conda` or some other path to
+root to avoid "path to long" errors. Add the `--croot=/opt/conda` or some other path to
 fix this.
 
 #### Recipe requirements
