@@ -1,15 +1,17 @@
+{% set version = "1.0.3" %}
 package:
   name: android-msgpack
-  version: 0.5.6
+  version: {{ version }}
 
 source:
-  url: https://github.com/msgpack/msgpack-python/archive/0.5.6.tar.gz
-  md5: e05e0edfebdd32d11b02bea88381595e
+  url: https://github.com/msgpack/msgpack-python/archive/refs/tags/v{{version}}.tar.gz
+  sha256: 576a1835a8b48d5861c883a6e10fd374065c6ae56287b221d1a4791e9529c71c
 
 requirements:
   build:
     - python
     - cython
+    - android-ndk
     - android-python * py{{CONDA_PY}}*
   run:
     - python

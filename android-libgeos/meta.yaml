@@ -1,16 +1,19 @@
-
+{% set version = "3.10.2" %}
 package:
   name: android-libgeos
-  version: 3.6.2
+  version: {{version}}
 
 source:
-  url: https://github.com/OSGeo/geos/archive/3.6.2.tar.gz
-  sha1: dfe1dbea10084822309767edd15a7ddb4f61b613
+  url: https://github.com/libgeos/geos/archive/refs/tags/{{version}}.tar.gz
+  sha256: d71932b444c9bd5d0bdf9eab4d22f25d9c31c122a73d619e2ec15294fb32147d
 
 build:
   number: 1
   binary_relocation: False
   noarch: generic
+requirements:
+  build:
+    - android-ndk
 
 about:
   home: http://github.com/codelv/enaml-native

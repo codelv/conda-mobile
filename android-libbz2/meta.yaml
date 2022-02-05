@@ -1,14 +1,18 @@
-
+{% set version = "1.0.8" %}
 package:
   name: android-libbz2
-  version: 1.0.8
+  version: {{ version }}
 
 source:
-  url: https://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz
+  url: https://sourceware.org/pub/bzip2/bzip2-{{ version }}.tar.gz
   sha256: ab5a03176ee106d3f0fa90e381da478ddae405918153cca248e682cd0c4a2269
 
+requirements:
+  build:
+    - android-ndk
+
 build:
-  number: 1
+  number: 2
   binary_relocation: False
   noarch: generic
 

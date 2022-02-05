@@ -1,11 +1,15 @@
-{% set version = "1.7.6" %}
+{% set version = "3.3.1" %}
 package:
   name: android-harfbuzz
   version: {{version}}
 
 source:
-  url: https://github.com/harfbuzz/harfbuzz/releases/download/{{version}}/harfbuzz-{{version}}.tar.bz2
-  sha256: da7bed39134826cd51e57c29f1dfbe342ccedb4f4773b1c951ff05ff383e2e9b
+  url: https://github.com/harfbuzz/harfbuzz/releases/download/{{version}}/harfbuzz-{{version}}.tar.xz
+  sha256: 8c083384838f39f4a4856a6584def595b10cc071754a08d5e999293462b34296
+
+requirements:
+  build:
+    - android-ndk
 
 build:
   number: 1

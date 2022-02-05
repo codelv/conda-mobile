@@ -1,7 +1,7 @@
 {% set name = "lxml" %}
-{% set version = "4.4.1" %}
+{% set version = "4.7.1" %}
 {% set hash_type = "sha256" %}
-{% set hash_value = "c81cb40bff373ab7a7446d6bbca0190bccc5be3448b47b51d729e37799bb5692" %}
+{% set hash_value = "a1613838aa6b89af4ba10a0f3a972836128801ed008078f8c1244e65958f1b24" %}
 package:
   name: android-{{ name|lower }}
   version: '{{ version }}'
@@ -17,6 +17,7 @@ requirements:
   build:
     - python
     - cython
+    - android-ndk
     - android-libxml2
     - android-libxslt
     - android-python * py{{CONDA_PY}}*

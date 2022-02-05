@@ -14,9 +14,6 @@ install:
 
   # Use java 8
   - java -version
-  #- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo  update-java-alternatives --list; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo  update-java-alternatives --set java-1.8.0-openjdk-amd64; fi
-  - java -version
 
   # Install rename via brew
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install rename; fi

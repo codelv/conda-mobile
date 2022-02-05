@@ -1,0 +1,45 @@
+{% set version=1.10 %}
+
+package:
+  name: scrcpy
+  version: {{ version }}
+
+source:
+  git: https://github.com/Genymobile/scrcpy.git
+  #git_tag: da5b0ec
+  #sha256: efa4965f4f773574d6cbda1cf874dbbe455ab1c0d4f906115f867d30444470b1
+
+requirements:
+  build:
+    - ffmpeg
+    - sdl2
+    - meson
+    - ninja
+    - pkg-config
+    - av
+
+build:
+  number: 1
+  script:
+    - export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+
+    # Update gradle
+    - sed -i 's/gradle-4.1/gradle-5.1.1/g' gradle/wrapper/gradle-wrapper.properties
+    - sed -i 's/3.0.1/3.4.2/g' build.gradle
+
+    # Build and install
+    - meson x --buildtype release --strip -Db_lto=true --portable
+    - cd x
+    - ninja
+    #- mkdir -p $PREFIX/share/scrcpy/
+    # Use portable option
+    - cp server/scrcpy-server.jar $PREFIX/bin/
+    - cp app/scrcpy $PREFIX/bin/
+
+about:
+  home: https://github.com/Genymobile/scrcpy
+  license: Apache-2.0
+  license_family: Apache
+  summary: Display and control your Android device
+  description: "This application provides display and control of Android devices connected on USB (or over TCP/IP). It does not require any root access. It works on GNU/Linux, Windows and macOS."
+

@@ -1,16 +1,17 @@
-{% set version = "2.9.1" %}
+{% set version = "2.11.1" %}
 package:
   name: android-freetype
   version: {{version}}
 
 source:
-  url: https://download.savannah.gnu.org/releases/freetype/freetype-{{version}}.tar.bz2
-  sha256: db8d87ea720ea9d5edc5388fc7a0497bb11ba9fe972245e0f7f4c7e8b1e1e84d
+  url: https://download.savannah.gnu.org/releases/freetype/freetype-{{version}}.tar.xz
+  sha256: 3333ae7cfda88429c97a7ae63b7d01ab398076c3b67182e960e5684050f2c5c8
 
 requirements:
   build:
     - android-libpng
     - android-harfbuzz
+    - android-ndk
   run:
     - android-libpng
     - android-harfbuzz

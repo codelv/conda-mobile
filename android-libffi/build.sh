@@ -5,34 +5,13 @@
 # The full license is in the file LICENSE, distributed with this software.
 # Created on Feb 23, 2018
 # ==================================================================================================
-export ARCHS=("x86_64 x86 arm arm64")
-export NDK="$HOME/Android/Sdk/ndk-bundle"
+source $PREFIX/android/activate-ndk.sh
 
 for ARCH in $ARCHS
 do
-    if [ "$ARCH" == "arm" ]; then
-        export TARGET_HOST="arm-linux-androideabi"
-        export TARGET_ABI="armeabi-v7a"
-    elif [ "$ARCH" == "arm64" ]; then
-        export TARGET_HOST="aarch64-linux-android"
-        export TARGET_ABI="arm64-v8a"
-    elif [ "$ARCH" == "x86" ]; then
-        export TARGET_HOST="i686-linux-android"
-        export TARGET_ABI="x86"
-    elif [ "$ARCH" == "x86_64" ]; then
-        export TARGET_HOST="x86_64-linux-android"
-        export TARGET_ABI="x86_64"
-    fi
-
-    export ANDROID_TOOLCHAIN="$NDK/standalone/$ARCH"
-    export APP_ROOT="$PREFIX/android/$ARCH"
-    export PATH="$PATH:$ANDROID_TOOLCHAIN/bin"
-    export AR="$TARGET_HOST-ar"
-    export CC="$TARGET_HOST-gcc"
-    export CXX="$TARGET_HOST-g++"
-    export LD="$TARGET_HOST-ld"
-
-    ./autogen.sh
+    # Setup compiler for arch and target_api
+    activate-ndk-clang $ARCH 32
+    # ./autogen.sh
     ./configure --host=$TARGET_HOST --prefix=$SRC_DIR/dist/$ARCH
 
     # Clean
@@ -47,7 +26,6 @@ do
     mkdir -p $PREFIX/android/$ARCH/include
     cp -RL dist/$ARCH/lib/libffi.so $PREFIX/android/$ARCH/lib
     cp -RL dist/$ARCH/include/*.h $PREFIX/android/$ARCH/include
-
 done
 
 

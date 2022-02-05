@@ -1,15 +1,17 @@
-
+{% set version = "1.6.37" %}
 package:
   name: android-libpng
-  version: 1.6.34
+  version: {{version}}
 
 source:
-  url: https://github.com/glennrp/libpng/archive/v1.6.34.tar.gz
-  sha256: e45ce5f68b1d80e2cb9a2b601605b374bdf51e1798ef1c2c2bd62131dfcf9eef
+
+  url: https://download.sourceforge.net/libpng/libpng-{{version}}.tar.xz
+  sha256: 505e70834d35383537b6491e7ae8641f1a4bed1876dbfe361201fc80868d88ca
 
 requirements:
   build:
     - cmake
+    - android-ndk
 
 build:
   number: 1

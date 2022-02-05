@@ -1,11 +1,12 @@
+{% set version = "2.1.2" %}
 
 package:
   name: android-libjpeg
-  version: 1.5.90
-  sha256: cb948ade92561d8626fd7866a4a7ba3b952f9759ea3dd642927bc687470f60b7
+  version: {{ version }}
 
 source:
-  url: https://github.com/libjpeg-turbo/libjpeg-turbo/archive/1.5.90.tar.gz
+  url: https://github.com/libjpeg-turbo/libjpeg-turbo/archive/refs/tags/{{ version }}.tar.gz
+  sha256: e7fdc8a255c45bc8fbd9aa11c1a49c23092fcd7379296aeaeb14d3343a3d1bed
 
 build:
   number: 1
@@ -15,6 +16,7 @@ build:
 requirements:
   build:
     - cmake
+    - android-ndk
 
 about:
   home: https://libjpeg-turbo.org/

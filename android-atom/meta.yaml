@@ -1,7 +1,7 @@
 {% set name = "atom" %}
-{% set version = "0.4.3" %}
+{% set version = "0.7.0" %}
 {% set hash_type = "sha256" %}
-{% set hash_value = "ce96fb50326a3bfa084463dbde1cf2e02c92735e5bc324d836355c25af87e0ae" %}
+{% set hash_value = "4055fbdeeb692d3d52c6e3c628d7513fc71f147920cac7d0da05b6dbb5ec8c8d" %}
 package:
   name: android-{{ name|lower }}
   version: '{{ version }}'
@@ -14,17 +14,19 @@ source:
 requirements:
   build:
     - python
+    - cppy
+    - pip-cppy
+    - android-ndk
     - android-python * py{{CONDA_PY}}*
-    - android-libcxx
   run:
     - python
     - android-python * py{{CONDA_PY}}*
-    - android-libcxx
 
 build:
   binary_relocation: False
   noarch: generic
 
 about:
-  home: http://github.com/codelv/enaml-native
-  license: GPLv3
+  home: https://github.com/nucleic/atom
+  summary: Memory efficient Python objects
+  license: BSD

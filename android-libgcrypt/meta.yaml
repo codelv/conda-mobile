@@ -1,0 +1,22 @@
+{% set version = "1.8.8" %}
+
+package:
+  name: android-libgcrypt
+  version: '{{ version }}'
+
+source:
+  url: https://github.com/gpg/libgcrypt/archive/refs/tags/libgcrypt-{{version}}.tar.gz
+  sha256: 9485b7a9054ac74b33f4d9e3de916c394e16c90073f8fb3358cd7e5efbfac388
+
+build:
+  number: 1
+  binary_relocation: False
+  noarch: generic
+
+requirements:
+  build:
+    - android-ndk
+about:
+  home: https://www.gnupg.org/software/libgcrypt/index.html
+  summary: The GNU crypto library.
+  license: GPLv2

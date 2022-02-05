@@ -1,7 +1,7 @@
 {% set name = "pyzmq" %}
-{% set version = "17.0.0" %}
+{% set version = "22.3.0" %}
 {% set hash_type = "sha256" %}
-{% set hash_value = "0145ae59139b41f65e047a3a9ed11bbc36e37d5e96c64382fcdff911c4d8c3f0" %}
+{% set hash_value = "8eddc033e716f8c91c6a2112f0a8ebc5e00532b4a6ae1eb0ccc48e027f9c671c" %}
 package:
   name: android-{{ name|lower }}
   version: '{{ version }}'
@@ -15,6 +15,7 @@ requirements:
   build:
     - python
     - cython
+    - android-ndk
     - android-libzmq
     - android-libsodium
     - android-python * py{{CONDA_PY}}*

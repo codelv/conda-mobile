@@ -1,10 +1,11 @@
-{% set version = "4.3.2" %}
+{% set version = "4.3.4" %}
 package:
   name: android-libzmq
   version: {{version}}
 
 source:
   url: https://github.com/zeromq/libzmq/releases/download/v{{version}}/zeromq-{{version}}.tar.gz
+  sha256: c593001a89f5a85dd2ddf564805deb860e02471171b3f204944857336295c3e5
 
 build:
   number: 1
@@ -14,6 +15,8 @@ build:
 requirements:
   build:
     - android-libsodium
+    - android-ndk
+
 about:
   home: http://www.zeromq.org
   summary:  The ZeroMQ lightweight messaging kernel is a library which extends the standard socket interfaces with features traditionally provided by specialised messaging middleware products. ZeroMQ sockets provide an abstraction of asynchronous message queues, multiple messaging patterns, message filtering (subscriptions), seamless access to multiple transport protocols and more.

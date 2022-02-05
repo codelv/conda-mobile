@@ -4,12 +4,17 @@ package:
   version: {{version}}
 
 source:
-  url: https://github.com/jedisct1/libsodium/releases/download/{{ version }}-RELEASE/libsodium-{{ version }}.tar.gz
+  url: https://github.com/jedisct1/libsodium/archive/refs/tags/{{version}}.tar.gz
+  sha256: d59323c6b712a1519a5daf710b68f5e7fde57040845ffec53850911f10a5d4f4
 
 build:
-  number: 1
+  number: 2
   binary_relocation: False
   noarch: generic
+
+requirements:
+  build:
+    - android-ndk
 
 about:
   home: https://github.com/jedisct1/libsodium

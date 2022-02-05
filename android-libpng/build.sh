@@ -5,50 +5,36 @@
 # The full license is in the file LICENSE, distributed with this software.
 # Created on Apr 19, 2018
 # ==================================================================================================
-export ARCHS=("x86_64 x86 arm arm64")
-export NDK="$HOME/Android/Sdk/ndk-bundle"
+source $PREFIX/android/activate-ndk.sh
 
+# Patch
+sed -i -e 's/find_library(M_LIBRARY m)/set(M_LIBRARY ${M_LIBRARY})/g' CMakeLists.txt
+sed -i -e 's/find_package(ZLIB REQUIRED)/set(ZLIB_LIBRARY ${ZLIB_LIBRARY})/g' CMakeLists.txt
 
 for ARCH in $ARCHS
 do
 
+    activate-ndk-clang $ARCH 32
     CONFIGURE_FLAGS=""
     if [ "$ARCH" == "arm" ]; then
-        export TARGET_HOST="arm-linux-androideabi"
-        export TARGET_ABI="armeabi-v7a"
         CONFIGURE_FLAGS="$CONFIGURE_FLAGS --enable-arm-neon"
     elif [ "$ARCH" == "arm64" ]; then
-        export TARGET_HOST="aarch64-linux-android"
-        export TARGET_ABI="arm64-v8a"
         CONFIGURE_FLAGS="$CONFIGURE_FLAGS --enable-arm-neon"
-    elif [ "$ARCH" == "x86" ]; then
-        export TARGET_HOST="i686-linux-android"
-        export TARGET_ABI="x86"
-    elif [ "$ARCH" == "x86_64" ]; then
-        export TARGET_HOST="x86_64-linux-android"
-        export TARGET_ABI="x86_64"
     fi
-
-    export ANDROID_TOOLCHAIN="$NDK/standalone/$ARCH"
-    export APP_ROOT="$PREFIX/android/$ARCH"
-    export PATH="$PATH:$ANDROID_TOOLCHAIN/bin"
-    export AR="$TARGET_HOST-ar"
-    #export AS="$TARGET_HOST-clang"
-    export CC="$TARGET_HOST-clang"
-    export CXX="$TARGET_HOST-clang++"
-    export LD="$TARGET_HOST-ld"
-
 
     rm -Rf build || true
     mkdir build
     cd build
-        cmake .. -G "Unix Makefiles" -DCMAKE_SYSTEM_NAME=Linux \
-                              -DCMAKE_FIND_ROOT_PATH="$ANDROID_TOOLCHAIN/sysroot" \
-                              -DCMAKE_C_COMPILER="$TARGET_HOST-clang" \
-                              -DCMAKE_ASM_COMPILER="$TARGET_HOST-clang" \
-                              -DCMAKE_SYSTEM_PROCESSOR=$ARCH \
-                              -DENABLE_STATIC=0 \
-                              -DCMAKE_INSTALL_PREFIX=$SRC_DIR/dist/$ARCH
+        cmake .. -G "Unix Makefiles" \
+            -DCMAKE_SYSTEM_NAME=Linux \
+            -DCMAKE_FIND_ROOT_PATH="$ANDROID_TOOLCHAIN/sysroot" \
+            -DCMAKE_C_COMPILER="$CC" \
+            -DCMAKE_ASM_COMPILER="$CC" \
+            -DCMAKE_SYSTEM_PROCESSOR=$ARCH \
+            -DZLIB_LIBRARY="$NDK_LIB_DIR/libz.so" \
+            -DZLIB_INCLUDE_DIR="$ARCH_INC_DIR" \
+            -DM_LIBRARY="$NDK_LIB_DIR/libm.so" \
+            -DCMAKE_INSTALL_PREFIX=$SRC_DIR/dist/$ARCH
 
         make -j$CPU_COUNT
         make install
@@ -61,5 +47,3 @@ do
     cp -RL dist/$ARCH/include/* $PREFIX/android/$ARCH/include
 
 done
-
-

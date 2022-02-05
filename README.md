@@ -18,7 +18,7 @@ packages are available.
 
 ### Targets
 
-Currently all recipes are built for 2.7.16 and 3.7.4 with optional support for
+Currently all recipes are built for 2.7.16 and 3.10.2 with optional support for
 openssl, sqlite, and ctypes for the following targets:
 
 - Android (arm (armeabi-v7a), arm64 (arm64-v8a), x86_64, x86 (i686))
@@ -85,7 +85,7 @@ To add a new recipe or to build existing recipes:
 5. Add the requirements to your recipes as needed
 6. If building an extension or c/c++ library install `build-essential`,  `autopoint`, and `texinfo` with apt
 7. Run `conda-build <recipe-name>` (python extensions must be built separately for
-    `2.7` and `3.7` by specifying it as an argument ex `conda-build --py 3.7 <recipe-name>`)
+    `2.7` and `3.10` by specifying it as an argument ex `conda-build --py 3.10 <recipe-name>`)
 8. Then either add a PR or create your own repos with recipes.
 
 > Note: If using linux with an encrypted home directory you may have to build in a different
@@ -94,7 +94,7 @@ fix this.
 
 #### Recipe requirements
 
-Now that both python 2.7 and 3.7 are supported all recipes that build python extensions MUST
+Now that both python 2.7 and 3.10 are supported all recipes that build python extensions MUST
 include `py27` or `py37` in the build string so conda knows which version to install.
 conda will do this automatically if you simply include `python` in the run
 requirements of your recipe (even though the ios / android version is actually used on the
@@ -113,6 +113,7 @@ requirements:
   build:
     - python
     - cython
+    - android-ndk
     - android-python * py{{CONDA_PY}}*
     - android-libc++
   run:
@@ -123,7 +124,7 @@ requirements:
 ```
 
 Failure to include python as a run requirement may cause conda to install the incorrect
-packages (ie a 2.7 package may be selected for a 3.7 python build!).
+packages (ie a 2.7 package may be selected for a 3.10 python build!).
 
 In order to make your package "installable" from other operating systems (ie windows) the
 recipe must use `noarch:generic` in the `build` parameters as follows.

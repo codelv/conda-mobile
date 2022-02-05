@@ -1,11 +1,16 @@
-
+{% set version = "1.1.1m" %}
+{% set sha256 = "f89199be8b23ca45fc7cb9f1d8d3ee67312318286ad030f5316aca6462db6c96" %}
 package:
   name: android-openssl
-  version: 1.1.0k
+  version: 1.1.1i
 
 source:
-  url: https://www.openssl.org/source/openssl-1.1.0k.tar.gz
-  sha256: efa4965f4f773574d6cbda1cf874dbbe455ab1c0d4f906115f867d30444470b1
+  url: https://www.openssl.org/source/openssl-{{version}}.tar.gz
+  sha256: {{sha256}}
+
+requirements:
+  build:
+    - android-ndk
 
 build:
   number: 1

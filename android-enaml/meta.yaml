@@ -1,7 +1,7 @@
 {% set name = "enaml" %}
-{% set version = "0.10.3" %}
+{% set version = "0.14.0" %}
 {% set hash_type = "sha256" %}
-{% set hash_value = "9a3a16f859372f50b1cb2868ea033f8e3724ce0cc8dbdd0dae0cb5f407b44a27" %}
+{% set hash_value = "577635deab19a5a7d19a7f61c6622b0f65b98ec6e939ccb345b2f48715bd9489" %}
 package:
   name: android-{{ name|lower }}
   version: '{{ version }}'
@@ -14,14 +14,24 @@ source:
 requirements:
   build:
     - python
-    - enaml=={{ version }}
-    - android-python *py{{CONDA_PY}}*
-    - android-atom>=0.4.3 *py{{CONDA_PY}}*
+    - cppy
+    - atom
+    - qtpy
+    - kiwisolver
+    - bytecode
+    - pip-cppy
+    - pip-bytecode
+    - android-ndk
+    - android-python * py{{CONDA_PY}}*
+    - android-kiwisolver * py{{CONDA_PY}}*
+    - android-atom * py{{CONDA_PY}}*
   run:
     - python
-    - android-python *py{{CONDA_PY}}*
-    - android-atom>=0.4.3 *py{{CONDA_PY}}*
-    - pip-ply==3.11
+    - android-python * py{{CONDA_PY}}*
+    - android-kiwisolver * py{{CONDA_PY}}*
+    - android-atom * py{{CONDA_PY}}*
+    - pip-ply
+    - pip-bytecode
 
 build:
   number: 0

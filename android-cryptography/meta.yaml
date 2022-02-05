@@ -1,7 +1,7 @@
 {% set name = "cryptography" %}
-{% set version = "2.7" %}
+{% set version = "36.0.1" %}
 {% set hash_type = "sha256" %}
-{% set hash_value = "e6347742ac8f35ded4a46ff835c60e68c22a536a8ae5c4422966d06946b6d4c6" %}
+{% set hash_value = "53e5c1dc3d7a953de055d77bef2ff607ceef7a2aac0353b5d630ab67f7423638" %}
 package:
   name: android-{{ name|lower }}
   version: '{{ version }}'
@@ -20,14 +20,13 @@ requirements:
   build:
     - python
     - cffi
-    - android-cffi>=1.8,!=1.11.3 py{{CONDA_PY}}*
+    - android-ndk
+    - android-cffi * py{{CONDA_PY}}*
     - android-openssl
   run:
     - python
     - android-openssl
-    - android-cffi>=1.8,!=1.11.3 py{{CONDA_PY}}*
-    - pip-six>=1.4.1
-    - pip-enum34 # [py27]
+    - android-cffi * py{{CONDA_PY}}*
 about:
   home: https://cryptography.io/
   license: Apache License

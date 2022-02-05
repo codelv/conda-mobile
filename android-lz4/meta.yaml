@@ -1,13 +1,16 @@
-
+{% set version = "1.9.3" %}
+{% set sha256 = "030644df4611007ff7dc962d981f390361e6c97a34e5cbc393ddfbe019ffe2c1" %}
 package:
   name: android-lz4
-  version: 1.8.1.2
+  version: {{ version }}
 
 source:
-  url: https://github.com/lz4/lz4/archive/v1.8.1.2.tar.gz
-  sha1: d16dd5062b98a715d18e2b0f7d8e1a595272b8d6
-  patches:
-    - makefile.patch
+  url: https://github.com/lz4/lz4/archive/refs/tags/v{{version}}.tar.gz
+  sha256: {{ sha256 }}
+
+requirements:
+  build:
+    - android-ndk
 
 build:
   number: 1
