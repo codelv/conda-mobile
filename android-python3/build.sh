@@ -26,18 +26,23 @@ do
     # Setup compiler for arch and target_api
     activate-ndk-clang $ARCH 32
 
-    export CFLAGS="-fPIC -I$APP_ROOT/include"
+    export CFLAGS="-fPIC -I$APP_ROOT/include -I$NDK_INC_DIR"
+    export CCSHARED="-fPIC -I$APP_ROOT/include -I$NDK_INC_DIR -DPy_BUILD_CORE"
+    export SSL="$APP_ROOT"
     export LDFLAGS="-L$APP_ROOT/lib -L$NDK_LIB_DIR -llog" # -lffi -lssl -lcrypto"
+    export _PYTHON_HOST_PLATFORM="$TARGET_HOST"
+
 
     cp $RECIPE_DIR/Setup.local $SRC_DIR/Modules/
-    export _PYTHON_HOST_PLATFORM="$TARGET_HOST"
+    sed -i s!APP_ROOT=/path/to/app/root/!APP_ROOT=$APP_ROOT/!g $SRC_DIR/Modules/Setup.local
+
     ./configure \
         ac_cv_file__dev_ptmx=yes \
         ac_cv_file__dev_ptc=no \
         ac_cv_have_long_long_format=yes \
         --with-build-python=$PYTHON \
-        --with-openssl=$APP_ROOT/include/openssl \
         --with-ensurepip=install \
+        --with-openssl=$APP_ROOT \
         --with-lto \
         --host=$TARGET_HOST \
         --build=$ARCH \
@@ -49,12 +54,17 @@ do
 
     make clean
 
+    # Change config
+    sed -i 's!\/\* #undef HAVE_BROKEN_POSIX_SEMAPHORES \*\/!#define HAVE_BROKEN_POSIX_SEMAPHORES 1!g' pyconfig.h
+    sed -i 's!#define HAVE_GETLOADAVG 1!/* #undef HAVE_GETLOADAVG */!g' pyconfig.h
+    sed -i 's!#define HAVE_MEMFD_CREATE 1!/* #undef HAVE_MEMFD_CREATE */!g' pyconfig.h
+
+
     # Build libpython
     make -j$CPU_COUNT libpython3.so
 
-    # Now build the extensions and be sure to explicitly link python
-    # The new setup.py build has all kinds of errors so use the old school way
-    # To anyone that wants to try with setup.py have fun :)
+    # New script now works but skips some modules like ssl, sqlite
+    # so stay with the old..
     make -j$CPU_COUNT oldsharedmods LDFLAGS="$LDFLAGS -L. -lpython3.10 -landroid"
     make -C $SRC_DIR install prefix=$SRC_DIR/dist/$ARCH
 

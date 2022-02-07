@@ -17,9 +17,11 @@ requirements:
     - cppy
     - pip-cppy
     - android-ndk
+    - android-libcxx
     - android-python * py{{CONDA_PY}}*
   run:
     - python
+    - android-libcxx
     - android-python * py{{CONDA_PY}}*
 
 build:
