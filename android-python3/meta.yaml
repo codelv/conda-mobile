@@ -16,10 +16,11 @@ requirements:
     - android-sqlite
     - android-liblzma
     - android-libbz2
+    - android-libuuid
   run:
     - python=3.10
 build:
-  number: 2
+  number: 3
   binary_relocation: False
   noarch: generic
 

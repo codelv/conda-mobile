@@ -184,6 +184,7 @@ _opcode _opcode.c	# _opcode module
 _asyncio _asynciomodule.c  # Fast asyncio Future
 _json -I$(srcdir)/Include/internal -DPy_BUILD_CORE_BUILTIN _json.c	# _json speedups
 _statistics _statisticsmodule.c # statistics accelerator
+_queue _queuemodule.c -DPy_BUILD_CORE_MODULE	# _queue module
 
 unicodedata unicodedata.c -DPy_BUILD_CORE_BUILTIN   # static Unicode character database
 
@@ -333,6 +334,10 @@ binascii binascii.c
 
 
 *shared*
+
+_statistics _statisticsmodule.c
+_lsprof _lsprof.c rotatingtree.c
+
 zlib zlibmodule.c -I$(prefix)/include -L$(exec_prefix)/lib -lz
 _lzma _lzmamodule.c -llzma # LZMA compression support.
 _bz2 _bz2module.c -lbz2 # Gustavo Niemeyer's bz2 module.
