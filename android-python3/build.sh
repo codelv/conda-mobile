@@ -16,10 +16,7 @@ sed -i 's!$(VERSION)$(ABIFLAGS)!$(VERSION)!g' configure
 # Add patch for parsing conda's python version header
 python $RECIPE_DIR/brand_python.py
 
-# Disable LFS
-#sed -ie "s!use_lfs=yes!use_lfs=no!g" configure
-
-sed -i 's!sqlite_inc_paths = \[\]!sqlite_inc_paths = [os.environ["APP_ROOT"] + "/include"]!g' $SRC_DIR/setup.py
+sed -i 's!self.inc_dirs = (self.compiler.include_dirs +!self.inc_dirs = (self.compiler.include_dirs + [os.environ["APP_ROOT"] + "/include", os.environ["NDK_INC_DIR"]] + !g' $SRC_DIR/setup.py
 
 for ARCH in $ARCHS
 do

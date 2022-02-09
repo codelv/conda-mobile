@@ -20,7 +20,7 @@ requirements:
   run:
     - python=3.10
 build:
-  number: 3
+  number: 4
   binary_relocation: False
   noarch: generic
 
