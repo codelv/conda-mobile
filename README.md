@@ -3,7 +3,7 @@
 A collection of conda recipes for cross compiling libraries, python, and
 python extensions for iOS and Android.
 
-[![Build Status](https://travis-ci.org/codelv/conda-mobile.svg?branch=master)](https://travis-ci.org/codelv/conda-mobile)
+[![status](https://github.com/codelv/conda-mobile/actions/workflows/ci.yml/badge.svg)](https://github.com/codelv/conda-mobile/actions)
 
 The idea is to be able to easily create a python distribution that works on
 Android and iOS by simply using `conda install android-<package>` or
@@ -18,7 +18,7 @@ packages are available.
 
 ### Targets
 
-Currently all recipes are built for 2.7.16 and 3.10.2 with optional support for
+Currently all recipes are built 3.10.2 with optional support for
 openssl, sqlite, and ctypes for the following targets:
 
 - Android (arm (armeabi-v7a), arm64 (arm64-v8a), x86_64, x86 (i686))
@@ -81,7 +81,7 @@ To add a new recipe or to build existing recipes:
 1. Install `miniconda3`
 2. Install conda-build via `conda install conda-build` (recommended outside of an env)
 3. Clone this repo or create your own recipe(s)
-4. Setup the android standalone toolchain by running `android-toolchain/build.sh`
+4. Install the android ndk using `sdkmanager "ndk:23.1.7779620"` (or update the android-ndk recipe)
 5. Add the requirements to your recipes as needed
 6. If building an extension or c/c++ library install `build-essential`,  `autopoint`, and `texinfo` with apt
 7. Run `conda-build <recipe-name>` (python extensions must be built separately for
