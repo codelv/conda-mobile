@@ -15,7 +15,6 @@ build:
 
 requirements:
   build:
-    - automake
     - android-libxml2
     - android-ndk
   run:

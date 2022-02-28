@@ -15,7 +15,6 @@ build:
 
 requirements:
   build:
-    - automake
     - android-liblzma
     - android-ndk
   run:
