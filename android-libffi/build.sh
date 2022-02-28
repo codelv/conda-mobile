@@ -10,7 +10,7 @@ source $PREFIX/android/activate-ndk.sh
 for ARCH in $ARCHS
 do
     # Setup compiler for arch and target_api
-    activate-ndk-clang $ARCH 32
+    activate-ndk-clang $ARCH
     # ./autogen.sh
     ./configure --host=$TARGET_HOST --prefix=$SRC_DIR/dist/$ARCH
 

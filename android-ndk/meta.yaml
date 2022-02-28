@@ -13,8 +13,8 @@ build:
 test:
   commands:
     - source $PREFIX/android/activate-ndk.sh
-    - activate-ndk-clang x86_64 32
-    - $CC test.c -llog -o test
+    - activate-ndk-clang x86_64
+    - $CC $RECIPE_DIR/test.c -llog
 
 about:
   home: http://github.com/codelv/enaml-native

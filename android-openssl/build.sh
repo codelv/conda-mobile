@@ -10,7 +10,7 @@ source $PREFIX/android/activate-ndk.sh
 for ARCH in $ARCHS
 do
     # Setup compiler for arch and target_api
-    activate-ndk-clang $ARCH 32
+    activate-ndk-clang $ARCH
 
     perl Configure "android-$ARCH" -shared -D__ANDROID_API__=$TARGET_API
 

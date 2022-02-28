@@ -14,7 +14,7 @@ sed -i -e 's/find_package(ZLIB REQUIRED)/set(ZLIB_LIBRARY ${ZLIB_LIBRARY})/g' CM
 for ARCH in $ARCHS
 do
 
-    activate-ndk-clang $ARCH 32
+    activate-ndk-clang $ARCH
     CONFIGURE_FLAGS=""
     if [ "$ARCH" == "arm" ]; then
         CONFIGURE_FLAGS="$CONFIGURE_FLAGS --enable-arm-neon"

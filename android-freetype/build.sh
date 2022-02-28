@@ -11,7 +11,7 @@ for ARCH in $ARCHS
 do
 
     # Setup compiler for arch and target_api
-    activate-ndk-clang $ARCH 32
+    activate-ndk-clang $ARCH
     export CFLAGS="-I$APP_ROOT/include"
     export LDFLAGS="-L$APP_ROOT/lib"
 

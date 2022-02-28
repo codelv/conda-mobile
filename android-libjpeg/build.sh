@@ -14,7 +14,7 @@ sed -i.bak 's/VERSION ${SO_MAJOR_VERSION}.${SO_AGE}.${SO_MINOR_VERSION}/NO_SONAM
 for ARCH in $ARCHS
 do
     # Setup compiler for arch and target_api
-    activate-ndk-clang $ARCH 32
+    activate-ndk-clang $ARCH
 
     export CFLAGS="-O2 -fPIE -w"
     if [ "$ARCH" == "arm" ]; then

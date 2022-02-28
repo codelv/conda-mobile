@@ -11,7 +11,7 @@ for ARCH in $ARCHS
 do
 
     # Setup compiler for arch and target_api
-    activate-ndk-clang $ARCH 32
+    activate-ndk-clang $ARCH
 
     ./configure --host=$TARGET_HOST --enable-shared --prefix=$SRC_DIR/dist/$ARCH
 

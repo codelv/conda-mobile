@@ -19,7 +19,7 @@ for ARCH in $ARCHS
 do
 
     # Setup compiler for arch and target_api
-    activate-ndk-clang $ARCH 32
+    activate-ndk-clang $ARCH
     export CFLAGS="-O3 -I$APP_ROOT/include/python$PY_LIB_VER -I$APP_ROOT/include"
     export LDFLAGS="-L$APP_ROOT/lib -L$NDK_LIB_DIR -lpython$PY_LIB_VER"
     export LDSHARED="$CXX -shared"

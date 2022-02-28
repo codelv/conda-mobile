@@ -21,7 +21,7 @@ sed -i 's!self.inc_dirs = (self.compiler.include_dirs +!self.inc_dirs = (self.co
 for ARCH in $ARCHS
 do
     # Setup compiler for arch and target_api
-    activate-ndk-clang $ARCH 32
+    activate-ndk-clang $ARCH
 
     export CFLAGS="-fPIC -I$APP_ROOT/include -I$NDK_INC_DIR"
     export CCSHARED="-fPIC -I$APP_ROOT/include -I$NDK_INC_DIR -DPy_BUILD_CORE"

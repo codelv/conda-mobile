@@ -11,8 +11,8 @@
 # source $PREFIX/android/activate-ndk.sh
 # for ARCH in $ARCHS
 # do
-#    # Setup compiler for arch and target_api
-#    activate-ndk-clang $ARCH 31
+#    # Setup compiler for arch
+#    activate-ndk-clang $ARCH
 #    # your script...
 # done
 #
@@ -25,7 +25,7 @@ export PATH="$ANDROID_TOOLCHAIN/bin:$PATH"
 
 function activate-ndk-clang() {
     export ARCH="$1"
-    export TARGET_API="$2"
+    export TARGET_API="31"
 
     if [ "$ARCH" == "arm" ]; then
         export TARGET_HOST="armv7a-linux-androideabi"
