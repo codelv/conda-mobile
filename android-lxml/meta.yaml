@@ -20,12 +20,12 @@ requirements:
     - android-ndk
     - android-libxml2
     - android-libxslt
-    - android-python * py{{CONDA_PY}}*
+    - android-python * py{{PY_VER}}*
   run:
     - python
     - android-libxml2
     - android-libxslt
-    - android-python * py{{CONDA_PY}}*
+    - android-python * py{{PY_VER}}*
 
 build:
   number: 0

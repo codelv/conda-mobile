@@ -11,10 +11,10 @@ requirements:
   build:
     - python
     - cython
-    - android-python * py{{CONDA_PY}}*
+    - android-python * py{{PY_VER}}*
   run:
     - python
-    - android-python * py{{CONDA_PY}}*
+    - android-python * py{{PY_VER}}*
 
 build:
   number: 0
