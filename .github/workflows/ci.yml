@@ -7,6 +7,7 @@ jobs:
       fail-fast: false
       matrix:
         python-version: ['3.10']
+        nkd-version: ['23.1.7779620']
     steps:
       - uses: actions/checkout@v2
       - name: Setup python ${{ matrix.python-version}}
@@ -33,6 +34,7 @@ jobs:
             yes | sdkmanager --licenses
             yes | sdkmanager tools
             yes | sdkmanager platform-tools
+            yes | sdkmanager "ndk:${ matrix.ndk-version}}"
       - name: Install conda build
         run: conda install conda-build
       - name: Build recipe
