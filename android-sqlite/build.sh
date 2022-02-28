@@ -15,7 +15,7 @@ do
     export STRIP="$TARGET_HOST-strip"
     export CFLAGS="-Os"
 
-    ./configure --host=$TARGET_HOST --prefix=$SRC_DIR/dist/$ARCH
+    ./configure --host=$TARGET_HOST --prefix=$SRC_DIR/dist/$ARCH --with-sysroot=$ANDROID_TOOLCHAIN/sysroot
     make clean
     make -j$CPU_COUNT
     make install

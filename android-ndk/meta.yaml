@@ -1,6 +1,6 @@
 package:
   name: android-ndk
-  version: 23.1.7779620
+  version: 24.0.7956693
 
 requirements:
   build:
