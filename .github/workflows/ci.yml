@@ -6,8 +6,6 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ['3.10']
-        ndk-version: ['23.1.7779620']
         package-name: [
             'android-ndk',
             'android-libcxx',
@@ -22,7 +20,8 @@ jobs:
             'android-freetype',
             'android-libxslt',
             'android-libxml2',
-            'android-libopenssl',
+            'android-openssl',
+            'android-harfbuzz',
             'android-python3',
             'android-cffi',
             'android-atom',
@@ -31,6 +30,8 @@ jobs:
             'android-enaml',
             'android-lxml',
         ]
+        python-version: ['3.10']
+        ndk-version: ['23.1.7779620']
     steps:
       - uses: actions/checkout@v2
       - uses: conda-incubator/setup-miniconda@v2
