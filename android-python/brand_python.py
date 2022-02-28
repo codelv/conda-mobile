@@ -18,7 +18,7 @@ def patch_platform(msg):
             fh.write(line)
             if line.startswith('_sys_version_parser'):
                 next_line = next(lines_it)
-                fh.write("    r'([\w.+]+)\s*(?:\|\s*[\w -]+\s*\|)\s*'\n")
+                fh.write("    r'([\w.+]+)\s*(?:\|\s*[\w -]+\s*\|)?\s*'\n")
 
 
 def patch_get_version(msg):
