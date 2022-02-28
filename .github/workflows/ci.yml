@@ -29,6 +29,8 @@ jobs:
             'android-kiwisolver',
             'android-enaml',
             'android-lxml',
+            'pip-cppy',
+            'pip-tornado',
         ]
         python-version: ['3.10']
         ndk-version: ['23.1.7779620']
@@ -44,7 +46,13 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
+      - uses: actions/cache@v2
+        id: android-ndk-cache
+        with:
+          path: $HOME/Android/Sdk
+          key: ${{ runner.os }}-${{ matrix.ndk-version }}
       - name: Setup Android NDK
+        if: steps.android-ndk-cache.outputs.cache-hit != 'true'
         run: |
             export ANDROID_HOME="$HOME/Android/Sdk"
             export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
