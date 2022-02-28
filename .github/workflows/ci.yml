@@ -10,13 +10,14 @@ jobs:
             'android-ndk',
             'android-libcxx',
             'android-liblzma',
+            'android-libbz2',
+            'android-lz4',
             'android-sqlite',
             'android-libffi',
             'android-libsodium',
             'android-libuuid',
             'android-libpng',
             'android-libjpeg',
-            'android-lz4',
             'android-freetype',
             'android-libxslt',
             'android-libxml2',
@@ -29,6 +30,8 @@ jobs:
             'android-kiwisolver',
             'android-enaml',
             'android-lxml',
+            'android-libzmq',
+            'android-pyzmq',
             'pip-bytecode',
             'pip-cppy',
             'pip-tornado',
@@ -38,6 +41,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: conda-incubator/setup-miniconda@v2
+        name: Install miniconda
         with:
           auto-update-conda: true
           python-version: ${{ matrix.python-version }}
@@ -48,6 +52,7 @@ jobs:
         with:
           java-version: 11
       - uses: actions/cache@v2
+        name: Cache Android NDK
         id: android-cache
         with:
           path: ~/Android
@@ -69,6 +74,7 @@ jobs:
       - name: Install conda build
         run: conda install conda-build
       - uses: actions/cache@v2
+        name: Cache conda noarch packages
         id: conda-bld-cache
         with:
           path: /usr/share/miniconda/conda-bld/noarch
