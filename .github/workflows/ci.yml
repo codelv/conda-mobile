@@ -29,6 +29,7 @@ jobs:
             'android-kiwisolver',
             'android-enaml',
             'android-lxml',
+            'pip-bytecode',
             'pip-cppy',
             'pip-tornado',
         ]
@@ -49,8 +50,8 @@ jobs:
       - uses: actions/cache@v2
         id: android-cache
         with:
-          path: ${{env.HOME}}/Android
-          key: ${{ runner.os }}-android-${{ matrix.ndk-version }}
+          path: ~/Android
+          key: ${{ runner.os }}-android-sdk-${{ matrix.ndk-version }}
       - name: Setup Android NDK
         if: steps.android-cache.outputs.cache-hit != 'true'
         run: |

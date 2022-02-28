@@ -13,12 +13,12 @@ requirements:
     - python
     - cython
     - numpy
-    - android-python * py{{PY_VER}}*
+    - android-python * py{{CONDA_PY}}*
     - android-libgeos
 
   run:
     - python
-    - android-python * py{{PY_VER}}*
+    - android-python * py{{CONDA_PY}}*
     - android-libgeos
 
 build:

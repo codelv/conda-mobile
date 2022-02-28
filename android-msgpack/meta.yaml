@@ -12,10 +12,10 @@ requirements:
     - python
     - cython
     - android-ndk
-    - android-python * py{{PY_VER}}*
+    - android-python * py{{CONDA_PY}}*
   run:
     - python
-    - android-python * py{{PY_VER}}*
+    - android-python * py{{CONDA_PY}}*
 
 build:
   number: 1

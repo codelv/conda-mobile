@@ -21,11 +21,11 @@ requirements:
     - pip-cppy
     - android-ndk
     - android-libcxx
-    - android-python * py{{PY_VER}}*
+    - android-python * py{{CONDA_PY}}*
   run:
     - python
     - android-libcxx
-    - android-python * py{{PY_VER}}*
+    - android-python * py{{CONDA_PY}}*
 
 build:
   binary_relocation: False

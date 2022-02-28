@@ -18,12 +18,12 @@ requirements:
     - android-ndk
     - android-libzmq
     - android-libsodium
-    - android-python * py{{PY_VER}}*
+    - android-python * py{{CONDA_PY}}*
   run:
     - python
     - android-libzmq
     - android-libffi
-    - android-python * py{{PY_VER}}*
+    - android-python * py{{CONDA_PY}}*
 
 build:
   number: 0

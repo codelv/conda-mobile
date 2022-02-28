@@ -14,7 +14,7 @@ requirements:
   run:
     - python
     - android-graphviz
-    - android-python * py{{PY_VER}}*
+    - android-python * py{{CONDA_PY}}*
 
 build:
   number: 0
