@@ -1,13 +1,36 @@
 name: CI
 on: [push]
 jobs:
-  android-python3:
+  android:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         python-version: ['3.10']
         ndk-version: ['23.1.7779620']
+        package-name: [
+            'android-ndk',
+            'android-libcxx',
+            'android-liblzma',
+            'android-sqlite',
+            'android-libffi',
+            'android-libsodium',
+            'android-libuuid',
+            'android-libpng',
+            'android-libjpeg',
+            'android-lz4',
+            'android-freetype',
+            'android-libxslt',
+            'android-libxml2',
+            'android-libopenssl',
+            'android-python3',
+            'android-cffi',
+            'android-atom',
+            'android-msgpack',
+            'android-kiwisolver',
+            'android-enaml',
+            'android-lxml',
+        ]
     steps:
       - uses: actions/checkout@v2
       - uses: conda-incubator/setup-miniconda@v2
@@ -34,4 +57,4 @@ jobs:
       - name: Install conda build
         run: conda install conda-build
       - name: Build recipe
-        run: conda build --py=${{matrix.python-version}} android-python3
+        run: conda build --py=${{matrix.python-version}} ${{matrix.package-name}}
