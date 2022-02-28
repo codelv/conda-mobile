@@ -1,7 +1,7 @@
 name: CI
 on: [push]
 jobs:
-  android:
+  build:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -22,7 +22,7 @@ jobs:
             'android-libxml2',
             'android-openssl',
             'android-harfbuzz',
-            'android-python3',
+            'android-python',
             'android-cffi',
             'android-atom',
             'android-msgpack',
