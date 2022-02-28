@@ -83,7 +83,7 @@ To add a new recipe or to build existing recipes:
 3. Clone this repo or create your own recipe(s)
 4. Install the android ndk using `sdkmanager "ndk:23.1.7779620"` (or update the android-ndk recipe)
 5. Add the requirements to your recipes as needed
-6. If building an extension or c/c++ library install `build-essential`,  `autopoint`, and `texinfo` with apt
+6. If building an extension or c/c++ library install `build-essential`,  `rename`, `autopoint`, and `texinfo` with apt
 7. Run `conda-build <recipe-name>` (python extensions must be built separately for
     `2.7` and `3.10` by specifying it as an argument ex `conda-build --py 3.10 <recipe-name>`)
 8. Then either add a PR or create your own repos with recipes.
