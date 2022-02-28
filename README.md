@@ -95,7 +95,7 @@ fix this.
 #### Recipe requirements
 
 Now that both python 2.7 and 3.10 are supported all recipes that build python extensions MUST
-include `py27` or `py37` in the build string so conda knows which version to install.
+include `py27` or `py310` in the build string so conda knows which version to install.
 conda will do this automatically if you simply include `python` in the run
 requirements of your recipe (even though the ios / android version is actually used on the
 app). Alternatively you can manually set `string: py{{CONDA_PY}}` under the `build` section.
