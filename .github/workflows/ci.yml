@@ -47,12 +47,12 @@ jobs:
         with:
           java-version: 11
       - uses: actions/cache@v2
-        id: android-ndk-cache
+        id: android-cache
         with:
-          path: $HOME/Android/Sdk
-          key: ${{ runner.os }}-${{ matrix.ndk-version }}
+          path: ${{env.HOME}}/Android
+          key: ${{ runner.os }}-android-${{ matrix.ndk-version }}
       - name: Setup Android NDK
-        if: steps.android-ndk-cache.outputs.cache-hit != 'true'
+        if: steps.android-cache.outputs.cache-hit != 'true'
         run: |
             export ANDROID_HOME="$HOME/Android/Sdk"
             export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
