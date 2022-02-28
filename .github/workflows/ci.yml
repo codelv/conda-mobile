@@ -68,5 +68,10 @@ jobs:
             sdkmanager --install "ndk;${{ matrix.ndk-version}}"
       - name: Install conda build
         run: conda install conda-build
+      - uses: actions/cache@v2
+        id: conda-bld-cache
+        with:
+          path: /usr/share/miniconda/conda-bld
+          key: ${{ runner.os }}-conda-bld-cache-${{ matrix.pthon-version }}-${{ matrix.ndk-version }}
       - name: Build recipe
         run: conda build --py=${{matrix.python-version}} ${{matrix.package-name}}
