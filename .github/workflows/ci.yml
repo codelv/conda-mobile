@@ -25,13 +25,12 @@ jobs:
             export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
             mkdir -p $ANDROID_HOME
             wget -q https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
-            unzip commandlinetools-linux-8092744_latest.zip -d $ANDROID_HOME/cmdline-tools
+            unzip -q commandlinetools-linux-8092744_latest.zip -d $ANDROID_HOME/cmdline-tools
             mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
-            yes | sdkmanager --licenses
+            yes | sdkmanager --licenses > /dev/null
             sdkmanager --install tools
             sdkmanager --install platform-tools
             sdkmanager --install "ndk;${{ matrix.ndk-version}}"
-            ls $ANDROID_SDK_ROOT/ndk/${{ matrix.ndk-version}}
       - name: Install conda build
         run: conda install conda-build
       - name: Build recipe

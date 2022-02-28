@@ -10,6 +10,12 @@ requirements:
 build:
   number: 1
 
+test:
+  commands:
+    - source $PREFIX/android/activate-ndk.sh
+    - activate-ndk-clang x86_64 32
+    - $CC test.c -llog -o test
+
 about:
   home: http://github.com/codelv/enaml-native
   summary: Android NDK with fortran support. Thanks to android-gfortran
