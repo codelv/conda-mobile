@@ -16,7 +16,7 @@
 #    # your script...
 # done
 #
-export NDK_VERSION="24.0.7956693"
+export NDK_VERSION="23.1.7779620"
 export ANDROID_NDK_HOME="$HOME/Android/Sdk/ndk/$NDK_VERSION"
 export ANDROID_TOOLCHAIN="$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64"
 export ARCHS=("x86_64 x86 arm arm64")
