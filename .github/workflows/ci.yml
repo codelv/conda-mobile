@@ -17,6 +17,8 @@ jobs:
       run: |
         conda install conda-build
         sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Install system deps
+      run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
       uses: actions/setup-java@v1
       with:
@@ -87,6 +89,8 @@ jobs:
       run: |
         conda install conda-build
         sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Install system deps
+      run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
       uses: actions/setup-java@v1
       with:
@@ -152,6 +156,8 @@ jobs:
       run: |
         conda install conda-build
         sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Install system deps
+      run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
       uses: actions/setup-java@v1
       with:
@@ -221,6 +227,8 @@ jobs:
       run: |
         conda install conda-build
         sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Install system deps
+      run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
       uses: actions/setup-java@v1
       with:
@@ -306,6 +314,8 @@ jobs:
       run: |
         conda install conda-build
         sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Install system deps
+      run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
       uses: actions/setup-java@v1
       with:
@@ -369,6 +379,8 @@ jobs:
       run: |
         conda install conda-build
         sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Install system deps
+      run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
       uses: actions/setup-java@v1
       with:
@@ -425,6 +437,8 @@ jobs:
       run: |
         conda install conda-build
         sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Install system deps
+      run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
       uses: actions/setup-java@v1
       with:
@@ -493,6 +507,8 @@ jobs:
       run: |
         conda install conda-build
         sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Install system deps
+      run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
       uses: actions/setup-java@v1
       with:
@@ -546,6 +562,8 @@ jobs:
       run: |
         conda install conda-build
         sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Install system deps
+      run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
       uses: actions/setup-java@v1
       with:
@@ -599,6 +617,8 @@ jobs:
       run: |
         conda install conda-build
         sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Install system deps
+      run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
       uses: actions/setup-java@v1
       with:
@@ -652,6 +672,8 @@ jobs:
       run: |
         conda install conda-build
         sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Install system deps
+      run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
       uses: actions/setup-java@v1
       with:
@@ -705,6 +727,8 @@ jobs:
       run: |
         conda install conda-build
         sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Install system deps
+      run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
       uses: actions/setup-java@v1
       with:
@@ -758,6 +782,8 @@ jobs:
       run: |
         conda install conda-build
         sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Install system deps
+      run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
       uses: actions/setup-java@v1
       with:
@@ -811,6 +837,8 @@ jobs:
       run: |
         conda install conda-build
         sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Install system deps
+      run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
       uses: actions/setup-java@v1
       with:
@@ -864,6 +892,8 @@ jobs:
       run: |
         conda install conda-build
         sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Install system deps
+      run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
       uses: actions/setup-java@v1
       with:
@@ -917,6 +947,8 @@ jobs:
       run: |
         conda install conda-build
         sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Install system deps
+      run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
       uses: actions/setup-java@v1
       with:
@@ -970,6 +1002,8 @@ jobs:
       run: |
         conda install conda-build
         sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Install system deps
+      run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
       uses: actions/setup-java@v1
       with:
@@ -1024,6 +1058,8 @@ jobs:
       run: |
         conda install conda-build
         sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Install system deps
+      run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
       uses: actions/setup-java@v1
       with:
@@ -1083,6 +1119,8 @@ jobs:
       run: |
         conda install conda-build
         sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Install system deps
+      run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
       uses: actions/setup-java@v1
       with:
@@ -1142,6 +1180,8 @@ jobs:
       run: |
         conda install conda-build
         sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Install system deps
+      run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
       uses: actions/setup-java@v1
       with:
@@ -1203,6 +1243,8 @@ jobs:
       run: |
         conda install conda-build
         sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Install system deps
+      run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
       uses: actions/setup-java@v1
       with:
@@ -1271,6 +1313,8 @@ jobs:
       run: |
         conda install conda-build
         sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Install system deps
+      run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
       uses: actions/setup-java@v1
       with:
@@ -1325,6 +1369,8 @@ jobs:
       run: |
         conda install conda-build
         sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Install system deps
+      run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
       uses: actions/setup-java@v1
       with:
@@ -1381,6 +1427,8 @@ jobs:
       run: |
         conda install conda-build
         sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Install system deps
+      run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
       uses: actions/setup-java@v1
       with:
@@ -1427,6 +1475,8 @@ jobs:
       run: |
         conda install conda-build
         sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Install system deps
+      run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
       uses: actions/setup-java@v1
       with:
@@ -1486,6 +1536,8 @@ jobs:
       run: |
         conda install conda-build
         sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Install system deps
+      run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
       uses: actions/setup-java@v1
       with:
@@ -1572,6 +1624,8 @@ jobs:
       run: |
         conda install conda-build
         sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Install system deps
+      run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
       uses: actions/setup-java@v1
       with:
@@ -1640,6 +1694,8 @@ jobs:
       run: |
         conda install conda-build
         sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Install system deps
+      run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
       uses: actions/setup-java@v1
       with:
@@ -1758,6 +1814,26 @@ jobs:
       with:
         name: pip-jsonrpclib-3.10
         path: /usr/share/miniconda/conda-bld/*/pip-jsonrpclib*.bz2
+  pip-motor:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-update-conda: true
+        python-version: '3.10'
+    - name: Install conda build
+      run: |
+        conda install conda-build
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Build recipe
+      run: conda build --py=3.10 pip-motor
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: pip-motor-3.10
+        path: /usr/share/miniconda/conda-bld/*/pip-motor*.bz2
   pip-ply:
     runs-on: ubuntu-latest
     steps:

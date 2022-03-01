@@ -97,6 +97,10 @@ def main():
 
     android_steps = [
         {
+            "name": "Install system deps",
+            "run": "sudo apt-get install -y autopoint texinfo rename",
+        },
+        {
             "name": "Setup JDK",
             "uses": "actions/setup-java@v1",
             "with": {"java-version": 11},
