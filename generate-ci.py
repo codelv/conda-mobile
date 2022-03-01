@@ -27,9 +27,10 @@ sdkmanager --install "ndk;{NDK_VER}"
 """
 
 # Patch conda build because it fails cleaning up optimized pyc files
+site_packages = '/usr/share/miniconda/lib/python3.9/site-packages'
 CONDA_BUILD = f"""
 conda install conda-build
-sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' {site_packages}/conda_build/post.py
 """
 
 
@@ -81,6 +82,7 @@ def main():
                 packages[group] = [item]
 
     jobs = {}
+    conda_bld_path = "/usr/share/miniconda/conda-bld"
 
     common_steps = [
         {"uses": "actions/checkout@v2"},
@@ -156,12 +158,12 @@ def main():
                     "uses": "actions/upload-artifact@v2",
                     "with": {
                         "name": f"{pkg}-{PY_VER}",
-                        "path": f"/usr/share/miniconda/conda-bld/*/{pkg}*.bz2",
+                        "path": f"{conda_bld_path}/*/{pkg}*.bz2",
                     },
                 },
             ]
 
-            # Generate seteps to download and install requirements
+            # Generate steps to download and install requirements
             req_steps = []
             if needs:
                 for req in needs:
@@ -171,14 +173,14 @@ def main():
                             "uses": "actions/download-artifact@v2",
                             "with": {
                                 "name": f"{req}-{PY_VER}",
-                                "path": "packages",
+                                "path": f"{conda_bld_path}/",
                             },
                         }
                     )
                 req_steps.append(
                     {
-                        "name": f"Install dependencies",
-                        "run": "conda install packages/*/*.bz2",
+                        "name": f"Run conda index",
+                        "run": f"conda index {conda_bld_path}/*",
                     }
                 )
 
