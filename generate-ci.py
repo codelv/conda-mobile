@@ -33,9 +33,7 @@ INSTALL_MINIMAMBA = f"""
 mkdir ~/micromamba
 cd ~/micromamba
 wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-export MAMBA_EXE="$HOME/bin/micromamba"
-export MAMBA_ROOT_PREFIX="$HOME/micromamba"
-export PATH="$HOME/micromamba/bin:$PATH"
+echo "$HOME/micromamba/bin:$PATH" >> $GITHUB_PATH
 """
 
 SETUP_MINIMAMBA = f"""
