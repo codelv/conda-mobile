@@ -18,6 +18,8 @@ do
         --disable-obsolete-api \
         --enable-hashes=all
 
+    # Cleanup old build
+    make clean
     # Build
     make -j$CPU_COUNT
     make install
