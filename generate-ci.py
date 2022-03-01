@@ -92,6 +92,7 @@ def main():
             "with": {
                 "auto-update-conda": True,
                 "python-version": PY_VER,
+                "channels": ["conda-forge"],
             },
         },
         {"name": "Install conda build", "run": Block(CONDA_BUILD)},

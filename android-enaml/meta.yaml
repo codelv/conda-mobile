@@ -16,12 +16,14 @@ source:
 requirements:
   build:
     - python
+    - ply
     - cppy
     - atom
     - qtpy
     - kiwisolver
     - bytecode
     - pip-cppy
+    - pip-ply
     - pip-bytecode
     - android-ndk
     - android-libcxx
