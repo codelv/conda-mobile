@@ -33,12 +33,15 @@ INSTALL_MINIMAMBA = f"""
 mkdir $HOME/micromamba
 cd $HOME/micromamba
 wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-echo "$HOME/micromamba/bin:$PATH" >> $GITHUB_PATH
+export PATH="$HOME/micromamba/bin:$PATH"
+micromamba -h
+echo "$PATH" >> $GITHUB_PATH
 """
 
-SETUP_MINIMAMBA = f"""
-ls $HOME/micromamba/bin
-micromamba install -c conda-forge python={PY_VER} boa
+SETUP = f"""
+micromamba info
+micromamba list
+boa -h
 """
 
 
@@ -94,8 +97,8 @@ def main():
 
     common_steps = [
         {"uses": "actions/checkout@v2"},
-        {"name": "Install micromamba", "run": Block(INSTALL_MINIMAMBA)},
-        {"name": "Setup micromamba", "run": Block(SETUP_MINIMAMBA)},
+        {"name": "Install micromamba", "uses": "mamba-org/provision-with-micromamba@main"},
+        {"name": "Setup micromamba", "run": Block(SETUP)},
     ]
 
     android_steps = [
@@ -202,6 +205,7 @@ def main():
         "name": "CI",
         "on": "push",
         "jobs": jobs,
+        "defaults": {"run": {"shell": "bash -l {0}"}},
     }
 
 
