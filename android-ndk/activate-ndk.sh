@@ -63,7 +63,7 @@ function activate-ndk-clang() {
 # Check that the given shared library matches the $ARCH variable
 function validate-lib-arch() {
     lib=$1
-    echo "Checking that $lib was compiled for $ARCH..."
+    echo "Validate that $lib was compiled for $ARCH..."
     if [ "$ARCH" == "arm" ]; then
         expected="ELF 32-bit LSB shared object, ARM"
     elif [ "$ARCH" == "arm64" ]; then
