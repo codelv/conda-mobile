@@ -93,7 +93,7 @@ def main():
                 packages[group] = [item]
 
     jobs = {}
-    conda_bld_path = "~/micromamba/conda-bld"
+    conda_bld_path = "~/micromamba/envs/conda-mobile/conda-bld"
 
     common_steps = [
         {"uses": "actions/checkout@v2"},
