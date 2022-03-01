@@ -33,8 +33,9 @@ INSTALL_MINIMAMBA = f"""
 mkdir ~/micromamba
 cd ~/micromamba
 wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-./bin/micromamba shell init -s bash -p ~/micromamba
-cd ~/
+export MAMBA_EXE="$HOME/bin/micromamba"
+export MAMBA_ROOT_PREFIX="$HOME/micromamba"
+export PATH="$HOME/micromamba/bin:$PATH"
 """
 
 SETUP_MINIMAMBA = f"""
@@ -198,11 +199,15 @@ def main():
             if needs:
                 job["needs"] = needs
 
+    # Try one for now..
+    jobs = {'android-ndk': jobs['android-ndk']}
     script = {
         "name": "CI",
         "on": "push",
         "jobs": jobs,
     }
+
+
 
     with open(".github/workflows/ci.yml", "w") as f:
         f.write(yaml.dump(script))
