@@ -65,13 +65,13 @@ function validate-lib-arch() {
     lib=$1
     echo "Checking that $lib was compiled for $ARCH..."
     if [ "$ARCH" == "arm" ]; then
-        expected="ELF 32-bit LSB shared object, ARM, version 1"
+        expected="ELF 32-bit LSB shared object, ARM"
     elif [ "$ARCH" == "arm64" ]; then
-        expected="ELF 64-bit LSB shared object, ARM aarch64, version 1"
+        expected="ELF 64-bit LSB shared object, ARM aarch64"
     elif [ "$ARCH" == "x86" ]; then
-        expected="ELF 32-bit LSB shared object, Intel 80386, version 1"
+        expected="ELF 32-bit LSB shared object, Intel 80386"
     elif [ "$ARCH" == "x86_64" ]; then
-        expected="ELF 64-bit LSB shared object, x86-64, version 1"
+        expected="ELF 64-bit LSB shared object, x86-64"
     fi
     output=$(file $lib)
     echo "$output"
