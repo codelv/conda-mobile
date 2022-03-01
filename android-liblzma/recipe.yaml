@@ -1,0 +1,25 @@
+context:
+  version: 5.2.5
+
+package:
+  name: android-liblzma
+  version: '{{ version }}'
+
+source:
+  url: https://versaweb.dl.sourceforge.net/project/lzmautils/xz-{{version}}.tar.xz
+  sha256: 3e1e518ffc912f86608a8cb35e4bd41ad1aec210df2a47aaa1f95e7f5576ef56
+
+build:
+  number: 1
+  binary_relocation: false
+  noarch: generic
+
+requirements:
+  build:
+    - android-ndk
+
+about:
+  home: http://github.com/codelv/enaml-native
+  summary: XZ Utils is free general-purpose data compression software with a high compression ratio. XZ Utils were written for POSIX-like systems, but also work on some not-so-POSIX systems. XZ Utils are the successor to LZMA Utils.
+  license: public domain
+

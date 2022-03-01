@@ -1,0 +1,27 @@
+context:
+  version: 1.6.37
+
+package:
+  name: android-libpng
+  version: '{{version}}'
+
+source:
+
+  url: https://download.sourceforge.net/libpng/libpng-{{version}}.tar.xz
+  sha256: 505e70834d35383537b6491e7ae8641f1a4bed1876dbfe361201fc80868d88ca
+
+requirements:
+  build:
+    - cmake
+    - android-ndk
+
+build:
+  number: 1
+  binary_relocation: false
+  noarch: generic
+
+about:
+  home: http://libpng.sf.net
+  summary: 'LIBPNG: Portable Network Graphics support'
+  license: PNG
+

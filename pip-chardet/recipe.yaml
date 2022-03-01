@@ -1,0 +1,47 @@
+context:
+  name: chardet
+  version: 3.0.4
+  file_ext: tar.gz
+  hash_type: sha256
+  hash_value: 84ab92ed1c4d4f16916e05906b6b75a6c0fb5db821cc65e70cbd64a3e2a5eaae
+
+package:
+  name: pip-{{ name|lower }}
+  version: '{{ version }}'
+
+source:
+  fn: '{{ name }}-{{ version }}.{{ file_ext }}'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ file_ext }}
+  '{{ hash_type }}': '{{ hash_value }}'
+
+build:
+  number: 0
+  entry_points:
+    - chardetect = chardet.cli.chardetect:main
+  noarch: true
+  script:
+
+    - export CC=/bin/false
+    - export CXX=/bin/false
+    - python setup.py install --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/arm --install-lib=$PREFIX/android/arm/python/site-packages --install-scripts=$PREFIX/android/arm/scripts --install-data=$PREFIX/android/arm/data --install-headers=$PREFIX/android/arm/include
+    - python setup.py install --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/arm64 --install-lib=$PREFIX/android/arm64/python/site-packages --install-scripts=$PREFIX/android/arm64/scripts --install-data=$PREFIX/android/arm64/data --install-headers=$PREFIX/android/arm64/include
+    - python setup.py install --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/x86 --install-lib=$PREFIX/android/x86/python/site-packages --install-scripts=$PREFIX/android/x86/scripts --install-data=$PREFIX/android/x86/data --install-headers=$PREFIX/android/x86/include
+    - python setup.py install --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/x86_64 --install-lib=$PREFIX/android/x86_64/python/site-packages --install-scripts=$PREFIX/android/x86_64/scripts --install-data=$PREFIX/android/x86_64/data --install-headers=$PREFIX/android/x86_64/include
+    - python setup.py install --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/iphoneos --install-lib=$PREFIX/iphoneos/python/site-packages --install-scripts=$PREFIX/iphoneos/scripts --install-data=$PREFIX/iphoneos/data --install-headers=$PREFIX/iphoneos/include
+    - python setup.py install --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/iphonesimulator --install-lib=$PREFIX/iphonesimulator/python/site-packages --install-scripts=$PREFIX/iphonesimulator/scripts --install-data=$PREFIX/iphonesimulator/data --install-headers=$PREFIX/iphonesimulator/include
+requirements: {}
+about:
+  home: https://github.com/chardet/chardet
+  license: GNU Library or Lesser General Public License (LGPL)
+  license_family: LGPL
+  license_file: ''
+  summary: Universal encoding detector for Python 2 and 3 Built for Android and iOS apps using enaml-native.
+  description: "Chardet: The Universal Character Encoding Detector\n--------------------------------------------------\n\n.. image:: https://img.shields.io/travis/chardet/chardet/stable.svg\n   :alt: Build status\n   :target: https://travis-ci.org/chardet/chardet\n\n.. image:: https://img.shields.io/coveralls/chardet/chardet/stable.svg\n   :target: https://coveralls.io/r/chardet/chardet\n\n.. image:: https://img.shields.io/pypi/v/chardet.svg\n   :target: https://warehouse.python.org/project/chardet/\n   :alt: Latest version on PyPI\n\n.. image:: https://img.shields.io/pypi/l/chardet.svg\n   :alt: License\n\n\nDetects\n - ASCII, UTF-8, UTF-16 (2 variants), UTF-32 (4 variants)\n - Big5, GB2312, EUC-TW, HZ-GB-2312, ISO-2022-CN (Traditional and Simplified Chinese)\n - EUC-JP, SHIFT_JIS, CP932, ISO-2022-JP (Japanese)\n - EUC-KR, ISO-2022-KR (Korean)\n - KOI8-R, MacCyrillic, IBM855, IBM866, ISO-8859-5, windows-1251 (Cyrillic)\n - ISO-8859-5, windows-1251 (Bulgarian)\n - ISO-8859-1, windows-1252\
+    \ (Western European languages)\n - ISO-8859-7, windows-1253 (Greek)\n - ISO-8859-8, windows-1255 (Visual and Logical Hebrew)\n - TIS-620 (Thai)\n\n.. note::\n   Our ISO-8859-2 and windows-1250 (Hungarian) probers have been temporarily\n   disabled until we can retrain the models.\n\nRequires Python 2.6, 2.7, or 3.3+.\n\nInstallation\n------------\n\nInstall from `PyPI <https://pypi.python.org/pypi/chardet>`_::\n\n    pip install chardet\n\nDocumentation\n-------------\n\nFor users, docs are now available at https://chardet.readthedocs.io/.\n\nCommand-line Tool\n-----------------\n\nchardet comes with a command-line script which reports on the encodings of one\nor more files::\n\n    % chardetect somefile someotherfile\n    somefile: windows-1252 with confidence 0.5\n    someotherfile: ascii with confidence 1.0\n\nAbout\n-----\n\nThis is a continuation of Mark Pilgrim's excellent chardet. Previously, two\nversions needed to be maintained: one that supported python 2.x and one that\nsupported\
+    \ python 3.x.  We've recently merged with `Ian Cordasco <https://github.com/sigmavirus24>`_'s\n`charade <https://github.com/sigmavirus24/charade>`_ fork, so now we have one\ncoherent version that works for Python 2.6+.\n\n:maintainer: Dan Blanchard\n\n\n"
+  doc_url: ''
+  dev_url: ''
+
+extra:
+  recipe-maintainers: https://github.com/rodgomesc
+

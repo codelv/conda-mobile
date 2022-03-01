@@ -1,0 +1,25 @@
+context:
+  version: 3.3.1
+
+package:
+  name: android-harfbuzz
+  version: '{{version}}'
+
+source:
+  url: https://github.com/harfbuzz/harfbuzz/releases/download/{{version}}/harfbuzz-{{version}}.tar.xz
+  sha256: 8c083384838f39f4a4856a6584def595b10cc071754a08d5e999293462b34296
+
+requirements:
+  build:
+    - android-ndk
+
+build:
+  number: 1
+  binary_relocation: false
+  noarch: generic
+
+about:
+  home: http://harfbuzz.org/
+  summary: HarfBuzz OpenType text shaping engine
+  license: MIT
+

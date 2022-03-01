@@ -1,0 +1,19 @@
+context: {}
+package:
+
+  name: android-libcxx
+  version: 14
+
+build:
+  number: 0
+  binary_relocation: false
+  noarch: generic
+
+requirements:
+  build:
+    - android-ndk
+
+about:
+  summary: libc++_shared from the Android NDK
+  license: MIT
+

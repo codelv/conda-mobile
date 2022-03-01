@@ -1,0 +1,39 @@
+context:
+  name: tornado
+  version: 6.2.dev1
+
+package:
+  name: pip-{{ name|lower }}
+  version: '{{ version }}'
+
+source:
+  #url: 'https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz'
+  url: https://github.com/tornadoweb/tornado/archive/refs/heads/master.zip
+  sha256: afa1c767c6066b850f682c93e5d21f99c4d265f520b50c3f56bb24f6ef75a2b1
+
+build:
+  number: 0
+  noarch: true
+  script:
+    - export CC=/bin/false
+    - export CXX=/bin/false
+    - 'python -m pip install . -vv --no-compile --target=$PREFIX/android/arm/python/site-packages '
+    - 'python -m pip install . -vv --no-compile --target=$PREFIX/android/arm64/python/site-packages '
+    - 'python -m pip install . -vv --no-compile --target=$PREFIX/android/x86/python/site-packages '
+    - 'python -m pip install . -vv --no-compile --target=$PREFIX/android/x86_64/python/site-packages '
+    - 'python -m pip install . -vv --no-compile --target=$PREFIX/iphoneos/python/site-packages '
+    - 'python -m pip install . -vv --no-compile --target=$PREFIX/iphonesimulator/python/site-packages '
+
+requirements: {}
+about:
+  home: The package home page
+  license: Apache Software
+  license_family: APACHE
+  license_file:
+  summary: Tornado is a Python web framework and asynchronous networking library, originally developed at FriendFeed. Built for Android and iOS apps using enaml-native.
+  doc_url:
+  dev_url:
+extra:
+  recipe-maintainers:
+    - your-github-id-here
+

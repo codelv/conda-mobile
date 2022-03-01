@@ -1,0 +1,48 @@
+context:
+  name: PyJWT
+  version: 1.6.1
+  hash_type: sha256
+  hash_value: dacba5786fe3bf1a0ae8673874e29f9ac497860955c501289c63b15d3daae63a
+
+package:
+  name: pip-{{ name|lower }}
+  version: '{{ version }}'
+
+source:
+  fn: '{{ name }}-{{ version }}.tar.gz'
+  url: https://pypi.io/packages/source/{{ name[0] | lower }}/{{ name|lower }}/{{ name }}-{{ version }}.tar.gz
+  '{{ hash_type }}': '{{ hash_value }}'
+
+build:
+  number: 0
+  entry_points:
+    - pyjwt = jwt.__main__:main
+  noarch: true
+  script:
+    - export CC=/bin/false
+    - export CXX=/bin/false
+    - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/arm --install-lib=$PREFIX/android/arm/python/site-packages --install-scripts=$PREFIX/android/arm/scripts --install-data=$PREFIX/android/arm/data --install-headers=$PREFIX/android/arm/include
+    - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/arm64 --install-lib=$PREFIX/android/arm64/python/site-packages --install-scripts=$PREFIX/android/arm64/scripts --install-data=$PREFIX/android/arm64/data --install-headers=$PREFIX/android/arm64/include
+    - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/x86 --install-lib=$PREFIX/android/x86/python/site-packages --install-scripts=$PREFIX/android/x86/scripts --install-data=$PREFIX/android/x86/data --install-headers=$PREFIX/android/x86/include
+    - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/android/x86_64 --install-lib=$PREFIX/android/x86_64/python/site-packages --install-scripts=$PREFIX/android/x86_64/scripts --install-data=$PREFIX/android/x86_64/data --install-headers=$PREFIX/android/x86_64/include
+    - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/iphoneos --install-lib=$PREFIX/iphoneos/python/site-packages --install-scripts=$PREFIX/iphoneos/scripts --install-data=$PREFIX/iphoneos/data --install-headers=$PREFIX/iphoneos/include
+    - python setup.py install  --single-version-externally-managed --record=record.txt --no-compile --install-base=$PREFIX/iphonesimulator --install-lib=$PREFIX/iphonesimulator/python/site-packages --install-scripts=$PREFIX/iphonesimulator/scripts --install-data=$PREFIX/iphonesimulator/data --install-headers=$PREFIX/iphonesimulator/include
+requirements:
+  run:
+    - android-cryptography
+
+about:
+  home: http://github.com/jpadilla/pyjwt
+  license: MIT License
+  license_family: MIT
+  license_file: ''
+  summary: JSON Web Token implementation in Python Built for Android and iOS apps using enaml-native.
+  description: "PyJWT\n=====\n\n.. image:: https://secure.travis-ci.org/jpadilla/pyjwt.svg?branch=master\n   :target: http://travis-ci.org/jpadilla/pyjwt?branch=master\n\n.. image:: https://ci.appveyor.com/api/projects/status/h8nt70aqtwhht39t?svg=true\n   :target: https://ci.appveyor.com/project/jpadilla/pyjwt\n\n.. image:: https://img.shields.io/pypi/v/pyjwt.svg\n   :target: https://pypi.python.org/pypi/pyjwt\n\n.. image:: https://coveralls.io/repos/jpadilla/pyjwt/badge.svg?branch=master\n   :target: https://coveralls.io/r/jpadilla/pyjwt?branch=master\n\n.. image:: https://readthedocs.org/projects/pyjwt/badge/?version=latest\n   :target: https://pyjwt.readthedocs.io\n\nA Python implementation of `RFC 7519 <https://tools.ietf.org/html/rfc7519>`_. Original implementation was written by `@progrium <https://github.com/progrium>`_.\n\nSponsor\n-------\n\n+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+\n\
+    | |auth0-logo| | If you want to quickly add secure token-based authentication to Python projects, feel free to check Auth0's Python SDK and free plan at `auth0.com/overview <https://auth0.com/overview?utm_source=GHsponsor&utm_medium=GHsponsor&utm_campaign=pyjwt&utm_content=auth>`_. |\n+--------------+-----------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+\n\n.. |auth0-logo| image:: https://user-images.githubusercontent.com/83319/31722733-de95bbde-b3ea-11e7-96bf-4f4e8f915588.png\n\nInstalling\n----------\n\nInstall with **pip**:\n\n.. code-block:: sh\n\n    $ pip install PyJWT\n\n\nUsage\n-----\n\n.. code:: python\n\n    >>> import jwt\n    >>> encoded = jwt.encode({'some': 'payload'}, 'secret', algorithm='HS256')\n    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzb21lIjoicGF5bG9hZCJ9.4twFt5NiznN84AWoo1d7KO1T_yoc0Z6XOpOVswacPZg'\n\
+    \n    >>> jwt.decode(encoded, 'secret', algorithms=['HS256'])\n    {'some': 'payload'}\n\n\nCommand line\n------------\n\nUsage::\n\n    pyjwt [options] INPUT\n\nDecoding examples::\n\n    pyjwt --key=secret TOKEN\n    pyjwt --no-verify TOKEN\n\nSee more options executing ``pyjwt --help``.\n\n\nDocumentation\n-------------\n\nView the full docs online at https://pyjwt.readthedocs.io/en/latest/\n\n\nTests\n-----\n\nYou can run tests from the project root after cloning with:\n\n.. code-block:: sh\n\n    $ python setup.py test\n\n\n"
+  doc_url: ''
+  dev_url: ''
+
+extra:
+  recipe-maintainers: ''
+

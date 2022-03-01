@@ -1,0 +1,52 @@
+context:
+  name: enaml
+  version: 0.15.0
+  hash_type: sha256
+  hash_value: 577635deab19a5a7d19a7f61c6622b0f65b98ec6e939ccb345b2f48715bd9489
+
+package:
+  name: android-{{ name|lower }}
+  version: '{{ version }}'
+
+source:
+  #fn: '{{ name }}-{{ version }}.tar.gz'
+  #url: 'https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz'
+  #'{{ hash_type }}': '{{ hash_value }}'
+  git_url: https://github.com/frmdstryr/enaml.git
+  git_rev: d-change-types
+
+requirements:
+  build:
+    - python
+    - ply
+    - cppy
+    - atom
+    - qtpy
+    - kiwisolver
+    - bytecode
+    - pip-cppy
+    - pip-ply
+    - pip-bytecode
+    - android-ndk
+    - android-libcxx
+    - android-python * py{{CONDA_PY}}*
+    - android-kiwisolver * py{{CONDA_PY}}*
+    - android-atom * py{{CONDA_PY}}*
+  run:
+    - python
+    - android-libcxx
+    - android-python * py{{CONDA_PY}}*
+    - android-kiwisolver * py{{CONDA_PY}}*
+    - android-atom * py{{CONDA_PY}}*
+    - pip-ply
+    - pip-bytecode
+
+build:
+  number: 0
+  binary_relocation: false
+  noarch: generic
+
+about:
+  home: http://github.com/codelv/enaml-native
+  license: GPLv3
+

@@ -1,0 +1,38 @@
+context:
+  name: cppy
+  version: 1.1.0
+
+package:
+  name: pip-{{ name|lower }}
+  version: '{{ version }}'
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 4eda6f1952054a270f32dc11df7c5e24b259a09fddf7bfaa5f33df9fb4a29642
+
+build:
+  number: 0
+  noarch: true
+  script:
+    - export CC=/bin/false
+    - export CXX=/bin/false
+    - 'python -m pip install . -vv --no-compile --target=$PREFIX/android/arm/python/site-packages '
+    - 'python -m pip install . -vv --no-compile --target=$PREFIX/android/arm64/python/site-packages '
+    - 'python -m pip install . -vv --no-compile --target=$PREFIX/android/x86/python/site-packages '
+    - 'python -m pip install . -vv --no-compile --target=$PREFIX/android/x86_64/python/site-packages '
+    - 'python -m pip install . -vv --no-compile --target=$PREFIX/iphoneos/python/site-packages '
+    - 'python -m pip install . -vv --no-compile --target=$PREFIX/iphonesimulator/python/site-packages '
+
+requirements: {}
+about:
+  home: The package home page
+  license: UNKNOWN
+  license_family: OTHER
+  license_file:
+  summary: C++ headers for C extension development Built for Android and iOS apps using enaml-native.
+  doc_url:
+  dev_url:
+extra:
+  recipe-maintainers:
+    - your-github-id-here
+

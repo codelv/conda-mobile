@@ -28,9 +28,13 @@ sdkmanager --install "ndk;{NDK_VER}"
 
 # Patch conda build because it fails cleaning up optimized pyc files
 site_packages = "/usr/share/miniconda/lib/python3.9/site-packages"
-CONDA_BUILD = f"""
-conda install conda-build
-sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' {site_packages}/conda_build/post.py
+
+MAMBA_BUILD = f"""
+wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+./bin/micromamba shell init -s bash -p ~/micromamba
+source ~/.bashrc
+micromamba activate
+micromamba install -c conda-forge python={PY_VER} boa
 """
 
 
@@ -58,7 +62,7 @@ def main():
             group, *name = item.split("-", 1)
             if group not in allowed_groups:
                 continue
-            meta_file = f"{item}/meta.yaml"
+            meta_file = f"{item}/recipe.yaml"
 
             if not os.path.exists(meta_file):
                 continue
@@ -82,20 +86,11 @@ def main():
                 packages[group] = [item]
 
     jobs = {}
-    conda_bld_path = "/usr/share/miniconda/conda-bld"
+    conda_bld_path = "~/bin/micromamba/conda-bld"
 
     common_steps = [
         {"uses": "actions/checkout@v2"},
-        {
-            "name": "Setup conda",
-            "uses": "conda-incubator/setup-miniconda@v2",
-            "with": {
-                "auto-update-conda": True,
-                "python-version": PY_VER,
-                "channels": "conda-forge,defaults",
-            },
-        },
-        {"name": "Install conda build", "run": Block(CONDA_BUILD)},
+        {"name": "Install build system", "run": Block(MAMBA_BUILD)},
     ]
 
     android_steps = [
@@ -130,18 +125,17 @@ def main():
             runs_on = "macos-latest"
 
         for pkg in items:
-            meta_file = f"{pkg}/meta.yaml"
+            meta_file = f"{pkg}/recipe.yaml"
             build_sh = f"{pkg}/build.sh"
             if not os.path.exists(meta_file):
                 continue
             with open(meta_file) as f:
-                data = f.read()
+                meta = yaml.load(f.read(), yaml.Loader)
 
             # Add requirements
             needs = []
-            if "requirements" in data:
-                i = data.index("requirements:")
-                meta = yaml.load(data[i:], yaml.Loader)
+            platform = 'linux-64'
+            if "requirements" in meta:
                 reqs = meta["requirements"]
                 if "build" in reqs:
                     for r in reqs["build"]:
@@ -149,10 +143,13 @@ def main():
                         if dep_name in all_packages:
                             needs.append(dep_name)
 
+            if 'build' in meta and 'noarch' in meta['build']:
+                platform = 'noarch'
+
             build_steps = [
                 {
                     "name": "Build recipe",
-                    "run": f"conda build --py={PY_VER} {pkg}",
+                    "run": f"boa build {pkg} --target-platform={platform}",
                 },
                 {
                     "name": "Upload package",
@@ -202,6 +199,16 @@ def main():
 
     with open(".github/workflows/ci.yml", "w") as f:
         f.write(yaml.dump(script))
+
+
+def convert_boa():
+    import subprocess
+    from glob import glob
+    for meta in glob("*/meta.yaml"):
+        path, name = os.path.split(meta)
+        result = subprocess.check_output(["boa", "convert", meta])
+        with open(os.path.join(path, "recipe.yaml"), "wb") as f:
+            f.write(result)
 
 
 if __name__ == "__main__":

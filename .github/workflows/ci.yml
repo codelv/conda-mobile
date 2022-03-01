@@ -8,16 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Setup conda
-      uses: conda-incubator/setup-miniconda@v2
-      with:
-        auto-update-conda: true
-        channels: conda-forge,defaults
-        python-version: '3.10'
-    - name: Install conda build
+    - name: Install build system
       run: |
-        conda install conda-build
-        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+        wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+        bin/micromamba activate
+        micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -48,31 +43,31 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: pip-cppy-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Download android-libcxx
       uses: actions/download-artifact@v2
       with:
         name: android-libcxx-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Download android-python
       uses: actions/download-artifact@v2
       with:
         name: android-python-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Run conda index
-      run: conda index /usr/share/miniconda/conda-bld/*
+      run: conda index ~/bin/micromamba/conda-bld/*
     - name: Build recipe
-      run: conda build --py=3.10 android-atom
+      run: boa build android-atom --target-platform=noarch
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-atom-3.10
-        path: /usr/share/miniconda/conda-bld/*/android-atom*.bz2
+        path: ~/bin/micromamba/conda-bld/*/android-atom*.bz2
   android-cffi:
     needs:
     - android-ndk
@@ -81,16 +76,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Setup conda
-      uses: conda-incubator/setup-miniconda@v2
-      with:
-        auto-update-conda: true
-        channels: conda-forge,defaults
-        python-version: '3.10'
-    - name: Install conda build
+    - name: Install build system
       run: |
-        conda install conda-build
-        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+        wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+        bin/micromamba activate
+        micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -121,26 +111,26 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Download android-python
       uses: actions/download-artifact@v2
       with:
         name: android-python-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Download android-libffi
       uses: actions/download-artifact@v2
       with:
         name: android-libffi-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Run conda index
-      run: conda index /usr/share/miniconda/conda-bld/*
+      run: conda index ~/bin/micromamba/conda-bld/*
     - name: Build recipe
-      run: conda build --py=3.10 android-cffi
+      run: boa build android-cffi --target-platform=noarch
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-cffi-3.10
-        path: /usr/share/miniconda/conda-bld/*/android-cffi*.bz2
+        path: ~/bin/micromamba/conda-bld/*/android-cffi*.bz2
   android-cryptography:
     needs:
     - android-ndk
@@ -149,16 +139,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Setup conda
-      uses: conda-incubator/setup-miniconda@v2
-      with:
-        auto-update-conda: true
-        channels: conda-forge,defaults
-        python-version: '3.10'
-    - name: Install conda build
+    - name: Install build system
       run: |
-        conda install conda-build
-        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+        wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+        bin/micromamba activate
+        micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -189,26 +174,26 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Download android-cffi
       uses: actions/download-artifact@v2
       with:
         name: android-cffi-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Download android-openssl
       uses: actions/download-artifact@v2
       with:
         name: android-openssl-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Run conda index
-      run: conda index /usr/share/miniconda/conda-bld/*
+      run: conda index ~/bin/micromamba/conda-bld/*
     - name: Build recipe
-      run: conda build --py=3.10 android-cryptography
+      run: boa build android-cryptography --target-platform=noarch
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-cryptography-3.10
-        path: /usr/share/miniconda/conda-bld/*/android-cryptography*.bz2
+        path: ~/bin/micromamba/conda-bld/*/android-cryptography*.bz2
   android-enaml:
     needs:
     - pip-cppy
@@ -222,16 +207,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Setup conda
-      uses: conda-incubator/setup-miniconda@v2
-      with:
-        auto-update-conda: true
-        channels: conda-forge,defaults
-        python-version: '3.10'
-    - name: Install conda build
+    - name: Install build system
       run: |
-        conda install conda-build
-        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+        wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+        bin/micromamba activate
+        micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -262,51 +242,51 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: pip-cppy-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Download pip-ply
       uses: actions/download-artifact@v2
       with:
         name: pip-ply-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Download pip-bytecode
       uses: actions/download-artifact@v2
       with:
         name: pip-bytecode-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Download android-libcxx
       uses: actions/download-artifact@v2
       with:
         name: android-libcxx-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Download android-python
       uses: actions/download-artifact@v2
       with:
         name: android-python-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Download android-kiwisolver
       uses: actions/download-artifact@v2
       with:
         name: android-kiwisolver-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Download android-atom
       uses: actions/download-artifact@v2
       with:
         name: android-atom-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Run conda index
-      run: conda index /usr/share/miniconda/conda-bld/*
+      run: conda index ~/bin/micromamba/conda-bld/*
     - name: Build recipe
-      run: conda build --py=3.10 android-enaml
+      run: boa build android-enaml --target-platform=noarch
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-enaml-3.10
-        path: /usr/share/miniconda/conda-bld/*/android-enaml*.bz2
+        path: ~/bin/micromamba/conda-bld/*/android-enaml*.bz2
   android-freetype:
     needs:
     - android-libpng
@@ -315,16 +295,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Setup conda
-      uses: conda-incubator/setup-miniconda@v2
-      with:
-        auto-update-conda: true
-        channels: conda-forge,defaults
-        python-version: '3.10'
-    - name: Install conda build
+    - name: Install build system
       run: |
-        conda install conda-build
-        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+        wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+        bin/micromamba activate
+        micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -355,42 +330,37 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-libpng-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Download android-harfbuzz
       uses: actions/download-artifact@v2
       with:
         name: android-harfbuzz-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Run conda index
-      run: conda index /usr/share/miniconda/conda-bld/*
+      run: conda index ~/bin/micromamba/conda-bld/*
     - name: Build recipe
-      run: conda build --py=3.10 android-freetype
+      run: boa build android-freetype --target-platform=noarch
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-freetype-3.10
-        path: /usr/share/miniconda/conda-bld/*/android-freetype*.bz2
+        path: ~/bin/micromamba/conda-bld/*/android-freetype*.bz2
   android-harfbuzz:
     needs:
     - android-ndk
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Setup conda
-      uses: conda-incubator/setup-miniconda@v2
-      with:
-        auto-update-conda: true
-        channels: conda-forge,defaults
-        python-version: '3.10'
-    - name: Install conda build
+    - name: Install build system
       run: |
-        conda install conda-build
-        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+        wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+        bin/micromamba activate
+        micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -421,16 +391,16 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Run conda index
-      run: conda index /usr/share/miniconda/conda-bld/*
+      run: conda index ~/bin/micromamba/conda-bld/*
     - name: Build recipe
-      run: conda build --py=3.10 android-harfbuzz
+      run: boa build android-harfbuzz --target-platform=noarch
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-harfbuzz-3.10
-        path: /usr/share/miniconda/conda-bld/*/android-harfbuzz*.bz2
+        path: ~/bin/micromamba/conda-bld/*/android-harfbuzz*.bz2
   android-kiwisolver:
     needs:
     - pip-cppy
@@ -440,16 +410,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Setup conda
-      uses: conda-incubator/setup-miniconda@v2
-      with:
-        auto-update-conda: true
-        channels: conda-forge,defaults
-        python-version: '3.10'
-    - name: Install conda build
+    - name: Install build system
       run: |
-        conda install conda-build
-        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+        wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+        bin/micromamba activate
+        micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -480,47 +445,42 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: pip-cppy-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Download android-libcxx
       uses: actions/download-artifact@v2
       with:
         name: android-libcxx-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Download android-python
       uses: actions/download-artifact@v2
       with:
         name: android-python-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Run conda index
-      run: conda index /usr/share/miniconda/conda-bld/*
+      run: conda index ~/bin/micromamba/conda-bld/*
     - name: Build recipe
-      run: conda build --py=3.10 android-kiwisolver
+      run: boa build android-kiwisolver --target-platform=noarch
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-kiwisolver-3.10
-        path: /usr/share/miniconda/conda-bld/*/android-kiwisolver*.bz2
+        path: ~/bin/micromamba/conda-bld/*/android-kiwisolver*.bz2
   android-libbz2:
     needs:
     - android-ndk
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Setup conda
-      uses: conda-incubator/setup-miniconda@v2
-      with:
-        auto-update-conda: true
-        channels: conda-forge,defaults
-        python-version: '3.10'
-    - name: Install conda build
+    - name: Install build system
       run: |
-        conda install conda-build
-        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+        wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+        bin/micromamba activate
+        micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -551,32 +511,27 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Run conda index
-      run: conda index /usr/share/miniconda/conda-bld/*
+      run: conda index ~/bin/micromamba/conda-bld/*
     - name: Build recipe
-      run: conda build --py=3.10 android-libbz2
+      run: boa build android-libbz2 --target-platform=noarch
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-libbz2-3.10
-        path: /usr/share/miniconda/conda-bld/*/android-libbz2*.bz2
+        path: ~/bin/micromamba/conda-bld/*/android-libbz2*.bz2
   android-libcxx:
     needs:
     - android-ndk
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Setup conda
-      uses: conda-incubator/setup-miniconda@v2
-      with:
-        auto-update-conda: true
-        channels: conda-forge,defaults
-        python-version: '3.10'
-    - name: Install conda build
+    - name: Install build system
       run: |
-        conda install conda-build
-        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+        wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+        bin/micromamba activate
+        micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -607,32 +562,27 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Run conda index
-      run: conda index /usr/share/miniconda/conda-bld/*
+      run: conda index ~/bin/micromamba/conda-bld/*
     - name: Build recipe
-      run: conda build --py=3.10 android-libcxx
+      run: boa build android-libcxx --target-platform=noarch
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-libcxx-3.10
-        path: /usr/share/miniconda/conda-bld/*/android-libcxx*.bz2
+        path: ~/bin/micromamba/conda-bld/*/android-libcxx*.bz2
   android-libffi:
     needs:
     - android-ndk
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Setup conda
-      uses: conda-incubator/setup-miniconda@v2
-      with:
-        auto-update-conda: true
-        channels: conda-forge,defaults
-        python-version: '3.10'
-    - name: Install conda build
+    - name: Install build system
       run: |
-        conda install conda-build
-        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+        wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+        bin/micromamba activate
+        micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -663,32 +613,27 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Run conda index
-      run: conda index /usr/share/miniconda/conda-bld/*
+      run: conda index ~/bin/micromamba/conda-bld/*
     - name: Build recipe
-      run: conda build --py=3.10 android-libffi
+      run: boa build android-libffi --target-platform=noarch
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-libffi-3.10
-        path: /usr/share/miniconda/conda-bld/*/android-libffi*.bz2
+        path: ~/bin/micromamba/conda-bld/*/android-libffi*.bz2
   android-libgeos:
     needs:
     - android-ndk
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Setup conda
-      uses: conda-incubator/setup-miniconda@v2
-      with:
-        auto-update-conda: true
-        channels: conda-forge,defaults
-        python-version: '3.10'
-    - name: Install conda build
+    - name: Install build system
       run: |
-        conda install conda-build
-        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+        wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+        bin/micromamba activate
+        micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -719,32 +664,27 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Run conda index
-      run: conda index /usr/share/miniconda/conda-bld/*
+      run: conda index ~/bin/micromamba/conda-bld/*
     - name: Build recipe
-      run: conda build --py=3.10 android-libgeos
+      run: boa build android-libgeos --target-platform=noarch
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-libgeos-3.10
-        path: /usr/share/miniconda/conda-bld/*/android-libgeos*.bz2
+        path: ~/bin/micromamba/conda-bld/*/android-libgeos*.bz2
   android-libjpeg:
     needs:
     - android-ndk
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Setup conda
-      uses: conda-incubator/setup-miniconda@v2
-      with:
-        auto-update-conda: true
-        channels: conda-forge,defaults
-        python-version: '3.10'
-    - name: Install conda build
+    - name: Install build system
       run: |
-        conda install conda-build
-        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+        wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+        bin/micromamba activate
+        micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -775,32 +715,27 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Run conda index
-      run: conda index /usr/share/miniconda/conda-bld/*
+      run: conda index ~/bin/micromamba/conda-bld/*
     - name: Build recipe
-      run: conda build --py=3.10 android-libjpeg
+      run: boa build android-libjpeg --target-platform=noarch
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-libjpeg-3.10
-        path: /usr/share/miniconda/conda-bld/*/android-libjpeg*.bz2
+        path: ~/bin/micromamba/conda-bld/*/android-libjpeg*.bz2
   android-liblzma:
     needs:
     - android-ndk
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Setup conda
-      uses: conda-incubator/setup-miniconda@v2
-      with:
-        auto-update-conda: true
-        channels: conda-forge,defaults
-        python-version: '3.10'
-    - name: Install conda build
+    - name: Install build system
       run: |
-        conda install conda-build
-        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+        wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+        bin/micromamba activate
+        micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -831,32 +766,27 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Run conda index
-      run: conda index /usr/share/miniconda/conda-bld/*
+      run: conda index ~/bin/micromamba/conda-bld/*
     - name: Build recipe
-      run: conda build --py=3.10 android-liblzma
+      run: boa build android-liblzma --target-platform=noarch
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-liblzma-3.10
-        path: /usr/share/miniconda/conda-bld/*/android-liblzma*.bz2
+        path: ~/bin/micromamba/conda-bld/*/android-liblzma*.bz2
   android-libpng:
     needs:
     - android-ndk
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Setup conda
-      uses: conda-incubator/setup-miniconda@v2
-      with:
-        auto-update-conda: true
-        channels: conda-forge,defaults
-        python-version: '3.10'
-    - name: Install conda build
+    - name: Install build system
       run: |
-        conda install conda-build
-        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+        wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+        bin/micromamba activate
+        micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -887,32 +817,27 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Run conda index
-      run: conda index /usr/share/miniconda/conda-bld/*
+      run: conda index ~/bin/micromamba/conda-bld/*
     - name: Build recipe
-      run: conda build --py=3.10 android-libpng
+      run: boa build android-libpng --target-platform=noarch
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-libpng-3.10
-        path: /usr/share/miniconda/conda-bld/*/android-libpng*.bz2
+        path: ~/bin/micromamba/conda-bld/*/android-libpng*.bz2
   android-libsodium:
     needs:
     - android-ndk
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Setup conda
-      uses: conda-incubator/setup-miniconda@v2
-      with:
-        auto-update-conda: true
-        channels: conda-forge,defaults
-        python-version: '3.10'
-    - name: Install conda build
+    - name: Install build system
       run: |
-        conda install conda-build
-        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+        wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+        bin/micromamba activate
+        micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -943,32 +868,27 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Run conda index
-      run: conda index /usr/share/miniconda/conda-bld/*
+      run: conda index ~/bin/micromamba/conda-bld/*
     - name: Build recipe
-      run: conda build --py=3.10 android-libsodium
+      run: boa build android-libsodium --target-platform=noarch
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-libsodium-3.10
-        path: /usr/share/miniconda/conda-bld/*/android-libsodium*.bz2
+        path: ~/bin/micromamba/conda-bld/*/android-libsodium*.bz2
   android-libuuid:
     needs:
     - android-ndk
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Setup conda
-      uses: conda-incubator/setup-miniconda@v2
-      with:
-        auto-update-conda: true
-        channels: conda-forge,defaults
-        python-version: '3.10'
-    - name: Install conda build
+    - name: Install build system
       run: |
-        conda install conda-build
-        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+        wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+        bin/micromamba activate
+        micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -999,32 +919,27 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Run conda index
-      run: conda index /usr/share/miniconda/conda-bld/*
+      run: conda index ~/bin/micromamba/conda-bld/*
     - name: Build recipe
-      run: conda build --py=3.10 android-libuuid
+      run: boa build android-libuuid --target-platform=noarch
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-libuuid-3.10
-        path: /usr/share/miniconda/conda-bld/*/android-libuuid*.bz2
+        path: ~/bin/micromamba/conda-bld/*/android-libuuid*.bz2
   android-libxcrypt:
     needs:
     - android-ndk
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Setup conda
-      uses: conda-incubator/setup-miniconda@v2
-      with:
-        auto-update-conda: true
-        channels: conda-forge,defaults
-        python-version: '3.10'
-    - name: Install conda build
+    - name: Install build system
       run: |
-        conda install conda-build
-        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+        wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+        bin/micromamba activate
+        micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -1055,16 +970,16 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Run conda index
-      run: conda index /usr/share/miniconda/conda-bld/*
+      run: conda index ~/bin/micromamba/conda-bld/*
     - name: Build recipe
-      run: conda build --py=3.10 android-libxcrypt
+      run: boa build android-libxcrypt --target-platform=noarch
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-libxcrypt-3.10
-        path: /usr/share/miniconda/conda-bld/*/android-libxcrypt*.bz2
+        path: ~/bin/micromamba/conda-bld/*/android-libxcrypt*.bz2
   android-libxml2:
     needs:
     - android-liblzma
@@ -1072,16 +987,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Setup conda
-      uses: conda-incubator/setup-miniconda@v2
-      with:
-        auto-update-conda: true
-        channels: conda-forge,defaults
-        python-version: '3.10'
-    - name: Install conda build
+    - name: Install build system
       run: |
-        conda install conda-build
-        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+        wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+        bin/micromamba activate
+        micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -1112,21 +1022,21 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-liblzma-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Run conda index
-      run: conda index /usr/share/miniconda/conda-bld/*
+      run: conda index ~/bin/micromamba/conda-bld/*
     - name: Build recipe
-      run: conda build --py=3.10 android-libxml2
+      run: boa build android-libxml2 --target-platform=noarch
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-libxml2-3.10
-        path: /usr/share/miniconda/conda-bld/*/android-libxml2*.bz2
+        path: ~/bin/micromamba/conda-bld/*/android-libxml2*.bz2
   android-libxslt:
     needs:
     - android-libxml2
@@ -1134,16 +1044,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Setup conda
-      uses: conda-incubator/setup-miniconda@v2
-      with:
-        auto-update-conda: true
-        channels: conda-forge,defaults
-        python-version: '3.10'
-    - name: Install conda build
+    - name: Install build system
       run: |
-        conda install conda-build
-        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+        wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+        bin/micromamba activate
+        micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -1174,21 +1079,21 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-libxml2-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Run conda index
-      run: conda index /usr/share/miniconda/conda-bld/*
+      run: conda index ~/bin/micromamba/conda-bld/*
     - name: Build recipe
-      run: conda build --py=3.10 android-libxslt
+      run: boa build android-libxslt --target-platform=noarch
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-libxslt-3.10
-        path: /usr/share/miniconda/conda-bld/*/android-libxslt*.bz2
+        path: ~/bin/micromamba/conda-bld/*/android-libxslt*.bz2
   android-libzmq:
     needs:
     - android-libsodium
@@ -1196,16 +1101,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Setup conda
-      uses: conda-incubator/setup-miniconda@v2
-      with:
-        auto-update-conda: true
-        channels: conda-forge,defaults
-        python-version: '3.10'
-    - name: Install conda build
+    - name: Install build system
       run: |
-        conda install conda-build
-        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+        wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+        bin/micromamba activate
+        micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -1236,21 +1136,21 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-libsodium-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Run conda index
-      run: conda index /usr/share/miniconda/conda-bld/*
+      run: conda index ~/bin/micromamba/conda-bld/*
     - name: Build recipe
-      run: conda build --py=3.10 android-libzmq
+      run: boa build android-libzmq --target-platform=noarch
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-libzmq-3.10
-        path: /usr/share/miniconda/conda-bld/*/android-libzmq*.bz2
+        path: ~/bin/micromamba/conda-bld/*/android-libzmq*.bz2
   android-lxml:
     needs:
     - android-ndk
@@ -1260,16 +1160,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Setup conda
-      uses: conda-incubator/setup-miniconda@v2
-      with:
-        auto-update-conda: true
-        channels: conda-forge,defaults
-        python-version: '3.10'
-    - name: Install conda build
+    - name: Install build system
       run: |
-        conda install conda-build
-        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+        wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+        bin/micromamba activate
+        micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -1300,47 +1195,42 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Download android-libxml2
       uses: actions/download-artifact@v2
       with:
         name: android-libxml2-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Download android-libxslt
       uses: actions/download-artifact@v2
       with:
         name: android-libxslt-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Download android-python
       uses: actions/download-artifact@v2
       with:
         name: android-python-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Run conda index
-      run: conda index /usr/share/miniconda/conda-bld/*
+      run: conda index ~/bin/micromamba/conda-bld/*
     - name: Build recipe
-      run: conda build --py=3.10 android-lxml
+      run: boa build android-lxml --target-platform=noarch
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-lxml-3.10
-        path: /usr/share/miniconda/conda-bld/*/android-lxml*.bz2
+        path: ~/bin/micromamba/conda-bld/*/android-lxml*.bz2
   android-lz4:
     needs:
     - android-ndk
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Setup conda
-      uses: conda-incubator/setup-miniconda@v2
-      with:
-        auto-update-conda: true
-        channels: conda-forge,defaults
-        python-version: '3.10'
-    - name: Install conda build
+    - name: Install build system
       run: |
-        conda install conda-build
-        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+        wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+        bin/micromamba activate
+        micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -1371,16 +1261,16 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Run conda index
-      run: conda index /usr/share/miniconda/conda-bld/*
+      run: conda index ~/bin/micromamba/conda-bld/*
     - name: Build recipe
-      run: conda build --py=3.10 android-lz4
+      run: boa build android-lz4 --target-platform=noarch
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-lz4-3.10
-        path: /usr/share/miniconda/conda-bld/*/android-lz4*.bz2
+        path: ~/bin/micromamba/conda-bld/*/android-lz4*.bz2
   android-msgpack:
     needs:
     - android-ndk
@@ -1389,16 +1279,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Setup conda
-      uses: conda-incubator/setup-miniconda@v2
-      with:
-        auto-update-conda: true
-        channels: conda-forge,defaults
-        python-version: '3.10'
-    - name: Install conda build
+    - name: Install build system
       run: |
-        conda install conda-build
-        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+        wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+        bin/micromamba activate
+        micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -1429,40 +1314,35 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Download android-libxcrypt
       uses: actions/download-artifact@v2
       with:
         name: android-libxcrypt-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Download android-python
       uses: actions/download-artifact@v2
       with:
         name: android-python-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Run conda index
-      run: conda index /usr/share/miniconda/conda-bld/*
+      run: conda index ~/bin/micromamba/conda-bld/*
     - name: Build recipe
-      run: conda build --py=3.10 android-msgpack
+      run: boa build android-msgpack --target-platform=noarch
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-msgpack-3.10
-        path: /usr/share/miniconda/conda-bld/*/android-msgpack*.bz2
+        path: ~/bin/micromamba/conda-bld/*/android-msgpack*.bz2
   android-ndk:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Setup conda
-      uses: conda-incubator/setup-miniconda@v2
-      with:
-        auto-update-conda: true
-        channels: conda-forge,defaults
-        python-version: '3.10'
-    - name: Install conda build
+    - name: Install build system
       run: |
-        conda install conda-build
-        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+        wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+        bin/micromamba activate
+        micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -1490,28 +1370,23 @@ jobs:
         sdkmanager --install platform-tools
         sdkmanager --install "ndk;23.1.7779620"
     - name: Build recipe
-      run: conda build --py=3.10 android-ndk
+      run: boa build android-ndk --target-platform=linux-64
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-ndk-3.10
-        path: /usr/share/miniconda/conda-bld/*/android-ndk*.bz2
+        path: ~/bin/micromamba/conda-bld/*/android-ndk*.bz2
   android-openssl:
     needs:
     - android-ndk
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Setup conda
-      uses: conda-incubator/setup-miniconda@v2
-      with:
-        auto-update-conda: true
-        channels: conda-forge,defaults
-        python-version: '3.10'
-    - name: Install conda build
+    - name: Install build system
       run: |
-        conda install conda-build
-        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+        wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+        bin/micromamba activate
+        micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -1542,16 +1417,16 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Run conda index
-      run: conda index /usr/share/miniconda/conda-bld/*
+      run: conda index ~/bin/micromamba/conda-bld/*
     - name: Build recipe
-      run: conda build --py=3.10 android-openssl
+      run: boa build android-openssl --target-platform=noarch
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-openssl-3.10
-        path: /usr/share/miniconda/conda-bld/*/android-openssl*.bz2
+        path: ~/bin/micromamba/conda-bld/*/android-openssl*.bz2
   android-python:
     needs:
     - android-ndk
@@ -1565,16 +1440,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Setup conda
-      uses: conda-incubator/setup-miniconda@v2
-      with:
-        auto-update-conda: true
-        channels: conda-forge,defaults
-        python-version: '3.10'
-    - name: Install conda build
+    - name: Install build system
       run: |
-        conda install conda-build
-        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+        wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+        bin/micromamba activate
+        micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -1605,51 +1475,51 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Download android-libffi
       uses: actions/download-artifact@v2
       with:
         name: android-libffi-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Download android-openssl
       uses: actions/download-artifact@v2
       with:
         name: android-openssl-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Download android-sqlite
       uses: actions/download-artifact@v2
       with:
         name: android-sqlite-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Download android-liblzma
       uses: actions/download-artifact@v2
       with:
         name: android-liblzma-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Download android-libbz2
       uses: actions/download-artifact@v2
       with:
         name: android-libbz2-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Download android-libuuid
       uses: actions/download-artifact@v2
       with:
         name: android-libuuid-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Download android-libxcrypt
       uses: actions/download-artifact@v2
       with:
         name: android-libxcrypt-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Run conda index
-      run: conda index /usr/share/miniconda/conda-bld/*
+      run: conda index ~/bin/micromamba/conda-bld/*
     - name: Build recipe
-      run: conda build --py=3.10 android-python
+      run: boa build android-python --target-platform=noarch
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-python-3.10
-        path: /usr/share/miniconda/conda-bld/*/android-python*.bz2
+        path: ~/bin/micromamba/conda-bld/*/android-python*.bz2
   android-pyzmq:
     needs:
     - android-ndk
@@ -1659,16 +1529,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Setup conda
-      uses: conda-incubator/setup-miniconda@v2
-      with:
-        auto-update-conda: true
-        channels: conda-forge,defaults
-        python-version: '3.10'
-    - name: Install conda build
+    - name: Install build system
       run: |
-        conda install conda-build
-        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+        wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+        bin/micromamba activate
+        micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -1699,47 +1564,42 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Download android-libzmq
       uses: actions/download-artifact@v2
       with:
         name: android-libzmq-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Download android-libsodium
       uses: actions/download-artifact@v2
       with:
         name: android-libsodium-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Download android-python
       uses: actions/download-artifact@v2
       with:
         name: android-python-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Run conda index
-      run: conda index /usr/share/miniconda/conda-bld/*
+      run: conda index ~/bin/micromamba/conda-bld/*
     - name: Build recipe
-      run: conda build --py=3.10 android-pyzmq
+      run: boa build android-pyzmq --target-platform=noarch
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-pyzmq-3.10
-        path: /usr/share/miniconda/conda-bld/*/android-pyzmq*.bz2
+        path: ~/bin/micromamba/conda-bld/*/android-pyzmq*.bz2
   android-sqlite:
     needs:
     - android-ndk
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Setup conda
-      uses: conda-incubator/setup-miniconda@v2
-      with:
-        auto-update-conda: true
-        channels: conda-forge,defaults
-        python-version: '3.10'
-    - name: Install conda build
+    - name: Install build system
       run: |
-        conda install conda-build
-        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+        wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+        bin/micromamba activate
+        micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -1770,183 +1630,143 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
-        path: /usr/share/miniconda/conda-bld/
+        path: ~/bin/micromamba/conda-bld/
     - name: Run conda index
-      run: conda index /usr/share/miniconda/conda-bld/*
+      run: conda index ~/bin/micromamba/conda-bld/*
     - name: Build recipe
-      run: conda build --py=3.10 android-sqlite
+      run: boa build android-sqlite --target-platform=noarch
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-sqlite-3.10
-        path: /usr/share/miniconda/conda-bld/*/android-sqlite*.bz2
+        path: ~/bin/micromamba/conda-bld/*/android-sqlite*.bz2
   pip-bytecode:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Setup conda
-      uses: conda-incubator/setup-miniconda@v2
-      with:
-        auto-update-conda: true
-        channels: conda-forge,defaults
-        python-version: '3.10'
-    - name: Install conda build
+    - name: Install build system
       run: |
-        conda install conda-build
-        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+        wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+        bin/micromamba activate
+        micromamba install -c conda-forge python=3.10 boa
     - name: Build recipe
-      run: conda build --py=3.10 pip-bytecode
+      run: boa build pip-bytecode --target-platform=noarch
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: pip-bytecode-3.10
-        path: /usr/share/miniconda/conda-bld/*/pip-bytecode*.bz2
+        path: ~/bin/micromamba/conda-bld/*/pip-bytecode*.bz2
   pip-cppy:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Setup conda
-      uses: conda-incubator/setup-miniconda@v2
-      with:
-        auto-update-conda: true
-        channels: conda-forge,defaults
-        python-version: '3.10'
-    - name: Install conda build
+    - name: Install build system
       run: |
-        conda install conda-build
-        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+        wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+        bin/micromamba activate
+        micromamba install -c conda-forge python=3.10 boa
     - name: Build recipe
-      run: conda build --py=3.10 pip-cppy
+      run: boa build pip-cppy --target-platform=noarch
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: pip-cppy-3.10
-        path: /usr/share/miniconda/conda-bld/*/pip-cppy*.bz2
+        path: ~/bin/micromamba/conda-bld/*/pip-cppy*.bz2
   pip-docutils:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Setup conda
-      uses: conda-incubator/setup-miniconda@v2
-      with:
-        auto-update-conda: true
-        channels: conda-forge,defaults
-        python-version: '3.10'
-    - name: Install conda build
+    - name: Install build system
       run: |
-        conda install conda-build
-        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+        wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+        bin/micromamba activate
+        micromamba install -c conda-forge python=3.10 boa
     - name: Build recipe
-      run: conda build --py=3.10 pip-docutils
+      run: boa build pip-docutils --target-platform=noarch
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: pip-docutils-3.10
-        path: /usr/share/miniconda/conda-bld/*/pip-docutils*.bz2
+        path: ~/bin/micromamba/conda-bld/*/pip-docutils*.bz2
   pip-jsonrpclib:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Setup conda
-      uses: conda-incubator/setup-miniconda@v2
-      with:
-        auto-update-conda: true
-        channels: conda-forge,defaults
-        python-version: '3.10'
-    - name: Install conda build
+    - name: Install build system
       run: |
-        conda install conda-build
-        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+        wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+        bin/micromamba activate
+        micromamba install -c conda-forge python=3.10 boa
     - name: Build recipe
-      run: conda build --py=3.10 pip-jsonrpclib
+      run: boa build pip-jsonrpclib --target-platform=noarch
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: pip-jsonrpclib-3.10
-        path: /usr/share/miniconda/conda-bld/*/pip-jsonrpclib*.bz2
+        path: ~/bin/micromamba/conda-bld/*/pip-jsonrpclib*.bz2
   pip-motor:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Setup conda
-      uses: conda-incubator/setup-miniconda@v2
-      with:
-        auto-update-conda: true
-        channels: conda-forge,defaults
-        python-version: '3.10'
-    - name: Install conda build
+    - name: Install build system
       run: |
-        conda install conda-build
-        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+        wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+        bin/micromamba activate
+        micromamba install -c conda-forge python=3.10 boa
     - name: Build recipe
-      run: conda build --py=3.10 pip-motor
+      run: boa build pip-motor --target-platform=noarch
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: pip-motor-3.10
-        path: /usr/share/miniconda/conda-bld/*/pip-motor*.bz2
+        path: ~/bin/micromamba/conda-bld/*/pip-motor*.bz2
   pip-ply:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Setup conda
-      uses: conda-incubator/setup-miniconda@v2
-      with:
-        auto-update-conda: true
-        channels: conda-forge,defaults
-        python-version: '3.10'
-    - name: Install conda build
+    - name: Install build system
       run: |
-        conda install conda-build
-        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+        wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+        bin/micromamba activate
+        micromamba install -c conda-forge python=3.10 boa
     - name: Build recipe
-      run: conda build --py=3.10 pip-ply
+      run: boa build pip-ply --target-platform=noarch
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: pip-ply-3.10
-        path: /usr/share/miniconda/conda-bld/*/pip-ply*.bz2
+        path: ~/bin/micromamba/conda-bld/*/pip-ply*.bz2
   pip-pytz:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Setup conda
-      uses: conda-incubator/setup-miniconda@v2
-      with:
-        auto-update-conda: true
-        channels: conda-forge,defaults
-        python-version: '3.10'
-    - name: Install conda build
+    - name: Install build system
       run: |
-        conda install conda-build
-        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+        wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+        bin/micromamba activate
+        micromamba install -c conda-forge python=3.10 boa
     - name: Build recipe
-      run: conda build --py=3.10 pip-pytz
+      run: boa build pip-pytz --target-platform=noarch
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: pip-pytz-3.10
-        path: /usr/share/miniconda/conda-bld/*/pip-pytz*.bz2
+        path: ~/bin/micromamba/conda-bld/*/pip-pytz*.bz2
   pip-tornado:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Setup conda
-      uses: conda-incubator/setup-miniconda@v2
-      with:
-        auto-update-conda: true
-        channels: conda-forge,defaults
-        python-version: '3.10'
-    - name: Install conda build
+    - name: Install build system
       run: |
-        conda install conda-build
-        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+        wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+        bin/micromamba activate
+        micromamba install -c conda-forge python=3.10 boa
     - name: Build recipe
-      run: conda build --py=3.10 pip-tornado
+      run: boa build pip-tornado --target-platform=noarch
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: pip-tornado-3.10
-        path: /usr/share/miniconda/conda-bld/*/pip-tornado*.bz2
+        path: ~/bin/micromamba/conda-bld/*/pip-tornado*.bz2
 name: CI
 'on': push
