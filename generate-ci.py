@@ -97,8 +97,19 @@ def main():
 
     common_steps = [
         {"uses": "actions/checkout@v2"},
-        {"name": "Install micromamba", "uses": "mamba-org/provision-with-micromamba@main"},
-        {"name": "Setup micromamba", "run": Block(SETUP)},
+        {
+            "name": "Install micromamba",
+            "uses": "mamba-org/provision-with-micromamba@main",
+            #"with": {
+            #    "cache-env": "true",
+            #    "cache-downloads": "true",
+            #}
+        },
+        {
+            "name": "Setup micromamba",
+            "shell": "bash -l {0}",
+            "run": Block(SETUP)
+        },
     ]
 
     android_steps = [
@@ -157,6 +168,7 @@ def main():
             build_steps = [
                 {
                     "name": "Build recipe",
+                    "shell": "bash -l {0}",
                     "run": f"boa build {pkg} --target-platform={platform}",
                 },
                 {
@@ -205,7 +217,6 @@ def main():
         "name": "CI",
         "on": "push",
         "jobs": jobs,
-        "defaults": {"run": {"shell": "bash -l {0}"}},
     }
 
 
