@@ -25,10 +25,9 @@ do
     # Copy to install dir
     mkdir -p $PREFIX/android/$ARCH/lib
     mkdir -p $PREFIX/android/$ARCH/include
-    validate-lib-arch libbz2.so
     cp -RL libbz2.so $PREFIX/android/$ARCH/lib
     cp -RL *.h $PREFIX/android/$ARCH/include
-
+    validate-lib-arch $PREFIX/android/$ARCH/lib/*.so
 done
 
 

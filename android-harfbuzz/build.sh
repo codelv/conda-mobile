@@ -27,14 +27,13 @@ do
     make -j$CPU_COUNT
     make install
 
-    validate-lib-arch dist/$ARCH/lib/libharfbuzz.so
-
     # Copy to install dir
     mkdir -p $PREFIX/android/$ARCH/lib
     mkdir -p $PREFIX/android/$ARCH/include
     cp -RL dist/$ARCH/lib/libharfbuzz.so $PREFIX/android/$ARCH/lib
     cp -RL dist/$ARCH/lib/libharfbuzz-subset.so $PREFIX/android/$ARCH/lib
     cp -RL dist/$ARCH/include/* $PREFIX/android/$ARCH/include
+    validate-lib-arch $PREFIX/android/$ARCH/lib/*.so
 
 done
 

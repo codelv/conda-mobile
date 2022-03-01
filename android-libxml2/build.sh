@@ -29,9 +29,9 @@ do
     # Copy to install dir
     mkdir -p $PREFIX/android/$ARCH/lib
     mkdir -p $PREFIX/android/$ARCH/include
-    validate-lib-arch dist/$ARCH/lib/libxml2.so
     cp -RL dist/$ARCH/lib/libxml2.so $PREFIX/android/$ARCH/lib
     cp -RL dist/$ARCH/include/libxml2/* $PREFIX/android/$ARCH/include
+    validate-lib-arch $PREFIX/android/$ARCH/lib/*.so
 
 done
 

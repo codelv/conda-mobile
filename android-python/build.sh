@@ -95,6 +95,7 @@ do
     cp -RL dist/$ARCH/lib/libpython3.10.so $PREFIX/android/$ARCH/lib/
     cp -RL dist/$ARCH/include $PREFIX/android/$ARCH
     cp -RL dist/$ARCH/lib/python3.10/* $PREFIX/android/$ARCH/python
+    validate-lib-arch $PREFIX/android/$ARCH/lib/*.so
 
     # exit 1
 done

@@ -25,14 +25,12 @@ do
     make -j$CPU_COUNT
     make install
 
-    # Validate
-    validate-lib-arch dist/$ARCH/lib/libuuid.so
-
     # Copy to install dir
     mkdir -p $PREFIX/android/$ARCH/lib
     mkdir -p $PREFIX/android/$ARCH/include
     cp -RL dist/$ARCH/lib/libuuid.so $PREFIX/android/$ARCH/lib
     cp -RL dist/$ARCH/include/uuid $PREFIX/android/$ARCH/include
+    validate-lib-arch $PREFIX/android/$ARCH/lib/*.so
 done
 
 

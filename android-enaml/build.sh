@@ -46,6 +46,7 @@ do
     mkdir -p $PREFIX/android/$ARCH/python/site-packages/
     cp -RL build/lib.android-$ARCH-$PY_VER/enaml $PREFIX/android/$ARCH/python/site-packages/
     cp -RL build/lib.android-$ARCH-$PY_VER/*.so $PREFIX/android/$ARCH/lib
+    validate-lib-arch $PREFIX/android/$ARCH/lib/*.so
 
     # Copy parse tables
     cp -RL $SRC_DIR/enaml/core/parser/parse_tab $PREFIX/android/$ARCH/python/site-packages/enaml/core/parser
@@ -54,6 +55,7 @@ do
     else
         rm -f $PREFIX/android/$ARCH/python/site-packages/enaml/core/parser/parse_tab/*3*.py
     fi
+
 done
 
 # Cleanup extra files added from running develop

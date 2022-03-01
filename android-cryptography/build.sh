@@ -40,5 +40,6 @@ do
     mkdir -p $PREFIX/android/$ARCH/python/site-packages/
     cp -RL build/lib.android-$ARCH-$PY_VER/cryptography $PREFIX/android/$ARCH/python/site-packages/
     cp -RL build/lib.android-$ARCH-$PY_VER/*.so $PREFIX/android/$ARCH/lib
+    validate-lib-arch $PREFIX/android/$ARCH/lib/*.so
 
 done

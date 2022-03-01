@@ -24,5 +24,6 @@ do
     mkdir -p $PREFIX/android/$ARCH/lib
     cp -RL lib*.so $PREFIX/android/$ARCH/lib
     cp -RL include $PREFIX/android/$ARCH/
+    validate-lib-arch $PREFIX/android/$ARCH/lib/*.so
 
 done

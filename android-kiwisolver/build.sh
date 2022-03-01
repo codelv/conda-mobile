@@ -39,4 +39,5 @@ do
     # Copy to install
     cp -RL kiwi $PREFIX/android/$ARCH/include
     cp -RL build/lib.android-$ARCH-$PY_VER/*.so $PREFIX/android/$ARCH/lib
+    validate-lib-arch $PREFIX/android/$ARCH/lib/*.so
 done

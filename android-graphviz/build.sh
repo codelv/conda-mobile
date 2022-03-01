@@ -52,7 +52,7 @@ do
     cp -RL ../../dist/$ARCH/lib/libcgraph.so $PREFIX/android/$ARCH/lib/
     cp -RL ../../dist/$ARCH/include/* $PREFIX/android/$ARCH/include
     cd ../../ # back
-
+    validate-lib-arch $PREFIX/android/$ARCH/lib/*.so
 done
 
 

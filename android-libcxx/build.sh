@@ -22,4 +22,5 @@ do
     # Include c++_shared.so
     mkdir -p $PREFIX/android/$ARCH/lib
     cp -RL $ANDROID_TOOLCHAIN/sysroot/usr/lib/$TARGET_HOST/libc++_shared.so $PREFIX/android/$ARCH/lib
+    validate-lib-arch $PREFIX/android/$ARCH/lib/*.so
 done

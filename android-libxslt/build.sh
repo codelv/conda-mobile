@@ -32,9 +32,9 @@ do
     # Copy to install dir
     mkdir -p $PREFIX/android/$ARCH/lib
     mkdir -p $PREFIX/android/$ARCH/include
-    validate-lib-arch dist/$ARCH/lib/libxslt.so
     cp -RL dist/$ARCH/lib/lib*.so $PREFIX/android/$ARCH/lib
     cp -RL dist/$ARCH/include/* $PREFIX/android/$ARCH/include
+    validate-lib-arch $PREFIX/android/$ARCH/lib/*.so
 
 done
 
