@@ -24,6 +24,7 @@ do
 
     # Copy to install dir
     mkdir -p $PREFIX/android/$ARCH/lib
+    validate-lib-arch dist/$ARCH/lib/libgeos_c.so
     cp -RL dist/$ARCH/lib/libgeos_c.so $PREFIX/android/$ARCH/lib
     cp -RL dist/$ARCH/include $PREFIX/android/$ARCH/
 

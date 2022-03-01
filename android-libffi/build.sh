@@ -24,6 +24,7 @@ do
     # Copy to install dir
     mkdir -p $PREFIX/android/$ARCH/lib
     mkdir -p $PREFIX/android/$ARCH/include
+    validate-lib-arch dist/$ARCH/lib/libffi.so
     cp -RL dist/$ARCH/lib/libffi.so $PREFIX/android/$ARCH/lib
     cp -RL dist/$ARCH/include/*.h $PREFIX/android/$ARCH/include
 done

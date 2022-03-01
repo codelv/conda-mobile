@@ -24,6 +24,8 @@ do
     make -j$CPU_COUNT
     make install
 
+    validate-lib-arch dist/$ARCH/lib/libfreetype.so
+
     # Copy to install dir
     mkdir -p $PREFIX/android/$ARCH/lib
     mkdir -p $PREFIX/android/$ARCH/include

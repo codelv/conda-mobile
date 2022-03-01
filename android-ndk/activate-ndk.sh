@@ -14,6 +14,7 @@
 #    # Setup compiler for arch
 #    activate-ndk-clang $ARCH
 #    # your script...
+#    validate-lib-arch path/to/libyourlib.so
 # done
 #
 export NDK_VERSION="23.1.7779620"
@@ -55,6 +56,30 @@ function activate-ndk-clang() {
     export NDK_LIB_DIR="$ANDROID_TOOLCHAIN/sysroot/usr/lib/$TARGET_HOST/$TARGET_API"
     if [ "$ARCH" == "arm" ]; then
         export NDK_LIB_DIR="$ANDROID_TOOLCHAIN/sysroot/usr/lib/arm-linux-androideabi/$TARGET_API"
+    fi
+
+}
+
+# Check that the given shared library matches the $ARCH variable
+function validate-lib-arch() {
+    lib=$1
+    echo "Checking that $lib was compiled for $ARCH..."
+    if [ "$ARCH" == "arm" ]; then
+        expected="ELF 32-bit LSB shared object, ARM, version 1"
+    elif [ "$ARCH" == "arm64" ]; then
+        expected="ELF 64-bit LSB shared object, ARM aarch64, version 1"
+    elif [ "$ARCH" == "x86" ]; then
+        expected="ELF 32-bit LSB shared object, Intel 80386, version 1"
+    elif [ "$ARCH" == "x86_64" ]; then
+        expected="ELF 64-bit LSB shared object, x86-64, version 1"
+    fi
+    output=$(file $lib)
+    echo "$output"
+    if [[ $output =~ $expected ]]; then
+        echo "OK"
+    else
+        echo "ERROR: Library $lib was not cross compiled for $ARCH"
+        exit 1
     fi
 
 }

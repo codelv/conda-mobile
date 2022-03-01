@@ -1906,6 +1906,27 @@ jobs:
       with:
         name: pip-ply-3.10
         path: /usr/share/miniconda/conda-bld/*/pip-ply*.bz2
+  pip-pytz:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-update-conda: true
+        channels: conda-forge
+        python-version: '3.10'
+    - name: Install conda build
+      run: |
+        conda install conda-build
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Build recipe
+      run: conda build --py=3.10 pip-pytz
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: pip-pytz-3.10
+        path: /usr/share/miniconda/conda-bld/*/pip-pytz*.bz2
   pip-tornado:
     runs-on: ubuntu-latest
     steps:
