@@ -5,12 +5,13 @@ jobs:
     - uses: actions/checkout@v2
     - name: Install micromamba
       run: |
-        mkdir ~/micromamba
-        cd ~/micromamba
+        mkdir $HOME/micromamba
+        cd $HOME/micromamba
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
         echo "$HOME/micromamba/bin:$PATH" >> $GITHUB_PATH
     - name: Setup micromamba
       run: |
+        ls $HOME/micromamba/bin
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename

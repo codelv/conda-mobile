@@ -30,13 +30,14 @@ sdkmanager --install "ndk;{NDK_VER}"
 site_packages = "/usr/share/miniconda/lib/python3.9/site-packages"
 
 INSTALL_MINIMAMBA = f"""
-mkdir ~/micromamba
-cd ~/micromamba
+mkdir $HOME/micromamba
+cd $HOME/micromamba
 wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
 echo "$HOME/micromamba/bin:$PATH" >> $GITHUB_PATH
 """
 
 SETUP_MINIMAMBA = f"""
+ls $HOME/micromamba/bin
 micromamba install -c conda-forge python={PY_VER} boa
 """
 
