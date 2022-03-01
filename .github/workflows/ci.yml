@@ -8,10 +8,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install build system
+    - name: Install minimamba
       run: |
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        bin/micromamba activate
+        touch ~/.bashrc
+        ./bin/micromamba shell init -s bash -p ~/micromamba
+    - name: Setup minimamba
+      run: |
+        micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -76,10 +80,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install build system
+    - name: Install minimamba
       run: |
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        bin/micromamba activate
+        touch ~/.bashrc
+        ./bin/micromamba shell init -s bash -p ~/micromamba
+    - name: Setup minimamba
+      run: |
+        micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -139,10 +147,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install build system
+    - name: Install minimamba
       run: |
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        bin/micromamba activate
+        touch ~/.bashrc
+        ./bin/micromamba shell init -s bash -p ~/micromamba
+    - name: Setup minimamba
+      run: |
+        micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -207,10 +219,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install build system
+    - name: Install minimamba
       run: |
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        bin/micromamba activate
+        touch ~/.bashrc
+        ./bin/micromamba shell init -s bash -p ~/micromamba
+    - name: Setup minimamba
+      run: |
+        micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -295,10 +311,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install build system
+    - name: Install minimamba
       run: |
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        bin/micromamba activate
+        touch ~/.bashrc
+        ./bin/micromamba shell init -s bash -p ~/micromamba
+    - name: Setup minimamba
+      run: |
+        micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -356,10 +376,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install build system
+    - name: Install minimamba
       run: |
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        bin/micromamba activate
+        touch ~/.bashrc
+        ./bin/micromamba shell init -s bash -p ~/micromamba
+    - name: Setup minimamba
+      run: |
+        micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -410,10 +434,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install build system
+    - name: Install minimamba
       run: |
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        bin/micromamba activate
+        touch ~/.bashrc
+        ./bin/micromamba shell init -s bash -p ~/micromamba
+    - name: Setup minimamba
+      run: |
+        micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -476,10 +504,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install build system
+    - name: Install minimamba
       run: |
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        bin/micromamba activate
+        touch ~/.bashrc
+        ./bin/micromamba shell init -s bash -p ~/micromamba
+    - name: Setup minimamba
+      run: |
+        micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -527,10 +559,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install build system
+    - name: Install minimamba
       run: |
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        bin/micromamba activate
+        touch ~/.bashrc
+        ./bin/micromamba shell init -s bash -p ~/micromamba
+    - name: Setup minimamba
+      run: |
+        micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -578,10 +614,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install build system
+    - name: Install minimamba
       run: |
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        bin/micromamba activate
+        touch ~/.bashrc
+        ./bin/micromamba shell init -s bash -p ~/micromamba
+    - name: Setup minimamba
+      run: |
+        micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -629,10 +669,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install build system
+    - name: Install minimamba
       run: |
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        bin/micromamba activate
+        touch ~/.bashrc
+        ./bin/micromamba shell init -s bash -p ~/micromamba
+    - name: Setup minimamba
+      run: |
+        micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -680,10 +724,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install build system
+    - name: Install minimamba
       run: |
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        bin/micromamba activate
+        touch ~/.bashrc
+        ./bin/micromamba shell init -s bash -p ~/micromamba
+    - name: Setup minimamba
+      run: |
+        micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -731,10 +779,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install build system
+    - name: Install minimamba
       run: |
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        bin/micromamba activate
+        touch ~/.bashrc
+        ./bin/micromamba shell init -s bash -p ~/micromamba
+    - name: Setup minimamba
+      run: |
+        micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -782,10 +834,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install build system
+    - name: Install minimamba
       run: |
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        bin/micromamba activate
+        touch ~/.bashrc
+        ./bin/micromamba shell init -s bash -p ~/micromamba
+    - name: Setup minimamba
+      run: |
+        micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -833,10 +889,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install build system
+    - name: Install minimamba
       run: |
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        bin/micromamba activate
+        touch ~/.bashrc
+        ./bin/micromamba shell init -s bash -p ~/micromamba
+    - name: Setup minimamba
+      run: |
+        micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -884,10 +944,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install build system
+    - name: Install minimamba
       run: |
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        bin/micromamba activate
+        touch ~/.bashrc
+        ./bin/micromamba shell init -s bash -p ~/micromamba
+    - name: Setup minimamba
+      run: |
+        micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -935,10 +999,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install build system
+    - name: Install minimamba
       run: |
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        bin/micromamba activate
+        touch ~/.bashrc
+        ./bin/micromamba shell init -s bash -p ~/micromamba
+    - name: Setup minimamba
+      run: |
+        micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -987,10 +1055,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install build system
+    - name: Install minimamba
       run: |
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        bin/micromamba activate
+        touch ~/.bashrc
+        ./bin/micromamba shell init -s bash -p ~/micromamba
+    - name: Setup minimamba
+      run: |
+        micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -1044,10 +1116,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install build system
+    - name: Install minimamba
       run: |
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        bin/micromamba activate
+        touch ~/.bashrc
+        ./bin/micromamba shell init -s bash -p ~/micromamba
+    - name: Setup minimamba
+      run: |
+        micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -1101,10 +1177,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install build system
+    - name: Install minimamba
       run: |
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        bin/micromamba activate
+        touch ~/.bashrc
+        ./bin/micromamba shell init -s bash -p ~/micromamba
+    - name: Setup minimamba
+      run: |
+        micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -1160,10 +1240,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install build system
+    - name: Install minimamba
       run: |
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        bin/micromamba activate
+        touch ~/.bashrc
+        ./bin/micromamba shell init -s bash -p ~/micromamba
+    - name: Setup minimamba
+      run: |
+        micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -1226,10 +1310,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install build system
+    - name: Install minimamba
       run: |
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        bin/micromamba activate
+        touch ~/.bashrc
+        ./bin/micromamba shell init -s bash -p ~/micromamba
+    - name: Setup minimamba
+      run: |
+        micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -1279,10 +1367,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install build system
+    - name: Install minimamba
       run: |
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        bin/micromamba activate
+        touch ~/.bashrc
+        ./bin/micromamba shell init -s bash -p ~/micromamba
+    - name: Setup minimamba
+      run: |
+        micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -1338,10 +1430,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install build system
+    - name: Install minimamba
       run: |
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        bin/micromamba activate
+        touch ~/.bashrc
+        ./bin/micromamba shell init -s bash -p ~/micromamba
+    - name: Setup minimamba
+      run: |
+        micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -1382,10 +1478,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install build system
+    - name: Install minimamba
       run: |
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        bin/micromamba activate
+        touch ~/.bashrc
+        ./bin/micromamba shell init -s bash -p ~/micromamba
+    - name: Setup minimamba
+      run: |
+        micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -1440,10 +1540,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install build system
+    - name: Install minimamba
       run: |
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        bin/micromamba activate
+        touch ~/.bashrc
+        ./bin/micromamba shell init -s bash -p ~/micromamba
+    - name: Setup minimamba
+      run: |
+        micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -1529,10 +1633,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install build system
+    - name: Install minimamba
       run: |
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        bin/micromamba activate
+        touch ~/.bashrc
+        ./bin/micromamba shell init -s bash -p ~/micromamba
+    - name: Setup minimamba
+      run: |
+        micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -1595,10 +1703,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install build system
+    - name: Install minimamba
       run: |
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        bin/micromamba activate
+        touch ~/.bashrc
+        ./bin/micromamba shell init -s bash -p ~/micromamba
+    - name: Setup minimamba
+      run: |
+        micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -1644,10 +1756,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install build system
+    - name: Install minimamba
       run: |
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        bin/micromamba activate
+        touch ~/.bashrc
+        ./bin/micromamba shell init -s bash -p ~/micromamba
+    - name: Setup minimamba
+      run: |
+        micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Build recipe
       run: boa build pip-bytecode --target-platform=noarch
@@ -1660,10 +1776,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install build system
+    - name: Install minimamba
       run: |
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        bin/micromamba activate
+        touch ~/.bashrc
+        ./bin/micromamba shell init -s bash -p ~/micromamba
+    - name: Setup minimamba
+      run: |
+        micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Build recipe
       run: boa build pip-cppy --target-platform=noarch
@@ -1676,10 +1796,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install build system
+    - name: Install minimamba
       run: |
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        bin/micromamba activate
+        touch ~/.bashrc
+        ./bin/micromamba shell init -s bash -p ~/micromamba
+    - name: Setup minimamba
+      run: |
+        micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Build recipe
       run: boa build pip-docutils --target-platform=noarch
@@ -1692,10 +1816,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install build system
+    - name: Install minimamba
       run: |
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        bin/micromamba activate
+        touch ~/.bashrc
+        ./bin/micromamba shell init -s bash -p ~/micromamba
+    - name: Setup minimamba
+      run: |
+        micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Build recipe
       run: boa build pip-jsonrpclib --target-platform=noarch
@@ -1708,10 +1836,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install build system
+    - name: Install minimamba
       run: |
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        bin/micromamba activate
+        touch ~/.bashrc
+        ./bin/micromamba shell init -s bash -p ~/micromamba
+    - name: Setup minimamba
+      run: |
+        micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Build recipe
       run: boa build pip-motor --target-platform=noarch
@@ -1724,10 +1856,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install build system
+    - name: Install minimamba
       run: |
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        bin/micromamba activate
+        touch ~/.bashrc
+        ./bin/micromamba shell init -s bash -p ~/micromamba
+    - name: Setup minimamba
+      run: |
+        micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Build recipe
       run: boa build pip-ply --target-platform=noarch
@@ -1740,10 +1876,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install build system
+    - name: Install minimamba
       run: |
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        bin/micromamba activate
+        touch ~/.bashrc
+        ./bin/micromamba shell init -s bash -p ~/micromamba
+    - name: Setup minimamba
+      run: |
+        micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Build recipe
       run: boa build pip-pytz --target-platform=noarch
@@ -1756,10 +1896,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install build system
+    - name: Install minimamba
       run: |
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        bin/micromamba activate
+        touch ~/.bashrc
+        ./bin/micromamba shell init -s bash -p ~/micromamba
+    - name: Setup minimamba
+      run: |
+        micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Build recipe
       run: boa build pip-tornado --target-platform=noarch

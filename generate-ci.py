@@ -29,10 +29,13 @@ sdkmanager --install "ndk;{NDK_VER}"
 # Patch conda build because it fails cleaning up optimized pyc files
 site_packages = "/usr/share/miniconda/lib/python3.9/site-packages"
 
-MAMBA_BUILD = f"""
+INSTALL_MINIMAMBA = f"""
 wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
+touch ~/.bashrc
 ./bin/micromamba shell init -s bash -p ~/micromamba
-source ~/.bashrc
+"""
+
+SETUP_MINIMAMBA = f"""
 micromamba activate
 micromamba install -c conda-forge python={PY_VER} boa
 """
@@ -90,7 +93,8 @@ def main():
 
     common_steps = [
         {"uses": "actions/checkout@v2"},
-        {"name": "Install build system", "run": Block(MAMBA_BUILD)},
+        {"name": "Install minimamba", "run": Block(INSTALL_MINIMAMBA)},
+        {"name": "Setup minimamba", "run": Block(SETUP_MINIMAMBA)},
     ]
 
     android_steps = [
