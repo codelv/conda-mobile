@@ -1,85 +1,1798 @@
-name: CI
-on: [push]
 jobs:
-  build:
+  android-atom:
+    needs:
+    - android-ndk
+    - android-libcxx
+    - android-python
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        package-name: [
-            'android-ndk',
-            'android-libcxx',
-            'android-liblzma',
-            'android-libbz2',
-            'android-lz4',
-            'android-sqlite',
-            'android-libffi',
-            'android-libsodium',
-            'android-libuuid',
-            'android-libpng',
-            'android-libjpeg',
-            'android-freetype',
-            'android-libxslt',
-            'android-libxml2',
-            'android-openssl',
-            'android-harfbuzz',
-            'android-python',
-            'android-cffi',
-            'android-atom',
-            'android-msgpack',
-            'android-kiwisolver',
-            'android-enaml',
-            'android-lxml',
-            'android-libzmq',
-            'android-pyzmq',
-            'pip-bytecode',
-            'pip-cppy',
-            'pip-tornado',
-        ]
-        python-version: ['3.10']
-        ndk-version: ['23.1.7779620']
     steps:
-      - uses: actions/checkout@v2
-      - uses: conda-incubator/setup-miniconda@v2
-        name: Install miniconda
-        with:
-          auto-update-conda: true
-          python-version: ${{ matrix.python-version }}
-      - name: Install system deps
-        run: sudo apt-get install -y autopoint texinfo rename
-      - name: Set up JDK
-        uses: actions/setup-java@v1
-        with:
-          java-version: 11
-      - uses: actions/cache@v2
-        name: Cache Android NDK
-        id: android-cache
-        with:
-          path: ~/Android
-          key: ${{ runner.os }}-android-sdk-${{ matrix.ndk-version }}
-      - name: Setup Android NDK
-        if: steps.android-cache.outputs.cache-hit != 'true'
-        run: |
-            export ANDROID_HOME="$HOME/Android/Sdk"
-            export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
-            export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
-            mkdir -p $ANDROID_HOME
-            wget -q https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
-            unzip -q commandlinetools-linux-8092744_latest.zip -d $ANDROID_HOME/cmdline-tools
-            mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
-            yes | sdkmanager --licenses > /dev/null
-            sdkmanager --install tools
-            sdkmanager --install platform-tools
-            sdkmanager --install "ndk;${{ matrix.ndk-version}}"
-      - name: Install conda build
-        run: |
-            conda install conda-build
-            sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
-      - uses: actions/cache@v2
-        name: Cache conda noarch packages
-        id: conda-bld-cache
-        with:
-          path: /usr/share/miniconda/conda-bld/noarch
-          key: ${{ runner.os }}-conda-bld-cache-${{ matrix.pthon-version }}-${{ matrix.ndk-version }}
-      - name: Build recipe
-        run: conda build --py=${{matrix.python-version}} ${{matrix.package-name}}
+    - uses: actions/checkout@v2
+    - name: Setup conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-update-conda: true
+        python-version: '3.10'
+    - name: Install conda build
+      run: |
+        conda install conda-build
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Setup JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - id: android-cache
+      name: Cache Android NDK
+      uses: actions/cache@v2
+      with:
+        key: linux-android-ndk-23.1.7779620
+        path: ~/Android
+    - if: steps.android-cache.outputs.cache-hit != 'true'
+      name: Setup android NDK
+      run: |
+        export ANDROID_HOME="$HOME/Android/Sdk"
+        export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+        export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+        mkdir -p $ANDROID_HOME
+        wget -q https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
+        unzip -e commandlinetools-linux-8092744_latest.zip -d $ANDROID_HOME/cmdline-tools
+        mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+        yes | sdkmanager --licenses > /dev/null
+        sdkmanager --install tools
+        sdkmanager --install platform-tools
+        sdkmanager --install "ndk;23.1.7779620"
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-ndk-3.10
+        path: packages
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-libcxx-3.10
+        path: packages
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-python-3.10
+        path: packages
+    - name: Install dependencies
+      run: conda install packages/*
+    - name: Build recipe
+      run: conda build --py=3.10 android-atom
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: android-atom-3.10
+        path: /usr/share/miniconda/conda-bld/noarch/android-atom*.bz2
+  android-cffi:
+    needs:
+    - android-ndk
+    - android-python
+    - android-libffi
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-update-conda: true
+        python-version: '3.10'
+    - name: Install conda build
+      run: |
+        conda install conda-build
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Setup JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - id: android-cache
+      name: Cache Android NDK
+      uses: actions/cache@v2
+      with:
+        key: linux-android-ndk-23.1.7779620
+        path: ~/Android
+    - if: steps.android-cache.outputs.cache-hit != 'true'
+      name: Setup android NDK
+      run: |
+        export ANDROID_HOME="$HOME/Android/Sdk"
+        export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+        export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+        mkdir -p $ANDROID_HOME
+        wget -q https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
+        unzip -e commandlinetools-linux-8092744_latest.zip -d $ANDROID_HOME/cmdline-tools
+        mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+        yes | sdkmanager --licenses > /dev/null
+        sdkmanager --install tools
+        sdkmanager --install platform-tools
+        sdkmanager --install "ndk;23.1.7779620"
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-ndk-3.10
+        path: packages
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-python-3.10
+        path: packages
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-libffi-3.10
+        path: packages
+    - name: Install dependencies
+      run: conda install packages/*
+    - name: Build recipe
+      run: conda build --py=3.10 android-cffi
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: android-cffi-3.10
+        path: /usr/share/miniconda/conda-bld/noarch/android-cffi*.bz2
+  android-cryptography:
+    needs:
+    - android-ndk
+    - android-cffi
+    - android-openssl
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-update-conda: true
+        python-version: '3.10'
+    - name: Install conda build
+      run: |
+        conda install conda-build
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Setup JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - id: android-cache
+      name: Cache Android NDK
+      uses: actions/cache@v2
+      with:
+        key: linux-android-ndk-23.1.7779620
+        path: ~/Android
+    - if: steps.android-cache.outputs.cache-hit != 'true'
+      name: Setup android NDK
+      run: |
+        export ANDROID_HOME="$HOME/Android/Sdk"
+        export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+        export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+        mkdir -p $ANDROID_HOME
+        wget -q https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
+        unzip -e commandlinetools-linux-8092744_latest.zip -d $ANDROID_HOME/cmdline-tools
+        mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+        yes | sdkmanager --licenses > /dev/null
+        sdkmanager --install tools
+        sdkmanager --install platform-tools
+        sdkmanager --install "ndk;23.1.7779620"
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-ndk-3.10
+        path: packages
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-cffi-3.10
+        path: packages
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-openssl-3.10
+        path: packages
+    - name: Install dependencies
+      run: conda install packages/*
+    - name: Build recipe
+      run: conda build --py=3.10 android-cryptography
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: android-cryptography-3.10
+        path: /usr/share/miniconda/conda-bld/noarch/android-cryptography*.bz2
+  android-enaml:
+    needs:
+    - android-ndk
+    - android-libcxx
+    - android-python
+    - android-kiwisolver
+    - android-atom
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-update-conda: true
+        python-version: '3.10'
+    - name: Install conda build
+      run: |
+        conda install conda-build
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Setup JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - id: android-cache
+      name: Cache Android NDK
+      uses: actions/cache@v2
+      with:
+        key: linux-android-ndk-23.1.7779620
+        path: ~/Android
+    - if: steps.android-cache.outputs.cache-hit != 'true'
+      name: Setup android NDK
+      run: |
+        export ANDROID_HOME="$HOME/Android/Sdk"
+        export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+        export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+        mkdir -p $ANDROID_HOME
+        wget -q https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
+        unzip -e commandlinetools-linux-8092744_latest.zip -d $ANDROID_HOME/cmdline-tools
+        mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+        yes | sdkmanager --licenses > /dev/null
+        sdkmanager --install tools
+        sdkmanager --install platform-tools
+        sdkmanager --install "ndk;23.1.7779620"
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-ndk-3.10
+        path: packages
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-libcxx-3.10
+        path: packages
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-python-3.10
+        path: packages
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-kiwisolver-3.10
+        path: packages
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-atom-3.10
+        path: packages
+    - name: Install dependencies
+      run: conda install packages/*
+    - name: Build recipe
+      run: conda build --py=3.10 android-enaml
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: android-enaml-3.10
+        path: /usr/share/miniconda/conda-bld/noarch/android-enaml*.bz2
+  android-freetype:
+    needs:
+    - android-libpng
+    - android-harfbuzz
+    - android-ndk
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-update-conda: true
+        python-version: '3.10'
+    - name: Install conda build
+      run: |
+        conda install conda-build
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Setup JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - id: android-cache
+      name: Cache Android NDK
+      uses: actions/cache@v2
+      with:
+        key: linux-android-ndk-23.1.7779620
+        path: ~/Android
+    - if: steps.android-cache.outputs.cache-hit != 'true'
+      name: Setup android NDK
+      run: |
+        export ANDROID_HOME="$HOME/Android/Sdk"
+        export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+        export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+        mkdir -p $ANDROID_HOME
+        wget -q https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
+        unzip -e commandlinetools-linux-8092744_latest.zip -d $ANDROID_HOME/cmdline-tools
+        mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+        yes | sdkmanager --licenses > /dev/null
+        sdkmanager --install tools
+        sdkmanager --install platform-tools
+        sdkmanager --install "ndk;23.1.7779620"
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-libpng-3.10
+        path: packages
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-harfbuzz-3.10
+        path: packages
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-ndk-3.10
+        path: packages
+    - name: Install dependencies
+      run: conda install packages/*
+    - name: Build recipe
+      run: conda build --py=3.10 android-freetype
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: android-freetype-3.10
+        path: /usr/share/miniconda/conda-bld/noarch/android-freetype*.bz2
+  android-harfbuzz:
+    needs:
+    - android-ndk
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-update-conda: true
+        python-version: '3.10'
+    - name: Install conda build
+      run: |
+        conda install conda-build
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Setup JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - id: android-cache
+      name: Cache Android NDK
+      uses: actions/cache@v2
+      with:
+        key: linux-android-ndk-23.1.7779620
+        path: ~/Android
+    - if: steps.android-cache.outputs.cache-hit != 'true'
+      name: Setup android NDK
+      run: |
+        export ANDROID_HOME="$HOME/Android/Sdk"
+        export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+        export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+        mkdir -p $ANDROID_HOME
+        wget -q https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
+        unzip -e commandlinetools-linux-8092744_latest.zip -d $ANDROID_HOME/cmdline-tools
+        mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+        yes | sdkmanager --licenses > /dev/null
+        sdkmanager --install tools
+        sdkmanager --install platform-tools
+        sdkmanager --install "ndk;23.1.7779620"
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-ndk-3.10
+        path: packages
+    - name: Install dependencies
+      run: conda install packages/*
+    - name: Build recipe
+      run: conda build --py=3.10 android-harfbuzz
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: android-harfbuzz-3.10
+        path: /usr/share/miniconda/conda-bld/noarch/android-harfbuzz*.bz2
+  android-kiwisolver:
+    needs:
+    - android-ndk
+    - android-libcxx
+    - android-python
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-update-conda: true
+        python-version: '3.10'
+    - name: Install conda build
+      run: |
+        conda install conda-build
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Setup JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - id: android-cache
+      name: Cache Android NDK
+      uses: actions/cache@v2
+      with:
+        key: linux-android-ndk-23.1.7779620
+        path: ~/Android
+    - if: steps.android-cache.outputs.cache-hit != 'true'
+      name: Setup android NDK
+      run: |
+        export ANDROID_HOME="$HOME/Android/Sdk"
+        export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+        export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+        mkdir -p $ANDROID_HOME
+        wget -q https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
+        unzip -e commandlinetools-linux-8092744_latest.zip -d $ANDROID_HOME/cmdline-tools
+        mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+        yes | sdkmanager --licenses > /dev/null
+        sdkmanager --install tools
+        sdkmanager --install platform-tools
+        sdkmanager --install "ndk;23.1.7779620"
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-ndk-3.10
+        path: packages
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-libcxx-3.10
+        path: packages
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-python-3.10
+        path: packages
+    - name: Install dependencies
+      run: conda install packages/*
+    - name: Build recipe
+      run: conda build --py=3.10 android-kiwisolver
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: android-kiwisolver-3.10
+        path: /usr/share/miniconda/conda-bld/noarch/android-kiwisolver*.bz2
+  android-libbz2:
+    needs:
+    - android-ndk
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-update-conda: true
+        python-version: '3.10'
+    - name: Install conda build
+      run: |
+        conda install conda-build
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Setup JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - id: android-cache
+      name: Cache Android NDK
+      uses: actions/cache@v2
+      with:
+        key: linux-android-ndk-23.1.7779620
+        path: ~/Android
+    - if: steps.android-cache.outputs.cache-hit != 'true'
+      name: Setup android NDK
+      run: |
+        export ANDROID_HOME="$HOME/Android/Sdk"
+        export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+        export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+        mkdir -p $ANDROID_HOME
+        wget -q https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
+        unzip -e commandlinetools-linux-8092744_latest.zip -d $ANDROID_HOME/cmdline-tools
+        mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+        yes | sdkmanager --licenses > /dev/null
+        sdkmanager --install tools
+        sdkmanager --install platform-tools
+        sdkmanager --install "ndk;23.1.7779620"
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-ndk-3.10
+        path: packages
+    - name: Install dependencies
+      run: conda install packages/*
+    - name: Build recipe
+      run: conda build --py=3.10 android-libbz2
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: android-libbz2-3.10
+        path: /usr/share/miniconda/conda-bld/noarch/android-libbz2*.bz2
+  android-libcxx:
+    needs:
+    - android-ndk
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-update-conda: true
+        python-version: '3.10'
+    - name: Install conda build
+      run: |
+        conda install conda-build
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Setup JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - id: android-cache
+      name: Cache Android NDK
+      uses: actions/cache@v2
+      with:
+        key: linux-android-ndk-23.1.7779620
+        path: ~/Android
+    - if: steps.android-cache.outputs.cache-hit != 'true'
+      name: Setup android NDK
+      run: |
+        export ANDROID_HOME="$HOME/Android/Sdk"
+        export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+        export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+        mkdir -p $ANDROID_HOME
+        wget -q https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
+        unzip -e commandlinetools-linux-8092744_latest.zip -d $ANDROID_HOME/cmdline-tools
+        mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+        yes | sdkmanager --licenses > /dev/null
+        sdkmanager --install tools
+        sdkmanager --install platform-tools
+        sdkmanager --install "ndk;23.1.7779620"
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-ndk-3.10
+        path: packages
+    - name: Install dependencies
+      run: conda install packages/*
+    - name: Build recipe
+      run: conda build --py=3.10 android-libcxx
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: android-libcxx-3.10
+        path: /usr/share/miniconda/conda-bld/noarch/android-libcxx*.bz2
+  android-libffi:
+    needs:
+    - android-ndk
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-update-conda: true
+        python-version: '3.10'
+    - name: Install conda build
+      run: |
+        conda install conda-build
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Setup JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - id: android-cache
+      name: Cache Android NDK
+      uses: actions/cache@v2
+      with:
+        key: linux-android-ndk-23.1.7779620
+        path: ~/Android
+    - if: steps.android-cache.outputs.cache-hit != 'true'
+      name: Setup android NDK
+      run: |
+        export ANDROID_HOME="$HOME/Android/Sdk"
+        export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+        export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+        mkdir -p $ANDROID_HOME
+        wget -q https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
+        unzip -e commandlinetools-linux-8092744_latest.zip -d $ANDROID_HOME/cmdline-tools
+        mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+        yes | sdkmanager --licenses > /dev/null
+        sdkmanager --install tools
+        sdkmanager --install platform-tools
+        sdkmanager --install "ndk;23.1.7779620"
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-ndk-3.10
+        path: packages
+    - name: Install dependencies
+      run: conda install packages/*
+    - name: Build recipe
+      run: conda build --py=3.10 android-libffi
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: android-libffi-3.10
+        path: /usr/share/miniconda/conda-bld/noarch/android-libffi*.bz2
+  android-libgcrypt:
+    needs:
+    - android-ndk
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-update-conda: true
+        python-version: '3.10'
+    - name: Install conda build
+      run: |
+        conda install conda-build
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Setup JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - id: android-cache
+      name: Cache Android NDK
+      uses: actions/cache@v2
+      with:
+        key: linux-android-ndk-23.1.7779620
+        path: ~/Android
+    - if: steps.android-cache.outputs.cache-hit != 'true'
+      name: Setup android NDK
+      run: |
+        export ANDROID_HOME="$HOME/Android/Sdk"
+        export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+        export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+        mkdir -p $ANDROID_HOME
+        wget -q https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
+        unzip -e commandlinetools-linux-8092744_latest.zip -d $ANDROID_HOME/cmdline-tools
+        mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+        yes | sdkmanager --licenses > /dev/null
+        sdkmanager --install tools
+        sdkmanager --install platform-tools
+        sdkmanager --install "ndk;23.1.7779620"
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-ndk-3.10
+        path: packages
+    - name: Install dependencies
+      run: conda install packages/*
+    - name: Build recipe
+      run: conda build --py=3.10 android-libgcrypt
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: android-libgcrypt-3.10
+        path: /usr/share/miniconda/conda-bld/noarch/android-libgcrypt*.bz2
+  android-libgeos:
+    needs:
+    - android-ndk
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-update-conda: true
+        python-version: '3.10'
+    - name: Install conda build
+      run: |
+        conda install conda-build
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Setup JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - id: android-cache
+      name: Cache Android NDK
+      uses: actions/cache@v2
+      with:
+        key: linux-android-ndk-23.1.7779620
+        path: ~/Android
+    - if: steps.android-cache.outputs.cache-hit != 'true'
+      name: Setup android NDK
+      run: |
+        export ANDROID_HOME="$HOME/Android/Sdk"
+        export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+        export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+        mkdir -p $ANDROID_HOME
+        wget -q https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
+        unzip -e commandlinetools-linux-8092744_latest.zip -d $ANDROID_HOME/cmdline-tools
+        mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+        yes | sdkmanager --licenses > /dev/null
+        sdkmanager --install tools
+        sdkmanager --install platform-tools
+        sdkmanager --install "ndk;23.1.7779620"
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-ndk-3.10
+        path: packages
+    - name: Install dependencies
+      run: conda install packages/*
+    - name: Build recipe
+      run: conda build --py=3.10 android-libgeos
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: android-libgeos-3.10
+        path: /usr/share/miniconda/conda-bld/noarch/android-libgeos*.bz2
+  android-libjpeg:
+    needs:
+    - android-ndk
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-update-conda: true
+        python-version: '3.10'
+    - name: Install conda build
+      run: |
+        conda install conda-build
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Setup JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - id: android-cache
+      name: Cache Android NDK
+      uses: actions/cache@v2
+      with:
+        key: linux-android-ndk-23.1.7779620
+        path: ~/Android
+    - if: steps.android-cache.outputs.cache-hit != 'true'
+      name: Setup android NDK
+      run: |
+        export ANDROID_HOME="$HOME/Android/Sdk"
+        export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+        export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+        mkdir -p $ANDROID_HOME
+        wget -q https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
+        unzip -e commandlinetools-linux-8092744_latest.zip -d $ANDROID_HOME/cmdline-tools
+        mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+        yes | sdkmanager --licenses > /dev/null
+        sdkmanager --install tools
+        sdkmanager --install platform-tools
+        sdkmanager --install "ndk;23.1.7779620"
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-ndk-3.10
+        path: packages
+    - name: Install dependencies
+      run: conda install packages/*
+    - name: Build recipe
+      run: conda build --py=3.10 android-libjpeg
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: android-libjpeg-3.10
+        path: /usr/share/miniconda/conda-bld/noarch/android-libjpeg*.bz2
+  android-liblzma:
+    needs:
+    - android-ndk
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-update-conda: true
+        python-version: '3.10'
+    - name: Install conda build
+      run: |
+        conda install conda-build
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Setup JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - id: android-cache
+      name: Cache Android NDK
+      uses: actions/cache@v2
+      with:
+        key: linux-android-ndk-23.1.7779620
+        path: ~/Android
+    - if: steps.android-cache.outputs.cache-hit != 'true'
+      name: Setup android NDK
+      run: |
+        export ANDROID_HOME="$HOME/Android/Sdk"
+        export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+        export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+        mkdir -p $ANDROID_HOME
+        wget -q https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
+        unzip -e commandlinetools-linux-8092744_latest.zip -d $ANDROID_HOME/cmdline-tools
+        mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+        yes | sdkmanager --licenses > /dev/null
+        sdkmanager --install tools
+        sdkmanager --install platform-tools
+        sdkmanager --install "ndk;23.1.7779620"
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-ndk-3.10
+        path: packages
+    - name: Install dependencies
+      run: conda install packages/*
+    - name: Build recipe
+      run: conda build --py=3.10 android-liblzma
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: android-liblzma-3.10
+        path: /usr/share/miniconda/conda-bld/noarch/android-liblzma*.bz2
+  android-libpng:
+    needs:
+    - android-ndk
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-update-conda: true
+        python-version: '3.10'
+    - name: Install conda build
+      run: |
+        conda install conda-build
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Setup JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - id: android-cache
+      name: Cache Android NDK
+      uses: actions/cache@v2
+      with:
+        key: linux-android-ndk-23.1.7779620
+        path: ~/Android
+    - if: steps.android-cache.outputs.cache-hit != 'true'
+      name: Setup android NDK
+      run: |
+        export ANDROID_HOME="$HOME/Android/Sdk"
+        export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+        export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+        mkdir -p $ANDROID_HOME
+        wget -q https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
+        unzip -e commandlinetools-linux-8092744_latest.zip -d $ANDROID_HOME/cmdline-tools
+        mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+        yes | sdkmanager --licenses > /dev/null
+        sdkmanager --install tools
+        sdkmanager --install platform-tools
+        sdkmanager --install "ndk;23.1.7779620"
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-ndk-3.10
+        path: packages
+    - name: Install dependencies
+      run: conda install packages/*
+    - name: Build recipe
+      run: conda build --py=3.10 android-libpng
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: android-libpng-3.10
+        path: /usr/share/miniconda/conda-bld/noarch/android-libpng*.bz2
+  android-libsodium:
+    needs:
+    - android-ndk
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-update-conda: true
+        python-version: '3.10'
+    - name: Install conda build
+      run: |
+        conda install conda-build
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Setup JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - id: android-cache
+      name: Cache Android NDK
+      uses: actions/cache@v2
+      with:
+        key: linux-android-ndk-23.1.7779620
+        path: ~/Android
+    - if: steps.android-cache.outputs.cache-hit != 'true'
+      name: Setup android NDK
+      run: |
+        export ANDROID_HOME="$HOME/Android/Sdk"
+        export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+        export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+        mkdir -p $ANDROID_HOME
+        wget -q https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
+        unzip -e commandlinetools-linux-8092744_latest.zip -d $ANDROID_HOME/cmdline-tools
+        mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+        yes | sdkmanager --licenses > /dev/null
+        sdkmanager --install tools
+        sdkmanager --install platform-tools
+        sdkmanager --install "ndk;23.1.7779620"
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-ndk-3.10
+        path: packages
+    - name: Install dependencies
+      run: conda install packages/*
+    - name: Build recipe
+      run: conda build --py=3.10 android-libsodium
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: android-libsodium-3.10
+        path: /usr/share/miniconda/conda-bld/noarch/android-libsodium*.bz2
+  android-libuuid:
+    needs:
+    - android-ndk
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-update-conda: true
+        python-version: '3.10'
+    - name: Install conda build
+      run: |
+        conda install conda-build
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Setup JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - id: android-cache
+      name: Cache Android NDK
+      uses: actions/cache@v2
+      with:
+        key: linux-android-ndk-23.1.7779620
+        path: ~/Android
+    - if: steps.android-cache.outputs.cache-hit != 'true'
+      name: Setup android NDK
+      run: |
+        export ANDROID_HOME="$HOME/Android/Sdk"
+        export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+        export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+        mkdir -p $ANDROID_HOME
+        wget -q https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
+        unzip -e commandlinetools-linux-8092744_latest.zip -d $ANDROID_HOME/cmdline-tools
+        mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+        yes | sdkmanager --licenses > /dev/null
+        sdkmanager --install tools
+        sdkmanager --install platform-tools
+        sdkmanager --install "ndk;23.1.7779620"
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-ndk-3.10
+        path: packages
+    - name: Install dependencies
+      run: conda install packages/*
+    - name: Build recipe
+      run: conda build --py=3.10 android-libuuid
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: android-libuuid-3.10
+        path: /usr/share/miniconda/conda-bld/noarch/android-libuuid*.bz2
+  android-libxml2:
+    needs:
+    - android-liblzma
+    - android-ndk
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-update-conda: true
+        python-version: '3.10'
+    - name: Install conda build
+      run: |
+        conda install conda-build
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Setup JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - id: android-cache
+      name: Cache Android NDK
+      uses: actions/cache@v2
+      with:
+        key: linux-android-ndk-23.1.7779620
+        path: ~/Android
+    - if: steps.android-cache.outputs.cache-hit != 'true'
+      name: Setup android NDK
+      run: |
+        export ANDROID_HOME="$HOME/Android/Sdk"
+        export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+        export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+        mkdir -p $ANDROID_HOME
+        wget -q https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
+        unzip -e commandlinetools-linux-8092744_latest.zip -d $ANDROID_HOME/cmdline-tools
+        mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+        yes | sdkmanager --licenses > /dev/null
+        sdkmanager --install tools
+        sdkmanager --install platform-tools
+        sdkmanager --install "ndk;23.1.7779620"
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-liblzma-3.10
+        path: packages
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-ndk-3.10
+        path: packages
+    - name: Install dependencies
+      run: conda install packages/*
+    - name: Build recipe
+      run: conda build --py=3.10 android-libxml2
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: android-libxml2-3.10
+        path: /usr/share/miniconda/conda-bld/noarch/android-libxml2*.bz2
+  android-libxslt:
+    needs:
+    - android-libxml2
+    - android-ndk
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-update-conda: true
+        python-version: '3.10'
+    - name: Install conda build
+      run: |
+        conda install conda-build
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Setup JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - id: android-cache
+      name: Cache Android NDK
+      uses: actions/cache@v2
+      with:
+        key: linux-android-ndk-23.1.7779620
+        path: ~/Android
+    - if: steps.android-cache.outputs.cache-hit != 'true'
+      name: Setup android NDK
+      run: |
+        export ANDROID_HOME="$HOME/Android/Sdk"
+        export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+        export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+        mkdir -p $ANDROID_HOME
+        wget -q https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
+        unzip -e commandlinetools-linux-8092744_latest.zip -d $ANDROID_HOME/cmdline-tools
+        mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+        yes | sdkmanager --licenses > /dev/null
+        sdkmanager --install tools
+        sdkmanager --install platform-tools
+        sdkmanager --install "ndk;23.1.7779620"
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-libxml2-3.10
+        path: packages
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-ndk-3.10
+        path: packages
+    - name: Install dependencies
+      run: conda install packages/*
+    - name: Build recipe
+      run: conda build --py=3.10 android-libxslt
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: android-libxslt-3.10
+        path: /usr/share/miniconda/conda-bld/noarch/android-libxslt*.bz2
+  android-libzmq:
+    needs:
+    - android-libsodium
+    - android-ndk
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-update-conda: true
+        python-version: '3.10'
+    - name: Install conda build
+      run: |
+        conda install conda-build
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Setup JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - id: android-cache
+      name: Cache Android NDK
+      uses: actions/cache@v2
+      with:
+        key: linux-android-ndk-23.1.7779620
+        path: ~/Android
+    - if: steps.android-cache.outputs.cache-hit != 'true'
+      name: Setup android NDK
+      run: |
+        export ANDROID_HOME="$HOME/Android/Sdk"
+        export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+        export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+        mkdir -p $ANDROID_HOME
+        wget -q https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
+        unzip -e commandlinetools-linux-8092744_latest.zip -d $ANDROID_HOME/cmdline-tools
+        mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+        yes | sdkmanager --licenses > /dev/null
+        sdkmanager --install tools
+        sdkmanager --install platform-tools
+        sdkmanager --install "ndk;23.1.7779620"
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-libsodium-3.10
+        path: packages
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-ndk-3.10
+        path: packages
+    - name: Install dependencies
+      run: conda install packages/*
+    - name: Build recipe
+      run: conda build --py=3.10 android-libzmq
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: android-libzmq-3.10
+        path: /usr/share/miniconda/conda-bld/noarch/android-libzmq*.bz2
+  android-lxml:
+    needs:
+    - android-ndk
+    - android-libxml2
+    - android-libxslt
+    - android-python
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-update-conda: true
+        python-version: '3.10'
+    - name: Install conda build
+      run: |
+        conda install conda-build
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Setup JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - id: android-cache
+      name: Cache Android NDK
+      uses: actions/cache@v2
+      with:
+        key: linux-android-ndk-23.1.7779620
+        path: ~/Android
+    - if: steps.android-cache.outputs.cache-hit != 'true'
+      name: Setup android NDK
+      run: |
+        export ANDROID_HOME="$HOME/Android/Sdk"
+        export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+        export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+        mkdir -p $ANDROID_HOME
+        wget -q https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
+        unzip -e commandlinetools-linux-8092744_latest.zip -d $ANDROID_HOME/cmdline-tools
+        mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+        yes | sdkmanager --licenses > /dev/null
+        sdkmanager --install tools
+        sdkmanager --install platform-tools
+        sdkmanager --install "ndk;23.1.7779620"
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-ndk-3.10
+        path: packages
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-libxml2-3.10
+        path: packages
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-libxslt-3.10
+        path: packages
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-python-3.10
+        path: packages
+    - name: Install dependencies
+      run: conda install packages/*
+    - name: Build recipe
+      run: conda build --py=3.10 android-lxml
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: android-lxml-3.10
+        path: /usr/share/miniconda/conda-bld/noarch/android-lxml*.bz2
+  android-lz4:
+    needs:
+    - android-ndk
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-update-conda: true
+        python-version: '3.10'
+    - name: Install conda build
+      run: |
+        conda install conda-build
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Setup JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - id: android-cache
+      name: Cache Android NDK
+      uses: actions/cache@v2
+      with:
+        key: linux-android-ndk-23.1.7779620
+        path: ~/Android
+    - if: steps.android-cache.outputs.cache-hit != 'true'
+      name: Setup android NDK
+      run: |
+        export ANDROID_HOME="$HOME/Android/Sdk"
+        export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+        export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+        mkdir -p $ANDROID_HOME
+        wget -q https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
+        unzip -e commandlinetools-linux-8092744_latest.zip -d $ANDROID_HOME/cmdline-tools
+        mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+        yes | sdkmanager --licenses > /dev/null
+        sdkmanager --install tools
+        sdkmanager --install platform-tools
+        sdkmanager --install "ndk;23.1.7779620"
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-ndk-3.10
+        path: packages
+    - name: Install dependencies
+      run: conda install packages/*
+    - name: Build recipe
+      run: conda build --py=3.10 android-lz4
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: android-lz4-3.10
+        path: /usr/share/miniconda/conda-bld/noarch/android-lz4*.bz2
+  android-msgpack:
+    needs:
+    - android-ndk
+    - android-python
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-update-conda: true
+        python-version: '3.10'
+    - name: Install conda build
+      run: |
+        conda install conda-build
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Setup JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - id: android-cache
+      name: Cache Android NDK
+      uses: actions/cache@v2
+      with:
+        key: linux-android-ndk-23.1.7779620
+        path: ~/Android
+    - if: steps.android-cache.outputs.cache-hit != 'true'
+      name: Setup android NDK
+      run: |
+        export ANDROID_HOME="$HOME/Android/Sdk"
+        export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+        export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+        mkdir -p $ANDROID_HOME
+        wget -q https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
+        unzip -e commandlinetools-linux-8092744_latest.zip -d $ANDROID_HOME/cmdline-tools
+        mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+        yes | sdkmanager --licenses > /dev/null
+        sdkmanager --install tools
+        sdkmanager --install platform-tools
+        sdkmanager --install "ndk;23.1.7779620"
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-ndk-3.10
+        path: packages
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-python-3.10
+        path: packages
+    - name: Install dependencies
+      run: conda install packages/*
+    - name: Build recipe
+      run: conda build --py=3.10 android-msgpack
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: android-msgpack-3.10
+        path: /usr/share/miniconda/conda-bld/noarch/android-msgpack*.bz2
+  android-ndk:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-update-conda: true
+        python-version: '3.10'
+    - name: Install conda build
+      run: |
+        conda install conda-build
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Setup JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - id: android-cache
+      name: Cache Android NDK
+      uses: actions/cache@v2
+      with:
+        key: linux-android-ndk-23.1.7779620
+        path: ~/Android
+    - if: steps.android-cache.outputs.cache-hit != 'true'
+      name: Setup android NDK
+      run: |
+        export ANDROID_HOME="$HOME/Android/Sdk"
+        export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+        export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+        mkdir -p $ANDROID_HOME
+        wget -q https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
+        unzip -e commandlinetools-linux-8092744_latest.zip -d $ANDROID_HOME/cmdline-tools
+        mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+        yes | sdkmanager --licenses > /dev/null
+        sdkmanager --install tools
+        sdkmanager --install platform-tools
+        sdkmanager --install "ndk;23.1.7779620"
+    - name: Build recipe
+      run: conda build --py=3.10 android-ndk
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: android-ndk-3.10
+        path: /usr/share/miniconda/conda-bld/noarch/android-ndk*.bz2
+  android-openssl:
+    needs:
+    - android-ndk
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-update-conda: true
+        python-version: '3.10'
+    - name: Install conda build
+      run: |
+        conda install conda-build
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Setup JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - id: android-cache
+      name: Cache Android NDK
+      uses: actions/cache@v2
+      with:
+        key: linux-android-ndk-23.1.7779620
+        path: ~/Android
+    - if: steps.android-cache.outputs.cache-hit != 'true'
+      name: Setup android NDK
+      run: |
+        export ANDROID_HOME="$HOME/Android/Sdk"
+        export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+        export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+        mkdir -p $ANDROID_HOME
+        wget -q https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
+        unzip -e commandlinetools-linux-8092744_latest.zip -d $ANDROID_HOME/cmdline-tools
+        mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+        yes | sdkmanager --licenses > /dev/null
+        sdkmanager --install tools
+        sdkmanager --install platform-tools
+        sdkmanager --install "ndk;23.1.7779620"
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-ndk-3.10
+        path: packages
+    - name: Install dependencies
+      run: conda install packages/*
+    - name: Build recipe
+      run: conda build --py=3.10 android-openssl
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: android-openssl-3.10
+        path: /usr/share/miniconda/conda-bld/noarch/android-openssl*.bz2
+  android-python:
+    needs:
+    - android-ndk
+    - android-libffi
+    - android-openssl
+    - android-sqlite
+    - android-liblzma
+    - android-libbz2
+    - android-libuuid
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-update-conda: true
+        python-version: '3.10'
+    - name: Install conda build
+      run: |
+        conda install conda-build
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Setup JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - id: android-cache
+      name: Cache Android NDK
+      uses: actions/cache@v2
+      with:
+        key: linux-android-ndk-23.1.7779620
+        path: ~/Android
+    - if: steps.android-cache.outputs.cache-hit != 'true'
+      name: Setup android NDK
+      run: |
+        export ANDROID_HOME="$HOME/Android/Sdk"
+        export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+        export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+        mkdir -p $ANDROID_HOME
+        wget -q https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
+        unzip -e commandlinetools-linux-8092744_latest.zip -d $ANDROID_HOME/cmdline-tools
+        mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+        yes | sdkmanager --licenses > /dev/null
+        sdkmanager --install tools
+        sdkmanager --install platform-tools
+        sdkmanager --install "ndk;23.1.7779620"
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-ndk-3.10
+        path: packages
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-libffi-3.10
+        path: packages
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-openssl-3.10
+        path: packages
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-sqlite-3.10
+        path: packages
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-liblzma-3.10
+        path: packages
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-libbz2-3.10
+        path: packages
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-libuuid-3.10
+        path: packages
+    - name: Install dependencies
+      run: conda install packages/*
+    - name: Build recipe
+      run: conda build --py=3.10 android-python
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: android-python-3.10
+        path: /usr/share/miniconda/conda-bld/noarch/android-python*.bz2
+  android-pyzmq:
+    needs:
+    - android-ndk
+    - android-libzmq
+    - android-libsodium
+    - android-python
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-update-conda: true
+        python-version: '3.10'
+    - name: Install conda build
+      run: |
+        conda install conda-build
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Setup JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - id: android-cache
+      name: Cache Android NDK
+      uses: actions/cache@v2
+      with:
+        key: linux-android-ndk-23.1.7779620
+        path: ~/Android
+    - if: steps.android-cache.outputs.cache-hit != 'true'
+      name: Setup android NDK
+      run: |
+        export ANDROID_HOME="$HOME/Android/Sdk"
+        export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+        export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+        mkdir -p $ANDROID_HOME
+        wget -q https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
+        unzip -e commandlinetools-linux-8092744_latest.zip -d $ANDROID_HOME/cmdline-tools
+        mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+        yes | sdkmanager --licenses > /dev/null
+        sdkmanager --install tools
+        sdkmanager --install platform-tools
+        sdkmanager --install "ndk;23.1.7779620"
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-ndk-3.10
+        path: packages
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-libzmq-3.10
+        path: packages
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-libsodium-3.10
+        path: packages
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-python-3.10
+        path: packages
+    - name: Install dependencies
+      run: conda install packages/*
+    - name: Build recipe
+      run: conda build --py=3.10 android-pyzmq
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: android-pyzmq-3.10
+        path: /usr/share/miniconda/conda-bld/noarch/android-pyzmq*.bz2
+  android-sqlite:
+    needs:
+    - android-ndk
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-update-conda: true
+        python-version: '3.10'
+    - name: Install conda build
+      run: |
+        conda install conda-build
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Setup JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - id: android-cache
+      name: Cache Android NDK
+      uses: actions/cache@v2
+      with:
+        key: linux-android-ndk-23.1.7779620
+        path: ~/Android
+    - if: steps.android-cache.outputs.cache-hit != 'true'
+      name: Setup android NDK
+      run: |
+        export ANDROID_HOME="$HOME/Android/Sdk"
+        export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+        export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+        mkdir -p $ANDROID_HOME
+        wget -q https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
+        unzip -e commandlinetools-linux-8092744_latest.zip -d $ANDROID_HOME/cmdline-tools
+        mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+        yes | sdkmanager --licenses > /dev/null
+        sdkmanager --install tools
+        sdkmanager --install platform-tools
+        sdkmanager --install "ndk;23.1.7779620"
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: android-ndk-3.10
+        path: packages
+    - name: Install dependencies
+      run: conda install packages/*
+    - name: Build recipe
+      run: conda build --py=3.10 android-sqlite
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: android-sqlite-3.10
+        path: /usr/share/miniconda/conda-bld/noarch/android-sqlite*.bz2
+  pip-bytecode:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-update-conda: true
+        python-version: '3.10'
+    - name: Install conda build
+      run: |
+        conda install conda-build
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Build recipe
+      run: conda build --py=3.10 pip-bytecode
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: pip-bytecode-3.10
+        path: /usr/share/miniconda/conda-bld/noarch/pip-bytecode*.bz2
+  pip-cppy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-update-conda: true
+        python-version: '3.10'
+    - name: Install conda build
+      run: |
+        conda install conda-build
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Build recipe
+      run: conda build --py=3.10 pip-cppy
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: pip-cppy-3.10
+        path: /usr/share/miniconda/conda-bld/noarch/pip-cppy*.bz2
+  pip-docutils:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-update-conda: true
+        python-version: '3.10'
+    - name: Install conda build
+      run: |
+        conda install conda-build
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Build recipe
+      run: conda build --py=3.10 pip-docutils
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: pip-docutils-3.10
+        path: /usr/share/miniconda/conda-bld/noarch/pip-docutils*.bz2
+  pip-jsonrpclib:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-update-conda: true
+        python-version: '3.10'
+    - name: Install conda build
+      run: |
+        conda install conda-build
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Build recipe
+      run: conda build --py=3.10 pip-jsonrpclib
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: pip-jsonrpclib-3.10
+        path: /usr/share/miniconda/conda-bld/noarch/pip-jsonrpclib*.bz2
+  pip-motor:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-update-conda: true
+        python-version: '3.10'
+    - name: Install conda build
+      run: |
+        conda install conda-build
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Build recipe
+      run: conda build --py=3.10 pip-motor
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: pip-motor-3.10
+        path: /usr/share/miniconda/conda-bld/noarch/pip-motor*.bz2
+  pip-ply:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-update-conda: true
+        python-version: '3.10'
+    - name: Install conda build
+      run: |
+        conda install conda-build
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Build recipe
+      run: conda build --py=3.10 pip-ply
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: pip-ply-3.10
+        path: /usr/share/miniconda/conda-bld/noarch/pip-ply*.bz2
+  pip-tornado:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-update-conda: true
+        python-version: '3.10'
+    - name: Install conda build
+      run: |
+        conda install conda-build
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Build recipe
+      run: conda build --py=3.10 pip-tornado
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: pip-tornado-3.10
+        path: /usr/share/miniconda/conda-bld/noarch/pip-tornado*.bz2
+name: CI
+'on': push
