@@ -13,8 +13,6 @@ jobs:
         export PATH="$HOME/micromamba/bin:$PATH"
     - name: Setup micromamba
       run: |
-        source ~/.bashrc
-        micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename

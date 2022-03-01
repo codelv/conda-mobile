@@ -39,8 +39,6 @@ export PATH="$HOME/micromamba/bin:$PATH"
 """
 
 SETUP_MINIMAMBA = f"""
-source ~/.bashrc
-micromamba activate
 micromamba install -c conda-forge python={PY_VER} boa
 """
 
