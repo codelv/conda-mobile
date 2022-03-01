@@ -93,23 +93,19 @@ def main():
                 packages[group] = [item]
 
     jobs = {}
-    conda_bld_path = "~/bin/micromamba/conda-bld"
+    conda_bld_path = "~/micromamba/conda-bld"
 
     common_steps = [
         {"uses": "actions/checkout@v2"},
         {
             "name": "Install micromamba",
             "uses": "mamba-org/provision-with-micromamba@main",
-            #"with": {
-            #    "cache-env": "true",
-            #    "cache-downloads": "true",
-            #}
+            "with": {
+                "cache-env": True,
+                "cache-downloads": True,
+            },
         },
-        {
-            "name": "Setup micromamba",
-            "shell": "bash -l {0}",
-            "run": Block(SETUP)
-        },
+        # {"name": "Setup micromamba", "shell": "bash -l {0}", "run": Block(SETUP)},
     ]
 
     android_steps = [
@@ -153,7 +149,7 @@ def main():
 
             # Add requirements
             needs = []
-            platform = 'linux-64'
+            platform = "linux-64"
             if "requirements" in meta:
                 reqs = meta["requirements"]
                 if "build" in reqs:
@@ -162,8 +158,8 @@ def main():
                         if dep_name in all_packages:
                             needs.append(dep_name)
 
-            if 'build' in meta and 'noarch' in meta['build']:
-                platform = 'noarch'
+            if "build" in meta and "noarch" in meta["build"]:
+                platform = "noarch"
 
             build_steps = [
                 {
@@ -198,6 +194,7 @@ def main():
                 req_steps.append(
                     {
                         "name": f"Run conda index",
+                        "shell": "bash -l {0}",
                         "run": f"conda index {conda_bld_path}/*",
                     }
                 )
@@ -212,14 +209,12 @@ def main():
                 job["needs"] = needs
 
     # Try one for now..
-    jobs = {'android-ndk': jobs['android-ndk']}
+    # jobs = {'android-ndk': jobs['android-ndk']}
     script = {
         "name": "CI",
         "on": "push",
         "jobs": jobs,
     }
-
-
 
     with open(".github/workflows/ci.yml", "w") as f:
         f.write(yaml.dump(script))
@@ -228,6 +223,7 @@ def main():
 def convert_boa():
     import subprocess
     from glob import glob
+
     for meta in glob("*/meta.yaml"):
         path, name = os.path.split(meta)
         result = subprocess.check_output(["boa", "convert", meta])
