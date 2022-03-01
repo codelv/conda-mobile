@@ -1,0 +1,6 @@
+name: conda-mobile
+channels:
+  - conda-forge
+dependencies:
+ - python=3.10
+ - boa
