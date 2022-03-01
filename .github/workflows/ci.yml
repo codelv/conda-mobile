@@ -8,13 +8,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install minimamba
+    - name: Install micromamba
       run: |
+        mkdir ~/micromamba
+        cd ~/micromamba
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        touch ~/.bashrc
         ./bin/micromamba shell init -s bash -p ~/micromamba
-    - name: Setup minimamba
+        cd ~/
+    - name: Setup micromamba
       run: |
+        source ~/.bashrc
         micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
@@ -80,13 +83,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install minimamba
+    - name: Install micromamba
       run: |
+        mkdir ~/micromamba
+        cd ~/micromamba
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        touch ~/.bashrc
         ./bin/micromamba shell init -s bash -p ~/micromamba
-    - name: Setup minimamba
+        cd ~/
+    - name: Setup micromamba
       run: |
+        source ~/.bashrc
         micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
@@ -147,13 +153,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install minimamba
+    - name: Install micromamba
       run: |
+        mkdir ~/micromamba
+        cd ~/micromamba
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        touch ~/.bashrc
         ./bin/micromamba shell init -s bash -p ~/micromamba
-    - name: Setup minimamba
+        cd ~/
+    - name: Setup micromamba
       run: |
+        source ~/.bashrc
         micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
@@ -219,13 +228,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install minimamba
+    - name: Install micromamba
       run: |
+        mkdir ~/micromamba
+        cd ~/micromamba
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        touch ~/.bashrc
         ./bin/micromamba shell init -s bash -p ~/micromamba
-    - name: Setup minimamba
+        cd ~/
+    - name: Setup micromamba
       run: |
+        source ~/.bashrc
         micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
@@ -311,13 +323,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install minimamba
+    - name: Install micromamba
       run: |
+        mkdir ~/micromamba
+        cd ~/micromamba
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        touch ~/.bashrc
         ./bin/micromamba shell init -s bash -p ~/micromamba
-    - name: Setup minimamba
+        cd ~/
+    - name: Setup micromamba
       run: |
+        source ~/.bashrc
         micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
@@ -376,13 +391,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install minimamba
+    - name: Install micromamba
       run: |
+        mkdir ~/micromamba
+        cd ~/micromamba
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        touch ~/.bashrc
         ./bin/micromamba shell init -s bash -p ~/micromamba
-    - name: Setup minimamba
+        cd ~/
+    - name: Setup micromamba
       run: |
+        source ~/.bashrc
         micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
@@ -434,13 +452,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install minimamba
+    - name: Install micromamba
       run: |
+        mkdir ~/micromamba
+        cd ~/micromamba
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        touch ~/.bashrc
         ./bin/micromamba shell init -s bash -p ~/micromamba
-    - name: Setup minimamba
+        cd ~/
+    - name: Setup micromamba
       run: |
+        source ~/.bashrc
         micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
@@ -504,13 +525,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install minimamba
+    - name: Install micromamba
       run: |
+        mkdir ~/micromamba
+        cd ~/micromamba
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        touch ~/.bashrc
         ./bin/micromamba shell init -s bash -p ~/micromamba
-    - name: Setup minimamba
+        cd ~/
+    - name: Setup micromamba
       run: |
+        source ~/.bashrc
         micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
@@ -559,13 +583,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install minimamba
+    - name: Install micromamba
       run: |
+        mkdir ~/micromamba
+        cd ~/micromamba
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        touch ~/.bashrc
         ./bin/micromamba shell init -s bash -p ~/micromamba
-    - name: Setup minimamba
+        cd ~/
+    - name: Setup micromamba
       run: |
+        source ~/.bashrc
         micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
@@ -614,13 +641,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install minimamba
+    - name: Install micromamba
       run: |
+        mkdir ~/micromamba
+        cd ~/micromamba
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        touch ~/.bashrc
         ./bin/micromamba shell init -s bash -p ~/micromamba
-    - name: Setup minimamba
+        cd ~/
+    - name: Setup micromamba
       run: |
+        source ~/.bashrc
         micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
@@ -669,13 +699,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install minimamba
+    - name: Install micromamba
       run: |
+        mkdir ~/micromamba
+        cd ~/micromamba
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        touch ~/.bashrc
         ./bin/micromamba shell init -s bash -p ~/micromamba
-    - name: Setup minimamba
+        cd ~/
+    - name: Setup micromamba
       run: |
+        source ~/.bashrc
         micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
@@ -724,13 +757,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install minimamba
+    - name: Install micromamba
       run: |
+        mkdir ~/micromamba
+        cd ~/micromamba
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        touch ~/.bashrc
         ./bin/micromamba shell init -s bash -p ~/micromamba
-    - name: Setup minimamba
+        cd ~/
+    - name: Setup micromamba
       run: |
+        source ~/.bashrc
         micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
@@ -779,13 +815,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install minimamba
+    - name: Install micromamba
       run: |
+        mkdir ~/micromamba
+        cd ~/micromamba
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        touch ~/.bashrc
         ./bin/micromamba shell init -s bash -p ~/micromamba
-    - name: Setup minimamba
+        cd ~/
+    - name: Setup micromamba
       run: |
+        source ~/.bashrc
         micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
@@ -834,13 +873,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install minimamba
+    - name: Install micromamba
       run: |
+        mkdir ~/micromamba
+        cd ~/micromamba
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        touch ~/.bashrc
         ./bin/micromamba shell init -s bash -p ~/micromamba
-    - name: Setup minimamba
+        cd ~/
+    - name: Setup micromamba
       run: |
+        source ~/.bashrc
         micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
@@ -889,13 +931,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install minimamba
+    - name: Install micromamba
       run: |
+        mkdir ~/micromamba
+        cd ~/micromamba
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        touch ~/.bashrc
         ./bin/micromamba shell init -s bash -p ~/micromamba
-    - name: Setup minimamba
+        cd ~/
+    - name: Setup micromamba
       run: |
+        source ~/.bashrc
         micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
@@ -944,13 +989,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install minimamba
+    - name: Install micromamba
       run: |
+        mkdir ~/micromamba
+        cd ~/micromamba
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        touch ~/.bashrc
         ./bin/micromamba shell init -s bash -p ~/micromamba
-    - name: Setup minimamba
+        cd ~/
+    - name: Setup micromamba
       run: |
+        source ~/.bashrc
         micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
@@ -999,13 +1047,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install minimamba
+    - name: Install micromamba
       run: |
+        mkdir ~/micromamba
+        cd ~/micromamba
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        touch ~/.bashrc
         ./bin/micromamba shell init -s bash -p ~/micromamba
-    - name: Setup minimamba
+        cd ~/
+    - name: Setup micromamba
       run: |
+        source ~/.bashrc
         micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
@@ -1055,13 +1106,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install minimamba
+    - name: Install micromamba
       run: |
+        mkdir ~/micromamba
+        cd ~/micromamba
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        touch ~/.bashrc
         ./bin/micromamba shell init -s bash -p ~/micromamba
-    - name: Setup minimamba
+        cd ~/
+    - name: Setup micromamba
       run: |
+        source ~/.bashrc
         micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
@@ -1116,13 +1170,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install minimamba
+    - name: Install micromamba
       run: |
+        mkdir ~/micromamba
+        cd ~/micromamba
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        touch ~/.bashrc
         ./bin/micromamba shell init -s bash -p ~/micromamba
-    - name: Setup minimamba
+        cd ~/
+    - name: Setup micromamba
       run: |
+        source ~/.bashrc
         micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
@@ -1177,13 +1234,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install minimamba
+    - name: Install micromamba
       run: |
+        mkdir ~/micromamba
+        cd ~/micromamba
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        touch ~/.bashrc
         ./bin/micromamba shell init -s bash -p ~/micromamba
-    - name: Setup minimamba
+        cd ~/
+    - name: Setup micromamba
       run: |
+        source ~/.bashrc
         micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
@@ -1240,13 +1300,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install minimamba
+    - name: Install micromamba
       run: |
+        mkdir ~/micromamba
+        cd ~/micromamba
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        touch ~/.bashrc
         ./bin/micromamba shell init -s bash -p ~/micromamba
-    - name: Setup minimamba
+        cd ~/
+    - name: Setup micromamba
       run: |
+        source ~/.bashrc
         micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
@@ -1310,13 +1373,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install minimamba
+    - name: Install micromamba
       run: |
+        mkdir ~/micromamba
+        cd ~/micromamba
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        touch ~/.bashrc
         ./bin/micromamba shell init -s bash -p ~/micromamba
-    - name: Setup minimamba
+        cd ~/
+    - name: Setup micromamba
       run: |
+        source ~/.bashrc
         micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
@@ -1367,13 +1433,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install minimamba
+    - name: Install micromamba
       run: |
+        mkdir ~/micromamba
+        cd ~/micromamba
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        touch ~/.bashrc
         ./bin/micromamba shell init -s bash -p ~/micromamba
-    - name: Setup minimamba
+        cd ~/
+    - name: Setup micromamba
       run: |
+        source ~/.bashrc
         micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
@@ -1430,13 +1499,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install minimamba
+    - name: Install micromamba
       run: |
+        mkdir ~/micromamba
+        cd ~/micromamba
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        touch ~/.bashrc
         ./bin/micromamba shell init -s bash -p ~/micromamba
-    - name: Setup minimamba
+        cd ~/
+    - name: Setup micromamba
       run: |
+        source ~/.bashrc
         micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
@@ -1478,13 +1550,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install minimamba
+    - name: Install micromamba
       run: |
+        mkdir ~/micromamba
+        cd ~/micromamba
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        touch ~/.bashrc
         ./bin/micromamba shell init -s bash -p ~/micromamba
-    - name: Setup minimamba
+        cd ~/
+    - name: Setup micromamba
       run: |
+        source ~/.bashrc
         micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
@@ -1540,13 +1615,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install minimamba
+    - name: Install micromamba
       run: |
+        mkdir ~/micromamba
+        cd ~/micromamba
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        touch ~/.bashrc
         ./bin/micromamba shell init -s bash -p ~/micromamba
-    - name: Setup minimamba
+        cd ~/
+    - name: Setup micromamba
       run: |
+        source ~/.bashrc
         micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
@@ -1633,13 +1711,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install minimamba
+    - name: Install micromamba
       run: |
+        mkdir ~/micromamba
+        cd ~/micromamba
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        touch ~/.bashrc
         ./bin/micromamba shell init -s bash -p ~/micromamba
-    - name: Setup minimamba
+        cd ~/
+    - name: Setup micromamba
       run: |
+        source ~/.bashrc
         micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
@@ -1703,13 +1784,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install minimamba
+    - name: Install micromamba
       run: |
+        mkdir ~/micromamba
+        cd ~/micromamba
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        touch ~/.bashrc
         ./bin/micromamba shell init -s bash -p ~/micromamba
-    - name: Setup minimamba
+        cd ~/
+    - name: Setup micromamba
       run: |
+        source ~/.bashrc
         micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Install system deps
@@ -1756,13 +1840,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install minimamba
+    - name: Install micromamba
       run: |
+        mkdir ~/micromamba
+        cd ~/micromamba
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        touch ~/.bashrc
         ./bin/micromamba shell init -s bash -p ~/micromamba
-    - name: Setup minimamba
+        cd ~/
+    - name: Setup micromamba
       run: |
+        source ~/.bashrc
         micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Build recipe
@@ -1776,13 +1863,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install minimamba
+    - name: Install micromamba
       run: |
+        mkdir ~/micromamba
+        cd ~/micromamba
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        touch ~/.bashrc
         ./bin/micromamba shell init -s bash -p ~/micromamba
-    - name: Setup minimamba
+        cd ~/
+    - name: Setup micromamba
       run: |
+        source ~/.bashrc
         micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Build recipe
@@ -1796,13 +1886,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install minimamba
+    - name: Install micromamba
       run: |
+        mkdir ~/micromamba
+        cd ~/micromamba
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        touch ~/.bashrc
         ./bin/micromamba shell init -s bash -p ~/micromamba
-    - name: Setup minimamba
+        cd ~/
+    - name: Setup micromamba
       run: |
+        source ~/.bashrc
         micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Build recipe
@@ -1816,13 +1909,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install minimamba
+    - name: Install micromamba
       run: |
+        mkdir ~/micromamba
+        cd ~/micromamba
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        touch ~/.bashrc
         ./bin/micromamba shell init -s bash -p ~/micromamba
-    - name: Setup minimamba
+        cd ~/
+    - name: Setup micromamba
       run: |
+        source ~/.bashrc
         micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Build recipe
@@ -1836,13 +1932,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install minimamba
+    - name: Install micromamba
       run: |
+        mkdir ~/micromamba
+        cd ~/micromamba
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        touch ~/.bashrc
         ./bin/micromamba shell init -s bash -p ~/micromamba
-    - name: Setup minimamba
+        cd ~/
+    - name: Setup micromamba
       run: |
+        source ~/.bashrc
         micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Build recipe
@@ -1856,13 +1955,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install minimamba
+    - name: Install micromamba
       run: |
+        mkdir ~/micromamba
+        cd ~/micromamba
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        touch ~/.bashrc
         ./bin/micromamba shell init -s bash -p ~/micromamba
-    - name: Setup minimamba
+        cd ~/
+    - name: Setup micromamba
       run: |
+        source ~/.bashrc
         micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Build recipe
@@ -1876,13 +1978,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install minimamba
+    - name: Install micromamba
       run: |
+        mkdir ~/micromamba
+        cd ~/micromamba
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        touch ~/.bashrc
         ./bin/micromamba shell init -s bash -p ~/micromamba
-    - name: Setup minimamba
+        cd ~/
+    - name: Setup micromamba
       run: |
+        source ~/.bashrc
         micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Build recipe
@@ -1896,13 +2001,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install minimamba
+    - name: Install micromamba
       run: |
+        mkdir ~/micromamba
+        cd ~/micromamba
         wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-        touch ~/.bashrc
         ./bin/micromamba shell init -s bash -p ~/micromamba
-    - name: Setup minimamba
+        cd ~/
+    - name: Setup micromamba
       run: |
+        source ~/.bashrc
         micromamba activate
         micromamba install -c conda-forge python=3.10 boa
     - name: Build recipe

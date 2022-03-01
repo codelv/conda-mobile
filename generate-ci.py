@@ -30,12 +30,15 @@ sdkmanager --install "ndk;{NDK_VER}"
 site_packages = "/usr/share/miniconda/lib/python3.9/site-packages"
 
 INSTALL_MINIMAMBA = f"""
+mkdir ~/micromamba
+cd ~/micromamba
 wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-touch ~/.bashrc
 ./bin/micromamba shell init -s bash -p ~/micromamba
+cd ~/
 """
 
 SETUP_MINIMAMBA = f"""
+source ~/.bashrc
 micromamba activate
 micromamba install -c conda-forge python={PY_VER} boa
 """
@@ -93,8 +96,8 @@ def main():
 
     common_steps = [
         {"uses": "actions/checkout@v2"},
-        {"name": "Install minimamba", "run": Block(INSTALL_MINIMAMBA)},
-        {"name": "Setup minimamba", "run": Block(SETUP_MINIMAMBA)},
+        {"name": "Install micromamba", "run": Block(INSTALL_MINIMAMBA)},
+        {"name": "Setup micromamba", "run": Block(SETUP_MINIMAMBA)},
     ]
 
     android_steps = [
