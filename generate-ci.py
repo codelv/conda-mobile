@@ -101,7 +101,7 @@ def main():
             "name": "Install micromamba",
             "uses": "mamba-org/provision-with-micromamba@main",
             "with": {
-                "cache-env": True,
+                #"cache-env": True,
                 "cache-downloads": True,
             },
         },
