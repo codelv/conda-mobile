@@ -152,7 +152,7 @@ def main():
                     "uses": "actions/upload-artifact@v2",
                     "with": {
                         "name": f"{pkg}-{PY_VER}",
-                        "path": f"/usr/share/miniconda/conda-bld/noarch/{pkg}*.bz2",
+                        "path": f"/usr/share/miniconda/conda-bld/*/{pkg}*.bz2",
                     },
                 },
             ]
@@ -172,7 +172,10 @@ def main():
                         }
                     )
                 req_steps.append(
-                    {"name": f"Install dependencies", "run": "conda install packages/*"}
+                    {
+                        "name": f"Install dependencies",
+                        "run": "conda install packages/*/*.bz2",
+                    }
                 )
 
             steps = common_steps + group_steps + req_steps + build_steps

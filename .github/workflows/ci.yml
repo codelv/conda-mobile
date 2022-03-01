@@ -62,14 +62,14 @@ jobs:
         name: android-python-3.10
         path: packages
     - name: Install dependencies
-      run: conda install packages/*
+      run: conda install packages/*/*.bz2
     - name: Build recipe
       run: conda build --py=3.10 android-atom
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-atom-3.10
-        path: /usr/share/miniconda/conda-bld/noarch/android-atom*.bz2
+        path: /usr/share/miniconda/conda-bld/*/android-atom*.bz2
   android-cffi:
     needs:
     - android-ndk
@@ -127,14 +127,14 @@ jobs:
         name: android-libffi-3.10
         path: packages
     - name: Install dependencies
-      run: conda install packages/*
+      run: conda install packages/*/*.bz2
     - name: Build recipe
       run: conda build --py=3.10 android-cffi
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-cffi-3.10
-        path: /usr/share/miniconda/conda-bld/noarch/android-cffi*.bz2
+        path: /usr/share/miniconda/conda-bld/*/android-cffi*.bz2
   android-cryptography:
     needs:
     - android-ndk
@@ -192,14 +192,14 @@ jobs:
         name: android-openssl-3.10
         path: packages
     - name: Install dependencies
-      run: conda install packages/*
+      run: conda install packages/*/*.bz2
     - name: Build recipe
       run: conda build --py=3.10 android-cryptography
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-cryptography-3.10
-        path: /usr/share/miniconda/conda-bld/noarch/android-cryptography*.bz2
+        path: /usr/share/miniconda/conda-bld/*/android-cryptography*.bz2
   android-enaml:
     needs:
     - pip-cppy
@@ -281,14 +281,14 @@ jobs:
         name: android-atom-3.10
         path: packages
     - name: Install dependencies
-      run: conda install packages/*
+      run: conda install packages/*/*.bz2
     - name: Build recipe
       run: conda build --py=3.10 android-enaml
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-enaml-3.10
-        path: /usr/share/miniconda/conda-bld/noarch/android-enaml*.bz2
+        path: /usr/share/miniconda/conda-bld/*/android-enaml*.bz2
   android-freetype:
     needs:
     - android-libpng
@@ -346,14 +346,14 @@ jobs:
         name: android-ndk-3.10
         path: packages
     - name: Install dependencies
-      run: conda install packages/*
+      run: conda install packages/*/*.bz2
     - name: Build recipe
       run: conda build --py=3.10 android-freetype
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-freetype-3.10
-        path: /usr/share/miniconda/conda-bld/noarch/android-freetype*.bz2
+        path: /usr/share/miniconda/conda-bld/*/android-freetype*.bz2
   android-harfbuzz:
     needs:
     - android-ndk
@@ -399,14 +399,14 @@ jobs:
         name: android-ndk-3.10
         path: packages
     - name: Install dependencies
-      run: conda install packages/*
+      run: conda install packages/*/*.bz2
     - name: Build recipe
       run: conda build --py=3.10 android-harfbuzz
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-harfbuzz-3.10
-        path: /usr/share/miniconda/conda-bld/noarch/android-harfbuzz*.bz2
+        path: /usr/share/miniconda/conda-bld/*/android-harfbuzz*.bz2
   android-kiwisolver:
     needs:
     - pip-cppy
@@ -470,14 +470,14 @@ jobs:
         name: android-python-3.10
         path: packages
     - name: Install dependencies
-      run: conda install packages/*
+      run: conda install packages/*/*.bz2
     - name: Build recipe
       run: conda build --py=3.10 android-kiwisolver
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-kiwisolver-3.10
-        path: /usr/share/miniconda/conda-bld/noarch/android-kiwisolver*.bz2
+        path: /usr/share/miniconda/conda-bld/*/android-kiwisolver*.bz2
   android-libbz2:
     needs:
     - android-ndk
@@ -523,14 +523,14 @@ jobs:
         name: android-ndk-3.10
         path: packages
     - name: Install dependencies
-      run: conda install packages/*
+      run: conda install packages/*/*.bz2
     - name: Build recipe
       run: conda build --py=3.10 android-libbz2
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-libbz2-3.10
-        path: /usr/share/miniconda/conda-bld/noarch/android-libbz2*.bz2
+        path: /usr/share/miniconda/conda-bld/*/android-libbz2*.bz2
   android-libcxx:
     needs:
     - android-ndk
@@ -576,14 +576,14 @@ jobs:
         name: android-ndk-3.10
         path: packages
     - name: Install dependencies
-      run: conda install packages/*
+      run: conda install packages/*/*.bz2
     - name: Build recipe
       run: conda build --py=3.10 android-libcxx
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-libcxx-3.10
-        path: /usr/share/miniconda/conda-bld/noarch/android-libcxx*.bz2
+        path: /usr/share/miniconda/conda-bld/*/android-libcxx*.bz2
   android-libffi:
     needs:
     - android-ndk
@@ -629,14 +629,14 @@ jobs:
         name: android-ndk-3.10
         path: packages
     - name: Install dependencies
-      run: conda install packages/*
+      run: conda install packages/*/*.bz2
     - name: Build recipe
       run: conda build --py=3.10 android-libffi
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-libffi-3.10
-        path: /usr/share/miniconda/conda-bld/noarch/android-libffi*.bz2
+        path: /usr/share/miniconda/conda-bld/*/android-libffi*.bz2
   android-libgcrypt:
     needs:
     - android-ndk
@@ -682,14 +682,14 @@ jobs:
         name: android-ndk-3.10
         path: packages
     - name: Install dependencies
-      run: conda install packages/*
+      run: conda install packages/*/*.bz2
     - name: Build recipe
       run: conda build --py=3.10 android-libgcrypt
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-libgcrypt-3.10
-        path: /usr/share/miniconda/conda-bld/noarch/android-libgcrypt*.bz2
+        path: /usr/share/miniconda/conda-bld/*/android-libgcrypt*.bz2
   android-libgeos:
     needs:
     - android-ndk
@@ -735,14 +735,14 @@ jobs:
         name: android-ndk-3.10
         path: packages
     - name: Install dependencies
-      run: conda install packages/*
+      run: conda install packages/*/*.bz2
     - name: Build recipe
       run: conda build --py=3.10 android-libgeos
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-libgeos-3.10
-        path: /usr/share/miniconda/conda-bld/noarch/android-libgeos*.bz2
+        path: /usr/share/miniconda/conda-bld/*/android-libgeos*.bz2
   android-libjpeg:
     needs:
     - android-ndk
@@ -788,14 +788,14 @@ jobs:
         name: android-ndk-3.10
         path: packages
     - name: Install dependencies
-      run: conda install packages/*
+      run: conda install packages/*/*.bz2
     - name: Build recipe
       run: conda build --py=3.10 android-libjpeg
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-libjpeg-3.10
-        path: /usr/share/miniconda/conda-bld/noarch/android-libjpeg*.bz2
+        path: /usr/share/miniconda/conda-bld/*/android-libjpeg*.bz2
   android-liblzma:
     needs:
     - android-ndk
@@ -841,14 +841,14 @@ jobs:
         name: android-ndk-3.10
         path: packages
     - name: Install dependencies
-      run: conda install packages/*
+      run: conda install packages/*/*.bz2
     - name: Build recipe
       run: conda build --py=3.10 android-liblzma
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-liblzma-3.10
-        path: /usr/share/miniconda/conda-bld/noarch/android-liblzma*.bz2
+        path: /usr/share/miniconda/conda-bld/*/android-liblzma*.bz2
   android-libpng:
     needs:
     - android-ndk
@@ -894,14 +894,14 @@ jobs:
         name: android-ndk-3.10
         path: packages
     - name: Install dependencies
-      run: conda install packages/*
+      run: conda install packages/*/*.bz2
     - name: Build recipe
       run: conda build --py=3.10 android-libpng
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-libpng-3.10
-        path: /usr/share/miniconda/conda-bld/noarch/android-libpng*.bz2
+        path: /usr/share/miniconda/conda-bld/*/android-libpng*.bz2
   android-libsodium:
     needs:
     - android-ndk
@@ -947,14 +947,14 @@ jobs:
         name: android-ndk-3.10
         path: packages
     - name: Install dependencies
-      run: conda install packages/*
+      run: conda install packages/*/*.bz2
     - name: Build recipe
       run: conda build --py=3.10 android-libsodium
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-libsodium-3.10
-        path: /usr/share/miniconda/conda-bld/noarch/android-libsodium*.bz2
+        path: /usr/share/miniconda/conda-bld/*/android-libsodium*.bz2
   android-libuuid:
     needs:
     - android-ndk
@@ -1000,14 +1000,14 @@ jobs:
         name: android-ndk-3.10
         path: packages
     - name: Install dependencies
-      run: conda install packages/*
+      run: conda install packages/*/*.bz2
     - name: Build recipe
       run: conda build --py=3.10 android-libuuid
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-libuuid-3.10
-        path: /usr/share/miniconda/conda-bld/noarch/android-libuuid*.bz2
+        path: /usr/share/miniconda/conda-bld/*/android-libuuid*.bz2
   android-libxml2:
     needs:
     - android-liblzma
@@ -1059,14 +1059,14 @@ jobs:
         name: android-ndk-3.10
         path: packages
     - name: Install dependencies
-      run: conda install packages/*
+      run: conda install packages/*/*.bz2
     - name: Build recipe
       run: conda build --py=3.10 android-libxml2
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-libxml2-3.10
-        path: /usr/share/miniconda/conda-bld/noarch/android-libxml2*.bz2
+        path: /usr/share/miniconda/conda-bld/*/android-libxml2*.bz2
   android-libxslt:
     needs:
     - android-libxml2
@@ -1118,14 +1118,14 @@ jobs:
         name: android-ndk-3.10
         path: packages
     - name: Install dependencies
-      run: conda install packages/*
+      run: conda install packages/*/*.bz2
     - name: Build recipe
       run: conda build --py=3.10 android-libxslt
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-libxslt-3.10
-        path: /usr/share/miniconda/conda-bld/noarch/android-libxslt*.bz2
+        path: /usr/share/miniconda/conda-bld/*/android-libxslt*.bz2
   android-libzmq:
     needs:
     - android-libsodium
@@ -1177,14 +1177,14 @@ jobs:
         name: android-ndk-3.10
         path: packages
     - name: Install dependencies
-      run: conda install packages/*
+      run: conda install packages/*/*.bz2
     - name: Build recipe
       run: conda build --py=3.10 android-libzmq
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-libzmq-3.10
-        path: /usr/share/miniconda/conda-bld/noarch/android-libzmq*.bz2
+        path: /usr/share/miniconda/conda-bld/*/android-libzmq*.bz2
   android-lxml:
     needs:
     - android-ndk
@@ -1248,14 +1248,14 @@ jobs:
         name: android-python-3.10
         path: packages
     - name: Install dependencies
-      run: conda install packages/*
+      run: conda install packages/*/*.bz2
     - name: Build recipe
       run: conda build --py=3.10 android-lxml
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-lxml-3.10
-        path: /usr/share/miniconda/conda-bld/noarch/android-lxml*.bz2
+        path: /usr/share/miniconda/conda-bld/*/android-lxml*.bz2
   android-lz4:
     needs:
     - android-ndk
@@ -1301,14 +1301,14 @@ jobs:
         name: android-ndk-3.10
         path: packages
     - name: Install dependencies
-      run: conda install packages/*
+      run: conda install packages/*/*.bz2
     - name: Build recipe
       run: conda build --py=3.10 android-lz4
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-lz4-3.10
-        path: /usr/share/miniconda/conda-bld/noarch/android-lz4*.bz2
+        path: /usr/share/miniconda/conda-bld/*/android-lz4*.bz2
   android-msgpack:
     needs:
     - android-ndk
@@ -1360,14 +1360,14 @@ jobs:
         name: android-python-3.10
         path: packages
     - name: Install dependencies
-      run: conda install packages/*
+      run: conda install packages/*/*.bz2
     - name: Build recipe
       run: conda build --py=3.10 android-msgpack
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-msgpack-3.10
-        path: /usr/share/miniconda/conda-bld/noarch/android-msgpack*.bz2
+        path: /usr/share/miniconda/conda-bld/*/android-msgpack*.bz2
   android-ndk:
     runs-on: ubuntu-latest
     steps:
@@ -1411,7 +1411,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: android-ndk-3.10
-        path: /usr/share/miniconda/conda-bld/noarch/android-ndk*.bz2
+        path: /usr/share/miniconda/conda-bld/*/android-ndk*.bz2
   android-openssl:
     needs:
     - android-ndk
@@ -1457,14 +1457,14 @@ jobs:
         name: android-ndk-3.10
         path: packages
     - name: Install dependencies
-      run: conda install packages/*
+      run: conda install packages/*/*.bz2
     - name: Build recipe
       run: conda build --py=3.10 android-openssl
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-openssl-3.10
-        path: /usr/share/miniconda/conda-bld/noarch/android-openssl*.bz2
+        path: /usr/share/miniconda/conda-bld/*/android-openssl*.bz2
   android-python:
     needs:
     - android-ndk
@@ -1546,14 +1546,14 @@ jobs:
         name: android-libuuid-3.10
         path: packages
     - name: Install dependencies
-      run: conda install packages/*
+      run: conda install packages/*/*.bz2
     - name: Build recipe
       run: conda build --py=3.10 android-python
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-python-3.10
-        path: /usr/share/miniconda/conda-bld/noarch/android-python*.bz2
+        path: /usr/share/miniconda/conda-bld/*/android-python*.bz2
   android-pyzmq:
     needs:
     - android-ndk
@@ -1617,14 +1617,14 @@ jobs:
         name: android-python-3.10
         path: packages
     - name: Install dependencies
-      run: conda install packages/*
+      run: conda install packages/*/*.bz2
     - name: Build recipe
       run: conda build --py=3.10 android-pyzmq
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-pyzmq-3.10
-        path: /usr/share/miniconda/conda-bld/noarch/android-pyzmq*.bz2
+        path: /usr/share/miniconda/conda-bld/*/android-pyzmq*.bz2
   android-sqlite:
     needs:
     - android-ndk
@@ -1670,14 +1670,14 @@ jobs:
         name: android-ndk-3.10
         path: packages
     - name: Install dependencies
-      run: conda install packages/*
+      run: conda install packages/*/*.bz2
     - name: Build recipe
       run: conda build --py=3.10 android-sqlite
     - name: Upload package
       uses: actions/upload-artifact@v2
       with:
         name: android-sqlite-3.10
-        path: /usr/share/miniconda/conda-bld/noarch/android-sqlite*.bz2
+        path: /usr/share/miniconda/conda-bld/*/android-sqlite*.bz2
   pip-bytecode:
     runs-on: ubuntu-latest
     steps:
@@ -1697,7 +1697,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: pip-bytecode-3.10
-        path: /usr/share/miniconda/conda-bld/noarch/pip-bytecode*.bz2
+        path: /usr/share/miniconda/conda-bld/*/pip-bytecode*.bz2
   pip-cppy:
     runs-on: ubuntu-latest
     steps:
@@ -1717,7 +1717,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: pip-cppy-3.10
-        path: /usr/share/miniconda/conda-bld/noarch/pip-cppy*.bz2
+        path: /usr/share/miniconda/conda-bld/*/pip-cppy*.bz2
   pip-docutils:
     runs-on: ubuntu-latest
     steps:
@@ -1737,7 +1737,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: pip-docutils-3.10
-        path: /usr/share/miniconda/conda-bld/noarch/pip-docutils*.bz2
+        path: /usr/share/miniconda/conda-bld/*/pip-docutils*.bz2
   pip-jsonrpclib:
     runs-on: ubuntu-latest
     steps:
@@ -1757,27 +1757,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: pip-jsonrpclib-3.10
-        path: /usr/share/miniconda/conda-bld/noarch/pip-jsonrpclib*.bz2
-  pip-motor:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Setup conda
-      uses: conda-incubator/setup-miniconda@v2
-      with:
-        auto-update-conda: true
-        python-version: '3.10'
-    - name: Install conda build
-      run: |
-        conda install conda-build
-        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
-    - name: Build recipe
-      run: conda build --py=3.10 pip-motor
-    - name: Upload package
-      uses: actions/upload-artifact@v2
-      with:
-        name: pip-motor-3.10
-        path: /usr/share/miniconda/conda-bld/noarch/pip-motor*.bz2
+        path: /usr/share/miniconda/conda-bld/*/pip-jsonrpclib*.bz2
   pip-ply:
     runs-on: ubuntu-latest
     steps:
@@ -1797,7 +1777,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: pip-ply-3.10
-        path: /usr/share/miniconda/conda-bld/noarch/pip-ply*.bz2
+        path: /usr/share/miniconda/conda-bld/*/pip-ply*.bz2
   pip-tornado:
     runs-on: ubuntu-latest
     steps:
@@ -1817,6 +1797,6 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: pip-tornado-3.10
-        path: /usr/share/miniconda/conda-bld/noarch/pip-tornado*.bz2
+        path: /usr/share/miniconda/conda-bld/*/pip-tornado*.bz2
 name: CI
 'on': push
