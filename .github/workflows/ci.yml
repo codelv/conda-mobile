@@ -12,7 +12,7 @@ jobs:
       uses: conda-incubator/setup-miniconda@v2
       with:
         auto-update-conda: true
-        channels: conda-forge
+        channels: conda-forge,defaults
         python-version: '3.10'
     - name: Install conda build
       run: |
@@ -85,7 +85,7 @@ jobs:
       uses: conda-incubator/setup-miniconda@v2
       with:
         auto-update-conda: true
-        channels: conda-forge
+        channels: conda-forge,defaults
         python-version: '3.10'
     - name: Install conda build
       run: |
@@ -153,7 +153,7 @@ jobs:
       uses: conda-incubator/setup-miniconda@v2
       with:
         auto-update-conda: true
-        channels: conda-forge
+        channels: conda-forge,defaults
         python-version: '3.10'
     - name: Install conda build
       run: |
@@ -226,7 +226,7 @@ jobs:
       uses: conda-incubator/setup-miniconda@v2
       with:
         auto-update-conda: true
-        channels: conda-forge
+        channels: conda-forge,defaults
         python-version: '3.10'
     - name: Install conda build
       run: |
@@ -319,7 +319,7 @@ jobs:
       uses: conda-incubator/setup-miniconda@v2
       with:
         auto-update-conda: true
-        channels: conda-forge
+        channels: conda-forge,defaults
         python-version: '3.10'
     - name: Install conda build
       run: |
@@ -385,7 +385,7 @@ jobs:
       uses: conda-incubator/setup-miniconda@v2
       with:
         auto-update-conda: true
-        channels: conda-forge
+        channels: conda-forge,defaults
         python-version: '3.10'
     - name: Install conda build
       run: |
@@ -444,7 +444,7 @@ jobs:
       uses: conda-incubator/setup-miniconda@v2
       with:
         auto-update-conda: true
-        channels: conda-forge
+        channels: conda-forge,defaults
         python-version: '3.10'
     - name: Install conda build
       run: |
@@ -515,7 +515,7 @@ jobs:
       uses: conda-incubator/setup-miniconda@v2
       with:
         auto-update-conda: true
-        channels: conda-forge
+        channels: conda-forge,defaults
         python-version: '3.10'
     - name: Install conda build
       run: |
@@ -571,7 +571,7 @@ jobs:
       uses: conda-incubator/setup-miniconda@v2
       with:
         auto-update-conda: true
-        channels: conda-forge
+        channels: conda-forge,defaults
         python-version: '3.10'
     - name: Install conda build
       run: |
@@ -627,7 +627,7 @@ jobs:
       uses: conda-incubator/setup-miniconda@v2
       with:
         auto-update-conda: true
-        channels: conda-forge
+        channels: conda-forge,defaults
         python-version: '3.10'
     - name: Install conda build
       run: |
@@ -683,7 +683,7 @@ jobs:
       uses: conda-incubator/setup-miniconda@v2
       with:
         auto-update-conda: true
-        channels: conda-forge
+        channels: conda-forge,defaults
         python-version: '3.10'
     - name: Install conda build
       run: |
@@ -739,7 +739,7 @@ jobs:
       uses: conda-incubator/setup-miniconda@v2
       with:
         auto-update-conda: true
-        channels: conda-forge
+        channels: conda-forge,defaults
         python-version: '3.10'
     - name: Install conda build
       run: |
@@ -795,7 +795,7 @@ jobs:
       uses: conda-incubator/setup-miniconda@v2
       with:
         auto-update-conda: true
-        channels: conda-forge
+        channels: conda-forge,defaults
         python-version: '3.10'
     - name: Install conda build
       run: |
@@ -851,7 +851,7 @@ jobs:
       uses: conda-incubator/setup-miniconda@v2
       with:
         auto-update-conda: true
-        channels: conda-forge
+        channels: conda-forge,defaults
         python-version: '3.10'
     - name: Install conda build
       run: |
@@ -907,7 +907,7 @@ jobs:
       uses: conda-incubator/setup-miniconda@v2
       with:
         auto-update-conda: true
-        channels: conda-forge
+        channels: conda-forge,defaults
         python-version: '3.10'
     - name: Install conda build
       run: |
@@ -963,7 +963,7 @@ jobs:
       uses: conda-incubator/setup-miniconda@v2
       with:
         auto-update-conda: true
-        channels: conda-forge
+        channels: conda-forge,defaults
         python-version: '3.10'
     - name: Install conda build
       run: |
@@ -1019,7 +1019,7 @@ jobs:
       uses: conda-incubator/setup-miniconda@v2
       with:
         auto-update-conda: true
-        channels: conda-forge
+        channels: conda-forge,defaults
         python-version: '3.10'
     - name: Install conda build
       run: |
@@ -1076,7 +1076,7 @@ jobs:
       uses: conda-incubator/setup-miniconda@v2
       with:
         auto-update-conda: true
-        channels: conda-forge
+        channels: conda-forge,defaults
         python-version: '3.10'
     - name: Install conda build
       run: |
@@ -1138,7 +1138,7 @@ jobs:
       uses: conda-incubator/setup-miniconda@v2
       with:
         auto-update-conda: true
-        channels: conda-forge
+        channels: conda-forge,defaults
         python-version: '3.10'
     - name: Install conda build
       run: |
@@ -1200,7 +1200,7 @@ jobs:
       uses: conda-incubator/setup-miniconda@v2
       with:
         auto-update-conda: true
-        channels: conda-forge
+        channels: conda-forge,defaults
         python-version: '3.10'
     - name: Install conda build
       run: |
@@ -1264,7 +1264,7 @@ jobs:
       uses: conda-incubator/setup-miniconda@v2
       with:
         auto-update-conda: true
-        channels: conda-forge
+        channels: conda-forge,defaults
         python-version: '3.10'
     - name: Install conda build
       run: |
@@ -1335,7 +1335,7 @@ jobs:
       uses: conda-incubator/setup-miniconda@v2
       with:
         auto-update-conda: true
-        channels: conda-forge
+        channels: conda-forge,defaults
         python-version: '3.10'
     - name: Install conda build
       run: |
@@ -1393,7 +1393,7 @@ jobs:
       uses: conda-incubator/setup-miniconda@v2
       with:
         auto-update-conda: true
-        channels: conda-forge
+        channels: conda-forge,defaults
         python-version: '3.10'
     - name: Install conda build
       run: |
@@ -1457,7 +1457,7 @@ jobs:
       uses: conda-incubator/setup-miniconda@v2
       with:
         auto-update-conda: true
-        channels: conda-forge
+        channels: conda-forge,defaults
         python-version: '3.10'
     - name: Install conda build
       run: |
@@ -1506,7 +1506,7 @@ jobs:
       uses: conda-incubator/setup-miniconda@v2
       with:
         auto-update-conda: true
-        channels: conda-forge
+        channels: conda-forge,defaults
         python-version: '3.10'
     - name: Install conda build
       run: |
@@ -1569,7 +1569,7 @@ jobs:
       uses: conda-incubator/setup-miniconda@v2
       with:
         auto-update-conda: true
-        channels: conda-forge
+        channels: conda-forge,defaults
         python-version: '3.10'
     - name: Install conda build
       run: |
@@ -1663,7 +1663,7 @@ jobs:
       uses: conda-incubator/setup-miniconda@v2
       with:
         auto-update-conda: true
-        channels: conda-forge
+        channels: conda-forge,defaults
         python-version: '3.10'
     - name: Install conda build
       run: |
@@ -1734,7 +1734,7 @@ jobs:
       uses: conda-incubator/setup-miniconda@v2
       with:
         auto-update-conda: true
-        channels: conda-forge
+        channels: conda-forge,defaults
         python-version: '3.10'
     - name: Install conda build
       run: |
@@ -1788,7 +1788,7 @@ jobs:
       uses: conda-incubator/setup-miniconda@v2
       with:
         auto-update-conda: true
-        channels: conda-forge
+        channels: conda-forge,defaults
         python-version: '3.10'
     - name: Install conda build
       run: |
@@ -1809,7 +1809,7 @@ jobs:
       uses: conda-incubator/setup-miniconda@v2
       with:
         auto-update-conda: true
-        channels: conda-forge
+        channels: conda-forge,defaults
         python-version: '3.10'
     - name: Install conda build
       run: |
@@ -1830,7 +1830,7 @@ jobs:
       uses: conda-incubator/setup-miniconda@v2
       with:
         auto-update-conda: true
-        channels: conda-forge
+        channels: conda-forge,defaults
         python-version: '3.10'
     - name: Install conda build
       run: |
@@ -1851,7 +1851,7 @@ jobs:
       uses: conda-incubator/setup-miniconda@v2
       with:
         auto-update-conda: true
-        channels: conda-forge
+        channels: conda-forge,defaults
         python-version: '3.10'
     - name: Install conda build
       run: |
@@ -1872,7 +1872,7 @@ jobs:
       uses: conda-incubator/setup-miniconda@v2
       with:
         auto-update-conda: true
-        channels: conda-forge
+        channels: conda-forge,defaults
         python-version: '3.10'
     - name: Install conda build
       run: |
@@ -1893,7 +1893,7 @@ jobs:
       uses: conda-incubator/setup-miniconda@v2
       with:
         auto-update-conda: true
-        channels: conda-forge
+        channels: conda-forge,defaults
         python-version: '3.10'
     - name: Install conda build
       run: |
@@ -1914,7 +1914,7 @@ jobs:
       uses: conda-incubator/setup-miniconda@v2
       with:
         auto-update-conda: true
-        channels: conda-forge
+        channels: conda-forge,defaults
         python-version: '3.10'
     - name: Install conda build
       run: |
@@ -1935,7 +1935,7 @@ jobs:
       uses: conda-incubator/setup-miniconda@v2
       with:
         auto-update-conda: true
-        channels: conda-forge
+        channels: conda-forge,defaults
         python-version: '3.10'
     - name: Install conda build
       run: |
