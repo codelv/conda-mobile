@@ -27,7 +27,7 @@ sdkmanager --install "ndk;{NDK_VER}"
 """
 
 # Patch conda build because it fails cleaning up optimized pyc files
-site_packages = '/usr/share/miniconda/lib/python3.9/site-packages'
+site_packages = "/usr/share/miniconda/lib/python3.9/site-packages"
 CONDA_BUILD = f"""
 conda install conda-build
 sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' {site_packages}/conda_build/post.py
@@ -169,7 +169,7 @@ def main():
                 for req in needs:
                     req_steps.append(
                         {
-                            "name": "Download requirements",
+                            "name": f"Download {req}",
                             "uses": "actions/download-artifact@v2",
                             "with": {
                                 "name": f"{req}-{PY_VER}",

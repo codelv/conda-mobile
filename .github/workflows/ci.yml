@@ -43,22 +43,22 @@ jobs:
         sdkmanager --install tools
         sdkmanager --install platform-tools
         sdkmanager --install "ndk;23.1.7779620"
-    - name: Download requirements
+    - name: Download pip-cppy
       uses: actions/download-artifact@v2
       with:
         name: pip-cppy-3.10
         path: /usr/share/miniconda/conda-bld/
-    - name: Download requirements
+    - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
         path: /usr/share/miniconda/conda-bld/
-    - name: Download requirements
+    - name: Download android-libcxx
       uses: actions/download-artifact@v2
       with:
         name: android-libcxx-3.10
         path: /usr/share/miniconda/conda-bld/
-    - name: Download requirements
+    - name: Download android-python
       uses: actions/download-artifact@v2
       with:
         name: android-python-3.10
@@ -115,17 +115,17 @@ jobs:
         sdkmanager --install tools
         sdkmanager --install platform-tools
         sdkmanager --install "ndk;23.1.7779620"
-    - name: Download requirements
+    - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
         path: /usr/share/miniconda/conda-bld/
-    - name: Download requirements
+    - name: Download android-python
       uses: actions/download-artifact@v2
       with:
         name: android-python-3.10
         path: /usr/share/miniconda/conda-bld/
-    - name: Download requirements
+    - name: Download android-libffi
       uses: actions/download-artifact@v2
       with:
         name: android-libffi-3.10
@@ -182,17 +182,17 @@ jobs:
         sdkmanager --install tools
         sdkmanager --install platform-tools
         sdkmanager --install "ndk;23.1.7779620"
-    - name: Download requirements
+    - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
         path: /usr/share/miniconda/conda-bld/
-    - name: Download requirements
+    - name: Download android-cffi
       uses: actions/download-artifact@v2
       with:
         name: android-cffi-3.10
         path: /usr/share/miniconda/conda-bld/
-    - name: Download requirements
+    - name: Download android-openssl
       uses: actions/download-artifact@v2
       with:
         name: android-openssl-3.10
@@ -253,37 +253,37 @@ jobs:
         sdkmanager --install tools
         sdkmanager --install platform-tools
         sdkmanager --install "ndk;23.1.7779620"
-    - name: Download requirements
+    - name: Download pip-cppy
       uses: actions/download-artifact@v2
       with:
         name: pip-cppy-3.10
         path: /usr/share/miniconda/conda-bld/
-    - name: Download requirements
+    - name: Download pip-bytecode
       uses: actions/download-artifact@v2
       with:
         name: pip-bytecode-3.10
         path: /usr/share/miniconda/conda-bld/
-    - name: Download requirements
+    - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
         path: /usr/share/miniconda/conda-bld/
-    - name: Download requirements
+    - name: Download android-libcxx
       uses: actions/download-artifact@v2
       with:
         name: android-libcxx-3.10
         path: /usr/share/miniconda/conda-bld/
-    - name: Download requirements
+    - name: Download android-python
       uses: actions/download-artifact@v2
       with:
         name: android-python-3.10
         path: /usr/share/miniconda/conda-bld/
-    - name: Download requirements
+    - name: Download android-kiwisolver
       uses: actions/download-artifact@v2
       with:
         name: android-kiwisolver-3.10
         path: /usr/share/miniconda/conda-bld/
-    - name: Download requirements
+    - name: Download android-atom
       uses: actions/download-artifact@v2
       with:
         name: android-atom-3.10
@@ -340,17 +340,17 @@ jobs:
         sdkmanager --install tools
         sdkmanager --install platform-tools
         sdkmanager --install "ndk;23.1.7779620"
-    - name: Download requirements
+    - name: Download android-libpng
       uses: actions/download-artifact@v2
       with:
         name: android-libpng-3.10
         path: /usr/share/miniconda/conda-bld/
-    - name: Download requirements
+    - name: Download android-harfbuzz
       uses: actions/download-artifact@v2
       with:
         name: android-harfbuzz-3.10
         path: /usr/share/miniconda/conda-bld/
-    - name: Download requirements
+    - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
@@ -405,7 +405,7 @@ jobs:
         sdkmanager --install tools
         sdkmanager --install platform-tools
         sdkmanager --install "ndk;23.1.7779620"
-    - name: Download requirements
+    - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
@@ -463,22 +463,22 @@ jobs:
         sdkmanager --install tools
         sdkmanager --install platform-tools
         sdkmanager --install "ndk;23.1.7779620"
-    - name: Download requirements
+    - name: Download pip-cppy
       uses: actions/download-artifact@v2
       with:
         name: pip-cppy-3.10
         path: /usr/share/miniconda/conda-bld/
-    - name: Download requirements
+    - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
         path: /usr/share/miniconda/conda-bld/
-    - name: Download requirements
+    - name: Download android-libcxx
       uses: actions/download-artifact@v2
       with:
         name: android-libcxx-3.10
         path: /usr/share/miniconda/conda-bld/
-    - name: Download requirements
+    - name: Download android-python
       uses: actions/download-artifact@v2
       with:
         name: android-python-3.10
@@ -533,7 +533,7 @@ jobs:
         sdkmanager --install tools
         sdkmanager --install platform-tools
         sdkmanager --install "ndk;23.1.7779620"
-    - name: Download requirements
+    - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
@@ -588,7 +588,7 @@ jobs:
         sdkmanager --install tools
         sdkmanager --install platform-tools
         sdkmanager --install "ndk;23.1.7779620"
-    - name: Download requirements
+    - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
@@ -643,7 +643,7 @@ jobs:
         sdkmanager --install tools
         sdkmanager --install platform-tools
         sdkmanager --install "ndk;23.1.7779620"
-    - name: Download requirements
+    - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
@@ -657,61 +657,6 @@ jobs:
       with:
         name: android-libffi-3.10
         path: /usr/share/miniconda/conda-bld/*/android-libffi*.bz2
-  android-libgcrypt:
-    needs:
-    - android-ndk
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Setup conda
-      uses: conda-incubator/setup-miniconda@v2
-      with:
-        auto-update-conda: true
-        python-version: '3.10'
-    - name: Install conda build
-      run: |
-        conda install conda-build
-        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
-    - name: Install system deps
-      run: sudo apt-get install -y autopoint texinfo rename
-    - name: Setup JDK
-      uses: actions/setup-java@v1
-      with:
-        java-version: 11
-    - id: android-cache
-      name: Cache Android NDK
-      uses: actions/cache@v2
-      with:
-        key: linux-android-ndk-23.1.7779620
-        path: ~/Android
-    - if: steps.android-cache.outputs.cache-hit != 'true'
-      name: Setup android NDK
-      run: |
-        export ANDROID_HOME="$HOME/Android/Sdk"
-        export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
-        export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
-        mkdir -p $ANDROID_HOME
-        wget -q https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
-        unzip -e commandlinetools-linux-8092744_latest.zip -d $ANDROID_HOME/cmdline-tools
-        mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
-        yes | sdkmanager --licenses > /dev/null
-        sdkmanager --install tools
-        sdkmanager --install platform-tools
-        sdkmanager --install "ndk;23.1.7779620"
-    - name: Download requirements
-      uses: actions/download-artifact@v2
-      with:
-        name: android-ndk-3.10
-        path: /usr/share/miniconda/conda-bld/
-    - name: Run conda index
-      run: conda index /usr/share/miniconda/conda-bld/*
-    - name: Build recipe
-      run: conda build --py=3.10 android-libgcrypt
-    - name: Upload package
-      uses: actions/upload-artifact@v2
-      with:
-        name: android-libgcrypt-3.10
-        path: /usr/share/miniconda/conda-bld/*/android-libgcrypt*.bz2
   android-libgeos:
     needs:
     - android-ndk
@@ -753,7 +698,7 @@ jobs:
         sdkmanager --install tools
         sdkmanager --install platform-tools
         sdkmanager --install "ndk;23.1.7779620"
-    - name: Download requirements
+    - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
@@ -808,7 +753,7 @@ jobs:
         sdkmanager --install tools
         sdkmanager --install platform-tools
         sdkmanager --install "ndk;23.1.7779620"
-    - name: Download requirements
+    - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
@@ -863,7 +808,7 @@ jobs:
         sdkmanager --install tools
         sdkmanager --install platform-tools
         sdkmanager --install "ndk;23.1.7779620"
-    - name: Download requirements
+    - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
@@ -918,7 +863,7 @@ jobs:
         sdkmanager --install tools
         sdkmanager --install platform-tools
         sdkmanager --install "ndk;23.1.7779620"
-    - name: Download requirements
+    - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
@@ -973,7 +918,7 @@ jobs:
         sdkmanager --install tools
         sdkmanager --install platform-tools
         sdkmanager --install "ndk;23.1.7779620"
-    - name: Download requirements
+    - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
@@ -1028,7 +973,7 @@ jobs:
         sdkmanager --install tools
         sdkmanager --install platform-tools
         sdkmanager --install "ndk;23.1.7779620"
-    - name: Download requirements
+    - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
@@ -1042,6 +987,61 @@ jobs:
       with:
         name: android-libuuid-3.10
         path: /usr/share/miniconda/conda-bld/*/android-libuuid*.bz2
+  android-libxcrypt:
+    needs:
+    - android-ndk
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-update-conda: true
+        python-version: '3.10'
+    - name: Install conda build
+      run: |
+        conda install conda-build
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' /usr/share/miniconda/lib/python3.9/site-packages/conda_build/post.py
+    - name: Install system deps
+      run: sudo apt-get install -y autopoint texinfo rename
+    - name: Setup JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - id: android-cache
+      name: Cache Android NDK
+      uses: actions/cache@v2
+      with:
+        key: linux-android-ndk-23.1.7779620
+        path: ~/Android
+    - if: steps.android-cache.outputs.cache-hit != 'true'
+      name: Setup android NDK
+      run: |
+        export ANDROID_HOME="$HOME/Android/Sdk"
+        export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+        export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+        mkdir -p $ANDROID_HOME
+        wget -q https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
+        unzip -e commandlinetools-linux-8092744_latest.zip -d $ANDROID_HOME/cmdline-tools
+        mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+        yes | sdkmanager --licenses > /dev/null
+        sdkmanager --install tools
+        sdkmanager --install platform-tools
+        sdkmanager --install "ndk;23.1.7779620"
+    - name: Download android-ndk
+      uses: actions/download-artifact@v2
+      with:
+        name: android-ndk-3.10
+        path: /usr/share/miniconda/conda-bld/
+    - name: Run conda index
+      run: conda index /usr/share/miniconda/conda-bld/*
+    - name: Build recipe
+      run: conda build --py=3.10 android-libxcrypt
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: android-libxcrypt-3.10
+        path: /usr/share/miniconda/conda-bld/*/android-libxcrypt*.bz2
   android-libxml2:
     needs:
     - android-liblzma
@@ -1084,12 +1084,12 @@ jobs:
         sdkmanager --install tools
         sdkmanager --install platform-tools
         sdkmanager --install "ndk;23.1.7779620"
-    - name: Download requirements
+    - name: Download android-liblzma
       uses: actions/download-artifact@v2
       with:
         name: android-liblzma-3.10
         path: /usr/share/miniconda/conda-bld/
-    - name: Download requirements
+    - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
@@ -1145,12 +1145,12 @@ jobs:
         sdkmanager --install tools
         sdkmanager --install platform-tools
         sdkmanager --install "ndk;23.1.7779620"
-    - name: Download requirements
+    - name: Download android-libxml2
       uses: actions/download-artifact@v2
       with:
         name: android-libxml2-3.10
         path: /usr/share/miniconda/conda-bld/
-    - name: Download requirements
+    - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
@@ -1206,12 +1206,12 @@ jobs:
         sdkmanager --install tools
         sdkmanager --install platform-tools
         sdkmanager --install "ndk;23.1.7779620"
-    - name: Download requirements
+    - name: Download android-libsodium
       uses: actions/download-artifact@v2
       with:
         name: android-libsodium-3.10
         path: /usr/share/miniconda/conda-bld/
-    - name: Download requirements
+    - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
@@ -1269,22 +1269,22 @@ jobs:
         sdkmanager --install tools
         sdkmanager --install platform-tools
         sdkmanager --install "ndk;23.1.7779620"
-    - name: Download requirements
+    - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
         path: /usr/share/miniconda/conda-bld/
-    - name: Download requirements
+    - name: Download android-libxml2
       uses: actions/download-artifact@v2
       with:
         name: android-libxml2-3.10
         path: /usr/share/miniconda/conda-bld/
-    - name: Download requirements
+    - name: Download android-libxslt
       uses: actions/download-artifact@v2
       with:
         name: android-libxslt-3.10
         path: /usr/share/miniconda/conda-bld/
-    - name: Download requirements
+    - name: Download android-python
       uses: actions/download-artifact@v2
       with:
         name: android-python-3.10
@@ -1339,7 +1339,7 @@ jobs:
         sdkmanager --install tools
         sdkmanager --install platform-tools
         sdkmanager --install "ndk;23.1.7779620"
-    - name: Download requirements
+    - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
@@ -1356,6 +1356,7 @@ jobs:
   android-msgpack:
     needs:
     - android-ndk
+    - android-libxcrypt
     - android-python
     runs-on: ubuntu-latest
     steps:
@@ -1395,12 +1396,17 @@ jobs:
         sdkmanager --install tools
         sdkmanager --install platform-tools
         sdkmanager --install "ndk;23.1.7779620"
-    - name: Download requirements
+    - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
         path: /usr/share/miniconda/conda-bld/
-    - name: Download requirements
+    - name: Download android-libxcrypt
+      uses: actions/download-artifact@v2
+      with:
+        name: android-libxcrypt-3.10
+        path: /usr/share/miniconda/conda-bld/
+    - name: Download android-python
       uses: actions/download-artifact@v2
       with:
         name: android-python-3.10
@@ -1501,7 +1507,7 @@ jobs:
         sdkmanager --install tools
         sdkmanager --install platform-tools
         sdkmanager --install "ndk;23.1.7779620"
-    - name: Download requirements
+    - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
@@ -1524,6 +1530,7 @@ jobs:
     - android-liblzma
     - android-libbz2
     - android-libuuid
+    - android-libxcrypt
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -1562,40 +1569,45 @@ jobs:
         sdkmanager --install tools
         sdkmanager --install platform-tools
         sdkmanager --install "ndk;23.1.7779620"
-    - name: Download requirements
+    - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
         path: /usr/share/miniconda/conda-bld/
-    - name: Download requirements
+    - name: Download android-libffi
       uses: actions/download-artifact@v2
       with:
         name: android-libffi-3.10
         path: /usr/share/miniconda/conda-bld/
-    - name: Download requirements
+    - name: Download android-openssl
       uses: actions/download-artifact@v2
       with:
         name: android-openssl-3.10
         path: /usr/share/miniconda/conda-bld/
-    - name: Download requirements
+    - name: Download android-sqlite
       uses: actions/download-artifact@v2
       with:
         name: android-sqlite-3.10
         path: /usr/share/miniconda/conda-bld/
-    - name: Download requirements
+    - name: Download android-liblzma
       uses: actions/download-artifact@v2
       with:
         name: android-liblzma-3.10
         path: /usr/share/miniconda/conda-bld/
-    - name: Download requirements
+    - name: Download android-libbz2
       uses: actions/download-artifact@v2
       with:
         name: android-libbz2-3.10
         path: /usr/share/miniconda/conda-bld/
-    - name: Download requirements
+    - name: Download android-libuuid
       uses: actions/download-artifact@v2
       with:
         name: android-libuuid-3.10
+        path: /usr/share/miniconda/conda-bld/
+    - name: Download android-libxcrypt
+      uses: actions/download-artifact@v2
+      with:
+        name: android-libxcrypt-3.10
         path: /usr/share/miniconda/conda-bld/
     - name: Run conda index
       run: conda index /usr/share/miniconda/conda-bld/*
@@ -1650,22 +1662,22 @@ jobs:
         sdkmanager --install tools
         sdkmanager --install platform-tools
         sdkmanager --install "ndk;23.1.7779620"
-    - name: Download requirements
+    - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10
         path: /usr/share/miniconda/conda-bld/
-    - name: Download requirements
+    - name: Download android-libzmq
       uses: actions/download-artifact@v2
       with:
         name: android-libzmq-3.10
         path: /usr/share/miniconda/conda-bld/
-    - name: Download requirements
+    - name: Download android-libsodium
       uses: actions/download-artifact@v2
       with:
         name: android-libsodium-3.10
         path: /usr/share/miniconda/conda-bld/
-    - name: Download requirements
+    - name: Download android-python
       uses: actions/download-artifact@v2
       with:
         name: android-python-3.10
@@ -1720,7 +1732,7 @@ jobs:
         sdkmanager --install tools
         sdkmanager --install platform-tools
         sdkmanager --install "ndk;23.1.7779620"
-    - name: Download requirements
+    - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.10

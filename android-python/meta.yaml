@@ -17,6 +17,7 @@ requirements:
     - android-liblzma
     - android-libbz2
     - android-libuuid
+    - android-libxcrypt
   run:
     - python=3.10
 build:

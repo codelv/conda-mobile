@@ -9,7 +9,7 @@ export HOSTPYTHON=$PYTHON
 source $PREFIX/android/activate-ndk.sh
 
 if [ "$PY3K" == "1" ]; then
-    export PY_LIB_VER="3.10m"
+    export PY_LIB_VER="3.10"
 else
     export PY_LIB_VER="2.7"
 fi

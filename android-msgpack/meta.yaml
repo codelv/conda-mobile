@@ -12,6 +12,7 @@ requirements:
     - python
     - cython
     - android-ndk
+    - android-libxcrypt
     - android-python * py{{CONDA_PY}}*
   run:
     - python
