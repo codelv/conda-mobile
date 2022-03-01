@@ -49,8 +49,9 @@ def main():
     allowed_groups = (
         "pip",
         # "ios",
-        "android"
+        "android",
     )
+    all_packages = set()
     for item in os.listdir("."):
         if os.path.isdir(item) and not item[0] == ".":
             group, *name = item.split("-", 1)
@@ -73,6 +74,7 @@ def main():
                 if "ndk-bundle" in build_script:
                     continue  # TODO: Old recipe
 
+            all_packages.add(item)
             if group in packages:
                 packages[group].append(item)
             else:
@@ -112,7 +114,6 @@ def main():
         },
     ]
 
-
     for group, items in packages.items():
         runs_on = "ubuntu-latest"
         group_steps = []
@@ -136,8 +137,10 @@ def main():
                 meta = yaml.load(data[i:], yaml.Loader)
                 reqs = meta["requirements"]
                 if "build" in reqs:
-                    needs = [r.split()[0] for r in reqs["build"] if r.startswith(group)]
-                    needs = [r for r in needs if r in items]
+                    for r in reqs["build"]:
+                        dep_name = r.split()[0]
+                        if dep_name in all_packages:
+                            needs.append(dep_name)
 
             build_steps = [
                 {
@@ -154,6 +157,7 @@ def main():
                 },
             ]
 
+            # Generate seteps to download and install requirements
             req_steps = []
             if needs:
                 for req in needs:

@@ -1,6 +1,7 @@
 jobs:
   android-atom:
     needs:
+    - pip-cppy
     - android-ndk
     - android-libcxx
     - android-python
@@ -40,6 +41,11 @@ jobs:
         sdkmanager --install tools
         sdkmanager --install platform-tools
         sdkmanager --install "ndk;23.1.7779620"
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: pip-cppy-3.10
+        path: packages
     - name: Download requirements
       uses: actions/download-artifact@v2
       with:
@@ -196,6 +202,8 @@ jobs:
         path: /usr/share/miniconda/conda-bld/noarch/android-cryptography*.bz2
   android-enaml:
     needs:
+    - pip-cppy
+    - pip-bytecode
     - android-ndk
     - android-libcxx
     - android-python
@@ -237,6 +245,16 @@ jobs:
         sdkmanager --install tools
         sdkmanager --install platform-tools
         sdkmanager --install "ndk;23.1.7779620"
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: pip-cppy-3.10
+        path: packages
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: pip-bytecode-3.10
+        path: packages
     - name: Download requirements
       uses: actions/download-artifact@v2
       with:
@@ -391,6 +409,7 @@ jobs:
         path: /usr/share/miniconda/conda-bld/noarch/android-harfbuzz*.bz2
   android-kiwisolver:
     needs:
+    - pip-cppy
     - android-ndk
     - android-libcxx
     - android-python
@@ -430,6 +449,11 @@ jobs:
         sdkmanager --install tools
         sdkmanager --install platform-tools
         sdkmanager --install "ndk;23.1.7779620"
+    - name: Download requirements
+      uses: actions/download-artifact@v2
+      with:
+        name: pip-cppy-3.10
+        path: packages
     - name: Download requirements
       uses: actions/download-artifact@v2
       with:
