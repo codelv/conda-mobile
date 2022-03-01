@@ -5,7 +5,7 @@
 # The full license is in the file LICENSE, distributed with this software.
 # Created on Feb 23, 2018
 # ==================================================================================================
-source $PREFIX/android/activate-ndk.sh
+source $BUILD_PREFIX/android/activate-ndk.sh
 
 # Remove versions
 sed -i.bak 's/SOVERSION ${TURBOJPEG_SO_MAJOR_VERSION} VERSION ${TURBOJPEG_SO_VERSION}/NO_SONAME 1/g' CMakeLists.txt

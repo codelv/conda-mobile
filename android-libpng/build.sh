@@ -5,7 +5,7 @@
 # The full license is in the file LICENSE, distributed with this software.
 # Created on Apr 19, 2018
 # ==================================================================================================
-source $PREFIX/android/activate-ndk.sh
+source $BUILD_PREFIX/android/activate-ndk.sh
 
 # Patch
 sed -i -e 's/find_library(M_LIBRARY m)/set(M_LIBRARY ${M_LIBRARY})/g' CMakeLists.txt

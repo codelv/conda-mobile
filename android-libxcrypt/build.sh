@@ -5,7 +5,7 @@
 # The full license is in the file LICENSE, distributed with this software.
 # Created on Mar 1, 2022
 # ==================================================================================================
-source $PREFIX/android/activate-ndk.sh
+source $BUILD_PREFIX/android/activate-ndk.sh
 
 for ARCH in $ARCHS
 do

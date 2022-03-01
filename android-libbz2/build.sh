@@ -5,7 +5,7 @@
 # The full license is in the file LICENSE, distributed with this software.
 # Created on Apr 19, 2018
 # ==================================================================================================
-source $PREFIX/android/activate-ndk.sh
+source $BUILD_PREFIX/android/activate-ndk.sh
 
 # Use our modified version of the Makefile-libbz2_so to Build the shared lib without a version
 cp -f $RECIPE_DIR/Makefile Makefile

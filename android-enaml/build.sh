@@ -6,7 +6,7 @@
 # Created on Feb 23, 2018
 # ==================================================================================================
 export HOSTPYTHON=$PYTHON
-source $PREFIX/android/activate-ndk.sh
+source $BUILD_PREFIX/android/activate-ndk.sh
 
 if [ "$PY3K" == "1" ]; then
     export PY_LIB_VER="3.10"

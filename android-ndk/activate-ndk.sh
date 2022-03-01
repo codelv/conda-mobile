@@ -8,7 +8,7 @@
 # This file is installed by the android-ndk package
 # To use it include the following in your build script:
 #
-# source $PREFIX/android/activate-ndk.sh
+# source $BUILD_PREFIX/android/activate-ndk.sh
 # for ARCH in $ARCHS
 # do
 #    # Setup compiler for arch
