@@ -51,11 +51,44 @@ class Block(str):
         return s
 
 
+def build_requirements(meta, all_packages) -> set[str]:
+    """ Read list of build requirements from meta file
+
+    """
+    needs = set()
+    if "requirements" in meta:
+        reqs = meta["requirements"]
+        if "build" in reqs:
+            for r in reqs["build"]:
+                dep_name = r.split()[0]
+                if dep_name in all_packages:
+                    needs.add(dep_name)
+    return needs
+
+
+def all_build_requirements(pkg, package_deps) -> set[str]:
+    """ Build a recursive list of all build requirements including dependencies
+    of dependencies
+
+    """
+    needs = package_deps[pkg]
+    deps_needed = set()
+    for dep in needs:
+        deps_needed.update(all_build_requirements(dep, package_deps))
+    reqs = list(needs.union(deps_needed))
+    reqs.sort()
+    return reqs
+
+
 def main():
     # Render blocks as | literal
     yaml.add_representer(Block, Block.render)
 
+    # Map package group to names (eg all android-* under one key)
     packages = {}
+    # Load meta files
+    package_meta = {}
+
     allowed_groups = (
         "pip",
         # "ios",
@@ -71,8 +104,11 @@ def main():
 
             if not os.path.exists(meta_file):
                 continue
+            print(f"Loading {meta_file}")
             with open(meta_file) as f:
                 data = f.read()
+                meta = yaml.load(data, yaml.Loader)
+                package_meta[item] = meta
 
             # FIXME: Old recipes...
             if "externally-managed" in data:
@@ -89,6 +125,12 @@ def main():
                 packages[group].append(item)
             else:
                 packages[group] = [item]
+
+    # Immediate dependencies of all packages
+    package_deps = {}
+    for pkg in all_packages:
+        meta = package_meta[pkg]
+        package_deps[pkg] = build_requirements(meta, all_packages)
 
     jobs = {}
     conda_bld_path = "~/micromamba/envs/conda-mobile/conda-bld"
@@ -138,24 +180,10 @@ def main():
             runs_on = "macos-latest"
 
         for pkg in items:
-            meta_file = f"{pkg}/recipe.yaml"
-            build_sh = f"{pkg}/build.sh"
-            if not os.path.exists(meta_file):
-                continue
-            with open(meta_file) as f:
-                meta = yaml.load(f.read(), yaml.Loader)
+            meta = package_meta[pkg]
 
             # Add requirements
-            needs = []
             platform = "linux-64"
-            if "requirements" in meta:
-                reqs = meta["requirements"]
-                if "build" in reqs:
-                    for r in reqs["build"]:
-                        dep_name = r.split()[0]
-                        if dep_name in all_packages:
-                            needs.append(dep_name)
-
             if "build" in meta and "noarch" in meta["build"]:
                 platform = "noarch"
 
@@ -177,6 +205,7 @@ def main():
 
             # Generate steps to download and install requirements
             req_steps = []
+            needs = all_build_requirements(pkg, package_deps)
             if needs:
                 for req in needs:
                     req_steps.append(
