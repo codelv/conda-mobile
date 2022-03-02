@@ -12,8 +12,6 @@ do
 
     # Setup compiler for arch and target_api
     activate-ndk-clang $ARCH
-    export CFLAGS="-I$APP_ROOT/include"
-    export LDFLAGS="-L$APP_ROOT/lib"
 
     ./configure --host=$TARGET_HOST --prefix=$SRC_DIR/dist/$ARCH --enable-static=no --with-png=no
 

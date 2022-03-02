@@ -1,21 +1,21 @@
 package:
   name: android-opencv
-  version: 4.0.0
+  version: 4.5.5
 
 source:
   url: https://github.com/opencv/opencv/archive/4.0.0.tar.gz
-  sha256: 3787b3cc7b21bba1441819cb00c636911a846c0392ddf6211d398040a1e4886c
+  sha256: a1cfdcf6619387ca9e232687504da996aaa9f7b5689986b8331ec02cb61d28ad
 
 requirements:
   build:
     - cmake
-    - libwebp 
-
+    - libwebp
+    - android-ndk
 
 channels:
-   - rustychris 
-    
-    
+   - rustychris
+
+
 build:
   number: 1
   binary_relocation: False

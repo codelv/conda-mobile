@@ -13,6 +13,7 @@ requirements:
   build:
     - cmake
     - libwebp
+    - android-ndk
 
 
 channels:

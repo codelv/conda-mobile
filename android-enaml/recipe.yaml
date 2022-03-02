@@ -29,13 +29,13 @@ requirements:
     - pip-bytecode
     - android-ndk
     - android-libcxx
-    - android-python * py{{CONDA_PY}}*
+    - android-python * py310*
     - android-kiwisolver * py{{CONDA_PY}}*
     - android-atom * py{{CONDA_PY}}*
   run:
     - python
     - android-libcxx
-    - android-python * py{{CONDA_PY}}*
+    - android-python * py310*
     - android-kiwisolver * py{{CONDA_PY}}*
     - android-atom * py{{CONDA_PY}}*
     - pip-ply
