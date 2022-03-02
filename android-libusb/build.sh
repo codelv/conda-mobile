@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # ==================================================================================================
-# Copyright (c) 2018, Jairus Martin.
+# Copyright (c) 2022, Jairus Martin.
 # Distributed under the terms of the GPL v3 License.
 # The full license is in the file LICENSE, distributed with this software.
-# Created on Feb 23, 2018
+# Created on March 2, 2022
 # ==================================================================================================
 source $BUILD_PREFIX/android/activate-ndk.sh
 
