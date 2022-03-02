@@ -39,7 +39,7 @@ echo "$PATH" >> $GITHUB_PATH
 """
 
 SETUP = """
-sed -i 's/"linux": ['elffile'],/"linux": ['elffile'],"noarch": [],/g' /home/runner/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
 """
 
 
