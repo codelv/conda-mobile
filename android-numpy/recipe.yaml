@@ -12,6 +12,7 @@ requirements:
   build:
     - python
     - cython
+    - android-ndk
     - android-python * py310*
   run:
     - python

@@ -16,6 +16,7 @@ source:
 requirements:
   build:
     - python
+    - android-ndk
     - android-python * py310*
   run:
     - python

@@ -21,6 +21,7 @@ requirements:
   build:
     - python
     - cffi
+    - setuptools_rust
     - android-ndk
     - android-cffi * py310*
     - android-openssl

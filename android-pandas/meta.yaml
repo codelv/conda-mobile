@@ -19,11 +19,12 @@ requirements:
     - tempita
     - numpy
     - python-dateutil
-    - android-numpy
+    - android-ndk
+    - android-numpy * py310*
     - android-python * py310*
   run:
     - python
-    - android-numpy
+    - android-numpy * py310*
     - android-python * py310*
     - pip-pytz
     - pip-python-dateutil

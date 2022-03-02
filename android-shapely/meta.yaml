@@ -13,6 +13,7 @@ requirements:
     - python
     - cython
     - numpy
+    - android-ndk
     - android-python * py310*
     - android-libgeos
 

@@ -10,7 +10,8 @@ requirements:
   build:
     - python
     - android-python
-    - android-graphviz * py310*
+    - android-ndk
+    - android-graphviz
   run:
     - python
     - android-graphviz
