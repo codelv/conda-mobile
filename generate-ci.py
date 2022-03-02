@@ -27,20 +27,11 @@ sdkmanager --install "ndk;{NDK_VER}"
 """
 
 # Patch conda build because it fails cleaning up optimized pyc files
-site_packages = "/usr/share/miniconda/lib/python3.9/site-packages"
-
-INSTALL_MINIMAMBA = f"""
-mkdir $HOME/micromamba
-cd $HOME/micromamba
-wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/latest | tar -xvj bin/micromamba
-export PATH="$HOME/micromamba/bin:$PATH"
-micromamba -h
-echo "$PATH" >> $GITHUB_PATH
-"""
-
+conda_post = "$HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py"
 SETUP = """
-sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
-"""
+sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' %s
+sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' %s
+""" % (conda_post, conda_post)
 
 
 class Block(str):

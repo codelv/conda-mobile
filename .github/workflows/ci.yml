@@ -22,6 +22,7 @@ jobs:
     - name: Setup micromamba
       run: |
         sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
       shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -136,6 +137,7 @@ jobs:
     - name: Setup micromamba
       run: |
         sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
       shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -241,6 +243,7 @@ jobs:
     - name: Setup micromamba
       run: |
         sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
       shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -356,6 +359,7 @@ jobs:
     - name: Setup micromamba
       run: |
         sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
       shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -484,6 +488,7 @@ jobs:
     - name: Setup micromamba
       run: |
         sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
       shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -550,6 +555,7 @@ jobs:
     - name: Setup micromamba
       run: |
         sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
       shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -616,6 +622,7 @@ jobs:
     - name: Setup micromamba
       run: |
         sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
       shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -722,6 +729,7 @@ jobs:
     - name: Setup micromamba
       run: |
         sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
       shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -778,6 +786,7 @@ jobs:
     - name: Setup micromamba
       run: |
         sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
       shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -834,6 +843,7 @@ jobs:
     - name: Setup micromamba
       run: |
         sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
       shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -890,6 +900,7 @@ jobs:
     - name: Setup micromamba
       run: |
         sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
       shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -946,6 +957,7 @@ jobs:
     - name: Setup micromamba
       run: |
         sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
       shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -1002,6 +1014,7 @@ jobs:
     - name: Setup micromamba
       run: |
         sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
       shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -1058,6 +1071,7 @@ jobs:
     - name: Setup micromamba
       run: |
         sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
       shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -1114,6 +1128,7 @@ jobs:
     - name: Setup micromamba
       run: |
         sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
       shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -1170,6 +1185,7 @@ jobs:
     - name: Setup micromamba
       run: |
         sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
       shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -1226,6 +1242,7 @@ jobs:
     - name: Setup micromamba
       run: |
         sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
       shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -1283,6 +1300,7 @@ jobs:
     - name: Setup micromamba
       run: |
         sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
       shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -1346,6 +1364,7 @@ jobs:
     - name: Setup micromamba
       run: |
         sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
       shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -1413,6 +1432,7 @@ jobs:
     - name: Setup micromamba
       run: |
         sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
       shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -1484,6 +1504,7 @@ jobs:
     - name: Setup micromamba
       run: |
         sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
       shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -1590,6 +1611,7 @@ jobs:
     - name: Setup micromamba
       run: |
         sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
       shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -1654,6 +1676,7 @@ jobs:
     - name: Setup micromamba
       run: |
         sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
       shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -1748,6 +1771,7 @@ jobs:
     - name: Setup micromamba
       run: |
         sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
       shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -1794,6 +1818,7 @@ jobs:
     - name: Setup micromamba
       run: |
         sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
       shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -1842,6 +1867,7 @@ jobs:
     - name: Setup micromamba
       run: |
         sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
       shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -1905,6 +1931,7 @@ jobs:
     - name: Setup micromamba
       run: |
         sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
       shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -2006,6 +2033,7 @@ jobs:
     - name: Setup micromamba
       run: |
         sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
       shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -2112,6 +2140,7 @@ jobs:
     - name: Setup micromamba
       run: |
         sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
       shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
@@ -2166,6 +2195,7 @@ jobs:
     - name: Setup micromamba
       run: |
         sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
       shell: bash -l {0}
     - name: Build recipe
       run: boa build pip-bytecode --target-platform=noarch
@@ -2186,6 +2216,7 @@ jobs:
     - name: Setup micromamba
       run: |
         sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
       shell: bash -l {0}
     - name: Build recipe
       run: boa build pip-cppy --target-platform=noarch
@@ -2206,6 +2237,7 @@ jobs:
     - name: Setup micromamba
       run: |
         sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
       shell: bash -l {0}
     - name: Build recipe
       run: boa build pip-jsonrpclib --target-platform=noarch
@@ -2226,6 +2258,7 @@ jobs:
     - name: Setup micromamba
       run: |
         sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
       shell: bash -l {0}
     - name: Build recipe
       run: boa build pip-motor --target-platform=noarch
@@ -2246,6 +2279,7 @@ jobs:
     - name: Setup micromamba
       run: |
         sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
       shell: bash -l {0}
     - name: Build recipe
       run: boa build pip-ply --target-platform=noarch
@@ -2266,6 +2300,7 @@ jobs:
     - name: Setup micromamba
       run: |
         sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
       shell: bash -l {0}
     - name: Build recipe
       run: boa build pip-pytz --target-platform=noarch
@@ -2286,6 +2321,7 @@ jobs:
     - name: Setup micromamba
       run: |
         sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
       shell: bash -l {0}
     - name: Build recipe
       run: boa build pip-tornado --target-platform=noarch
