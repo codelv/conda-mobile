@@ -11,7 +11,7 @@ source:
 
 requirements:
   build:
-    - python * py{{CONDA_PY}}*
+    - python
     - android-ndk
     - android-libffi
     - android-openssl
@@ -21,7 +21,7 @@ requirements:
     - android-libuuid
     - android-libxcrypt
   run:
-    - python * py{{CONDA_PY}}*
+    - python
 build:
   number: 5
   binary_relocation: false
