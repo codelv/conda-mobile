@@ -1,0 +1,25 @@
+context:
+  version: 1.0.25
+
+package:
+  name: android-libusb
+  version: '{{ version }}'
+
+source:
+  url: https://github.com/libusb/libusb/archive/refs/tags/v{{version}}.tar.gz
+  sha256: f9c4b7dad27a6196ca9ec3c6ec7fa446194342de326c71e030eb2c480895e169
+
+build:
+  number: 1
+  binary_relocation: false
+  noarch: generic
+
+requirements:
+  build:
+    - android-ndk
+
+about:
+  home: https://libusb.info/
+  summary: A cross-platform library to access USB devices
+  license: LGPL 2.1
+

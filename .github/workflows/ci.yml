@@ -108,6 +108,9 @@ jobs:
     - name: Run conda index
       run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert android-atom/meta.yaml > android-atom/recipe.yaml
+      shell: bash -l {0}
     - name: Build recipe
       run: boa build android-atom --target-platform=noarch
       shell: bash -l {0}
@@ -212,6 +215,9 @@ jobs:
         path: ~/micromamba/envs/conda-mobile/conda-bld/
     - name: Run conda index
       run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert android-cffi/meta.yaml > android-cffi/recipe.yaml
       shell: bash -l {0}
     - name: Build recipe
       run: boa build android-cffi --target-platform=noarch
@@ -323,6 +329,9 @@ jobs:
         path: ~/micromamba/envs/conda-mobile/conda-bld/
     - name: Run conda index
       run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert android-cryptography/meta.yaml > android-cryptography/recipe.yaml
       shell: bash -l {0}
     - name: Build recipe
       run: boa build android-cryptography --target-platform=noarch
@@ -465,6 +474,9 @@ jobs:
     - name: Run conda index
       run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert android-enaml/meta.yaml > android-enaml/recipe.yaml
+      shell: bash -l {0}
     - name: Build recipe
       run: boa build android-enaml --target-platform=noarch
       shell: bash -l {0}
@@ -534,6 +546,9 @@ jobs:
     - name: Run conda index
       run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert android-freetype/meta.yaml > android-freetype/recipe.yaml
+      shell: bash -l {0}
     - name: Build recipe
       run: boa build android-freetype --target-platform=noarch
       shell: bash -l {0}
@@ -590,6 +605,9 @@ jobs:
         path: ~/micromamba/envs/conda-mobile/conda-bld/
     - name: Run conda index
       run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert android-harfbuzz/meta.yaml > android-harfbuzz/recipe.yaml
       shell: bash -l {0}
     - name: Build recipe
       run: boa build android-harfbuzz --target-platform=noarch
@@ -708,6 +726,9 @@ jobs:
     - name: Run conda index
       run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert android-kiwisolver/meta.yaml > android-kiwisolver/recipe.yaml
+      shell: bash -l {0}
     - name: Build recipe
       run: boa build android-kiwisolver --target-platform=noarch
       shell: bash -l {0}
@@ -764,6 +785,9 @@ jobs:
         path: ~/micromamba/envs/conda-mobile/conda-bld/
     - name: Run conda index
       run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert android-libbz2/meta.yaml > android-libbz2/recipe.yaml
       shell: bash -l {0}
     - name: Build recipe
       run: boa build android-libbz2 --target-platform=noarch
@@ -822,6 +846,9 @@ jobs:
     - name: Run conda index
       run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert android-libcxx/meta.yaml > android-libcxx/recipe.yaml
+      shell: bash -l {0}
     - name: Build recipe
       run: boa build android-libcxx --target-platform=noarch
       shell: bash -l {0}
@@ -878,6 +905,9 @@ jobs:
         path: ~/micromamba/envs/conda-mobile/conda-bld/
     - name: Run conda index
       run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert android-libffi/meta.yaml > android-libffi/recipe.yaml
       shell: bash -l {0}
     - name: Build recipe
       run: boa build android-libffi --target-platform=noarch
@@ -936,6 +966,9 @@ jobs:
     - name: Run conda index
       run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert android-libgeos/meta.yaml > android-libgeos/recipe.yaml
+      shell: bash -l {0}
     - name: Build recipe
       run: boa build android-libgeos --target-platform=noarch
       shell: bash -l {0}
@@ -992,6 +1025,9 @@ jobs:
         path: ~/micromamba/envs/conda-mobile/conda-bld/
     - name: Run conda index
       run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert android-libjpeg/meta.yaml > android-libjpeg/recipe.yaml
       shell: bash -l {0}
     - name: Build recipe
       run: boa build android-libjpeg --target-platform=noarch
@@ -1050,6 +1086,9 @@ jobs:
     - name: Run conda index
       run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert android-liblzma/meta.yaml > android-liblzma/recipe.yaml
+      shell: bash -l {0}
     - name: Build recipe
       run: boa build android-liblzma --target-platform=noarch
       shell: bash -l {0}
@@ -1106,6 +1145,9 @@ jobs:
         path: ~/micromamba/envs/conda-mobile/conda-bld/
     - name: Run conda index
       run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert android-libpng/meta.yaml > android-libpng/recipe.yaml
       shell: bash -l {0}
     - name: Build recipe
       run: boa build android-libpng --target-platform=noarch
@@ -1164,6 +1206,9 @@ jobs:
     - name: Run conda index
       run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert android-libsodium/meta.yaml > android-libsodium/recipe.yaml
+      shell: bash -l {0}
     - name: Build recipe
       run: boa build android-libsodium --target-platform=noarch
       shell: bash -l {0}
@@ -1172,6 +1217,66 @@ jobs:
       with:
         name: android-libsodium-3.10
         path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-libsodium*.bz2
+  android-libusb:
+    needs:
+    - android-ndk
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install micromamba
+      uses: mamba-org/provision-with-micromamba@main
+      with:
+        cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
+    - name: Install system deps
+      run: sudo apt-get install -y autopoint texinfo rename
+    - name: Setup JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - id: android-cache
+      name: Cache Android NDK
+      uses: actions/cache@v2
+      with:
+        key: linux-android-ndk-23.1.7779620
+        path: ~/Android
+    - if: steps.android-cache.outputs.cache-hit != 'true'
+      name: Setup android NDK
+      run: |
+        export ANDROID_HOME="$HOME/Android/Sdk"
+        export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+        export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+        mkdir -p $ANDROID_HOME
+        wget -q https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
+        unzip -e commandlinetools-linux-8092744_latest.zip -d $ANDROID_HOME/cmdline-tools
+        mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+        yes | sdkmanager --licenses > /dev/null
+        sdkmanager --install tools
+        sdkmanager --install platform-tools
+        sdkmanager --install "ndk;23.1.7779620"
+    - name: Download android-ndk
+      uses: actions/download-artifact@v2
+      with:
+        name: android-ndk-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Run conda index
+      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert android-libusb/meta.yaml > android-libusb/recipe.yaml
+      shell: bash -l {0}
+    - name: Build recipe
+      run: boa build android-libusb --target-platform=noarch
+      shell: bash -l {0}
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: android-libusb-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-libusb*.bz2
   android-libuuid:
     needs:
     - android-ndk
@@ -1220,6 +1325,9 @@ jobs:
         path: ~/micromamba/envs/conda-mobile/conda-bld/
     - name: Run conda index
       run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert android-libuuid/meta.yaml > android-libuuid/recipe.yaml
       shell: bash -l {0}
     - name: Build recipe
       run: boa build android-libuuid --target-platform=noarch
@@ -1277,6 +1385,9 @@ jobs:
         path: ~/micromamba/envs/conda-mobile/conda-bld/
     - name: Run conda index
       run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert android-libxcrypt/meta.yaml > android-libxcrypt/recipe.yaml
       shell: bash -l {0}
     - name: Build recipe
       run: boa build android-libxcrypt --target-platform=noarch
@@ -1340,6 +1451,9 @@ jobs:
         path: ~/micromamba/envs/conda-mobile/conda-bld/
     - name: Run conda index
       run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert android-libxml2/meta.yaml > android-libxml2/recipe.yaml
       shell: bash -l {0}
     - name: Build recipe
       run: boa build android-libxml2 --target-platform=noarch
@@ -1410,6 +1524,9 @@ jobs:
     - name: Run conda index
       run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert android-libxslt/meta.yaml > android-libxslt/recipe.yaml
+      shell: bash -l {0}
     - name: Build recipe
       run: boa build android-libxslt --target-platform=noarch
       shell: bash -l {0}
@@ -1472,6 +1589,9 @@ jobs:
         path: ~/micromamba/envs/conda-mobile/conda-bld/
     - name: Run conda index
       run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert android-libzmq/meta.yaml > android-libzmq/recipe.yaml
       shell: bash -l {0}
     - name: Build recipe
       run: boa build android-libzmq --target-platform=noarch
@@ -1590,6 +1710,9 @@ jobs:
     - name: Run conda index
       run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert android-lxml/meta.yaml > android-lxml/recipe.yaml
+      shell: bash -l {0}
     - name: Build recipe
       run: boa build android-lxml --target-platform=noarch
       shell: bash -l {0}
@@ -1646,6 +1769,9 @@ jobs:
         path: ~/micromamba/envs/conda-mobile/conda-bld/
     - name: Run conda index
       run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert android-lz4/meta.yaml > android-lz4/recipe.yaml
       shell: bash -l {0}
     - name: Build recipe
       run: boa build android-lz4 --target-platform=noarch
@@ -1752,6 +1878,9 @@ jobs:
     - name: Run conda index
       run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert android-msgpack/meta.yaml > android-msgpack/recipe.yaml
+      shell: bash -l {0}
     - name: Build recipe
       run: boa build android-msgpack --target-platform=noarch
       shell: bash -l {0}
@@ -1799,6 +1928,9 @@ jobs:
         sdkmanager --install tools
         sdkmanager --install platform-tools
         sdkmanager --install "ndk;23.1.7779620"
+    - name: Convert recipe
+      run: boa convert android-ndk/meta.yaml > android-ndk/recipe.yaml
+      shell: bash -l {0}
     - name: Build recipe
       run: boa build android-ndk --target-platform=linux-64
       shell: bash -l {0}
@@ -1904,6 +2036,9 @@ jobs:
     - name: Run conda index
       run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert android-numpy/meta.yaml > android-numpy/recipe.yaml
+      shell: bash -l {0}
     - name: Build recipe
       run: boa build android-numpy --target-platform=noarch
       shell: bash -l {0}
@@ -1961,6 +2096,9 @@ jobs:
     - name: Run conda index
       run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert android-opencv/meta.yaml > android-opencv/recipe.yaml
+      shell: bash -l {0}
     - name: Build recipe
       run: boa build android-opencv --target-platform=noarch
       shell: bash -l {0}
@@ -2017,6 +2155,9 @@ jobs:
         path: ~/micromamba/envs/conda-mobile/conda-bld/
     - name: Run conda index
       run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert android-openssl/meta.yaml > android-openssl/recipe.yaml
       shell: bash -l {0}
     - name: Build recipe
       run: boa build android-openssl --target-platform=noarch
@@ -2123,6 +2264,9 @@ jobs:
     - name: Run conda index
       run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert android-pymongo/meta.yaml > android-pymongo/recipe.yaml
+      shell: bash -l {0}
     - name: Build recipe
       run: boa build android-pymongo --target-platform=noarch
       shell: bash -l {0}
@@ -2228,6 +2372,9 @@ jobs:
     - name: Run conda index
       run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert android-pyproj/meta.yaml > android-pyproj/recipe.yaml
+      shell: bash -l {0}
     - name: Build recipe
       run: boa build android-pyproj --target-platform=noarch
       shell: bash -l {0}
@@ -2326,6 +2473,9 @@ jobs:
         path: ~/micromamba/envs/conda-mobile/conda-bld/
     - name: Run conda index
       run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert android-python/meta.yaml > android-python/recipe.yaml
       shell: bash -l {0}
     - name: Build recipe
       run: boa build android-python --target-platform=noarch
@@ -2444,6 +2594,9 @@ jobs:
     - name: Run conda index
       run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert android-pyzmq/meta.yaml > android-pyzmq/recipe.yaml
+      shell: bash -l {0}
     - name: Build recipe
       run: boa build android-pyzmq --target-platform=noarch
       shell: bash -l {0}
@@ -2555,6 +2708,9 @@ jobs:
     - name: Run conda index
       run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert android-shapely/meta.yaml > android-shapely/recipe.yaml
+      shell: bash -l {0}
     - name: Build recipe
       run: boa build android-shapely --target-platform=noarch
       shell: bash -l {0}
@@ -2612,6 +2768,9 @@ jobs:
     - name: Run conda index
       run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert android-sqlite/meta.yaml > android-sqlite/recipe.yaml
+      shell: bash -l {0}
     - name: Build recipe
       run: boa build android-sqlite --target-platform=noarch
       shell: bash -l {0}
@@ -2632,6 +2791,9 @@ jobs:
       run: |
         sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
         sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert pip-bytecode/meta.yaml > pip-bytecode/recipe.yaml
       shell: bash -l {0}
     - name: Build recipe
       run: boa build pip-bytecode --target-platform=noarch
@@ -2654,6 +2816,9 @@ jobs:
         sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
         sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
       shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert pip-cppy/meta.yaml > pip-cppy/recipe.yaml
+      shell: bash -l {0}
     - name: Build recipe
       run: boa build pip-cppy --target-platform=noarch
       shell: bash -l {0}
@@ -2674,6 +2839,9 @@ jobs:
       run: |
         sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
         sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert pip-jsonrpclib/meta.yaml > pip-jsonrpclib/recipe.yaml
       shell: bash -l {0}
     - name: Build recipe
       run: boa build pip-jsonrpclib --target-platform=noarch
@@ -2696,6 +2864,9 @@ jobs:
         sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
         sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
       shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert pip-motor/meta.yaml > pip-motor/recipe.yaml
+      shell: bash -l {0}
     - name: Build recipe
       run: boa build pip-motor --target-platform=noarch
       shell: bash -l {0}
@@ -2716,6 +2887,9 @@ jobs:
       run: |
         sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
         sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert pip-ply/meta.yaml > pip-ply/recipe.yaml
       shell: bash -l {0}
     - name: Build recipe
       run: boa build pip-ply --target-platform=noarch
@@ -2738,6 +2912,9 @@ jobs:
         sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
         sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
       shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert pip-pytz/meta.yaml > pip-pytz/recipe.yaml
+      shell: bash -l {0}
     - name: Build recipe
       run: boa build pip-pytz --target-platform=noarch
       shell: bash -l {0}
@@ -2758,6 +2935,9 @@ jobs:
       run: |
         sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
         sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert pip-tornado/meta.yaml > pip-tornado/recipe.yaml
       shell: bash -l {0}
     - name: Build recipe
       run: boa build pip-tornado --target-platform=noarch

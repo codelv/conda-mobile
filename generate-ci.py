@@ -7,6 +7,7 @@
 import os
 import copy
 import yaml
+import subprocess
 from yaml.representer import SafeRepresenter
 
 PY_VER = "3.10"
@@ -91,15 +92,15 @@ def main():
             group, *name = item.split("-", 1)
             if group not in allowed_groups:
                 continue
-            meta_file = f"{item}/recipe.yaml"
+            meta_file = f"{item}/meta.yaml"
 
             if not os.path.exists(meta_file):
                 continue
             print(f"Loading {meta_file}")
-            with open(meta_file) as f:
-                data = f.read()
-                meta = yaml.load(data, yaml.Loader)
-                package_meta[item] = meta
+            data = subprocess.check_output(f'boa convert {meta_file}'.split())
+            data = data.decode()
+            meta = yaml.load(data, yaml.Loader)
+            package_meta[item] = meta
 
             # FIXME: Old recipes...
             if "externally-managed" in data:
@@ -179,6 +180,11 @@ def main():
                 platform = "noarch"
 
             build_steps = [
+                {
+                    "name": "Convert recipe",
+                    "shell": "bash -l {0}",
+                    "run": f"boa convert {pkg}/meta.yaml > {pkg}/recipe.yaml",
+                },
                 {
                     "name": "Build recipe",
                     "shell": "bash -l {0}",
