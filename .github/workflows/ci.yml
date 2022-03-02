@@ -2875,6 +2875,30 @@ jobs:
       with:
         name: pip-ecdsa-3.10
         path: ~/micromamba/envs/conda-mobile/conda-bld/*/pip-ecdsa*.bz2
+  pip-esptool:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install micromamba
+      uses: mamba-org/provision-with-micromamba@main
+      with:
+        cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert pip-esptool/meta.yaml > pip-esptool/recipe.yaml
+      shell: bash -l {0}
+    - name: Build recipe
+      run: boa build pip-esptool --target-platform=noarch
+      shell: bash -l {0}
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: pip-esptool-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/*/pip-esptool*.bz2
   pip-jsonrpclib:
     runs-on: ubuntu-latest
     steps:
@@ -2971,6 +2995,30 @@ jobs:
       with:
         name: pip-ply-3.10
         path: ~/micromamba/envs/conda-mobile/conda-bld/*/pip-ply*.bz2
+  pip-pyserial:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install micromamba
+      uses: mamba-org/provision-with-micromamba@main
+      with:
+        cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert pip-pyserial/meta.yaml > pip-pyserial/recipe.yaml
+      shell: bash -l {0}
+    - name: Build recipe
+      run: boa build pip-pyserial --target-platform=noarch
+      shell: bash -l {0}
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: pip-pyserial-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/*/pip-pyserial*.bz2
   pip-pytz:
     runs-on: ubuntu-latest
     steps:
@@ -2995,6 +3043,30 @@ jobs:
       with:
         name: pip-pytz-3.10
         path: ~/micromamba/envs/conda-mobile/conda-bld/*/pip-pytz*.bz2
+  pip-pyusb:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install micromamba
+      uses: mamba-org/provision-with-micromamba@main
+      with:
+        cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert pip-pyusb/meta.yaml > pip-pyusb/recipe.yaml
+      shell: bash -l {0}
+    - name: Build recipe
+      run: boa build pip-pyusb --target-platform=noarch
+      shell: bash -l {0}
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: pip-pyusb-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/*/pip-pyusb*.bz2
   pip-reedsolo:
     runs-on: ubuntu-latest
     steps:

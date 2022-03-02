@@ -1,0 +1,42 @@
+{% set name = "esptool" %}
+{% set version = "3.2" %}
+package:
+  name: pip-{{ name|lower }}
+  version: '{{ version }}'
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 9638ff11c68e621e08e7c3335d4fd9d70b2ddcf7caae778073cd8cc27be1216f
+
+build:
+  number: 0
+  noarch: true
+  script:
+  - export CC=/bin/false
+  - export CXX=/bin/false
+  - 'python -m pip install . -vv --no-compile --target=$PREFIX/android/arm/python/site-packages '
+  - 'python -m pip install . -vv --no-compile --target=$PREFIX/android/arm64/python/site-packages '
+  - 'python -m pip install . -vv --no-compile --target=$PREFIX/android/x86/python/site-packages '
+  - 'python -m pip install . -vv --no-compile --target=$PREFIX/android/x86_64/python/site-packages '
+  - 'python -m pip install . -vv --no-compile --target=$PREFIX/iphoneos/python/site-packages '
+  - 'python -m pip install . -vv --no-compile --target=$PREFIX/iphonesimulator/python/site-packages '
+
+requirements:
+  run:
+    - pip-bitstring
+    - android-cryptography
+    - pip-ecdsa
+    - pip-pyserial
+    - pip-reedsolo
+about:
+  home: The package home page
+  license: GNU General Public v2 or later (GPLv2+)
+  license_family: GPL2
+  license_file:
+  summary: A serial utility to communicate & flash code to Espressif ESP8266 & ESP32 chips. Built for Android and iOS apps using enaml-native.
+  doc_url:
+  dev_url:
+
+extra:
+  recipe-maintainers:
+  - your-github-id-here
