@@ -10,7 +10,7 @@ requirements:
   build:
     - python
     - cython
-    - numpy
+    - numpy 1.22
     - android-ndk
     - android-python * py310*
 
