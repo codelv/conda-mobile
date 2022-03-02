@@ -60,6 +60,10 @@ function activate-ndk-clang() {
         export NDK_LIB_DIR="$ANDROID_TOOLCHAIN/sysroot/usr/lib/arm-linux-androideabi/$TARGET_API"
     fi
 
+    # Make package directories
+    mkdir -p $PREFIX/android/$ARCH/include
+    mkdir -p $PREFIX/android/$ARCH/lib
+
 }
 
 # Check that the given shared library matches the $ARCH variable
