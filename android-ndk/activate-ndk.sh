@@ -44,7 +44,7 @@ function activate-ndk-clang() {
 
 
     # Compiler setup
-    export APP_ROOT="$PREFIX/android/$ARCH"
+    export APP_ROOT="$BUILD_PREFIX/android/$ARCH"
     export CC="$TARGET_HOST$TARGET_API-clang"
     export CXX="$TARGET_HOST$TARGET_API-clang++"
     export AR="llvm-ar"
