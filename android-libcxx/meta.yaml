@@ -1,6 +1,6 @@
 package:
   name: android-libcxx
-  version: 14
+  version: '14'
 
 build:
   number: 0
