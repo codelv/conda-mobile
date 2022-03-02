@@ -1,0 +1,36 @@
+{% set name = "pyserial" %}
+{% set version = "3.5" %}
+package:
+  name: pip-{{ name|lower }}
+  version: '{{ version }}'
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 3c77e014170dfffbd816e6ffc205e9842efb10be9f58ec16d3e8675b4925cddb
+
+build:
+  number: 0
+  noarch: true
+  script:
+  - export CC=/bin/false
+  - export CXX=/bin/false
+  - 'python -m pip install . -vv --no-compile --target=$PREFIX/android/arm/python/site-packages '
+  - 'python -m pip install . -vv --no-compile --target=$PREFIX/android/arm64/python/site-packages '
+  - 'python -m pip install . -vv --no-compile --target=$PREFIX/android/x86/python/site-packages '
+  - 'python -m pip install . -vv --no-compile --target=$PREFIX/android/x86_64/python/site-packages '
+  - 'python -m pip install . -vv --no-compile --target=$PREFIX/iphoneos/python/site-packages '
+  - 'python -m pip install . -vv --no-compile --target=$PREFIX/iphonesimulator/python/site-packages '
+
+requirements: {}
+about:
+  home: The package home page
+  license: BSD
+  license_family: BSD
+  license_file:
+  summary: Python Serial Port Extension Built for Android and iOS apps using enaml-native.
+  doc_url:
+  dev_url:
+
+extra:
+  recipe-maintainers:
+  - your-github-id-here
