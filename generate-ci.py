@@ -38,10 +38,8 @@ micromamba -h
 echo "$PATH" >> $GITHUB_PATH
 """
 
-SETUP = f"""
-micromamba info
-micromamba list
-boa -h
+SETUP = """
+sed -i 's/"linux": ['elffile'],/"linux": ['elffile'],"noarch": [],/g' /home/runner/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
 """
 
 
@@ -105,7 +103,7 @@ def main():
                 "cache-downloads": True,
             },
         },
-        # {"name": "Setup micromamba", "shell": "bash -l {0}", "run": Block(SETUP)},
+        {"name": "Setup micromamba", "shell": "bash -l {0}", "run": Block(SETUP)},
     ]
 
     android_steps = [

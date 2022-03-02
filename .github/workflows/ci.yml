@@ -12,6 +12,10 @@ jobs:
       uses: mamba-org/provision-with-micromamba@main
       with:
         cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/"linux": ['elffile'],/"linux": ['elffile'],"noarch": [],/g' /home/runner/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -81,6 +85,10 @@ jobs:
       uses: mamba-org/provision-with-micromamba@main
       with:
         cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/"linux": ['elffile'],/"linux": ['elffile'],"noarch": [],/g' /home/runner/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -145,6 +153,10 @@ jobs:
       uses: mamba-org/provision-with-micromamba@main
       with:
         cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/"linux": ['elffile'],/"linux": ['elffile'],"noarch": [],/g' /home/runner/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -214,6 +226,10 @@ jobs:
       uses: mamba-org/provision-with-micromamba@main
       with:
         cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/"linux": ['elffile'],/"linux": ['elffile'],"noarch": [],/g' /home/runner/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -303,6 +319,10 @@ jobs:
       uses: mamba-org/provision-with-micromamba@main
       with:
         cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/"linux": ['elffile'],/"linux": ['elffile'],"noarch": [],/g' /home/runner/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -365,6 +385,10 @@ jobs:
       uses: mamba-org/provision-with-micromamba@main
       with:
         cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/"linux": ['elffile'],/"linux": ['elffile'],"noarch": [],/g' /home/runner/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -420,6 +444,10 @@ jobs:
       uses: mamba-org/provision-with-micromamba@main
       with:
         cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/"linux": ['elffile'],/"linux": ['elffile'],"noarch": [],/g' /home/runner/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -487,6 +515,10 @@ jobs:
       uses: mamba-org/provision-with-micromamba@main
       with:
         cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/"linux": ['elffile'],/"linux": ['elffile'],"noarch": [],/g' /home/runner/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -539,6 +571,10 @@ jobs:
       uses: mamba-org/provision-with-micromamba@main
       with:
         cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/"linux": ['elffile'],/"linux": ['elffile'],"noarch": [],/g' /home/runner/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -591,6 +627,10 @@ jobs:
       uses: mamba-org/provision-with-micromamba@main
       with:
         cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/"linux": ['elffile'],/"linux": ['elffile'],"noarch": [],/g' /home/runner/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -643,6 +683,10 @@ jobs:
       uses: mamba-org/provision-with-micromamba@main
       with:
         cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/"linux": ['elffile'],/"linux": ['elffile'],"noarch": [],/g' /home/runner/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -695,6 +739,10 @@ jobs:
       uses: mamba-org/provision-with-micromamba@main
       with:
         cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/"linux": ['elffile'],/"linux": ['elffile'],"noarch": [],/g' /home/runner/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -747,6 +795,10 @@ jobs:
       uses: mamba-org/provision-with-micromamba@main
       with:
         cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/"linux": ['elffile'],/"linux": ['elffile'],"noarch": [],/g' /home/runner/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -799,6 +851,10 @@ jobs:
       uses: mamba-org/provision-with-micromamba@main
       with:
         cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/"linux": ['elffile'],/"linux": ['elffile'],"noarch": [],/g' /home/runner/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -851,6 +907,10 @@ jobs:
       uses: mamba-org/provision-with-micromamba@main
       with:
         cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/"linux": ['elffile'],/"linux": ['elffile'],"noarch": [],/g' /home/runner/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -903,6 +963,10 @@ jobs:
       uses: mamba-org/provision-with-micromamba@main
       with:
         cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/"linux": ['elffile'],/"linux": ['elffile'],"noarch": [],/g' /home/runner/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -955,6 +1019,10 @@ jobs:
       uses: mamba-org/provision-with-micromamba@main
       with:
         cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/"linux": ['elffile'],/"linux": ['elffile'],"noarch": [],/g' /home/runner/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -1008,6 +1076,10 @@ jobs:
       uses: mamba-org/provision-with-micromamba@main
       with:
         cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/"linux": ['elffile'],/"linux": ['elffile'],"noarch": [],/g' /home/runner/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -1066,6 +1138,10 @@ jobs:
       uses: mamba-org/provision-with-micromamba@main
       with:
         cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/"linux": ['elffile'],/"linux": ['elffile'],"noarch": [],/g' /home/runner/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -1124,6 +1200,10 @@ jobs:
       uses: mamba-org/provision-with-micromamba@main
       with:
         cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/"linux": ['elffile'],/"linux": ['elffile'],"noarch": [],/g' /home/runner/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -1184,6 +1264,10 @@ jobs:
       uses: mamba-org/provision-with-micromamba@main
       with:
         cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/"linux": ['elffile'],/"linux": ['elffile'],"noarch": [],/g' /home/runner/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -1251,6 +1335,10 @@ jobs:
       uses: mamba-org/provision-with-micromamba@main
       with:
         cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/"linux": ['elffile'],/"linux": ['elffile'],"noarch": [],/g' /home/runner/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -1305,6 +1393,10 @@ jobs:
       uses: mamba-org/provision-with-micromamba@main
       with:
         cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/"linux": ['elffile'],/"linux": ['elffile'],"noarch": [],/g' /home/runner/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -1365,6 +1457,10 @@ jobs:
       uses: mamba-org/provision-with-micromamba@main
       with:
         cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/"linux": ['elffile'],/"linux": ['elffile'],"noarch": [],/g' /home/runner/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -1409,6 +1505,10 @@ jobs:
       uses: mamba-org/provision-with-micromamba@main
       with:
         cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/"linux": ['elffile'],/"linux": ['elffile'],"noarch": [],/g' /home/runner/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -1468,6 +1568,10 @@ jobs:
       uses: mamba-org/provision-with-micromamba@main
       with:
         cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/"linux": ['elffile'],/"linux": ['elffile'],"noarch": [],/g' /home/runner/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -1558,6 +1662,10 @@ jobs:
       uses: mamba-org/provision-with-micromamba@main
       with:
         cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/"linux": ['elffile'],/"linux": ['elffile'],"noarch": [],/g' /home/runner/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -1625,6 +1733,10 @@ jobs:
       uses: mamba-org/provision-with-micromamba@main
       with:
         cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/"linux": ['elffile'],/"linux": ['elffile'],"noarch": [],/g' /home/runner/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
     - name: Install system deps
       run: sudo apt-get install -y autopoint texinfo rename
     - name: Setup JDK
@@ -1675,6 +1787,10 @@ jobs:
       uses: mamba-org/provision-with-micromamba@main
       with:
         cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/"linux": ['elffile'],/"linux": ['elffile'],"noarch": [],/g' /home/runner/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
     - name: Build recipe
       run: boa build pip-bytecode --target-platform=noarch
       shell: bash -l {0}
@@ -1691,6 +1807,10 @@ jobs:
       uses: mamba-org/provision-with-micromamba@main
       with:
         cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/"linux": ['elffile'],/"linux": ['elffile'],"noarch": [],/g' /home/runner/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
     - name: Build recipe
       run: boa build pip-cppy --target-platform=noarch
       shell: bash -l {0}
@@ -1707,6 +1827,10 @@ jobs:
       uses: mamba-org/provision-with-micromamba@main
       with:
         cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/"linux": ['elffile'],/"linux": ['elffile'],"noarch": [],/g' /home/runner/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
     - name: Build recipe
       run: boa build pip-docutils --target-platform=noarch
       shell: bash -l {0}
@@ -1723,6 +1847,10 @@ jobs:
       uses: mamba-org/provision-with-micromamba@main
       with:
         cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/"linux": ['elffile'],/"linux": ['elffile'],"noarch": [],/g' /home/runner/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
     - name: Build recipe
       run: boa build pip-jsonrpclib --target-platform=noarch
       shell: bash -l {0}
@@ -1739,6 +1867,10 @@ jobs:
       uses: mamba-org/provision-with-micromamba@main
       with:
         cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/"linux": ['elffile'],/"linux": ['elffile'],"noarch": [],/g' /home/runner/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
     - name: Build recipe
       run: boa build pip-motor --target-platform=noarch
       shell: bash -l {0}
@@ -1755,6 +1887,10 @@ jobs:
       uses: mamba-org/provision-with-micromamba@main
       with:
         cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/"linux": ['elffile'],/"linux": ['elffile'],"noarch": [],/g' /home/runner/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
     - name: Build recipe
       run: boa build pip-ply --target-platform=noarch
       shell: bash -l {0}
@@ -1771,6 +1907,10 @@ jobs:
       uses: mamba-org/provision-with-micromamba@main
       with:
         cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/"linux": ['elffile'],/"linux": ['elffile'],"noarch": [],/g' /home/runner/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
     - name: Build recipe
       run: boa build pip-pytz --target-platform=noarch
       shell: bash -l {0}
@@ -1787,6 +1927,10 @@ jobs:
       uses: mamba-org/provision-with-micromamba@main
       with:
         cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/"linux": ['elffile'],/"linux": ['elffile'],"noarch": [],/g' /home/runner/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
     - name: Build recipe
       run: boa build pip-tornado --target-platform=noarch
       shell: bash -l {0}
