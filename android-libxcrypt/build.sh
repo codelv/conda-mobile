@@ -11,7 +11,6 @@ for ARCH in $ARCHS
 do
     activate-ndk-clang $ARCH
     export CFLAGS="-I$APP_ROOT/include -Wno-language-extension-token"
-    export LDFLAGS="-L$APP_ROOT/lib"
 
     ./configure --host=$TARGET_HOST --prefix=$SRC_DIR/dist/$ARCH \
         --with-sysroot=$ANDROID_TOOLCHAIN/sysroot \
