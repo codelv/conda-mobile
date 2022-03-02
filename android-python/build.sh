@@ -26,7 +26,7 @@ do
     export CFLAGS="-fPIC -I$APP_ROOT/include -I$NDK_INC_DIR"
     export CCSHARED="-fPIC -I$APP_ROOT/include -I$NDK_INC_DIR -DPy_BUILD_CORE"
     export SSL="$APP_ROOT"
-    export LDFLAGS="--sysroot=$ANDROID_TOOLCHAIN/sysroot -L$APP_ROOT/lib -L$NDK_LIB_DIR -llog"
+    export LDFLAGS="--sysroot=$ANDROID_TOOLCHAIN/sysroot -L$APP_ROOT/lib -L$NDK_LIB_DIR -llog -Wl,--hash-style=both"
     export _PYTHON_HOST_PLATFORM="$TARGET_HOST"
 
 
