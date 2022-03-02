@@ -1,0 +1,39 @@
+{% set name = "pyusb" %}
+{% set version = "1.2.1" %}
+package:
+  name: pip-{{ name|lower }}
+  version: '{{ version }}'
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: a4cc7404a203144754164b8b40994e2849fde1cfff06b08492f12fff9d9de7b9
+
+build:
+  number: 0
+  noarch: true
+  script:
+  - export CC=/bin/false
+  - export CXX=/bin/false
+  - 'python -m pip install . -vv --no-compile --target=$PREFIX/android/arm/python/site-packages '
+  - 'python -m pip install . -vv --no-compile --target=$PREFIX/android/arm64/python/site-packages '
+  - 'python -m pip install . -vv --no-compile --target=$PREFIX/android/x86/python/site-packages '
+  - 'python -m pip install . -vv --no-compile --target=$PREFIX/android/x86_64/python/site-packages '
+  - 'python -m pip install . -vv --no-compile --target=$PREFIX/iphoneos/python/site-packages '
+  - 'python -m pip install . -vv --no-compile --target=$PREFIX/iphonesimulator/python/site-packages '
+
+requirements:
+  run:
+    - android-libusb
+
+about:
+  home: The package home page
+  license: BSD
+  license_family: BSD
+  license_file:
+  summary: Python USB access module Built for Android and iOS apps using enaml-native.
+  doc_url:
+  dev_url:
+
+extra:
+  recipe-maintainers:
+  - your-github-id-here
