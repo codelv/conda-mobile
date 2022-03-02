@@ -1,0 +1,36 @@
+{% set name = "loguru" %}
+{% set version = "0.6.0" %}
+package:
+  name: pip-{{ name|lower }}
+  version: '{{ version }}'
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 066bd06758d0a513e9836fd9c6b5a75bfb3fd36841f4b996bc60b547a309d41c
+
+build:
+  number: 0
+  noarch: true
+  script:
+  - export CC=/bin/false
+  - export CXX=/bin/false
+  - 'python -m pip install . -vv --no-compile --target=$PREFIX/android/arm/python/site-packages '
+  - 'python -m pip install . -vv --no-compile --target=$PREFIX/android/arm64/python/site-packages '
+  - 'python -m pip install . -vv --no-compile --target=$PREFIX/android/x86/python/site-packages '
+  - 'python -m pip install . -vv --no-compile --target=$PREFIX/android/x86_64/python/site-packages '
+  - 'python -m pip install . -vv --no-compile --target=$PREFIX/iphoneos/python/site-packages '
+  - 'python -m pip install . -vv --no-compile --target=$PREFIX/iphonesimulator/python/site-packages '
+
+requirements: {}
+about:
+  home: The package home page
+  license: MIT
+  license_family: MIT
+  license_file:
+  summary: Python logging made (stupidly) simple Built for Android and iOS apps using enaml-native.
+  doc_url:
+  dev_url:
+
+extra:
+  recipe-maintainers:
+  - your-github-id-here

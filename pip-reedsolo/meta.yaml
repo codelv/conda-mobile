@@ -1,0 +1,36 @@
+{% set name = "reedsolo" %}
+{% set version = "1.5.4" %}
+package:
+  name: pip-{{ name|lower }}
+  version: '{{ version }}'
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: b8b25cdc83478ccb06361a0e8fadc27b376a3dfabbb1dc6bb583a998a22c0127
+
+build:
+  number: 0
+  noarch: true
+  script:
+  - export CC=/bin/false
+  - export CXX=/bin/false
+  - 'python -m pip install . -vv --no-compile --target=$PREFIX/android/arm/python/site-packages '
+  - 'python -m pip install . -vv --no-compile --target=$PREFIX/android/arm64/python/site-packages '
+  - 'python -m pip install . -vv --no-compile --target=$PREFIX/android/x86/python/site-packages '
+  - 'python -m pip install . -vv --no-compile --target=$PREFIX/android/x86_64/python/site-packages '
+  - 'python -m pip install . -vv --no-compile --target=$PREFIX/iphoneos/python/site-packages '
+  - 'python -m pip install . -vv --no-compile --target=$PREFIX/iphonesimulator/python/site-packages '
+
+requirements: {}
+about:
+  home: The package home page
+  license: MIT
+  license_family: MIT
+  license_file:
+  summary: Pure-Python Reed Solomon encoder/decoder Built for Android and iOS apps using enaml-native.
+  doc_url:
+  dev_url:
+
+extra:
+  recipe-maintainers:
+  - your-github-id-here

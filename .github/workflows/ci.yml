@@ -2779,6 +2779,30 @@ jobs:
       with:
         name: android-sqlite-3.10
         path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-sqlite*.bz2
+  pip-bitstring:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install micromamba
+      uses: mamba-org/provision-with-micromamba@main
+      with:
+        cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert pip-bitstring/meta.yaml > pip-bitstring/recipe.yaml
+      shell: bash -l {0}
+    - name: Build recipe
+      run: boa build pip-bitstring --target-platform=noarch
+      shell: bash -l {0}
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: pip-bitstring-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/*/pip-bitstring*.bz2
   pip-bytecode:
     runs-on: ubuntu-latest
     steps:
@@ -2827,6 +2851,30 @@ jobs:
       with:
         name: pip-cppy-3.10
         path: ~/micromamba/envs/conda-mobile/conda-bld/*/pip-cppy*.bz2
+  pip-ecdsa:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install micromamba
+      uses: mamba-org/provision-with-micromamba@main
+      with:
+        cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert pip-ecdsa/meta.yaml > pip-ecdsa/recipe.yaml
+      shell: bash -l {0}
+    - name: Build recipe
+      run: boa build pip-ecdsa --target-platform=noarch
+      shell: bash -l {0}
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: pip-ecdsa-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/*/pip-ecdsa*.bz2
   pip-jsonrpclib:
     runs-on: ubuntu-latest
     steps:
@@ -2851,6 +2899,30 @@ jobs:
       with:
         name: pip-jsonrpclib-3.10
         path: ~/micromamba/envs/conda-mobile/conda-bld/*/pip-jsonrpclib*.bz2
+  pip-loguru:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install micromamba
+      uses: mamba-org/provision-with-micromamba@main
+      with:
+        cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert pip-loguru/meta.yaml > pip-loguru/recipe.yaml
+      shell: bash -l {0}
+    - name: Build recipe
+      run: boa build pip-loguru --target-platform=noarch
+      shell: bash -l {0}
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: pip-loguru-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/*/pip-loguru*.bz2
   pip-motor:
     runs-on: ubuntu-latest
     steps:
@@ -2923,6 +2995,54 @@ jobs:
       with:
         name: pip-pytz-3.10
         path: ~/micromamba/envs/conda-mobile/conda-bld/*/pip-pytz*.bz2
+  pip-reedsolo:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install micromamba
+      uses: mamba-org/provision-with-micromamba@main
+      with:
+        cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert pip-reedsolo/meta.yaml > pip-reedsolo/recipe.yaml
+      shell: bash -l {0}
+    - name: Build recipe
+      run: boa build pip-reedsolo --target-platform=noarch
+      shell: bash -l {0}
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: pip-reedsolo-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/*/pip-reedsolo*.bz2
+  pip-setuptools_rust:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install micromamba
+      uses: mamba-org/provision-with-micromamba@main
+      with:
+        cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert pip-setuptools_rust/meta.yaml > pip-setuptools_rust/recipe.yaml
+      shell: bash -l {0}
+    - name: Build recipe
+      run: boa build pip-setuptools_rust --target-platform=noarch
+      shell: bash -l {0}
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: pip-setuptools_rust-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/*/pip-setuptools_rust*.bz2
   pip-tornado:
     runs-on: ubuntu-latest
     steps:

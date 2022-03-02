@@ -32,7 +32,10 @@ conda_post = "$HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/co
 SETUP = """
 sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' %s
 sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' %s
-""" % (conda_post, conda_post)
+""" % (
+    conda_post,
+    conda_post,
+)
 
 
 class Block(str):
@@ -44,9 +47,7 @@ class Block(str):
 
 
 def build_requirements(meta, all_packages) -> set[str]:
-    """ Read list of build requirements from meta file
-
-    """
+    """Read list of build requirements from meta file"""
     needs = set()
     if "requirements" in meta:
         reqs = meta["requirements"]
@@ -59,7 +60,7 @@ def build_requirements(meta, all_packages) -> set[str]:
 
 
 def all_build_requirements(pkg, package_deps) -> set[str]:
-    """ Build a recursive list of all build requirements including dependencies
+    """Build a recursive list of all build requirements including dependencies
     of dependencies
 
     """
@@ -97,7 +98,10 @@ def main():
             if not os.path.exists(meta_file):
                 continue
             print(f"Loading {meta_file}")
-            data = subprocess.check_output(f'boa convert {meta_file}'.split())
+            data = subprocess.check_output(f"boa convert {meta_file}".split())
+            with open(f"{item}/recipe.yaml", "wb") as f:
+                f.write(data)
+
             data = data.decode()
             meta = yaml.load(data, yaml.Loader)
             package_meta[item] = meta
@@ -133,7 +137,7 @@ def main():
             "name": "Install micromamba",
             "uses": "mamba-org/provision-with-micromamba@main",
             "with": {
-                #"cache-env": True,
+                # "cache-env": True,
                 "cache-downloads": True,
             },
         },

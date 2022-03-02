@@ -157,6 +157,12 @@ these libraries from the env for the given target and use them as is.
 [enaml-native](https://github.com/codelv/enaml-native) supports this.
 
 
+### CI
+
+The ci script is generated using `python generate-ci.py`. Running it will
+update the `ci.yaml` and generate a boa `recipe.yaml` for each package.
+
+
 ### Contributing
 
 This is released under the GPL v3. See the LICENSE included adjacent to this file.

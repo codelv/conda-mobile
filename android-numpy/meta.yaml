@@ -1,11 +1,11 @@
-
+{% set version = "1.22.2" %}
 package:
   name: android-numpy
-  version: 1.14.3
+  version: '{{ version }}'
 
 source:
-  url: https://github.com/numpy/numpy/releases/download/v1.14.3/numpy-1.14.3.tar.gz
-  sha256: cfcfc7a9a8ba4275c60a815c683d59ac5e7aa9362d76573b6cc4324ffb1235fa
+  url: https://github.com/numpy/numpy/releases/download/v{{version}}/numpy-{{version}}.tar.gz
+  sha256: 093d513a460fd94f94c16193c3ef29b2d69a33e482071e3d6d6e561a700587a6
 
 requirements:
   build:

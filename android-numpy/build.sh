@@ -14,14 +14,13 @@ else
     export PY_LIB_VER="2.7"
 fi
 
-patch -t -d $SRC_DIR -p1 -i $RECIPE_DIR/numpy.patch
+#patch -t -d $SRC_DIR -p1 -i $RECIPE_DIR/numpy.patch
 
 for ARCH in $ARCHS
 do
 
     export CFLAGS="-O3 -I$APP_ROOT/include/python$PY_LIB_VER -I$APP_ROOT/include/"
     export LDFLAGS="-L$APP_ROOT/lib -L$NDK_LIB_DIR -lpython$PY_LIB_VER"
-    export LDSHARED="$CXX -shared"
     export CROSS_COMPILE="$ARCH"
     export CROSS_COMPILE_TARGET='yes'
     export _PYTHON_HOST_PLATFORM="android-$ARCH"
