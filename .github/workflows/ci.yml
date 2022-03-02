@@ -1807,7 +1807,17 @@ jobs:
       with:
         name: android-ndk-3.10
         path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-ndk*.bz2
-  android-opencv:
+  android-numpy:
+    needs:
+    - android-libbz2
+    - android-libffi
+    - android-liblzma
+    - android-libuuid
+    - android-libxcrypt
+    - android-ndk
+    - android-openssl
+    - android-python
+    - android-sqlite
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -1846,6 +1856,111 @@ jobs:
         sdkmanager --install tools
         sdkmanager --install platform-tools
         sdkmanager --install "ndk;23.1.7779620"
+    - name: Download android-libbz2
+      uses: actions/download-artifact@v2
+      with:
+        name: android-libbz2-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-libffi
+      uses: actions/download-artifact@v2
+      with:
+        name: android-libffi-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-liblzma
+      uses: actions/download-artifact@v2
+      with:
+        name: android-liblzma-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-libuuid
+      uses: actions/download-artifact@v2
+      with:
+        name: android-libuuid-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-libxcrypt
+      uses: actions/download-artifact@v2
+      with:
+        name: android-libxcrypt-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-ndk
+      uses: actions/download-artifact@v2
+      with:
+        name: android-ndk-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-openssl
+      uses: actions/download-artifact@v2
+      with:
+        name: android-openssl-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-python
+      uses: actions/download-artifact@v2
+      with:
+        name: android-python-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-sqlite
+      uses: actions/download-artifact@v2
+      with:
+        name: android-sqlite-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Run conda index
+      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      shell: bash -l {0}
+    - name: Build recipe
+      run: boa build android-numpy --target-platform=noarch
+      shell: bash -l {0}
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: android-numpy-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-numpy*.bz2
+  android-opencv:
+    needs:
+    - android-ndk
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install micromamba
+      uses: mamba-org/provision-with-micromamba@main
+      with:
+        cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
+    - name: Install system deps
+      run: sudo apt-get install -y autopoint texinfo rename
+    - name: Setup JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - id: android-cache
+      name: Cache Android NDK
+      uses: actions/cache@v2
+      with:
+        key: linux-android-ndk-23.1.7779620
+        path: ~/Android
+    - if: steps.android-cache.outputs.cache-hit != 'true'
+      name: Setup android NDK
+      run: |
+        export ANDROID_HOME="$HOME/Android/Sdk"
+        export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+        export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+        mkdir -p $ANDROID_HOME
+        wget -q https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
+        unzip -e commandlinetools-linux-8092744_latest.zip -d $ANDROID_HOME/cmdline-tools
+        mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+        yes | sdkmanager --licenses > /dev/null
+        sdkmanager --install tools
+        sdkmanager --install platform-tools
+        sdkmanager --install "ndk;23.1.7779620"
+    - name: Download android-ndk
+      uses: actions/download-artifact@v2
+      with:
+        name: android-ndk-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Run conda index
+      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      shell: bash -l {0}
     - name: Build recipe
       run: boa build android-opencv --target-platform=noarch
       shell: bash -l {0}
@@ -1911,6 +2026,216 @@ jobs:
       with:
         name: android-openssl-3.10
         path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-openssl*.bz2
+  android-pymongo:
+    needs:
+    - android-libbz2
+    - android-libffi
+    - android-liblzma
+    - android-libuuid
+    - android-libxcrypt
+    - android-ndk
+    - android-openssl
+    - android-python
+    - android-sqlite
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install micromamba
+      uses: mamba-org/provision-with-micromamba@main
+      with:
+        cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
+    - name: Install system deps
+      run: sudo apt-get install -y autopoint texinfo rename
+    - name: Setup JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - id: android-cache
+      name: Cache Android NDK
+      uses: actions/cache@v2
+      with:
+        key: linux-android-ndk-23.1.7779620
+        path: ~/Android
+    - if: steps.android-cache.outputs.cache-hit != 'true'
+      name: Setup android NDK
+      run: |
+        export ANDROID_HOME="$HOME/Android/Sdk"
+        export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+        export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+        mkdir -p $ANDROID_HOME
+        wget -q https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
+        unzip -e commandlinetools-linux-8092744_latest.zip -d $ANDROID_HOME/cmdline-tools
+        mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+        yes | sdkmanager --licenses > /dev/null
+        sdkmanager --install tools
+        sdkmanager --install platform-tools
+        sdkmanager --install "ndk;23.1.7779620"
+    - name: Download android-libbz2
+      uses: actions/download-artifact@v2
+      with:
+        name: android-libbz2-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-libffi
+      uses: actions/download-artifact@v2
+      with:
+        name: android-libffi-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-liblzma
+      uses: actions/download-artifact@v2
+      with:
+        name: android-liblzma-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-libuuid
+      uses: actions/download-artifact@v2
+      with:
+        name: android-libuuid-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-libxcrypt
+      uses: actions/download-artifact@v2
+      with:
+        name: android-libxcrypt-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-ndk
+      uses: actions/download-artifact@v2
+      with:
+        name: android-ndk-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-openssl
+      uses: actions/download-artifact@v2
+      with:
+        name: android-openssl-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-python
+      uses: actions/download-artifact@v2
+      with:
+        name: android-python-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-sqlite
+      uses: actions/download-artifact@v2
+      with:
+        name: android-sqlite-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Run conda index
+      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      shell: bash -l {0}
+    - name: Build recipe
+      run: boa build android-pymongo --target-platform=noarch
+      shell: bash -l {0}
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: android-pymongo-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-pymongo*.bz2
+  android-pyproj:
+    needs:
+    - android-libbz2
+    - android-libffi
+    - android-liblzma
+    - android-libuuid
+    - android-libxcrypt
+    - android-ndk
+    - android-openssl
+    - android-python
+    - android-sqlite
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install micromamba
+      uses: mamba-org/provision-with-micromamba@main
+      with:
+        cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
+    - name: Install system deps
+      run: sudo apt-get install -y autopoint texinfo rename
+    - name: Setup JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - id: android-cache
+      name: Cache Android NDK
+      uses: actions/cache@v2
+      with:
+        key: linux-android-ndk-23.1.7779620
+        path: ~/Android
+    - if: steps.android-cache.outputs.cache-hit != 'true'
+      name: Setup android NDK
+      run: |
+        export ANDROID_HOME="$HOME/Android/Sdk"
+        export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+        export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+        mkdir -p $ANDROID_HOME
+        wget -q https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
+        unzip -e commandlinetools-linux-8092744_latest.zip -d $ANDROID_HOME/cmdline-tools
+        mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+        yes | sdkmanager --licenses > /dev/null
+        sdkmanager --install tools
+        sdkmanager --install platform-tools
+        sdkmanager --install "ndk;23.1.7779620"
+    - name: Download android-libbz2
+      uses: actions/download-artifact@v2
+      with:
+        name: android-libbz2-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-libffi
+      uses: actions/download-artifact@v2
+      with:
+        name: android-libffi-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-liblzma
+      uses: actions/download-artifact@v2
+      with:
+        name: android-liblzma-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-libuuid
+      uses: actions/download-artifact@v2
+      with:
+        name: android-libuuid-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-libxcrypt
+      uses: actions/download-artifact@v2
+      with:
+        name: android-libxcrypt-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-ndk
+      uses: actions/download-artifact@v2
+      with:
+        name: android-ndk-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-openssl
+      uses: actions/download-artifact@v2
+      with:
+        name: android-openssl-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-python
+      uses: actions/download-artifact@v2
+      with:
+        name: android-python-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-sqlite
+      uses: actions/download-artifact@v2
+      with:
+        name: android-sqlite-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Run conda index
+      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      shell: bash -l {0}
+    - name: Build recipe
+      run: boa build android-pyproj --target-platform=noarch
+      shell: bash -l {0}
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: android-pyproj-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-pyproj*.bz2
   android-python:
     needs:
     - android-libbz2
@@ -2127,6 +2452,117 @@ jobs:
       with:
         name: android-pyzmq-3.10
         path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-pyzmq*.bz2
+  android-shapely:
+    needs:
+    - android-libbz2
+    - android-libffi
+    - android-libgeos
+    - android-liblzma
+    - android-libuuid
+    - android-libxcrypt
+    - android-ndk
+    - android-openssl
+    - android-python
+    - android-sqlite
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install micromamba
+      uses: mamba-org/provision-with-micromamba@main
+      with:
+        cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
+    - name: Install system deps
+      run: sudo apt-get install -y autopoint texinfo rename
+    - name: Setup JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - id: android-cache
+      name: Cache Android NDK
+      uses: actions/cache@v2
+      with:
+        key: linux-android-ndk-23.1.7779620
+        path: ~/Android
+    - if: steps.android-cache.outputs.cache-hit != 'true'
+      name: Setup android NDK
+      run: |
+        export ANDROID_HOME="$HOME/Android/Sdk"
+        export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+        export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+        mkdir -p $ANDROID_HOME
+        wget -q https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
+        unzip -e commandlinetools-linux-8092744_latest.zip -d $ANDROID_HOME/cmdline-tools
+        mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+        yes | sdkmanager --licenses > /dev/null
+        sdkmanager --install tools
+        sdkmanager --install platform-tools
+        sdkmanager --install "ndk;23.1.7779620"
+    - name: Download android-libbz2
+      uses: actions/download-artifact@v2
+      with:
+        name: android-libbz2-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-libffi
+      uses: actions/download-artifact@v2
+      with:
+        name: android-libffi-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-libgeos
+      uses: actions/download-artifact@v2
+      with:
+        name: android-libgeos-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-liblzma
+      uses: actions/download-artifact@v2
+      with:
+        name: android-liblzma-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-libuuid
+      uses: actions/download-artifact@v2
+      with:
+        name: android-libuuid-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-libxcrypt
+      uses: actions/download-artifact@v2
+      with:
+        name: android-libxcrypt-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-ndk
+      uses: actions/download-artifact@v2
+      with:
+        name: android-ndk-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-openssl
+      uses: actions/download-artifact@v2
+      with:
+        name: android-openssl-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-python
+      uses: actions/download-artifact@v2
+      with:
+        name: android-python-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-sqlite
+      uses: actions/download-artifact@v2
+      with:
+        name: android-sqlite-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Run conda index
+      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      shell: bash -l {0}
+    - name: Build recipe
+      run: boa build android-shapely --target-platform=noarch
+      shell: bash -l {0}
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: android-shapely-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-shapely*.bz2
   android-sqlite:
     needs:
     - android-ndk
