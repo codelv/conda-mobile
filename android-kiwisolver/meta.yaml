@@ -18,15 +18,16 @@ requirements:
     - pip-cppy
     - android-ndk
     - android-libcxx
-    - android-python * py{{CONDA_PY}}*
+    - android-python * py310*
   run:
     - python
     - android-libcxx
-    - android-python * py{{CONDA_PY}}*
+    - android-python * py310*
 
 build:
   binary_relocation: False
   noarch: generic
+  string: 'py310'
 
 about:
   home: https://github.com/nucleic/atom

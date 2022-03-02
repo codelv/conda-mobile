@@ -25,6 +25,7 @@ build:
   number: 0
   binary_relocation: false
   noarch: generic
+  string: 'py310'
 
 about:
   home: http://lxml.de/

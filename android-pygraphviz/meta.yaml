@@ -10,7 +10,7 @@ requirements:
   build:
     - python
     - android-python
-    - android-graphviz * py{{CONDA_PY}}*
+    - android-graphviz * py310*
   run:
     - python
     - android-graphviz
@@ -20,6 +20,7 @@ build:
   number: 0
   binary_relocation: False
   noarch: generic
+  string: 'py310'
 
 about:
   home: http://github.com/codelv/enaml-native

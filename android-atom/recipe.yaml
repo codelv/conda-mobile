@@ -31,6 +31,7 @@ requirements:
 
 build:
   binary_relocation: false
+  string: 'py310'
   noarch: generic
 
 about:

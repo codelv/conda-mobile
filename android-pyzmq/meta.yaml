@@ -29,6 +29,7 @@ build:
   number: 0
   binary_relocation: False
   noarch: generic
+  string: 'py310'
 
 about:
   home: https://pyzmq.readthedocs.io/en/latest/

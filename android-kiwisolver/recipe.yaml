@@ -29,6 +29,7 @@ requirements:
 build:
   binary_relocation: false
   noarch: generic
+  string: 'py310'
 
 about:
   home: https://github.com/nucleic/atom

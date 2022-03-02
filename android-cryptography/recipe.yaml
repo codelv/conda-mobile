@@ -17,18 +17,19 @@ build:
   number: 0
   binary_relocation: false
   noarch: generic
+  string: 'py310'
 
 requirements:
   build:
     - python
     - cffi
     - android-ndk
-    - android-cffi * py{{CONDA_PY}}*
+    - android-cffi * py310*
     - android-openssl
   run:
     - python
     - android-openssl
-    - android-cffi * py{{CONDA_PY}}*
+    - android-cffi * py310*
 about:
   home: https://cryptography.io/
   license: Apache License
