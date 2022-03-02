@@ -1,7 +1,7 @@
 {% set name = "pandas" %}
-{% set version = "0.22.0" %}
+{% set version = "1.4.1" %}
 {% set hash_type = "sha256" %}
-{% set hash_value = "44a94091dd71f05922eec661638ec1a35f26d573c119aa2fad964f10a2880e6c" %}
+{% set hash_value = "8db93ec98ac7cb5f8ac1420c10f5e3c43533153f253fe7fb6d891cf5aa2b80d2" %}
 package:
   name: android-{{ name|lower }}
   version: '{{ version }}'
@@ -17,7 +17,7 @@ requirements:
     - cython
     - pytz
     - tempita
-    - numpy
+    - numpy 1.22
     - python-dateutil
     - android-ndk
     - android-numpy * py310*

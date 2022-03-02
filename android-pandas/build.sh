@@ -6,8 +6,7 @@
 # Created on May 2, 2018
 # ==================================================================================================
 export HOSTPYTHON=$PYTHON
-export ARCHS=("arm arm64 x86_64 x86 ")
-export NDK="$HOME/Android/Sdk/ndk-bundle"
+source $BUILD_PREFIX/android/activate-ndk.sh
 
 patch -t -d $SRC_DIR -p1 -i $RECIPE_DIR/compat.patch
 

@@ -22,13 +22,11 @@ do
     activate-ndk-clang $ARCH
     export CFLAGS="-O3 -I$APP_ROOT/include/python$PY_LIB_VER -I$APP_ROOT/include/"
     export LDFLAGS="-L$APP_ROOT/lib -L$NDK_LIB_DIR -lpython$PY_LIB_VER"
-
+    export NPY_DISABLE_SVML=0
     if [ "$ARCH" == "x86" ]; then
-        export CFLAGS="$CFLAGS -m32"
-        export LDFLAGS="$LDFLAGS -m32"
+        export NPY_DISABLE_SVML=1
     elif [ "$ARCH" == "arm" ]; then
-        export CFLAGS="$CFLAGS -m32"
-        export LDFLAGS="$LDFLAGS -m32"
+        export NPY_DISABLE_SVML=1
     fi
 
     export CROSS_COMPILE="$ARCH"

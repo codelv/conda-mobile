@@ -2167,6 +2167,120 @@ jobs:
       with:
         name: android-openssl-3.10
         path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-openssl*.bz2
+  android-pandas:
+    needs:
+    - android-libbz2
+    - android-libffi
+    - android-liblzma
+    - android-libuuid
+    - android-libxcrypt
+    - android-ndk
+    - android-numpy
+    - android-openssl
+    - android-python
+    - android-sqlite
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install micromamba
+      uses: mamba-org/provision-with-micromamba@main
+      with:
+        cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
+    - name: Install system deps
+      run: sudo apt-get install -y autopoint texinfo rename
+    - name: Setup JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - id: android-cache
+      name: Cache Android NDK
+      uses: actions/cache@v2
+      with:
+        key: linux-android-ndk-23.1.7779620
+        path: ~/Android
+    - if: steps.android-cache.outputs.cache-hit != 'true'
+      name: Setup android NDK
+      run: |
+        export ANDROID_HOME="$HOME/Android/Sdk"
+        export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+        export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+        mkdir -p $ANDROID_HOME
+        wget -q https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
+        unzip -e commandlinetools-linux-8092744_latest.zip -d $ANDROID_HOME/cmdline-tools
+        mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+        yes | sdkmanager --licenses > /dev/null
+        sdkmanager --install tools
+        sdkmanager --install platform-tools
+        sdkmanager --install "ndk;23.1.7779620"
+    - name: Download android-libbz2
+      uses: actions/download-artifact@v2
+      with:
+        name: android-libbz2-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-libffi
+      uses: actions/download-artifact@v2
+      with:
+        name: android-libffi-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-liblzma
+      uses: actions/download-artifact@v2
+      with:
+        name: android-liblzma-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-libuuid
+      uses: actions/download-artifact@v2
+      with:
+        name: android-libuuid-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-libxcrypt
+      uses: actions/download-artifact@v2
+      with:
+        name: android-libxcrypt-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-ndk
+      uses: actions/download-artifact@v2
+      with:
+        name: android-ndk-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-numpy
+      uses: actions/download-artifact@v2
+      with:
+        name: android-numpy-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-openssl
+      uses: actions/download-artifact@v2
+      with:
+        name: android-openssl-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-python
+      uses: actions/download-artifact@v2
+      with:
+        name: android-python-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-sqlite
+      uses: actions/download-artifact@v2
+      with:
+        name: android-sqlite-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Run conda index
+      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert android-pandas/meta.yaml > android-pandas/recipe.yaml
+      shell: bash -l {0}
+    - name: Build recipe
+      run: boa build android-pandas --target-platform=noarch
+      shell: bash -l {0}
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: android-pandas-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-pandas*.bz2
   android-pymongo:
     needs:
     - android-libbz2
@@ -3019,6 +3133,30 @@ jobs:
       with:
         name: pip-pyserial-3.10
         path: ~/micromamba/envs/conda-mobile/conda-bld/*/pip-pyserial*.bz2
+  pip-python-dateutil:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install micromamba
+      uses: mamba-org/provision-with-micromamba@main
+      with:
+        cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert pip-python-dateutil/meta.yaml > pip-python-dateutil/recipe.yaml
+      shell: bash -l {0}
+    - name: Build recipe
+      run: boa build pip-python-dateutil --target-platform=noarch
+      shell: bash -l {0}
+    - name: Upload package
+      uses: actions/upload-artifact@v2
+      with:
+        name: pip-python-dateutil-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/*/pip-python-dateutil*.bz2
   pip-pytz:
     runs-on: ubuntu-latest
     steps:
@@ -3091,30 +3229,6 @@ jobs:
       with:
         name: pip-reedsolo-3.10
         path: ~/micromamba/envs/conda-mobile/conda-bld/*/pip-reedsolo*.bz2
-  pip-setuptools_rust:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Install micromamba
-      uses: mamba-org/provision-with-micromamba@main
-      with:
-        cache-downloads: true
-    - name: Setup micromamba
-      run: |
-        sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
-        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
-      shell: bash -l {0}
-    - name: Convert recipe
-      run: boa convert pip-setuptools_rust/meta.yaml > pip-setuptools_rust/recipe.yaml
-      shell: bash -l {0}
-    - name: Build recipe
-      run: boa build pip-setuptools_rust --target-platform=noarch
-      shell: bash -l {0}
-    - name: Upload package
-      uses: actions/upload-artifact@v2
-      with:
-        name: pip-setuptools_rust-3.10
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/pip-setuptools_rust*.bz2
   pip-tornado:
     runs-on: ubuntu-latest
     steps:
