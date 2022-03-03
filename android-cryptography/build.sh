@@ -14,6 +14,9 @@ else
     export PY_LIB_VER="2.7"
 fi
 
+# Remove pthread
+sed -i 's/, "pthread"//g' src/_cffi_src/build_openssl.py
+
 for ARCH in $ARCHS
 do
 
