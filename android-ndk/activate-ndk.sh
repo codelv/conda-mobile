@@ -56,15 +56,13 @@ function activate-ndk-clang() {
     export LD="ld"
     export READELF="llvm-readelf"
     export APP_ROOT="$BUILD_PREFIX/android/$ARCH"
-    export CFLAGS="-I$APP_ROOT/include -$INDK_INC_DIR"
+    export CFLAGS="-I$APP_ROOT/include -I$NDK_INC_DIR"
     export LDFLAGS="-L$APP_ROOT/lib -L$NDK_LIB_DIR -Wl,--hash-style=both"
-
-    # boa does not set this but conda does so keep it the same
-    export LD_RUN_PATH="$PREFIX/lib"
 
     # Make package directories
     mkdir -p $PREFIX/android/$ARCH/include
     mkdir -p $PREFIX/android/$ARCH/lib
+
 }
 
 # Check that the given shared library matches the $ARCH variable
@@ -89,4 +87,6 @@ function validate-lib-arch() {
         exit 1
     fi
 
+    patchelf --remove-rpath $lib
+    readelf --dynamic $lib
 }

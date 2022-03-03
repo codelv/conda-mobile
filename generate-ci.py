@@ -29,11 +29,10 @@ sdkmanager --install "ndk;{NDK_VER}"
 
 # Patch conda build because it fails cleaning up optimized pyc files
 conda_post = "$HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py"
+
 SETUP = """
-sed -i 's/filetypes_for_platform = {/filetypes_for_platform = {"noarch": [],/g' %s
 sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' %s
 """ % (
-    conda_post,
     conda_post,
 )
 
@@ -147,7 +146,7 @@ def main():
     android_steps = [
         {
             "name": "Install system deps",
-            "run": "sudo apt-get install -y autopoint texinfo rename",
+            "run": "sudo apt-get install -y autopoint texinfo rename patchelf",
         },
         {
             "name": "Setup JDK",
@@ -177,12 +176,6 @@ def main():
 
         for pkg in items:
             meta = package_meta[pkg]
-
-            # Add requirements
-            platform = "linux-64"
-            if "build" in meta and "noarch" in meta["build"]:
-                platform = "noarch"
-
             build_steps = [
                 {
                     "name": "Convert recipe",
@@ -192,7 +185,7 @@ def main():
                 {
                     "name": "Build recipe",
                     "shell": "bash -l {0}",
-                    "run": f"boa build {pkg} --target-platform={platform}",
+                    "run": f"boa build {pkg}",
                 },
                 {
                     "name": "Upload package",
