@@ -25,6 +25,7 @@ do
     # Setup compiler for arch and target_api
     activate-ndk-clang $ARCH
 
+    export CFLAGS="$CFLAGS -fPIC"
     export CCSHARED="$CFLAGS -DPy_BUILD_CORE"
     export SSL="$APP_ROOT"
     export LDFLAGS="$LDFLAGS --sysroot=$ANDROID_TOOLCHAIN/sysroot -llog"
