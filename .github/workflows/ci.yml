@@ -2151,6 +2151,8 @@ jobs:
     - android-openssl
     - android-python
     - android-sqlite
+    - pip-python-dateutil
+    - pip-pytz
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -2237,6 +2239,16 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-sqlite-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download pip-python-dateutil
+      uses: actions/download-artifact@v2
+      with:
+        name: pip-python-dateutil-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download pip-pytz
+      uses: actions/download-artifact@v2
+      with:
+        name: pip-pytz-3.10
         path: ~/micromamba/envs/conda-mobile/conda-bld/
     - name: Run conda index
       run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
@@ -2951,6 +2963,22 @@ jobs:
         name: pip-ecdsa-3.10
         path: ~/micromamba/envs/conda-mobile/conda-bld/*/pip-ecdsa*.bz2
   pip-esptool:
+    needs:
+    - android-cffi
+    - android-cryptography
+    - android-libbz2
+    - android-libffi
+    - android-liblzma
+    - android-libuuid
+    - android-libxcrypt
+    - android-ndk
+    - android-openssl
+    - android-python
+    - android-sqlite
+    - pip-bitstring
+    - pip-ecdsa
+    - pip-pyserial
+    - pip-reedsolo
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -2961,6 +2989,84 @@ jobs:
     - name: Setup micromamba
       run: |
         sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
+    - name: Download android-cffi
+      uses: actions/download-artifact@v2
+      with:
+        name: android-cffi-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-cryptography
+      uses: actions/download-artifact@v2
+      with:
+        name: android-cryptography-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-libbz2
+      uses: actions/download-artifact@v2
+      with:
+        name: android-libbz2-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-libffi
+      uses: actions/download-artifact@v2
+      with:
+        name: android-libffi-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-liblzma
+      uses: actions/download-artifact@v2
+      with:
+        name: android-liblzma-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-libuuid
+      uses: actions/download-artifact@v2
+      with:
+        name: android-libuuid-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-libxcrypt
+      uses: actions/download-artifact@v2
+      with:
+        name: android-libxcrypt-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-ndk
+      uses: actions/download-artifact@v2
+      with:
+        name: android-ndk-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-openssl
+      uses: actions/download-artifact@v2
+      with:
+        name: android-openssl-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-python
+      uses: actions/download-artifact@v2
+      with:
+        name: android-python-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-sqlite
+      uses: actions/download-artifact@v2
+      with:
+        name: android-sqlite-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download pip-bitstring
+      uses: actions/download-artifact@v2
+      with:
+        name: pip-bitstring-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download pip-ecdsa
+      uses: actions/download-artifact@v2
+      with:
+        name: pip-ecdsa-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download pip-pyserial
+      uses: actions/download-artifact@v2
+      with:
+        name: pip-pyserial-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download pip-reedsolo
+      uses: actions/download-artifact@v2
+      with:
+        name: pip-reedsolo-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Run conda index
+      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
     - name: Convert recipe
       run: boa convert pip-esptool/meta.yaml > pip-esptool/recipe.yaml
@@ -3135,6 +3241,9 @@ jobs:
         name: pip-pytz-3.10
         path: ~/micromamba/envs/conda-mobile/conda-bld/*/pip-pytz*.bz2
   pip-pyusb:
+    needs:
+    - android-libusb
+    - android-ndk
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -3145,6 +3254,19 @@ jobs:
     - name: Setup micromamba
       run: |
         sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' $HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py
+      shell: bash -l {0}
+    - name: Download android-libusb
+      uses: actions/download-artifact@v2
+      with:
+        name: android-libusb-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Download android-ndk
+      uses: actions/download-artifact@v2
+      with:
+        name: android-ndk-3.10
+        path: ~/micromamba/envs/conda-mobile/conda-bld/
+    - name: Run conda index
+      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
     - name: Convert recipe
       run: boa convert pip-pyusb/meta.yaml > pip-pyusb/recipe.yaml

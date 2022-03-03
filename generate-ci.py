@@ -50,11 +50,12 @@ def build_requirements(meta, all_packages) -> set[str]:
     needs = set()
     if "requirements" in meta:
         reqs = meta["requirements"]
-        if "build" in reqs:
-            for r in reqs["build"]:
-                dep_name = r.split()[0]
-                if dep_name in all_packages:
-                    needs.add(dep_name)
+        for section in ("build", "run"):
+            if section in reqs:
+                for r in reqs[section]:
+                    dep_name = r.split()[0]
+                    if dep_name in all_packages:
+                        needs.add(dep_name)
     return needs
 
 
