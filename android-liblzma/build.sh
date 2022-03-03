@@ -12,7 +12,7 @@ do
 
     # Setup compiler for arch and target_api
     activate-ndk-clang $ARCH
-    export CFLAGS="-std=c11"
+    export CFLAGS="$CFLAGS -std=c11"
 
     ./autogen.sh --no-po4a
     ./configure --host=$TARGET_HOST --prefix=$SRC_DIR/dist/$ARCH \

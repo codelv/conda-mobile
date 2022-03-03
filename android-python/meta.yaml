@@ -21,7 +21,7 @@ requirements:
   run:
     - python
 build:
-  number: 5
+  number: 6
   string: 'py310'
   binary_relocation: False
   noarch: generic

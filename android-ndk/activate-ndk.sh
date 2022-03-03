@@ -42,6 +42,12 @@ function activate-ndk-clang() {
         export TARGET_ABI="x86_64"
     fi
 
+    # NDK paths
+    export NDK_INC_DIR="$ANDROID_TOOLCHAIN/sysroot/usr/include"
+    export NDK_LIB_DIR="$ANDROID_TOOLCHAIN/sysroot/usr/lib/$TARGET_HOST/$TARGET_API"
+    if [ "$ARCH" == "arm" ]; then
+        export NDK_LIB_DIR="$ANDROID_TOOLCHAIN/sysroot/usr/lib/arm-linux-androideabi/$TARGET_API"
+    fi
 
     # Compiler setup
     export CC="$TARGET_HOST$TARGET_API-clang"
@@ -50,20 +56,15 @@ function activate-ndk-clang() {
     export LD="ld"
     export READELF="llvm-readelf"
     export APP_ROOT="$BUILD_PREFIX/android/$ARCH"
-    export CFLAGS="-I$APP_ROOT/include"
-    export LDFLAGS="-L$APP_ROOT/lib"
+    export CFLAGS="-I$APP_ROOT/include -$INDK_INC_DIR"
+    export LDFLAGS="-L$APP_ROOT/lib -L$NDK_LIB_DIR -Wl,--hash-style=both"
 
-    # NDK paths
-    export NDK_INC_DIR="$ANDROID_TOOLCHAIN/sysroot/usr/include"
-    export NDK_LIB_DIR="$ANDROID_TOOLCHAIN/sysroot/usr/lib/$TARGET_HOST/$TARGET_API"
-    if [ "$ARCH" == "arm" ]; then
-        export NDK_LIB_DIR="$ANDROID_TOOLCHAIN/sysroot/usr/lib/arm-linux-androideabi/$TARGET_API"
-    fi
+    # boa does not set this but conda does so keep it the same
+    export LD_RUN_PATH="$PREFIX/lib"
 
     # Make package directories
     mkdir -p $PREFIX/android/$ARCH/include
     mkdir -p $PREFIX/android/$ARCH/lib
-
 }
 
 # Check that the given shared library matches the $ARCH variable

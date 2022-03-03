@@ -10,7 +10,7 @@ source $BUILD_PREFIX/android/activate-ndk.sh
 for ARCH in $ARCHS
 do
     activate-ndk-clang $ARCH
-    export CFLAGS="-I$APP_ROOT/include -Wno-language-extension-token"
+    export CFLAGS="$CFLAGS -Wno-language-extension-token"
 
     ./configure --host=$TARGET_HOST --prefix=$SRC_DIR/dist/$ARCH \
         --with-sysroot=$ANDROID_TOOLCHAIN/sysroot \

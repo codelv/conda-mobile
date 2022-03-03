@@ -13,7 +13,7 @@ do
     # Setup compiler for arch and target_api
     activate-ndk-clang $ARCH
     export STRIP="$TARGET_HOST-strip"
-    export CFLAGS="-Os"
+    export CFLAGS="$CFLAGS -Os"
 
     ./configure --host=$TARGET_HOST --prefix=$SRC_DIR/dist/$ARCH --with-sysroot=$ANDROID_TOOLCHAIN/sysroot
     make clean

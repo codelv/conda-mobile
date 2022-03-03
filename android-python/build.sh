@@ -18,15 +18,16 @@ python $RECIPE_DIR/brand_python.py
 
 sed -i 's!self.inc_dirs = (self.compiler.include_dirs +!self.inc_dirs = (self.compiler.include_dirs + [os.environ["APP_ROOT"] + "/include", os.environ["NDK_INC_DIR"]] + !g' $SRC_DIR/setup.py
 
+export LD_RUN_PATH="$PREFIX/lib"
+
 for ARCH in $ARCHS
 do
     # Setup compiler for arch and target_api
     activate-ndk-clang $ARCH
 
-    export CFLAGS="-fPIC -I$APP_ROOT/include -I$NDK_INC_DIR"
-    export CCSHARED="-fPIC -I$APP_ROOT/include -I$NDK_INC_DIR -DPy_BUILD_CORE"
+    export CCSHARED="$CFLAGS -DPy_BUILD_CORE"
     export SSL="$APP_ROOT"
-    export LDFLAGS="--sysroot=$ANDROID_TOOLCHAIN/sysroot -L$APP_ROOT/lib -L$NDK_LIB_DIR -llog -Wl,--hash-style=both"
+    export LDFLAGS="$LDFLAGS --sysroot=$ANDROID_TOOLCHAIN/sysroot -llog"
     export _PYTHON_HOST_PLATFORM="$TARGET_HOST"
 
 
@@ -47,7 +48,8 @@ do
         --enable-optimizations \
         --enable-shared
 
-    sed -i 's!$(BLDSHARED) -o!$(BLDSHARED) -Wl,-soname,$(INSTSONAME) -o!g' Makefile
+    # Set soname and support for libs < 23
+    sed -i 's!$(BLDSHARED) -o!$(BLDSHARED) -Wl,--hash-style=both -Wl,-soname,$(INSTSONAME) -o!g' Makefile
 
     make clean
 
