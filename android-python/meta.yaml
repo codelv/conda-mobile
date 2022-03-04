@@ -20,6 +20,8 @@ requirements:
     - android-libxcrypt
   run:
     - python
+    - android-libxcrypt
+
 build:
   number: 6
   string: 'py310'
