@@ -87,13 +87,13 @@ To add a new recipe or to build existing recipes:
 4. Install the android ndk using `sdkmanager "ndk:23.1.7779620"` (or update the android-ndk recipe)
 5. Add the requirements to your recipes as needed
 6. Install `build-essential`,  `rename`, `autopoint`, and `texinfo` with apt
-7. Run `boa build <recipe-name> --target-platform=noarch`
+7. Run `boa build <recipe-name>`
 8. Then either add a PR or create your own repos with recipes.
 
 
 #### Recipe requirements
 
-All recipes that build python extensions MUST include `py27` or `py310` in the
+All recipes that build python extensions MUST include `py310` in the
 build string so conda knows which version to install. Add
 `string: py310` under the `build` section.
 

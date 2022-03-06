@@ -12,7 +12,9 @@ do
     # Setup compiler for arch and target_api
     activate-ndk-clang $ARCH
     # ./autogen.sh
-    ./configure --host=$TARGET_HOST --prefix=$SRC_DIR/dist/$ARCH
+    ./configure --host=$TARGET_HOST \
+        --prefix=$SRC_DIR/dist/$ARCH \
+        --with-sysroot=$ANDROID_TOOLCHAIN/sysroot
 
     # Clean
     make clean

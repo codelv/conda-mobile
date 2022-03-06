@@ -26,7 +26,7 @@ export PATH="$ANDROID_TOOLCHAIN/bin:$PATH"
 
 function activate-ndk-clang() {
     export ARCH="$1"
-    export TARGET_API="31"
+    export TARGET_API="24"
 
     if [ "$ARCH" == "arm" ]; then
         export TARGET_HOST="armv7a-linux-androideabi"
