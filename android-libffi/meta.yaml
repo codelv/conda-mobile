@@ -12,7 +12,7 @@ requirements:
     - android-ndk
 
 build:
-  number: 2
+  number: 3
   binary_relocation: False
   noarch: generic
 
