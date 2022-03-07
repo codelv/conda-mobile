@@ -9,7 +9,7 @@ source:
   sha256: f9c4b7dad27a6196ca9ec3c6ec7fa446194342de326c71e030eb2c480895e169
 
 build:
-  number: 1
+  number: 3
   binary_relocation: False
   noarch: generic
 
