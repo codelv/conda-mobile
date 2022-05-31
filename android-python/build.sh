@@ -81,8 +81,17 @@ do
     # Prefix with lib., remove cpython-310 from name, remove module from name, and copy extensions
     # If using oldsharedmods this should just be Modules
     export MOD_DIR="dist/$ARCH/lib/python3.10/lib-dynload"
-    cd $MOD_DIR; rename 's/^/lib./' *.so; rename 's/.cpython-310//' *.so; rename 's/module//' *.so; cd $SRC_DIR
-    find $MOD_DIR -type f -name "*.so" -exec cp {} "$PREFIX/android/$ARCH/lib/" \;
+    cd "$MOD_DIR"
+    for f in *.so; do mv "$f" "lib.${f}"; done
+    for f in *.so; do
+      mv "$f" "${f//.cpython-310/}";
+    done
+    for f in *.so; do
+      test "$f" != "*module*" && continue
+      mv "$f" "${f//module/}";
+    done
+    cd "$SRC_DIR"
+    find "$MOD_DIR" -type f -name "*.so" -exec cp {} "$PREFIX/android/$ARCH/lib/" \;
 
     # Remove unused stuff
     rm -rf dist/$ARCH/lib/python3.10/test
