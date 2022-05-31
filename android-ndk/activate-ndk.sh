@@ -60,8 +60,8 @@ function activate-ndk-clang() {
     export LDFLAGS="-L$APP_ROOT/lib -L$NDK_LIB_DIR -Wl,--hash-style=both"
 
     # Make package directories
-    mkdir -p $PREFIX/android/$ARCH/include
-    mkdir -p $PREFIX/android/$ARCH/lib
+    mkdir -p "$PREFIX"/android/"$ARCH"/include
+    mkdir -p "$PREFIX"/android/"$ARCH"/lib
 
 }
 
@@ -78,7 +78,7 @@ function validate-lib-arch() {
     elif [ "$ARCH" == "x86_64" ]; then
         expected="ELF 64-bit LSB shared object, x86-64"
     fi
-    output=$(file $lib)
+    output=$(file "$lib")
     echo "$output"
     if [[ $output =~ $expected ]]; then
         echo "OK"
@@ -87,6 +87,6 @@ function validate-lib-arch() {
         exit 1
     fi
 
-    patchelf --remove-rpath $lib
-    readelf --dynamic $lib
+    patchelf --remove-rpath "$lib"
+    readelf --dynamic "$lib"
 }
