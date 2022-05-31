@@ -31,10 +31,6 @@ do
     export LDFLAGS="$LDFLAGS --sysroot=$ANDROID_TOOLCHAIN/sysroot -llog"
     export _PYTHON_HOST_PLATFORM="$TARGET_HOST"
 
-
-    #cp $RECIPE_DIR/Setup.local $SRC_DIR/Modules/
-    #sed -i s!APP_ROOT=/path/to/app/root/!APP_ROOT=$APP_ROOT/!g $SRC_DIR/Modules/Setup.local
-
     ./configure \
         ac_cv_file__dev_ptmx=yes \
         ac_cv_file__dev_ptc=no \
@@ -59,7 +55,6 @@ do
     sed -i 's!#define HAVE_GETLOADAVG 1!/* #undef HAVE_GETLOADAVG */!g' pyconfig.h
     sed -i 's!#define HAVE_MEMFD_CREATE 1!/* #undef HAVE_MEMFD_CREATE */!g' pyconfig.h
 
-
     # Build libpython
     make -j"$CPU_COUNT" libpython3.so
 
@@ -73,7 +68,6 @@ do
     rm dist/"$ARCH"/lib/python3.10/lib-dynload/xxlim*.so
     rm dist/"$ARCH"/lib/python3.10/lib-dynload/_xx*.so
     rm dist/"$ARCH"/lib/python3.10/lib-dynload/*test*.so
-
 
     mkdir -p "$PREFIX"/android/"$ARCH"/lib
     mkdir -p "$PREFIX"/android/"$ARCH"/python
