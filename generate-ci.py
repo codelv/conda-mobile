@@ -28,7 +28,7 @@ sdkmanager --install "ndk;{NDK_VER}"
 """
 
 # Patch conda build because it fails cleaning up optimized pyc files
-conda_post = f"$HOME/micromamba-root/envs/conda-mobile/lib/python{PY_VER}/site-packages/conda_build/post.py"
+conda_post = f"$MAMBA_ROOT_PREFIX/envs/conda-mobile/lib/python{PY_VER}/site-packages/conda_build/post.py"
 
 SETUP = """
 sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' %s
