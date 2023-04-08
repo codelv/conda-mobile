@@ -73,10 +73,10 @@ do
     # Prefix with lib., remove cpython-310 from name, remove module from name, and copy extensions
     # If using oldsharedmods this should just be Modules
     export MOD_DIR="dist/$ARCH/lib/python$PY_VER/lib-dynload"
+    export MOD_SUFFIX=".cpython-${PY_VER/./}"
     cd "$MOD_DIR"
-    for f in *.so; do mv "$f" "lib.${f}"; done
     for f in *.so; do
-      mv "$f" "${f//.cpython-310/}";
+      mv "$f" "lib.${f//MOD_SUFFIX/}";
     done
     for f in *.so; do
       test "$f" != "*module*" && continue
