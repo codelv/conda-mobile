@@ -14,7 +14,7 @@ do
     activate-ndk-clang $ARCH
     export CFLAGS="$CFLAGS -std=c11"
 
-    ./autogen.sh --no-po4a
+    ./autogen.sh --no-po4a --no-doxygen
     ./configure --host=$TARGET_HOST --prefix=$SRC_DIR/dist/$ARCH \
         --disable-xz --disable-xzdec --disable-lzmainfo \
         --disable-scripts --disable-lzmadec
