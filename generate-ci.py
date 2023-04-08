@@ -172,8 +172,8 @@ def main():
         },
         {
             "name": "Setup JDK",
-            "uses": "actions/setup-java@v1",
-            "with": {"java-version": 11},
+            "uses": "actions/setup-java@v3",
+            "with": {"java-version": 11, "distribution":"temurin"},
         },
         {
             "name": "Cache Android NDK",
@@ -199,7 +199,7 @@ def main():
         for pkg in items:
             meta = package_meta[pkg]
             pkg_version = find_version(meta)
-            artifact_name = f"{pkg}-{pkg_version}"
+            artifact_name = f"{pkg}-v{pkg_version}"
             if build_string := meta['build'].get('string'):
                 artifact_name += f"-{build_string}"
 
@@ -233,7 +233,7 @@ def main():
                     req_meta = package_meta[req]
 
                     req_version = find_version(req_meta)
-                    req_artifact = f"{req}-{req_version}"
+                    req_artifact = f"{req}-v{req_version}"
                     if build_string := req_meta['build'].get('string'):
                         req_artifact += f"-{build_string}"
 
@@ -251,7 +251,7 @@ def main():
                     {
                         "name": f"Run conda index",
                         "shell": "bash -l {0}",
-                        "run": f"conda index {conda_bld_path}/*",
+                        "run": f"mamba index {conda_bld_path}/*",
                     }
                 )
 

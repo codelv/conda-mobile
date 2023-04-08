@@ -1,6 +1,7 @@
+{% set version = "25.2.9519653" %}
 package:
   name: android-ndk
-  version: 25.2.9519653
+  version: {{version}}
 
 requirements:
   build:
@@ -8,7 +9,11 @@ requirements:
     - flex
 
 build:
-  number: 1
+  number: 3
+  script:
+    - mkdir -p $PREFIX/android
+    - cp $RECIPE_DIR/activate-ndk.sh "$PREFIX/android/activate-ndk.sh"
+    - sed -i s/__version__/{{version}}/g "$PREFIX/android/activate-ndk.sh"
 
 test:
   commands:

@@ -17,7 +17,8 @@
 #    validate-lib-arch path/to/libyourlib.so
 # done
 #
-export NDK_VERSION=$PKG_VERSION
+# Version is replaced by sed command in conda's build script
+export NDK_VERSION="__version__"
 export ANDROID_NDK_HOME="$HOME/Android/Sdk/ndk/$NDK_VERSION"
 export ANDROID_TOOLCHAIN="$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64"
 export ARCHS=("x86_64 x86 arm arm64")
