@@ -12,6 +12,7 @@ requirements:
   build:
     - android-libpng
     - android-harfbuzz
+    - android-brotli
     - android-ndk
   run:
     - android-libpng

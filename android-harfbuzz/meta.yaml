@@ -10,7 +10,6 @@ source:
 requirements:
   build:
     - android-ndk
-    - android-brotli
 
 build:
   number: 1
