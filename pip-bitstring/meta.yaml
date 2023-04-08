@@ -1,12 +1,12 @@
 {% set name = "bitstring" %}
-{% set version = "3.1.9" %}
+{% set version = "4.0.1" %}
 package:
   name: pip-{{ name|lower }}
   version: '{{ version }}'
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: a5848a3f63111785224dca8bb4c0a75b62ecdef56a042c8d6be74b16f7e860e7
+  sha256: 7719f08f6df89ce28453a5e580d4a8ec1d1bda892dbb033466da0ccd9bdcb706
 
 build:
   number: 0

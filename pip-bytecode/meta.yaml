@@ -14,19 +14,19 @@ build:
   script:
   - export CC=/bin/false
   - export CXX=/bin/false
-      - sed -i "s/setup()/setup(name='{{name}}', version='{{version}}')/g" setup.py
-    - 'python -m pip install . -vv --no-compile --target=$PREFIX/android/arm/python/site-packages '
-    - cp -r src/{{name}} $PREFIX/android/arm/python/site-packages
-    - 'python -m pip install . -vv --no-compile --target=$PREFIX/android/arm64/python/site-packages '
-    - cp -r src/{{name}} $PREFIX/android/arm64/python/site-packages
-    - 'python -m pip install . -vv --no-compile --target=$PREFIX/android/x86/python/site-packages '
-    - cp -r src/{{name}} $PREFIX/android/x86/python/site-packages
-    - 'python -m pip install . -vv --no-compile --target=$PREFIX/android/x86_64/python/site-packages '
-    - cp -r src/{{name}} $PREFIX/android/x86_64/python/site-packages
-    - 'python -m pip install . -vv --no-compile --target=$PREFIX/iphoneos/python/site-packages '
-    - cp -r src/{{name}} $PREFIX/iphoneos/python/site-packages
-    - 'python -m pip install . -vv --no-compile --target=$PREFIX/iphonesimulator/python/site-packages '
-    - cp -r src/{{name}} $PREFIX/iphonesimulator/python/site-packages
+  - sed -i 's/setup()/setup(name=\"{{name}}\", version=\"{{version}}\")/g' setup.py
+  - 'python -m pip install . -vv --no-compile --target=$PREFIX/android/arm/python/site-packages '
+  - cp -r src/{{name}} $PREFIX/android/arm/python/site-packages
+  - 'python -m pip install . -vv --no-compile --target=$PREFIX/android/arm64/python/site-packages '
+  - cp -r src/{{name}} $PREFIX/android/arm64/python/site-packages
+  - 'python -m pip install . -vv --no-compile --target=$PREFIX/android/x86/python/site-packages '
+  - cp -r src/{{name}} $PREFIX/android/x86/python/site-packages
+  - 'python -m pip install . -vv --no-compile --target=$PREFIX/android/x86_64/python/site-packages '
+  - cp -r src/{{name}} $PREFIX/android/x86_64/python/site-packages
+  - 'python -m pip install . -vv --no-compile --target=$PREFIX/iphoneos/python/site-packages '
+  - cp -r src/{{name}} $PREFIX/iphoneos/python/site-packages
+  - 'python -m pip install . -vv --no-compile --target=$PREFIX/iphonesimulator/python/site-packages '
+  - cp -r src/{{name}} $PREFIX/iphonesimulator/python/site-packages
 
 
 requirements: {}
