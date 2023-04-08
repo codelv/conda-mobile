@@ -120,6 +120,67 @@ jobs:
         if-no-files-found: error
         name: android-atom-v0.9.1-py311
         path: ~/micromamba-root/envs/conda-mobile/conda-bld/*/android-atom*.bz2
+  android-brotli:
+    needs:
+    - android-ndk
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install micromamba
+      uses: mamba-org/provision-with-micromamba@main
+      with:
+        cache-downloads: true
+    - name: Setup micromamba
+      run: |
+        sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' ~/micromamba-root/envs/conda-mobile/lib/python3.11/site-packages/conda_build/post.py
+      shell: bash -l {0}
+    - name: Install system deps
+      run: sudo apt-get install -y autopoint texinfo rename patchelf
+    - name: Setup JDK
+      uses: actions/setup-java@v3
+      with:
+        distribution: temurin
+        java-version: 11
+    - id: android-cache
+      name: Cache Android NDK
+      uses: actions/cache@v3
+      with:
+        key: linux-android-ndk-25.2.9519653
+        path: ~/Android
+    - if: steps.android-cache.outputs.cache-hit != 'true'
+      name: Setup android NDK
+      run: |
+        export ANDROID_HOME="$HOME/Android/Sdk"
+        export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
+        export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
+        mkdir -p $ANDROID_HOME
+        wget -q https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
+        unzip -e commandlinetools-linux-8092744_latest.zip -d $ANDROID_HOME/cmdline-tools
+        mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+        yes | sdkmanager --licenses > /dev/null
+        sdkmanager --install tools
+        sdkmanager --install platform-tools
+        sdkmanager --install "ndk;25.2.9519653"
+    - name: Download android-ndk
+      uses: actions/download-artifact@v3
+      with:
+        name: android-ndk-v25.2.9519653
+        path: ~/micromamba-root/envs/conda-mobile/conda-bld/
+    - name: Run conda index
+      run: mamba index ~/micromamba-root/envs/conda-mobile/conda-bld/*
+      shell: bash -l {0}
+    - name: Convert recipe
+      run: boa convert android-brotli/meta.yaml > android-brotli/recipe.yaml
+      shell: bash -l {0}
+    - name: Build recipe
+      run: boa build android-brotli
+      shell: bash -l {0}
+    - name: Upload package
+      uses: actions/upload-artifact@v3
+      with:
+        if-no-files-found: error
+        name: android-brotli-v1.0.9
+        path: ~/micromamba-root/envs/conda-mobile/conda-bld/*/android-brotli*.bz2
   android-cffi:
     needs:
     - android-libbz2
@@ -497,6 +558,7 @@ jobs:
         path: ~/micromamba-root/envs/conda-mobile/conda-bld/*/android-enaml*.bz2
   android-freetype:
     needs:
+    - android-brotli
     - android-harfbuzz
     - android-libpng
     - android-ndk
@@ -538,10 +600,15 @@ jobs:
         sdkmanager --install tools
         sdkmanager --install platform-tools
         sdkmanager --install "ndk;25.2.9519653"
+    - name: Download android-brotli
+      uses: actions/download-artifact@v3
+      with:
+        name: android-brotli-v1.0.9
+        path: ~/micromamba-root/envs/conda-mobile/conda-bld/
     - name: Download android-harfbuzz
       uses: actions/download-artifact@v3
       with:
-        name: android-harfbuzz-v3.3.1
+        name: android-harfbuzz-v7.1.0
         path: ~/micromamba-root/envs/conda-mobile/conda-bld/
     - name: Download android-libpng
       uses: actions/download-artifact@v3
@@ -566,10 +633,11 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         if-no-files-found: error
-        name: android-freetype-v2.11.1
+        name: android-freetype-v2.13.0
         path: ~/micromamba-root/envs/conda-mobile/conda-bld/*/android-freetype*.bz2
   android-harfbuzz:
     needs:
+    - android-brotli
     - android-ndk
     runs-on: ubuntu-latest
     steps:
@@ -609,6 +677,11 @@ jobs:
         sdkmanager --install tools
         sdkmanager --install platform-tools
         sdkmanager --install "ndk;25.2.9519653"
+    - name: Download android-brotli
+      uses: actions/download-artifact@v3
+      with:
+        name: android-brotli-v1.0.9
+        path: ~/micromamba-root/envs/conda-mobile/conda-bld/
     - name: Download android-ndk
       uses: actions/download-artifact@v3
       with:
@@ -627,7 +700,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         if-no-files-found: error
-        name: android-harfbuzz-v3.3.1
+        name: android-harfbuzz-v7.1.0
         path: ~/micromamba-root/envs/conda-mobile/conda-bld/*/android-harfbuzz*.bz2
   android-kiwisolver:
     needs:
