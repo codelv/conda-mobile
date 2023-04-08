@@ -53,59 +53,59 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-libbz2-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libcxx
       uses: actions/download-artifact@v2
       with:
         name: android-libcxx-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libffi
       uses: actions/download-artifact@v2
       with:
         name: android-libffi-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-liblzma
       uses: actions/download-artifact@v2
       with:
         name: android-liblzma-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libuuid
       uses: actions/download-artifact@v2
       with:
         name: android-libuuid-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libxcrypt
       uses: actions/download-artifact@v2
       with:
         name: android-libxcrypt-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-openssl
       uses: actions/download-artifact@v2
       with:
         name: android-openssl-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-python
       uses: actions/download-artifact@v2
       with:
         name: android-python-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-sqlite
       uses: actions/download-artifact@v2
       with:
         name: android-sqlite-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download pip-cppy
       uses: actions/download-artifact@v2
       with:
         name: pip-cppy-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Run conda index
-      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      run: conda index $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
     - name: Convert recipe
       run: boa convert android-atom/meta.yaml > android-atom/recipe.yaml
@@ -117,7 +117,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: android-atom-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-atom*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/android-atom*.bz2
   android-cffi:
     needs:
     - android-libbz2
@@ -170,49 +170,49 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-libbz2-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libffi
       uses: actions/download-artifact@v2
       with:
         name: android-libffi-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-liblzma
       uses: actions/download-artifact@v2
       with:
         name: android-liblzma-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libuuid
       uses: actions/download-artifact@v2
       with:
         name: android-libuuid-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libxcrypt
       uses: actions/download-artifact@v2
       with:
         name: android-libxcrypt-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-openssl
       uses: actions/download-artifact@v2
       with:
         name: android-openssl-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-python
       uses: actions/download-artifact@v2
       with:
         name: android-python-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-sqlite
       uses: actions/download-artifact@v2
       with:
         name: android-sqlite-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Run conda index
-      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      run: conda index $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
     - name: Convert recipe
       run: boa convert android-cffi/meta.yaml > android-cffi/recipe.yaml
@@ -224,7 +224,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: android-cffi-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-cffi*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/android-cffi*.bz2
   android-cryptography:
     needs:
     - android-cffi
@@ -278,54 +278,54 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-cffi-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libbz2
       uses: actions/download-artifact@v2
       with:
         name: android-libbz2-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libffi
       uses: actions/download-artifact@v2
       with:
         name: android-libffi-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-liblzma
       uses: actions/download-artifact@v2
       with:
         name: android-liblzma-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libuuid
       uses: actions/download-artifact@v2
       with:
         name: android-libuuid-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libxcrypt
       uses: actions/download-artifact@v2
       with:
         name: android-libxcrypt-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-openssl
       uses: actions/download-artifact@v2
       with:
         name: android-openssl-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-python
       uses: actions/download-artifact@v2
       with:
         name: android-python-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-sqlite
       uses: actions/download-artifact@v2
       with:
         name: android-sqlite-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Run conda index
-      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      run: conda index $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
     - name: Convert recipe
       run: boa convert android-cryptography/meta.yaml > android-cryptography/recipe.yaml
@@ -337,7 +337,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: android-cryptography-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-cryptography*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/android-cryptography*.bz2
   android-enaml:
     needs:
     - android-atom
@@ -397,84 +397,84 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-atom-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-kiwisolver
       uses: actions/download-artifact@v2
       with:
         name: android-kiwisolver-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libbz2
       uses: actions/download-artifact@v2
       with:
         name: android-libbz2-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libcxx
       uses: actions/download-artifact@v2
       with:
         name: android-libcxx-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libffi
       uses: actions/download-artifact@v2
       with:
         name: android-libffi-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-liblzma
       uses: actions/download-artifact@v2
       with:
         name: android-liblzma-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libuuid
       uses: actions/download-artifact@v2
       with:
         name: android-libuuid-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libxcrypt
       uses: actions/download-artifact@v2
       with:
         name: android-libxcrypt-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-openssl
       uses: actions/download-artifact@v2
       with:
         name: android-openssl-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-python
       uses: actions/download-artifact@v2
       with:
         name: android-python-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-sqlite
       uses: actions/download-artifact@v2
       with:
         name: android-sqlite-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download pip-bytecode
       uses: actions/download-artifact@v2
       with:
         name: pip-bytecode-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download pip-cppy
       uses: actions/download-artifact@v2
       with:
         name: pip-cppy-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download pip-pegen
       uses: actions/download-artifact@v2
       with:
         name: pip-pegen-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download pip-ply
       uses: actions/download-artifact@v2
       with:
         name: pip-ply-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Run conda index
-      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      run: conda index $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
     - name: Convert recipe
       run: boa convert android-enaml/meta.yaml > android-enaml/recipe.yaml
@@ -486,7 +486,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: android-enaml-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-enaml*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/android-enaml*.bz2
   android-freetype:
     needs:
     - android-harfbuzz
@@ -533,19 +533,19 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-harfbuzz-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libpng
       uses: actions/download-artifact@v2
       with:
         name: android-libpng-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Run conda index
-      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      run: conda index $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
     - name: Convert recipe
       run: boa convert android-freetype/meta.yaml > android-freetype/recipe.yaml
@@ -557,7 +557,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: android-freetype-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-freetype*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/android-freetype*.bz2
   android-harfbuzz:
     needs:
     - android-ndk
@@ -602,9 +602,9 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Run conda index
-      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      run: conda index $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
     - name: Convert recipe
       run: boa convert android-harfbuzz/meta.yaml > android-harfbuzz/recipe.yaml
@@ -616,7 +616,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: android-harfbuzz-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-harfbuzz*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/android-harfbuzz*.bz2
   android-kiwisolver:
     needs:
     - android-libbz2
@@ -671,59 +671,59 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-libbz2-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libcxx
       uses: actions/download-artifact@v2
       with:
         name: android-libcxx-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libffi
       uses: actions/download-artifact@v2
       with:
         name: android-libffi-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-liblzma
       uses: actions/download-artifact@v2
       with:
         name: android-liblzma-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libuuid
       uses: actions/download-artifact@v2
       with:
         name: android-libuuid-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libxcrypt
       uses: actions/download-artifact@v2
       with:
         name: android-libxcrypt-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-openssl
       uses: actions/download-artifact@v2
       with:
         name: android-openssl-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-python
       uses: actions/download-artifact@v2
       with:
         name: android-python-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-sqlite
       uses: actions/download-artifact@v2
       with:
         name: android-sqlite-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download pip-cppy
       uses: actions/download-artifact@v2
       with:
         name: pip-cppy-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Run conda index
-      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      run: conda index $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
     - name: Convert recipe
       run: boa convert android-kiwisolver/meta.yaml > android-kiwisolver/recipe.yaml
@@ -735,7 +735,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: android-kiwisolver-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-kiwisolver*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/android-kiwisolver*.bz2
   android-libbz2:
     needs:
     - android-ndk
@@ -780,9 +780,9 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Run conda index
-      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      run: conda index $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
     - name: Convert recipe
       run: boa convert android-libbz2/meta.yaml > android-libbz2/recipe.yaml
@@ -794,7 +794,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: android-libbz2-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-libbz2*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/android-libbz2*.bz2
   android-libcxx:
     needs:
     - android-ndk
@@ -839,9 +839,9 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Run conda index
-      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      run: conda index $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
     - name: Convert recipe
       run: boa convert android-libcxx/meta.yaml > android-libcxx/recipe.yaml
@@ -853,7 +853,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: android-libcxx-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-libcxx*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/android-libcxx*.bz2
   android-libffi:
     needs:
     - android-ndk
@@ -898,9 +898,9 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Run conda index
-      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      run: conda index $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
     - name: Convert recipe
       run: boa convert android-libffi/meta.yaml > android-libffi/recipe.yaml
@@ -912,7 +912,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: android-libffi-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-libffi*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/android-libffi*.bz2
   android-libgeos:
     needs:
     - android-ndk
@@ -957,9 +957,9 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Run conda index
-      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      run: conda index $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
     - name: Convert recipe
       run: boa convert android-libgeos/meta.yaml > android-libgeos/recipe.yaml
@@ -971,7 +971,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: android-libgeos-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-libgeos*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/android-libgeos*.bz2
   android-libjpeg:
     needs:
     - android-ndk
@@ -1016,9 +1016,9 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Run conda index
-      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      run: conda index $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
     - name: Convert recipe
       run: boa convert android-libjpeg/meta.yaml > android-libjpeg/recipe.yaml
@@ -1030,7 +1030,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: android-libjpeg-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-libjpeg*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/android-libjpeg*.bz2
   android-liblzma:
     needs:
     - android-ndk
@@ -1075,9 +1075,9 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Run conda index
-      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      run: conda index $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
     - name: Convert recipe
       run: boa convert android-liblzma/meta.yaml > android-liblzma/recipe.yaml
@@ -1089,7 +1089,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: android-liblzma-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-liblzma*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/android-liblzma*.bz2
   android-libpng:
     needs:
     - android-ndk
@@ -1134,9 +1134,9 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Run conda index
-      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      run: conda index $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
     - name: Convert recipe
       run: boa convert android-libpng/meta.yaml > android-libpng/recipe.yaml
@@ -1148,7 +1148,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: android-libpng-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-libpng*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/android-libpng*.bz2
   android-libsodium:
     needs:
     - android-ndk
@@ -1193,9 +1193,9 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Run conda index
-      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      run: conda index $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
     - name: Convert recipe
       run: boa convert android-libsodium/meta.yaml > android-libsodium/recipe.yaml
@@ -1207,7 +1207,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: android-libsodium-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-libsodium*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/android-libsodium*.bz2
   android-libusb:
     needs:
     - android-ndk
@@ -1252,9 +1252,9 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Run conda index
-      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      run: conda index $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
     - name: Convert recipe
       run: boa convert android-libusb/meta.yaml > android-libusb/recipe.yaml
@@ -1266,7 +1266,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: android-libusb-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-libusb*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/android-libusb*.bz2
   android-libuuid:
     needs:
     - android-ndk
@@ -1311,9 +1311,9 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Run conda index
-      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      run: conda index $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
     - name: Convert recipe
       run: boa convert android-libuuid/meta.yaml > android-libuuid/recipe.yaml
@@ -1325,7 +1325,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: android-libuuid-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-libuuid*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/android-libuuid*.bz2
   android-libxcrypt:
     needs:
     - android-ndk
@@ -1370,9 +1370,9 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Run conda index
-      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      run: conda index $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
     - name: Convert recipe
       run: boa convert android-libxcrypt/meta.yaml > android-libxcrypt/recipe.yaml
@@ -1384,7 +1384,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: android-libxcrypt-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-libxcrypt*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/android-libxcrypt*.bz2
   android-libxml2:
     needs:
     - android-liblzma
@@ -1430,14 +1430,14 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-liblzma-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Run conda index
-      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      run: conda index $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
     - name: Convert recipe
       run: boa convert android-libxml2/meta.yaml > android-libxml2/recipe.yaml
@@ -1449,7 +1449,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: android-libxml2-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-libxml2*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/android-libxml2*.bz2
   android-libxslt:
     needs:
     - android-liblzma
@@ -1496,19 +1496,19 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-liblzma-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libxml2
       uses: actions/download-artifact@v2
       with:
         name: android-libxml2-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Run conda index
-      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      run: conda index $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
     - name: Convert recipe
       run: boa convert android-libxslt/meta.yaml > android-libxslt/recipe.yaml
@@ -1520,7 +1520,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: android-libxslt-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-libxslt*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/android-libxslt*.bz2
   android-libzmq:
     needs:
     - android-libsodium
@@ -1566,14 +1566,14 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-libsodium-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Run conda index
-      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      run: conda index $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
     - name: Convert recipe
       run: boa convert android-libzmq/meta.yaml > android-libzmq/recipe.yaml
@@ -1585,7 +1585,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: android-libzmq-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-libzmq*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/android-libzmq*.bz2
   android-lxml:
     needs:
     - android-libbz2
@@ -1640,59 +1640,59 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-libbz2-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libffi
       uses: actions/download-artifact@v2
       with:
         name: android-libffi-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-liblzma
       uses: actions/download-artifact@v2
       with:
         name: android-liblzma-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libuuid
       uses: actions/download-artifact@v2
       with:
         name: android-libuuid-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libxcrypt
       uses: actions/download-artifact@v2
       with:
         name: android-libxcrypt-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libxml2
       uses: actions/download-artifact@v2
       with:
         name: android-libxml2-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libxslt
       uses: actions/download-artifact@v2
       with:
         name: android-libxslt-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-openssl
       uses: actions/download-artifact@v2
       with:
         name: android-openssl-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-python
       uses: actions/download-artifact@v2
       with:
         name: android-python-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-sqlite
       uses: actions/download-artifact@v2
       with:
         name: android-sqlite-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Run conda index
-      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      run: conda index $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
     - name: Convert recipe
       run: boa convert android-lxml/meta.yaml > android-lxml/recipe.yaml
@@ -1704,7 +1704,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: android-lxml-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-lxml*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/android-lxml*.bz2
   android-lz4:
     needs:
     - android-ndk
@@ -1749,9 +1749,9 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Run conda index
-      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      run: conda index $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
     - name: Convert recipe
       run: boa convert android-lz4/meta.yaml > android-lz4/recipe.yaml
@@ -1763,7 +1763,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: android-lz4-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-lz4*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/android-lz4*.bz2
   android-msgpack:
     needs:
     - android-libbz2
@@ -1816,49 +1816,49 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-libbz2-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libffi
       uses: actions/download-artifact@v2
       with:
         name: android-libffi-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-liblzma
       uses: actions/download-artifact@v2
       with:
         name: android-liblzma-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libuuid
       uses: actions/download-artifact@v2
       with:
         name: android-libuuid-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libxcrypt
       uses: actions/download-artifact@v2
       with:
         name: android-libxcrypt-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-openssl
       uses: actions/download-artifact@v2
       with:
         name: android-openssl-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-python
       uses: actions/download-artifact@v2
       with:
         name: android-python-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-sqlite
       uses: actions/download-artifact@v2
       with:
         name: android-sqlite-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Run conda index
-      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      run: conda index $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
     - name: Convert recipe
       run: boa convert android-msgpack/meta.yaml > android-msgpack/recipe.yaml
@@ -1870,7 +1870,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: android-msgpack-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-msgpack*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/android-msgpack*.bz2
   android-ndk:
     runs-on: ubuntu-latest
     steps:
@@ -1919,7 +1919,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: android-ndk-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-ndk*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/android-ndk*.bz2
   android-numpy:
     needs:
     - android-libbz2
@@ -1972,49 +1972,49 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-libbz2-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libffi
       uses: actions/download-artifact@v2
       with:
         name: android-libffi-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-liblzma
       uses: actions/download-artifact@v2
       with:
         name: android-liblzma-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libuuid
       uses: actions/download-artifact@v2
       with:
         name: android-libuuid-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libxcrypt
       uses: actions/download-artifact@v2
       with:
         name: android-libxcrypt-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-openssl
       uses: actions/download-artifact@v2
       with:
         name: android-openssl-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-python
       uses: actions/download-artifact@v2
       with:
         name: android-python-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-sqlite
       uses: actions/download-artifact@v2
       with:
         name: android-sqlite-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Run conda index
-      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      run: conda index $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
     - name: Convert recipe
       run: boa convert android-numpy/meta.yaml > android-numpy/recipe.yaml
@@ -2026,7 +2026,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: android-numpy-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-numpy*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/android-numpy*.bz2
   android-opencv:
     needs:
     - android-ndk
@@ -2071,9 +2071,9 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Run conda index
-      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      run: conda index $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
     - name: Convert recipe
       run: boa convert android-opencv/meta.yaml > android-opencv/recipe.yaml
@@ -2085,7 +2085,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: android-opencv-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-opencv*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/android-opencv*.bz2
   android-openssl:
     needs:
     - android-ndk
@@ -2130,9 +2130,9 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Run conda index
-      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      run: conda index $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
     - name: Convert recipe
       run: boa convert android-openssl/meta.yaml > android-openssl/recipe.yaml
@@ -2144,7 +2144,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: android-openssl-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-openssl*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/android-openssl*.bz2
   android-pandas:
     needs:
     - android-libbz2
@@ -2200,64 +2200,64 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-libbz2-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libffi
       uses: actions/download-artifact@v2
       with:
         name: android-libffi-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-liblzma
       uses: actions/download-artifact@v2
       with:
         name: android-liblzma-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libuuid
       uses: actions/download-artifact@v2
       with:
         name: android-libuuid-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libxcrypt
       uses: actions/download-artifact@v2
       with:
         name: android-libxcrypt-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-numpy
       uses: actions/download-artifact@v2
       with:
         name: android-numpy-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-openssl
       uses: actions/download-artifact@v2
       with:
         name: android-openssl-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-python
       uses: actions/download-artifact@v2
       with:
         name: android-python-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-sqlite
       uses: actions/download-artifact@v2
       with:
         name: android-sqlite-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download pip-python-dateutil
       uses: actions/download-artifact@v2
       with:
         name: pip-python-dateutil-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download pip-pytz
       uses: actions/download-artifact@v2
       with:
         name: pip-pytz-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Run conda index
-      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      run: conda index $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
     - name: Convert recipe
       run: boa convert android-pandas/meta.yaml > android-pandas/recipe.yaml
@@ -2269,7 +2269,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: android-pandas-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-pandas*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/android-pandas*.bz2
   android-pymongo:
     needs:
     - android-libbz2
@@ -2322,49 +2322,49 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-libbz2-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libffi
       uses: actions/download-artifact@v2
       with:
         name: android-libffi-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-liblzma
       uses: actions/download-artifact@v2
       with:
         name: android-liblzma-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libuuid
       uses: actions/download-artifact@v2
       with:
         name: android-libuuid-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libxcrypt
       uses: actions/download-artifact@v2
       with:
         name: android-libxcrypt-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-openssl
       uses: actions/download-artifact@v2
       with:
         name: android-openssl-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-python
       uses: actions/download-artifact@v2
       with:
         name: android-python-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-sqlite
       uses: actions/download-artifact@v2
       with:
         name: android-sqlite-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Run conda index
-      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      run: conda index $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
     - name: Convert recipe
       run: boa convert android-pymongo/meta.yaml > android-pymongo/recipe.yaml
@@ -2376,7 +2376,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: android-pymongo-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-pymongo*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/android-pymongo*.bz2
   android-pyproj:
     needs:
     - android-libbz2
@@ -2429,49 +2429,49 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-libbz2-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libffi
       uses: actions/download-artifact@v2
       with:
         name: android-libffi-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-liblzma
       uses: actions/download-artifact@v2
       with:
         name: android-liblzma-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libuuid
       uses: actions/download-artifact@v2
       with:
         name: android-libuuid-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libxcrypt
       uses: actions/download-artifact@v2
       with:
         name: android-libxcrypt-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-openssl
       uses: actions/download-artifact@v2
       with:
         name: android-openssl-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-python
       uses: actions/download-artifact@v2
       with:
         name: android-python-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-sqlite
       uses: actions/download-artifact@v2
       with:
         name: android-sqlite-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Run conda index
-      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      run: conda index $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
     - name: Convert recipe
       run: boa convert android-pyproj/meta.yaml > android-pyproj/recipe.yaml
@@ -2483,7 +2483,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: android-pyproj-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-pyproj*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/android-pyproj*.bz2
   android-python:
     needs:
     - android-libbz2
@@ -2535,44 +2535,44 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-libbz2-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libffi
       uses: actions/download-artifact@v2
       with:
         name: android-libffi-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-liblzma
       uses: actions/download-artifact@v2
       with:
         name: android-liblzma-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libuuid
       uses: actions/download-artifact@v2
       with:
         name: android-libuuid-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libxcrypt
       uses: actions/download-artifact@v2
       with:
         name: android-libxcrypt-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-openssl
       uses: actions/download-artifact@v2
       with:
         name: android-openssl-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-sqlite
       uses: actions/download-artifact@v2
       with:
         name: android-sqlite-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Run conda index
-      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      run: conda index $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
     - name: Convert recipe
       run: boa convert android-python/meta.yaml > android-python/recipe.yaml
@@ -2584,7 +2584,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: android-python-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-python*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/android-python*.bz2
   android-pyzmq:
     needs:
     - android-libbz2
@@ -2639,59 +2639,59 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-libbz2-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libffi
       uses: actions/download-artifact@v2
       with:
         name: android-libffi-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-liblzma
       uses: actions/download-artifact@v2
       with:
         name: android-liblzma-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libsodium
       uses: actions/download-artifact@v2
       with:
         name: android-libsodium-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libuuid
       uses: actions/download-artifact@v2
       with:
         name: android-libuuid-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libxcrypt
       uses: actions/download-artifact@v2
       with:
         name: android-libxcrypt-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libzmq
       uses: actions/download-artifact@v2
       with:
         name: android-libzmq-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-openssl
       uses: actions/download-artifact@v2
       with:
         name: android-openssl-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-python
       uses: actions/download-artifact@v2
       with:
         name: android-python-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-sqlite
       uses: actions/download-artifact@v2
       with:
         name: android-sqlite-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Run conda index
-      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      run: conda index $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
     - name: Convert recipe
       run: boa convert android-pyzmq/meta.yaml > android-pyzmq/recipe.yaml
@@ -2703,7 +2703,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: android-pyzmq-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-pyzmq*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/android-pyzmq*.bz2
   android-shapely:
     needs:
     - android-libbz2
@@ -2757,54 +2757,54 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-libbz2-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libffi
       uses: actions/download-artifact@v2
       with:
         name: android-libffi-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libgeos
       uses: actions/download-artifact@v2
       with:
         name: android-libgeos-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-liblzma
       uses: actions/download-artifact@v2
       with:
         name: android-liblzma-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libuuid
       uses: actions/download-artifact@v2
       with:
         name: android-libuuid-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libxcrypt
       uses: actions/download-artifact@v2
       with:
         name: android-libxcrypt-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-openssl
       uses: actions/download-artifact@v2
       with:
         name: android-openssl-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-python
       uses: actions/download-artifact@v2
       with:
         name: android-python-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-sqlite
       uses: actions/download-artifact@v2
       with:
         name: android-sqlite-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Run conda index
-      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      run: conda index $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
     - name: Convert recipe
       run: boa convert android-shapely/meta.yaml > android-shapely/recipe.yaml
@@ -2816,7 +2816,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: android-shapely-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-shapely*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/android-shapely*.bz2
   android-sqlite:
     needs:
     - android-ndk
@@ -2861,9 +2861,9 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Run conda index
-      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      run: conda index $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
     - name: Convert recipe
       run: boa convert android-sqlite/meta.yaml > android-sqlite/recipe.yaml
@@ -2875,7 +2875,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: android-sqlite-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/android-sqlite*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/android-sqlite*.bz2
   pip-bitstring:
     runs-on: ubuntu-latest
     steps:
@@ -2898,7 +2898,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: pip-bitstring-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/pip-bitstring*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/pip-bitstring*.bz2
   pip-bytecode:
     runs-on: ubuntu-latest
     steps:
@@ -2921,7 +2921,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: pip-bytecode-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/pip-bytecode*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/pip-bytecode*.bz2
   pip-cppy:
     runs-on: ubuntu-latest
     steps:
@@ -2944,7 +2944,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: pip-cppy-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/pip-cppy*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/pip-cppy*.bz2
   pip-ecdsa:
     runs-on: ubuntu-latest
     steps:
@@ -2967,7 +2967,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: pip-ecdsa-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/pip-ecdsa*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/pip-ecdsa*.bz2
   pip-esptool:
     needs:
     - android-cffi
@@ -3000,79 +3000,79 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-cffi-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-cryptography
       uses: actions/download-artifact@v2
       with:
         name: android-cryptography-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libbz2
       uses: actions/download-artifact@v2
       with:
         name: android-libbz2-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libffi
       uses: actions/download-artifact@v2
       with:
         name: android-libffi-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-liblzma
       uses: actions/download-artifact@v2
       with:
         name: android-liblzma-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libuuid
       uses: actions/download-artifact@v2
       with:
         name: android-libuuid-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-libxcrypt
       uses: actions/download-artifact@v2
       with:
         name: android-libxcrypt-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-openssl
       uses: actions/download-artifact@v2
       with:
         name: android-openssl-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-python
       uses: actions/download-artifact@v2
       with:
         name: android-python-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-sqlite
       uses: actions/download-artifact@v2
       with:
         name: android-sqlite-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download pip-bitstring
       uses: actions/download-artifact@v2
       with:
         name: pip-bitstring-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download pip-ecdsa
       uses: actions/download-artifact@v2
       with:
         name: pip-ecdsa-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download pip-pyserial
       uses: actions/download-artifact@v2
       with:
         name: pip-pyserial-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download pip-reedsolo
       uses: actions/download-artifact@v2
       with:
         name: pip-reedsolo-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Run conda index
-      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      run: conda index $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
     - name: Convert recipe
       run: boa convert pip-esptool/meta.yaml > pip-esptool/recipe.yaml
@@ -3084,7 +3084,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: pip-esptool-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/pip-esptool*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/pip-esptool*.bz2
   pip-jsonrpclib:
     runs-on: ubuntu-latest
     steps:
@@ -3107,7 +3107,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: pip-jsonrpclib-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/pip-jsonrpclib*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/pip-jsonrpclib*.bz2
   pip-loguru:
     runs-on: ubuntu-latest
     steps:
@@ -3130,7 +3130,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: pip-loguru-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/pip-loguru*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/pip-loguru*.bz2
   pip-motor:
     runs-on: ubuntu-latest
     steps:
@@ -3153,7 +3153,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: pip-motor-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/pip-motor*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/pip-motor*.bz2
   pip-pegen:
     runs-on: ubuntu-latest
     steps:
@@ -3176,7 +3176,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: pip-pegen-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/pip-pegen*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/pip-pegen*.bz2
   pip-ply:
     runs-on: ubuntu-latest
     steps:
@@ -3199,7 +3199,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: pip-ply-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/pip-ply*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/pip-ply*.bz2
   pip-pyserial:
     runs-on: ubuntu-latest
     steps:
@@ -3222,7 +3222,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: pip-pyserial-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/pip-pyserial*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/pip-pyserial*.bz2
   pip-python-dateutil:
     runs-on: ubuntu-latest
     steps:
@@ -3245,7 +3245,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: pip-python-dateutil-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/pip-python-dateutil*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/pip-python-dateutil*.bz2
   pip-pytz:
     runs-on: ubuntu-latest
     steps:
@@ -3268,7 +3268,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: pip-pytz-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/pip-pytz*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/pip-pytz*.bz2
   pip-pyusb:
     needs:
     - android-libusb
@@ -3288,14 +3288,14 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: android-libusb-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Download android-ndk
       uses: actions/download-artifact@v2
       with:
         name: android-ndk-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/
     - name: Run conda index
-      run: conda index ~/micromamba/envs/conda-mobile/conda-bld/*
+      run: conda index $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*
       shell: bash -l {0}
     - name: Convert recipe
       run: boa convert pip-pyusb/meta.yaml > pip-pyusb/recipe.yaml
@@ -3307,7 +3307,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: pip-pyusb-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/pip-pyusb*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/pip-pyusb*.bz2
   pip-reedsolo:
     runs-on: ubuntu-latest
     steps:
@@ -3330,7 +3330,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: pip-reedsolo-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/pip-reedsolo*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/pip-reedsolo*.bz2
   pip-tornado:
     runs-on: ubuntu-latest
     steps:
@@ -3353,6 +3353,6 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: pip-tornado-3.11
-        path: ~/micromamba/envs/conda-mobile/conda-bld/*/pip-tornado*.bz2
+        path: $MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld/*/pip-tornado*.bz2
 name: CI
 'on': push

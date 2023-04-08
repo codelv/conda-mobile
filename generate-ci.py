@@ -129,7 +129,7 @@ def main():
         package_deps[pkg] = build_requirements(meta, all_packages)
 
     jobs = {}
-    conda_bld_path = "~/micromamba/envs/conda-mobile/conda-bld"
+    conda_bld_path = "$MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld"
 
     common_steps = [
         {"uses": "actions/checkout@v2"},
