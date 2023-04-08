@@ -5,7 +5,7 @@ package:
   version: '{{ version }}'
 
 source:
-  url: https://versaweb.dl.sourceforge.net/project/lzmautils/xz-{{version}}.tar.xz
+  url: https://downloads.sourceforge.net/project/lzmautils/xz-{{version}}.tar.xz
   sha256: 3ee13d0f40148625306b90f9622f8c9660b8082884051b0cfe46f18492f88955
 
 build:
