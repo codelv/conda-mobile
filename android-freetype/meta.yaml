@@ -1,11 +1,12 @@
-{% set version = "2.11.1" %}
+{% set version = "2.13.0" %}
 package:
   name: android-freetype
   version: {{version}}
 
 source:
-  url: https://download.savannah.gnu.org/releases/freetype/freetype-{{version}}.tar.xz
-  sha256: 3333ae7cfda88429c97a7ae63b7d01ab398076c3b67182e960e5684050f2c5c8
+  #url: https://download.savannah.gnu.org/releases/freetype/freetype-{{version}}.tar.xz
+  url: https://downloads.sourceforge.net/project/freetype/freetype2/{{version}}/freetype-{{version}}.tar.gz
+  sha256: a7aca0e532a276ea8d85bd31149f0a74c33d19c8d287116ef8f5f8357b4f1f80
 
 requirements:
   build:
@@ -17,7 +18,7 @@ requirements:
     - android-harfbuzz
 
 build:
-  number: 1
+  number: 0
   binary_relocation: False
   noarch: generic
 
