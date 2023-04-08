@@ -8,10 +8,12 @@ import os
 import copy
 import yaml
 import subprocess
+import argparse
 from yaml.representer import SafeRepresenter
 
 PY_VER = "3.11"
 NDK_VER = "25.2.9519653"
+MICROMAMBA_ROOT_PREFIX = "~/micromamba-root"
 
 NDK_TEMPLATE = f"""
 export ANDROID_HOME="$HOME/Android/Sdk"
@@ -28,7 +30,7 @@ sdkmanager --install "ndk;{NDK_VER}"
 """
 
 # Patch conda build because it fails cleaning up optimized pyc files
-conda_post = f"$MAMBA_ROOT_PREFIX/envs/conda-mobile/lib/python{PY_VER}/site-packages/conda_build/post.py"
+conda_post = f"{MICROMAMBA_ROOT_PREFIX}/envs/conda-mobile/lib/python{PY_VER}/site-packages/conda_build/post.py"
 
 SETUP = """
 sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' %s
@@ -72,9 +74,24 @@ def all_build_requirements(pkg, package_deps) -> set[str]:
     reqs.sort()
     return reqs
 
+def find_version(meta):
+    """ Lookup the version from the recipe.yaml """
+    context = meta['context']
+    if 'version' in context:
+        return context['version']
+    else:
+        return meta['package']['version']
+
 
 def main():
     # Render blocks as | literal
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '--use-existing',
+        action='store_true',
+        help="Use existing recipe.yaml if present instead of running boa convert"
+    )
+    args = parser.parse_args()
     yaml.add_representer(Block, Block.render)
 
     # Map package group to names (eg all android-* under one key)
@@ -98,11 +115,15 @@ def main():
             if not os.path.exists(meta_file):
                 continue
             print(f"Loading {meta_file}")
-            data = subprocess.check_output(f"boa convert {meta_file}".split())
-            with open(f"{item}/recipe.yaml", "wb") as f:
-                f.write(data)
+            if os.path.exists(f"{item}/recipe.yaml") and args.use_existing:
+                with open(f"{item}/recipe.yaml", "r") as f:
+                    data = f.read()
+            else:
+                data = subprocess.check_output(f"boa convert {meta_file}".split())
+                with open(f"{item}/recipe.yaml", "wb") as f:
+                    f.write(data)
 
-            data = data.decode()
+                data = data.decode()
             meta = yaml.load(data, yaml.Loader)
             package_meta[item] = meta
 
@@ -129,10 +150,10 @@ def main():
         package_deps[pkg] = build_requirements(meta, all_packages)
 
     jobs = {}
-    conda_bld_path = "$MAMBA_ROOT_PREFIX/envs/conda-mobile/conda-bld"
+    conda_bld_path = f"{MICROMAMBA_ROOT_PREFIX}/envs/conda-mobile/conda-bld"
 
     common_steps = [
-        {"uses": "actions/checkout@v2"},
+        {"uses": "actions/checkout@v3"},
         {
             "name": "Install micromamba",
             "uses": "mamba-org/provision-with-micromamba@main",
@@ -156,7 +177,7 @@ def main():
         },
         {
             "name": "Cache Android NDK",
-            "uses": "actions/cache@v2",
+            "uses": "actions/cache@v3",
             "id": "android-cache",
             "with": {"path": "~/Android", "key": f"linux-android-ndk-{NDK_VER}"},
         },
@@ -177,6 +198,11 @@ def main():
 
         for pkg in items:
             meta = package_meta[pkg]
+            pkg_version = find_version(meta)
+            artifact_name = f"{pkg}-{pkg_version}"
+            if build_string := meta['build'].get('string'):
+                artifact_name += f"-{build_string}"
+
             build_steps = [
                 {
                     "name": "Convert recipe",
@@ -190,10 +216,11 @@ def main():
                 },
                 {
                     "name": "Upload package",
-                    "uses": "actions/upload-artifact@v2",
+                    "uses": "actions/upload-artifact@v3",
                     "with": {
-                        "name": f"{pkg}-{PY_VER}",
+                        "name": artifact_name,
                         "path": f"{conda_bld_path}/*/{pkg}*.bz2",
+                        "if-no-files-found": "error",
                     },
                 },
             ]
@@ -203,12 +230,19 @@ def main():
             needs = all_build_requirements(pkg, package_deps)
             if needs:
                 for req in needs:
+                    req_meta = package_meta[req]
+
+                    req_version = find_version(req_meta)
+                    req_artifact = f"{req}-{req_version}"
+                    if build_string := req_meta['build'].get('string'):
+                        req_artifact += f"-{build_string}"
+
                     req_steps.append(
                         {
                             "name": f"Download {req}",
-                            "uses": "actions/download-artifact@v2",
+                            "uses": "actions/download-artifact@v3",
                             "with": {
-                                "name": f"{req}-{PY_VER}",
+                                "name": req_artifact,
                                 "path": f"{conda_bld_path}/",
                             },
                         }
