@@ -1,7 +1,7 @@
 {% set name = "kiwisolver" %}
-{% set version = "1.3.2" %}
+{% set version = "1.4.4" %}
 {% set hash_type = "sha256" %}
-{% set hash_value = "fc4453705b81d03568d5b808ad8f09c77c47534f6ac2e72e733f9ca4714aa75c" %}
+{% set hash_value = "d41997519fcba4a1e46eb4a2fe31bc12f0ff957b2b81bac28db24744f333e955" %}
 package:
   name: android-{{ name|lower }}
   version: '{{ version }}'
@@ -18,16 +18,16 @@ requirements:
     - pip-cppy
     - android-ndk
     - android-libcxx
-    - android-python * py310*
+    - android-python * py311*
   run:
     - python
     - android-libcxx
-    - android-python * py310*
+    - android-python * py311*
 
 build:
   binary_relocation: False
   noarch: generic
-  string: 'py310'
+  string: 'py311'
 
 about:
   home: https://github.com/nucleic/atom

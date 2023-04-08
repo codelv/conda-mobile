@@ -35,14 +35,13 @@ do
         ac_cv_file__dev_ptmx=yes \
         ac_cv_file__dev_ptc=no \
         ac_cv_have_long_long_format=yes \
-        --with-build-python="$PYTHON" \
+        --with-build-python="python$PY_VER" \
         --with-ensurepip=install \
         --with-openssl="$APP_ROOT" \
         --with-lto \
         --host="$TARGET_HOST" \
         --build="$ARCH" \
         --enable-ipv6 \
-        --enable-optimizations \
         --enable-shared
 
     # Set soname and support for libs < 23
@@ -60,21 +59,20 @@ do
 
     # New script now works but skips some modules like ssl, sqlite
     # so stay with the old..
-    #make -j$CPU_COUNT oldsharedmods LDFLAGS="$LDFLAGS -L. -lpython3.10 -landroid"
-    make -j"$CPU_COUNT" sharedmods LDFLAGS="$LDFLAGS -L. -lpython3.10 -landroid"
-    make -C "$SRC_DIR" install prefix="$SRC_DIR"/dist/"$ARCH"
+    make -j"$CPU_COUNT" sharedmods LDFLAGS="$LDFLAGS -L. -lpython$PY_VER -landroid"
+    make -C "$SRC_DIR" install prefix="$SRC_DIR/dist/$ARCH"
 
     # Remove example/test modules
-    rm dist/"$ARCH"/lib/python3.10/lib-dynload/xxlim*.so
-    rm dist/"$ARCH"/lib/python3.10/lib-dynload/_xx*.so
-    rm dist/"$ARCH"/lib/python3.10/lib-dynload/*test*.so
+    rm dist/"$ARCH"/lib/python"$PY_VER"/lib-dynload/xxlim*.so
+    rm dist/"$ARCH"/lib/python"$PY_VER"/lib-dynload/_xx*.so
+    rm dist/"$ARCH"/lib/python"$PY_VER"/lib-dynload/*test*.so
 
-    mkdir -p "$PREFIX"/android/"$ARCH"/lib
-    mkdir -p "$PREFIX"/android/"$ARCH"/python
+    mkdir -p "$PREFIX/android/$ARCH/lib"
+    mkdir -p "$PREFIX/android/$ARCH/python"
 
     # Prefix with lib., remove cpython-310 from name, remove module from name, and copy extensions
     # If using oldsharedmods this should just be Modules
-    export MOD_DIR="dist/$ARCH/lib/python3.10/lib-dynload"
+    export MOD_DIR="dist/$ARCH/lib/python$PY_VER/lib-dynload"
     cd "$MOD_DIR"
     for f in *.so; do mv "$f" "lib.${f}"; done
     for f in *.so; do
@@ -88,19 +86,19 @@ do
     find "$MOD_DIR" -type f -name "*.so" -exec cp {} "$PREFIX/android/$ARCH/lib/" \;
 
     # Remove unused stuff
-    rm -rf dist/"$ARCH"/lib/python3.10/test
-    rm -rf dist/"$ARCH"/lib/python3.10/*/test/
-    rm -rf dist/"$ARCH"/lib/python3.10/*/tests/
-    rm -rf dist/"$ARCH"/lib/python3.10/__pycache__
-    rm -rf dist/"$ARCH"/lib/python3.10/plat-*
-    rm -rf dist/"$ARCH"/lib/python3.10/config-*
-    rm -rf dist/"$ARCH"/lib/python3.10/tkinter
-    rm -rf dist/"$ARCH"/lib/python3.10/lib-*
+    rm -rf dist/"$ARCH"/lib/python"$PY_VER"/test
+    rm -rf dist/"$ARCH"/lib/python"$PY_VER"/*/test/
+    rm -rf dist/"$ARCH"/lib/python"$PY_VER"/*/tests/
+    rm -rf dist/"$ARCH"/lib/python"$PY_VER"/__pycache__
+    rm -rf dist/"$ARCH"/lib/python"$PY_VER"/plat-*
+    rm -rf dist/"$ARCH"/lib/python"$PY_VER"/config-*
+    rm -rf dist/"$ARCH"/lib/python"$PY_VER"/tkinter
+    rm -rf dist/"$ARCH"/lib/python"$PY_VER"/lib-*
 
     # Copy python
-    cp -RL dist/"$ARCH"/lib/libpython3.10.so "$PREFIX"/android/"$ARCH"/lib/
+    cp -RL dist/"$ARCH"/lib/libpython"$PY_VER".so "$PREFIX"/android/"$ARCH"/lib/
     cp -RL dist/"$ARCH"/include "$PREFIX"/android/"$ARCH"
-    cp -RL dist/"$ARCH"/lib/python3.10/* "$PREFIX"/android/"$ARCH"/python
+    cp -RL dist/"$ARCH"/lib/python"$PY_VER"/* "$PREFIX"/android/"$ARCH"/python
     validate-lib-arch "$PREFIX"/android/"$ARCH"/lib/*.so
 
     # exit 1

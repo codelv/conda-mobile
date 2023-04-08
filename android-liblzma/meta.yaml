@@ -1,4 +1,4 @@
-{% set version = "5.2.5" %}
+{% set version = "5.4.2" %}
 
 package:
   name: android-liblzma
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://versaweb.dl.sourceforge.net/project/lzmautils/xz-{{version}}.tar.xz
-  sha256: 3e1e518ffc912f86608a8cb35e4bd41ad1aec210df2a47aaa1f95e7f5576ef56
+  sha256: 3ee13d0f40148625306b90f9622f8c9660b8082884051b0cfe46f18492f88955
 
 build:
   number: 1

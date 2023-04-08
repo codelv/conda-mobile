@@ -1,17 +1,17 @@
 {% set name = "atom" %}
-{% set version = "0.8.0" %}
+{% set version = "0.9.1" %}
 {% set hash_type = "sha256" %}
-{% set hash_value = "4055fbdeeb692d3d52c6e3c628d7513fc71f147920cac7d0da05b6dbb5ec8c8d" %}
+{% set hash_value = "025cdd2606ea9cf3b4c3a10f3267ae98652bc7acdb528aa1cf4b2df3ba4f5d6a" %}
 package:
   name: android-{{ name|lower }}
   version: '{{ version }}'
 
 source:
-  git_url: https://github.com/nucleic/atom.git
-  git_rev: main
-  #fn: '{{ name }}-{{ version }}.tar.gz'
-  #url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  #'{{ hash_type }}': '{{ hash_value }}'
+  #git_url: https://github.com/nucleic/atom.git
+  #git_rev: main
+  fn: '{{ name }}-{{ version }}.tar.gz'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  '{{ hash_type }}': '{{ hash_value }}'
 
 
 requirements:
@@ -21,15 +21,15 @@ requirements:
     - pip-cppy
     - android-ndk
     - android-libcxx
-    - android-python * py310*
+    - android-python * py311*
   run:
     - python
     - android-libcxx
-    - android-python * py310*
+    - android-python * py311*
 
 build:
   binary_relocation: False
-  string: 'py310'
+  string: 'py311'
   noarch: generic
 
 about:

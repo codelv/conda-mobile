@@ -15,16 +15,16 @@ requirements:
   build:
     - python
     - android-ndk
-    - android-python * py310*
+    - android-python * py311*
   run:
     - python
-    - android-python * py310*
+    - android-python * py311*
 
 build:
   number: 0
   binary_relocation: False
   noarch: generic
-  string: 'py310'
+  string: 'py311'
 
 about:
   home: http://lxml.de/

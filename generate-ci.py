@@ -10,8 +10,8 @@ import yaml
 import subprocess
 from yaml.representer import SafeRepresenter
 
-PY_VER = "3.10"
-NDK_VER = "23.1.7779620"
+PY_VER = "3.11"
+NDK_VER = "25.2.9519653"
 
 NDK_TEMPLATE = f"""
 export ANDROID_HOME="$HOME/Android/Sdk"
@@ -28,7 +28,7 @@ sdkmanager --install "ndk;{NDK_VER}"
 """
 
 # Patch conda build because it fails cleaning up optimized pyc files
-conda_post = "$HOME/micromamba/envs/conda-mobile/lib/python3.10/site-packages/conda_build/post.py"
+conda_post = f"$HOME/micromamba-root/envs/conda-mobile/lib/python{PY_VER}/site-packages/conda_build/post.py"
 
 SETUP = """
 sed -i 's/.match(fn):/.match(fn) and exists(join(prefix, fn)):/g' %s

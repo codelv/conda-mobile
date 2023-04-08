@@ -1,7 +1,7 @@
 {% set name = "cffi" %}
-{% set version = "1.15.0" %}
+{% set version = "1.15.1" %}
 {% set hash_type = "sha256" %}
-{% set hash_value = "920f0d66a896c2d99f0adbb391f990a84091179542c205fa53ce5787aff87954" %}
+{% set hash_value = "d400bfb9a37b1351253cb402671cea7e89bdecc294e8016a707f6d1d8ac934f9" %}
 package:
   name: android-{{ name|lower }}
   version: '{{ version }}'
@@ -15,17 +15,17 @@ requirements:
   build:
     - python
     - android-ndk
-    - android-python * py310*
+    - android-python * py311*
     - android-libffi
   run:
     - python
-    - android-python * py310*
+    - android-python * py311*
     - android-libffi
 
 build:
   number: 0
   binary_relocation: False
-  string: 'py310'
+  string: 'py311'
   noarch: generic
 
 about:

@@ -1,5 +1,5 @@
-{% set version = "3.10.2" %}
-{% set md5 = "14e8c22458ed7779a1957b26cde01db9" %}
+{% set version = "3.11.3" %}
+{% set md5 = "c8d52fc4fb8ad9932a11d86d142ee73a" %}
 package:
   name: android-python
   version: {{version}}
@@ -23,8 +23,8 @@ requirements:
     - android-libxcrypt
 
 build:
-  number: 6
-  string: 'py310'
+  number: 0
+  string: 'py311'
   binary_relocation: False
   noarch: generic
 

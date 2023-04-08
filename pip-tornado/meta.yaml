@@ -1,13 +1,12 @@
 {% set name = "tornado" %}
-{% set version = "6.2.dev1" %}
+{% set version = "6.2" %}
 package:
   name: pip-{{ name|lower }}
   version: '{{ version }}'
 
 source:
-  #url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  url: https://github.com/tornadoweb/tornado/archive/refs/heads/master.zip
-  sha256: afa1c767c6066b850f682c93e5d21f99c4d265f520b50c3f56bb24f6ef75a2b1
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 9b630419bde84ec666bfd7ea0a4cb2a8a651c2d5cccdbdd1972a0c859dfc3c13
 
 build:
   number: 0

@@ -15,13 +15,13 @@ requirements:
   run:
     - python
     - android-graphviz
-    - android-python * py310*
+    - android-python * py311*
 
 build:
   number: 0
   binary_relocation: False
   noarch: generic
-  string: 'py310'
+  string: 'py311'
 
 about:
   home: http://github.com/codelv/enaml-native

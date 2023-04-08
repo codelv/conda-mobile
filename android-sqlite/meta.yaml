@@ -1,10 +1,10 @@
 package:
   name: android-sqlite
-  version: 3.37.2
+  version: 3.41.2
 
 source:
-  url: https://sqlite.org/2022/sqlite-autoconf-3370200.tar.gz
-  sha256: 4089a8d9b467537b3f246f217b84cd76e00b1d1a971fe5aca1e30e230e46b2d8
+  url: https://sqlite.org/2023/sqlite-autoconf-3410200.tar.gz
+  sha256: e98c100dd1da4e30fa460761dab7c0b91a50b785e167f8c57acc46514fae9499
 
 requirements:
   build:

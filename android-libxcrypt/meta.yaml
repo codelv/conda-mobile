@@ -1,4 +1,4 @@
-{% set version = "4.4.28" %}
+{% set version = "4.4.33" %}
 
 package:
   name: android-libxcrypt
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://github.com/besser82/libxcrypt/releases/download/v{{ version }}/libxcrypt-{{ version }}.tar.xz
-  sha256: 9e936811f9fad11dbca33ca19bd97c55c52eb3ca15901f27ade046cc79e69e87
+  sha256: e87acf9c652c573a4713d5582159f98f305d56ed5f754ce64f57d4194d6b3a6f
 
 build:
   number: 1

@@ -1,7 +1,7 @@
 {% set name = "cryptography" %}
-{% set version = "36.0.1" %}
+{% set version = "40.0.1" %}
 {% set hash_type = "sha256" %}
-{% set hash_value = "53e5c1dc3d7a953de055d77bef2ff607ceef7a2aac0353b5d630ab67f7423638" %}
+{% set hash_value = "2803f2f8b1e95f614419926c7e6f55d828afc614ca5ed61543877ae668cc3472" %}
 package:
   name: android-{{ name|lower }}
   version: '{{ version }}'
@@ -15,7 +15,7 @@ build:
   number: 0
   binary_relocation: False
   noarch: generic
-  string: 'py310'
+  string: 'py311'
 
 requirements:
   build:
@@ -23,12 +23,12 @@ requirements:
     - cffi
     - setuptools-rust
     - android-ndk
-    - android-cffi * py310*
+    - android-cffi * py311*
     - android-openssl
   run:
     - python
     - android-openssl
-    - android-cffi * py310*
+    - android-cffi * py311*
 about:
   home: https://cryptography.io/
   license: Apache License

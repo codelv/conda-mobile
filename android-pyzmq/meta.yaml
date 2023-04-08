@@ -18,18 +18,18 @@ requirements:
     - android-ndk
     - android-libzmq
     - android-libsodium
-    - android-python * py310*
+    - android-python * py311*
   run:
     - python
     - android-libzmq
     - android-libffi
-    - android-python * py310*
+    - android-python * py311*
 
 build:
   number: 0
   binary_relocation: False
   noarch: generic
-  string: 'py310'
+  string: 'py311'
 
 about:
   home: https://pyzmq.readthedocs.io/en/latest/

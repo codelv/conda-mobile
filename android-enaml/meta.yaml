@@ -1,17 +1,17 @@
 {% set name = "enaml" %}
-{% set version = "0.15.0" %}
+{% set version = "0.16.0" %}
 {% set hash_type = "sha256" %}
-{% set hash_value = "577635deab19a5a7d19a7f61c6622b0f65b98ec6e939ccb345b2f48715bd9489" %}
+{% set hash_value = "dee51e9099965de4dac3ba779a0852722ae7b1f1ae0f39f75dd15400171cd5a2" %}
 package:
   name: android-{{ name|lower }}
   version: '{{ version }}'
 
 source:
-  #fn: '{{ name }}-{{ version }}.tar.gz'
-  #url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  #'{{ hash_type }}': '{{ hash_value }}'
-  git_url: https://github.com/frmdstryr/enaml.git
-  git_rev: d-change-types
+  fn: '{{ name }}-{{ version }}.tar.gz'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  '{{ hash_type }}': '{{ hash_value }}'
+  #git_url: https://github.com/frmdstryr/enaml.git
+  #git_rev: d-change-types
 
 requirements:
   build:
@@ -25,25 +25,27 @@ requirements:
     - pip-cppy
     - pip-ply
     - pip-bytecode
+    - pip-pegen
     - android-ndk
     - android-libcxx
-    - android-python * py310*
-    - android-kiwisolver * py310*
-    - android-atom * py310*
+    - android-python * py311*
+    - android-kiwisolver * py311*
+    - android-atom * py311*
   run:
     - python
     - android-libcxx
-    - android-python * py310*
-    - android-kiwisolver * py310*
-    - android-atom * py310*
+    - android-python * py311*
+    - android-kiwisolver * py311*
+    - android-atom * py311*
     - pip-ply
     - pip-bytecode
+    - pip-pegen
 
 build:
   number: 0
   binary_relocation: False
   noarch: generic
-  string: 'py310'
+  string: 'py311'
 
 about:
   home: http://github.com/codelv/enaml-native

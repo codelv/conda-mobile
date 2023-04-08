@@ -1,20 +1,20 @@
-{% set name = "bytecode" %}
-{% set version = "0.14.1" %}
+{% set name = "pegen" %}
+{% set version = "0.2.0" %}
 package:
   name: pip-{{ name|lower }}
   version: '{{ version }}'
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 82e99af6b0f9e71ba9c5daba11f370fc93adf97d423e93a22659dfc7895fb6a2
+  sha256: 0cd306d5b1073542c177035c3caa4526cd10f674a74d6ab40d9a94c57fe1ff33
 
 build:
-  number: 0
+  number: 1
   noarch: true
   script:
-  - export CC=/bin/false
-  - export CXX=/bin/false
-      - sed -i "s/setup()/setup(name='{{name}}', version='{{version}}')/g" setup.py
+    - export CC=/bin/false
+    - export CXX=/bin/false
+    - sed -i "s/setup()/setup(name='{{name}}', version='{{version}}')/g" setup.py
     - 'python -m pip install . -vv --no-compile --target=$PREFIX/android/arm/python/site-packages '
     - cp -r src/{{name}} $PREFIX/android/arm/python/site-packages
     - 'python -m pip install . -vv --no-compile --target=$PREFIX/android/arm64/python/site-packages '
@@ -28,14 +28,13 @@ build:
     - 'python -m pip install . -vv --no-compile --target=$PREFIX/iphonesimulator/python/site-packages '
     - cp -r src/{{name}} $PREFIX/iphonesimulator/python/site-packages
 
-
 requirements: {}
 about:
   home: The package home page
   license: MIT
   license_family: MIT
   license_file:
-  summary: Python module to generate and modify bytecode Built for Android and iOS apps using enaml-native.
+  summary: CPython's PEG parser generator Built for Android and iOS apps using enaml-native.
   doc_url:
   dev_url:
 

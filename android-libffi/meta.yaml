@@ -1,18 +1,18 @@
-{% set version = "3.4.2" %}
+{% set version = "3.4.4" %}
 package:
   name: android-libffi
   version: {{version}}
 
 source:
   url: https://github.com/libffi/libffi/releases/download/v{{version}}/libffi-{{version}}.tar.gz
-  sha256: 540fb721619a6aba3bdeef7d940d8e9e0e6d2c193595bc243241b77ff9e93620
+  sha256: d66c56ad259a82cf2a9dfc408b32bf5da52371500b84745f7fb8b645712df676
 
 requirements:
   build:
     - android-ndk
 
 build:
-  number: 3
+  number: 0
   binary_relocation: False
   noarch: generic
 
